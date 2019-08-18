@@ -1,23 +1,54 @@
+import request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
-import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
+import { INestApplication } from '../node_modules/@nestjs/common';
+import promisePool from 'es6-promise-pool';
 
 describe('AppController (e2e)', () => {
-  let app;
+   let app: INestApplication;
+   let server;
 
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
+   beforeAll(async () => {
+      jest.setTimeout(600000);
+   });
 
-    app = moduleFixture.createNestApplication();
-    await app.init();
-  });
+   beforeEach(async () => {
+      const moduleFixture: TestingModule = await Test.createTestingModule({
+         imports: [AppModule],
+      }).compile();
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
-  });
+      app = moduleFixture.createNestApplication();
+      await app.init();
+      server = app.getHttpServer();
+   });
+
+   it('/ (GET)', () => {
+      return request(server as any)
+         .get('/')
+         .expect(200)
+         .expect('Hello World!');
+   });
+
+   const sleep = (ms: number) => {
+      return new Promise(resolve => setTimeout(resolve, ms));
+   };
+
+   const generatePromises = (iterationCount: number, url: string) => function*() {
+      for (let i = 0; i < iterationCount; i++) {
+         yield request(url).get('/');
+         // yield sleep(100);
+      }
+   };
+
+   it.only('/ (GET) 1000', async () => {
+      const iterationCount = 10000;
+      const url = `http://localhost:3000/`;
+      const threadCount = 10;
+      const pool = new promisePool(generatePromises(iterationCount, url) as any, threadCount);
+      const t0 = new Date();
+      await pool.start();
+      const diff = new Date().valueOf() - t0.valueOf();
+      const rps = iterationCount / diff * 1000;
+      console.log(`Total: ${diff} ms, RPS: ${rps.toFixed(1)} req/s`);
+   });
 });
