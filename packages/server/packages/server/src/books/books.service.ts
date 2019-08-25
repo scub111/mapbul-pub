@@ -29,10 +29,32 @@ export class BooksService {
     });
   }
 
-  addBooks(book): Promise<any> {
+  addBook(book): Promise<any> {
     return new Promise(resolve => {
       this.books.push(book);
+      resolve(book);
+    });
+  }
+
+  updateBooks(book): Promise<any> {
+    return new Promise(resolve => {
+      this.books.forEach(
+        (i, index) =>
+          (this.books[index] = { ...this.books[index], ...book }),
+      );
       resolve();
+    });
+  }
+
+  updateBook(bookId, book): Promise<any> {
+    const id = Number(bookId);
+    return new Promise(resolve => {
+      const index = this.books.findIndex(item => item.id === id);
+      if (index === -1) {
+        throw new HttpException('Books does not exist', 404);
+      }
+      this.books[index] = book;
+      resolve(this.books[index]);
     });
   }
 
