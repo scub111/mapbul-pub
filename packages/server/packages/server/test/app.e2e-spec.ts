@@ -42,8 +42,8 @@ describe('AppController (e2e)', () => {
 
    it.only('/ (GET) 1000', async () => {
       const iterationCount = 10000;
-      // const url = `http://localhost:3000/`;
-      const url = `http://localhost:8081/api/values`;
+      const url = `http://localhost:3000/books/1`;
+      // const url = `http://localhost:8081/api/values`;
       // const url = `https://www.google.com/`;
       const threadCount = 10;
       const pool = new promisePool(generatePromises(iterationCount, url) as any, threadCount);
