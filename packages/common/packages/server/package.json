@@ -1,6 +1,6 @@
 {
-   "name": "bookstore-nest",
-   "version": "0.0.1",
+   "name": "mapbul-pub",
+   "version": "0.1.1",
    "description": "",
    "author": "",
    "license": "MIT",
@@ -18,8 +18,7 @@
       "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
       "test:e2e": "jest --config ./test/jest-e2e.json",
       "server-start": "ts-node-dev --inspect=5858 --respawn --transpileOnly --no-notify src/server/main.ts",
-      "server-debug": "ts-node-dev --inspect=6589 --respawn src/main.ts",
-      "start:debug2": "nodemon --config nodemon-debug.json"
+      "server-debug": "ts-node-dev --inspect=6589 --respawn src/main.ts"
    },
    "dependencies": {
       "@nestjs/common": "^6.0.0",
