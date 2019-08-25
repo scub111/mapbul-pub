@@ -9,7 +9,7 @@
       "format": "prettier --write \"src/**/*.ts\"",
       "start": "ts-node -r tsconfig-paths/register src/main.ts",
       "start:dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node dist/main.js\"",
-      "start:debug": "tsc-watch -p tsconfig.build.json --onSuccess \"node --inspect-brk dist/main.js\"",
+      "start:debug": "tsc-watch -p tsconfig.build.json --onSuccess \"node --inspect=6589 dist/main.js\"",
       "start:prod": "node dist/main.js",
       "lint": "tslint -p tsconfig.json -c tslint.json",
       "test": "jest",
@@ -18,7 +18,7 @@
       "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
       "test:e2e": "jest --config ./test/jest-e2e.json",
       "server-start": "ts-node-dev --inspect=5858 --respawn --transpileOnly --no-notify src/server/main.ts",
-      "server-debug": "ts-node-dev --inspect --respawn src/main.ts",
+      "server-debug": "ts-node-dev --inspect=6589 --respawn src/main.ts",
       "start:debug2": "nodemon --config nodemon-debug.json"
    },
    "dependencies": {
