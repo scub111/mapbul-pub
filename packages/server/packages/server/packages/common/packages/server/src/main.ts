@@ -20,8 +20,8 @@ const typeOrmTest = async () => {
     username: 'root',
     password: '461301+MY',
     database: 'mapbul',
-    // entities: ['src/article.ts'],
-    entities: ['dist/article.ts'],
+    entities: [`${appRootPath.path}/dist/article.js`],
+    // entities: ['dist/article.ts'],
     // logging: true,
     // synchronize: true,
   });
