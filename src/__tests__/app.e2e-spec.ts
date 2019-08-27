@@ -1,7 +1,9 @@
 import request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppModule } from './../src/app.module';
-import { INestApplication } from '../node_modules/@nestjs/common';
+import { AppModule } from 'src/app.module';
+// import { AppModule } from './../src/app.module';
+import { INestApplication } from '@nestjs/common';
+import { ArticlesService } from 'src/articles/articles.service';
 import promisePool from 'es6-promise-pool';
 
 describe('AppController (e2e)', () => {
@@ -40,7 +42,7 @@ describe('AppController (e2e)', () => {
       }
    };
 
-   it.only('/ (GET) 1000', async () => {
+   it('/ (GET) 1000', async () => {
       const iterationCount = 10000;
       const url = `http://localhost:3000/books/1`;
       // const url = `http://localhost:8081/api/values`;
@@ -52,5 +54,24 @@ describe('AppController (e2e)', () => {
       const diff = new Date().valueOf() - t0.valueOf();
       const rps = iterationCount / diff * 1000;
       console.log(`Total: ${diff} ms, RPS: ${rps.toFixed(1)} req/s`);
+   });
+
+   it.only('/ MySql', async (done) => {
+      const iterationCount = 1000;
+      const t0 = new Date();
+      const articlesService = new ArticlesService();
+
+      for (let i = 0; i < iterationCount; i++) {
+         const articles = await articlesService.getAll();
+         // console.log(articles);
+         // console.log('test');
+      }
+
+      // await articlesService.test();
+
+      const diff = new Date().valueOf() - t0.valueOf();
+      const rps = iterationCount / diff * 1000;
+      console.log(`Total: ${diff} ms, RPS: ${rps.toFixed(1)} req/s`);
+      done();
    });
 });
