@@ -1,14 +1,7 @@
-// import { NestFactory } from '@nestjs/core';
-// import { AppModule } from './app.module';
+
 import { createConnection } from 'typeorm';
 import { Article } from './article';
 import appRootPath from 'app-root-path';
-
-// async function bootstrap() {
-//   const app = await NestFactory.create(AppModule);
-//   await app.listen(3000);
-// }
-// bootstrap();
 
 const typeOrmTest = async () => {
   console.log(appRootPath.path);
@@ -34,6 +27,6 @@ const typeOrmTest = async () => {
   const diff = new Date().valueOf() - t0.valueOf();
   const rps = iterationCount / diff * 1000;
   console.log(`Total: ${diff} ms, RPS: ${rps.toFixed(1)} req/s`);
-}
+};
 
 typeOrmTest();

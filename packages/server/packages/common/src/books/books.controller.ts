@@ -28,8 +28,7 @@ export class BooksController {
 
   @Put()
   async putBooks(@Body() bookDTO: CreateBookDTO) {
-    const book = await this.booksService.updateBooks(bookDTO);
-    return book;
+    await this.booksService.updateBooks(bookDTO);
   }
 
   @Delete()
