@@ -25,8 +25,10 @@ export class ArticlesService implements IApi<ArticleDTO> {
     mysqlQuery: any;
     articleRepository;
     async getAll(): Promise<ArticleDTO[]> {
-        // return await this.mysqlQuery('select id, Title from article limit 100;');
-        return await this.mysqlQuery('SELECT `Article`.`id` AS `Article_id`, `Article`.`title` AS `Article_title` FROM `article` `Article` LIMIT 100');
+        const result = await this.mysqlQuery('SELECT id, title from article LIMIT 100');
+        // const result = await this.mysqlQuery('SELECT `Article`.`id` AS `Article_id`, `Article`.`title` AS `Article_title` FROM `article` `Article` LIMIT 100');
+        // console.log(result);
+        return result.map(i => ({id: i.id, title: i.title} as ArticleDTO));
         // return null;
         // return await this.articleRepository.find();
     }
