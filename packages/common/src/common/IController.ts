@@ -6,6 +6,6 @@ export interface IController<T> {
     putAll(item: T): T;
     deleteAll(): void;
     getItem(id: TID): T;
-    putItem(id: TID): T;
+    putItem(id: TID, item: T): T;
     deleteItem(id: TID): T;
 }

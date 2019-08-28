@@ -2,43 +2,46 @@ import * as mysql from 'mysql';
 import * as util from 'util';
 import { Injectable } from '@nestjs/common';
 import { IService } from 'src/common/IService';
-import { ArticleDTO } from './dto/article.dto';
+import { IArticleDTO } from './dto/article.dto';
 import { Connection } from 'mysql';
+import { TID } from 'src/common/types';
 
 @Injectable()
-export class ArticlesService implements IService<ArticleDTO> {
+export class ArticlesService implements IService<IArticleDTO> {
     constructor() {
-        this.mysqlConnection = mysql.createConnection({
+        this.connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
             password: '461301+MY',
             database: 'mapbul',
         });
-        this.mysqlQuery = util.promisify(this.mysqlConnection.query).bind(this.mysqlConnection);
-    }
-    mysqlConnection: Connection;
-    mysqlQuery: any;
-    async getAll(): Promise<ArticleDTO[]> {
-        const result = await this.mysqlQuery('SELECT id, title from article LIMIT 100');
-        return result.map(i => ({id: i.id, title: i.title} as ArticleDTO));
+        this.query = util.promisify(this.connection.query).bind(this.connection);
     }
 
-    postItem(item: ArticleDTO): ArticleDTO {
+    connection: Connection;
+    query: any;
+
+    async getAll(): Promise<IArticleDTO[]> {
+        const result = await this.query('SELECT id, title from article LIMIT 100');
+        return result.map((i: IArticleDTO) => ({id: i.id, title: i.title} as IArticleDTO));
+    }
+
+    postItem(item: IArticleDTO): IArticleDTO {
         throw new Error('Method not implemented.');
     }
-    putAll(item: ArticleDTO): ArticleDTO {
+    putAll(item: IArticleDTO): IArticleDTO {
         throw new Error('Method not implemented.');
     }
     deleteAll(): void {
         throw new Error('Method not implemented.');
     }
-    getItem(id: import('../common/IService').TID): ArticleDTO {
+    getItem(id: TID): IArticleDTO {
         throw new Error('Method not implemented.');
     }
-    putItem(id: import('../common/IService').TID): ArticleDTO {
+    putItem(id: TID): IArticleDTO {
         throw new Error('Method not implemented.');
     }
-    deleteItem(id: import('../common/IService').TID): ArticleDTO {
+    deleteItem(id: TID): IArticleDTO {
         throw new Error('Method not implemented.');
     }
 }
