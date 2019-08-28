@@ -39,8 +39,7 @@ export class BooksService {
   updateBooks(book): Promise<any> {
     return new Promise(resolve => {
       this.books.forEach(
-        (i, index) =>
-          (this.books[index] = { ...this.books[index], ...book }),
+        (i, index) => (this.books[index] = { ...this.books[index], ...book }),
       );
       resolve();
     });
