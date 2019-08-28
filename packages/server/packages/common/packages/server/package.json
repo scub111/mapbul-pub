@@ -18,7 +18,7 @@
       "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
       "test:e2e": "jest --config ./__test__/jest-e2e.json",
       "server-start": "ts-node-dev --inspect=5858 --respawn --transpileOnly --no-notify src/main.ts",
-      "server-debug": "ts-node-dev --inspect=6589 --respawn src/main.ts"
+      "server-debug": "ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/main.ts"
    },
    "dependencies": {
       "@nestjs/common": "^6.0.0",
@@ -48,7 +48,7 @@
       "tsc-watch": "2.2.1",
       "tsconfig-paths": "3.8.0",
       "tslint": "5.16.0",
-      "typescript": "3.4.3",
+      "typescript": "^3.4.3",
       "util": "^0.12.1"
    },
    "jest": {
