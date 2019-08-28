@@ -42,9 +42,9 @@ describe('AppController (e2e)', () => {
       }
    };
 
-   it('/ (GET) 1000', async () => {
-      const iterationCount = 10000;
-      const url = `http://localhost:3000/books/1`;
+   it.only('/ (GET) 1000', async () => {
+      const iterationCount = 100000;
+      const url = `http://localhost:3100/articles`;
       // const url = `http://localhost:8081/api/values`;
       // const url = `https://www.google.com/`;
       const threadCount = 10;
@@ -56,7 +56,7 @@ describe('AppController (e2e)', () => {
       console.log(`Total: ${diff} ms, RPS: ${rps.toFixed(1)} req/s`);
    });
 
-   it.only('/ MySql', async (done) => {
+   it('/ MySql', async (done) => {
       const iterationCount = 1000;
       const t0 = new Date();
       const articlesService = new ArticlesService();
