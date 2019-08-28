@@ -1,6 +1,6 @@
-export type TID = number | string;
+import { TID } from './types';
 
-export interface IApi<T> {
+export interface IController<T> {
     getAll(): Promise<T[]> | T[];
     postItem(item: T): T;
     putAll(item: T): T;
