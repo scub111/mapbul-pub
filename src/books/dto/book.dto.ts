@@ -1,4 +1,4 @@
-export class CreateBookDTO {
+export interface BookDTO {
   readonly id: number;
   readonly title: string;
   readonly description: string;
