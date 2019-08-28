@@ -7,7 +7,7 @@
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "target": "es6",
-      "sourceMap": true,
+      "sourceMap": false,
       "outDir": "./dist",
       "baseUrl": "./",
       "incremental": true,
@@ -19,6 +19,10 @@
          "es7",
          "dom"
       ],
+      "paths": {
+         "src/*": ["./src/*"],
+         "app/*": ["./app/*"],
+      }
    },
    "exclude": [
       "node_modules",
