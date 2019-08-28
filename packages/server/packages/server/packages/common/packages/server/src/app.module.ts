@@ -8,7 +8,14 @@ import { ArticlesService } from './articles/articles.service';
 
 @Module({
   imports: [],
-  providers: [AppService, BooksService, ArticlesService],
+  providers: [
+    AppService,
+    BooksService,
+    {
+      provide: 'IService',
+      useClass: ArticlesService,
+    },
+  ],
   controllers: [AppController, BooksController, ArticlesController],
 })
 export class AppModule {}
