@@ -5,7 +5,7 @@ import {
   Post,
   Body,
   Delete,
-  Put,
+  Put
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { BookDTO } from './dto/book.dto';
