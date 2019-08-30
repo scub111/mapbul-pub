@@ -20,7 +20,7 @@ export class ArticlesService implements IService<IArticleDTO> {
   async getAll(): Promise<IArticleDTO[]> {
     const result = await this.query('SELECT id, title from article LIMIT 100');
     return result.map(
-      (i: IArticleDTO) => ({ id: i.id, title: i.title } as IArticleDTO),
+      (i: IArticleDTO) => ({ id: i.id, title: i.title } as IArticleDTO)
     );
   }
 
