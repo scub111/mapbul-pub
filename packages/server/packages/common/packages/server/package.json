@@ -5,7 +5,7 @@
    "author": "",
    "license": "MIT",
    "scripts": {
-      "build": "rimraf dist && tsc -p tsconfig.build.json --diagnostics",
+      "build": "rimraf dist && tsc -p tsconfig.build.json --diagnostics | gnomon",
       "build2": "run-s build",
       "format": "prettier --write \"src/**/*.ts\"",
       "start": "ts-node -r tsconfig-paths/register src/main.ts",
@@ -19,8 +19,11 @@
       "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
       "test:e2e": "jest --config ./__test__/jest-e2e.json",
       "server-start": "ts-node-dev --inspect=5858 --respawn --transpileOnly --no-notify src/main.ts",
-      "server-debug": "ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/main.ts"
+      "server-debug": "ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/main.ts | gnomon"
    },
+    "_moduleAliases": {
+      "src": "dist/"
+    },
    "dependencies": {
       "@nestjs/common": "^6.0.0",
       "@nestjs/core": "^6.0.0",
