@@ -11,7 +11,7 @@ import {
 import { IArticleDTO } from './dto/article.dto';
 import { TID } from 'src/common/types';
 import { IService } from 'src/common/IService';
-import { IController } from '../common/IController';
+import { IController } from 'src/common/IController';
 
 @Controller('articles')
 export class ArticlesController implements IController<IArticleDTO> {
