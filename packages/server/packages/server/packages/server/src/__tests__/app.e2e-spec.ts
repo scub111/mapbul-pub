@@ -50,7 +50,7 @@ describe('AppController (e2e)', () => {
     const threadCount = 10;
     const pool = new promisePool(
       generatePromises(iterationCount, url) as any,
-      threadCount
+      threadCount,
     );
     const t0 = new Date();
     await pool.start();
