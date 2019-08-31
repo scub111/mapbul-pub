@@ -5,7 +5,7 @@ import {
   Put,
   Delete,
   Param,
-  Inject
+  Inject,
 } from '@nestjs/common';
 // import { IController } from 'src/common/IController';
 import { IArticleDTO } from './dto/article.dto';
@@ -16,7 +16,7 @@ import { IController } from 'src/common/IController';
 @Controller('articles')
 export class ArticlesController implements IController<IArticleDTO> {
   constructor(
-    @Inject('IService') private readonly articleService: IService<IArticleDTO>
+    @Inject('IService') private readonly articleService: IService<IArticleDTO>,
   ) {}
 
   @Get()
