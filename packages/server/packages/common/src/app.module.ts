@@ -13,9 +13,9 @@ import { ArticlesService } from './articles/articles.service';
     BooksService,
     {
       provide: 'IService',
-      useClass: ArticlesService
-    }
+      useClass: ArticlesService,
+    },
   ],
-  controllers: [AppController, BooksController, ArticlesController]
+  controllers: [AppController, BooksController, ArticlesController],
 })
 export class AppModule {}
