@@ -1,6 +1,6 @@
 export const setEnvVariables = (path: string) => {
   require('dotenv').config({ path });
-  // console.log(path);
+  console.log(path);
   serverConfig = {
     isProduction: process.env.NODE_ENV !== 'development',
     dbConnection: {
