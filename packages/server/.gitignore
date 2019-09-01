@@ -5,4 +5,5 @@
 *.xml
 *.rar
 *.html
+.env
 db-connection.json
