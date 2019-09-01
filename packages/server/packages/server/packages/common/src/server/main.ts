@@ -1,4 +1,7 @@
-import 'module-alias/register';
+if (process.env.NODE_ENV !== 'development') {
+  require('module-alias/register');
+  console.log('module-alias/register');
+}
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from 'server/app.module';
 
