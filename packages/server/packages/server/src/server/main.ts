@@ -1,10 +1,12 @@
-import { setEnvVariables, serverConfig} from 'src/common/serverConfig';
-setEnvVariables(__dirname + '/.env');
-// console.log(serverConfig);
-if (serverConfig.isProduction) {
+if (process.env.NODE_ENV !== 'development') {
   require('module-alias/register');
   console.log('module-alias/register');
 }
+
+import { setEnvVariables, serverConfig} from 'common/serverConfig';
+setEnvVariables(__dirname + '/.env');
+console.log(serverConfig);
+
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from 'server/app.module';
 
