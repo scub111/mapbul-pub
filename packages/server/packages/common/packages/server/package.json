@@ -6,7 +6,7 @@
    "license": "MIT",
    "scripts": {
       "server-build": "rimraf dist/server && tsc -p tsconfig.server-build.json --diagnostics | gnomon",
-      "server-debug": "ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/server/main.ts | gnomon",
+      "server-debug": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/server/main.ts | gnomon",
       "format": "prettier --write \"src/**/*.ts\"",
       "start": "ts-node -r tsconfig-paths/register src/main.ts",
       "start:dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node dist/main.js\"",
@@ -46,6 +46,7 @@
       "@types/node": "11.13.4",
       "@types/supertest": "2.0.7",
       "axios": "^0.19.0",
+      "cross-env": "^5.2.1",
       "es6-promise-pool": "^2.5.0",
       "jest": "24.7.1",
       "move-cli": "^1.2.1",
