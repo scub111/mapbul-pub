@@ -1,6 +1,6 @@
-import { TID } from './types';
+import { TID } from 'server/common/types';
 
-export interface IController<T> {
+export interface IService<T> {
   getAll(): Promise<T[]> | T[];
   postItem(item: T): T;
   putAll(item: T): T;
