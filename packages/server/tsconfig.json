@@ -21,6 +21,7 @@
       "paths": {
           "server/*": ["./src/server/*"],
           "client/*": ["./src/client/*"],
+          "codegen/*": ["./src/codegen/*"],
       }
    }
 }
