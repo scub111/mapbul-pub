@@ -5,7 +5,8 @@
    "author": "",
    "license": "MIT",
    "scripts": {
-      "server-build": "rimraf dist && tsc -p tsconfig.server-build.json --diagnostics | gnomon",
+      "server-build": "rimraf dist/server && tsc -p tsconfig.server-build.json --diagnostics | gnomon",
+      "server-build2": "move-cli dist dist2/server2 --mkdirp",
       "server-debug": "ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/server/main.ts | gnomon",
       "format": "prettier --write \"src/**/*.ts\"",
       "start": "ts-node -r tsconfig-paths/register src/main.ts",
@@ -45,6 +46,7 @@
       "axios": "^0.19.0",
       "es6-promise-pool": "^2.5.0",
       "jest": "24.7.1",
+      "move-cli": "^1.2.1",
       "prettier": "1.17.0",
       "react-script": "^2.0.5",
       "supertest": "4.0.2",
