@@ -3,7 +3,6 @@
 /cache
 /publish
 *.xml
-*.txt
 *.rar
 *.html
 db-connection.json
