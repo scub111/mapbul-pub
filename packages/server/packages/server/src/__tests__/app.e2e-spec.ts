@@ -43,8 +43,9 @@ describe('AppController (e2e)', () => {
     };
 
   it.only('/ (GET) 1000', async () => {
-    const iterationCount = 10000;
-    const url = `http://localhost:3100/articles`;
+    const iterationCount = 100;
+    // const url = `http://localhost:3100/articles`;
+    const url = `http://pub.mapbul.scub111.com/articles`;
     // const url = `http://localhost:8081/api/values`;
     // const url = `https://www.google.com/`;
     const threadCount = 10;
