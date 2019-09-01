@@ -7,9 +7,8 @@ import {
   Param,
   Inject,
 } from '@nestjs/common';
-// import { IController } from 'src/common/IController';
-import { IArticleDTO } from './dto/article.dto';
 import { TID } from 'src/common/types';
+import { IArticleDTO } from './dto/article.dto';
 import { IService } from 'src/common/IService';
 import { IController } from 'src/common/IController';
 
