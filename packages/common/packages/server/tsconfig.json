@@ -17,5 +17,12 @@
          "es7",
          "dom"
       ],
+      "baseUrl": "./",
+      "outDir": "dist",
+      "paths": {
+          "src/*": ["./src/*"],
+          "server/*": ["./src/server/*"],
+          "client/*": ["./src/client/*"],
+      }
    }
 }
