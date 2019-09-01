@@ -1,11 +1,11 @@
 import * as mysql from 'mysql';
 import * as util from 'util';
 import { Injectable } from '@nestjs/common';
-import { IService } from 'src/common/IService';
-import { IArticleDTO } from './dto/article.dto';
+import { IService } from 'server/common/IService';
+import { IArticleDTO } from 'server/articles/article.dto';
 import { Connection } from 'mysql';
-import { TID } from 'src/common/types';
-import { dbConnection } from 'src/common/utils';
+import { TID } from 'server/common/types';
+import { dbConnection } from 'server/common/utils';
 
 @Injectable()
 export class ArticlesService implements IService<IArticleDTO> {
