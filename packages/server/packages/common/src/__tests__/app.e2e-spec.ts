@@ -1,8 +1,8 @@
 import request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppModule } from 'src/app.module';
+import { AppModule } from 'server/app.module';
 import { INestApplication } from '@nestjs/common';
-import { ArticlesService } from 'src/articles/articles.service';
+import { ArticlesService } from 'server/articles/articles.service';
 import promisePool from 'es6-promise-pool';
 import axios from 'axios';
 
