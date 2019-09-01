@@ -7,10 +7,10 @@ import {
   Delete,
   Put,
 } from '@nestjs/common';
-import { BooksService } from './books.service';
-import { BookDTO } from './dto/book.dto';
+import { BooksService } from 'server/books/books.service';
+import { BookDTO } from 'server/books/book.dto';
 
-@Controller('books2')
+@Controller('books')
 export class BooksController {
   constructor(private booksService: BooksService) {}
 

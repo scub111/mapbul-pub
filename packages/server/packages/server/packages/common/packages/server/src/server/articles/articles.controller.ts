@@ -7,10 +7,10 @@ import {
   Param,
   Inject,
 } from '@nestjs/common';
-import { TID } from 'src/common/types';
-import { IArticleDTO } from './dto/article.dto';
-import { IService } from 'src/common/IService';
-import { IController } from 'src/common/IController';
+import { TID } from 'server/common/types';
+import { IController } from 'server/common/IController';
+import { IService } from 'server/common/IService';
+import { IArticleDTO } from 'server/articles/article.dto';
 
 @Controller('articles')
 export class ArticlesController implements IController<IArticleDTO> {
