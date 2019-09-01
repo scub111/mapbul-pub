@@ -1,4 +1,7 @@
-if (process.env.NODE_ENV !== 'development') {
+import { setEnvVariables, serverConfig} from 'src/common/serverConfig';
+setEnvVariables(__dirname + '/.env');
+// console.log(serverConfig);
+if (serverConfig.isProduction) {
   require('module-alias/register');
   console.log('module-alias/register');
 }
