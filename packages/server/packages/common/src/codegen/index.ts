@@ -1,7 +1,8 @@
 import { Project, StructureKind } from 'ts-morph';
+import appRootPath from 'app-root-path';
 
 const project = new Project({
-  tsConfigFilePath: 'path/to/tsconfig.json',
+  tsConfigFilePath: `${appRootPath.path}/tsconfig.json`,
 });
 
 // add source files
@@ -39,7 +40,7 @@ myClass.addProperty({
     initializer: '5',
 });
 
-project.getSourceFileOrThrow('src/ExistingFile.ts').delete();
+// project.getSourceFileOrThrow('src/ExistingFile.ts').delete();
 
 // asynchronously save all the changes above
 project.save();
