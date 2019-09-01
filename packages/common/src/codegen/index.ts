@@ -1,4 +1,6 @@
-import { Project, StructureKind } from 'ts-morph';
+import { Project } from 'ts-morph';
+import { createDTO } from './dto';
+import { IField } from './IField';
 import appRootPath from 'app-root-path';
 
 const project = new Project({
@@ -7,17 +9,11 @@ const project = new Project({
 
 project.addExistingSourceFiles('src/**/*.ts');
 
-const interfaceShotName = `Article`;
-const interfaceFullName = `I${interfaceShotName}DTO`;
-const fileName = `src/${interfaceShotName.toLowerCase()}.dto.ts`;
-// add source files
-const myInterfaceFile = project.createSourceFile(fileName, {
-    statements: [{
-        kind: StructureKind.Interface,
-        name: interfaceFullName,
-        isExported: true,
-        properties: [{ name: 'id', type: 'string'}],
-    }],
-}, { overwrite: true });
+const fields: IField[] = [
+  { name: 'id', type: 'string'},
+  { name: 'temp', type: 'string'},
+];
+
+createDTO(project, 'articles2', 'Article', fields);
 
 project.save();
