@@ -1,10 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "dist/codegen",
     "sourceMap": true,
   },
   "include": [
-    "src/server",
+    "src/codegen",
   ],
 }
