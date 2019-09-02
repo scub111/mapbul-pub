@@ -1,0 +1,1 @@
+echo y | hygen server dto Article --message id12 --abc 23
