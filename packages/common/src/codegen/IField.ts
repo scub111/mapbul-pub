@@ -1,4 +1,5 @@
 export interface IField {
-  name: string;
+  fieldOrigin: string;
+  field: string;
   type: string;
-};
+}
