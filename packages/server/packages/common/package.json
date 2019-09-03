@@ -19,7 +19,7 @@
       "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
       "test:e2e": "jest --config ./__test__/jest-e2e.json",
       "codegen-build": "rimraf dist/codegen && tsc -p tsconfig.codegen-build.json --diagnostics | gnomon",
-      "codegen-debug": "ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/codegen/index.ts | gnomon"
+      "codegen-debug": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/codegen/index.ts | gnomon"
    },
    "_moduleAliases": {
       "common": "dist/common/",
