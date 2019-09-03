@@ -6,7 +6,6 @@ import { IArticleDTO } from 'server/articles/article.dto';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { serverConfig } from 'common/serverConfig';
-// import { dbConnection } from 'server/common/utils';
 
 @Injectable()
 export class ArticlesService implements IService<IArticleDTO> {
@@ -19,7 +18,7 @@ export class ArticlesService implements IService<IArticleDTO> {
   query: (expression: string) => Promise<any>;
 
   async getAll(): Promise<IArticleDTO[]> {
-    const result = await this.query('SELECT id, title from article LIMIT 10');
+    const result = await this.query('SELECT id, title from article LIMIT 100');
     return result.map(
       (i: IArticleDTO) => ({ id: i.id, title: i.title } as IArticleDTO),
     );
