@@ -13,4 +13,5 @@ export const createDTO = (project: Project, folder: string, name: string, fields
         properties,
     }],
   }, { overwrite: true });
+  return myInterfaceFile;
 };
