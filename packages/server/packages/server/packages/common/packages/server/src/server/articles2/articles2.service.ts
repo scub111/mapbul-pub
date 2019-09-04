@@ -2,13 +2,13 @@ import * as mysql from 'mysql';
 import * as util from 'util';
 import { Injectable } from '@nestjs/common';
 import { IService } from 'server/common/IService';
-import { {{interfaceName}} } from 'server/{{saveFolder}}/{{tableName}}.dto';
+import { IArticleDTO } from 'server/articles2/article.dto';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { serverConfig } from 'common/serverConfig';
 
 @Injectable()
-export class {{serviceName}}Service implements IService<{{interfaceName}}> {
+export class Articles2Service implements IService<IArticleDTO> {
   constructor() {
     this.connection = mysql.createConnection(serverConfig.dbConnection);
     this.query = util.promisify(this.connection.query).bind(this.connection);
@@ -17,35 +17,56 @@ export class {{serviceName}}Service implements IService<{{interfaceName}}> {
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(): Promise<{{interfaceName}}[]> {
+  async getAll(): Promise<IArticleDTO[]> {
     const result = await this.query(`
       SELECT
-        {{#each fields}}
-        {{field}}{{separator}}
-        {{/each}} 
-      FROM {{tableName}}
+        id,
+        title,
+        titleEn,
+        titlePhoto,
+        photo,
+        sourceUrl,
+        sourceUrlEn,
+        sourcePhoto,
+        sourcePhotoEn,
+        description,
+        descriptionEn,
+        text,
+        textEn,
+        authorId,
+        editorId,
+        addedDate,
+        publishedDate,
+        markerId,
+        startDate,
+        startTime,
+        statusId,
+        baseCategoryId,
+        endDate,
+        cityId
+      FROM article
       LIMIT 100`);
     return result.map(
-      (i: {{interfaceName}}) => ({ id: i.id, title: i.title } as {{interfaceName}}),
+      (i: IArticleDTO) => ({ id: i.id, title: i.title } as IArticleDTO),
     );
   }
 
-  postItem(item: {{interfaceName}}): {{interfaceName}} {
+  postItem(item: IArticleDTO): IArticleDTO {
     throw new Error('Method not implemented.');
   }
-  putAll(item: {{interfaceName}}): {{interfaceName}} {
+  putAll(item: IArticleDTO): IArticleDTO {
     throw new Error('Method not implemented.');
   }
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
-  getItem(id: TID): {{interfaceName}} {
+  getItem(id: TID): IArticleDTO {
     throw new Error('Method not implemented.');
   }
-  putItem(id: TID): {{interfaceName}} {
+  putItem(id: TID): IArticleDTO {
     throw new Error('Method not implemented.');
   }
-  deleteItem(id: TID): {{interfaceName}} {
+  deleteItem(id: TID): IArticleDTO {
     throw new Error('Method not implemented.');
   }
 }
