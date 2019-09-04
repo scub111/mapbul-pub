@@ -1,6 +1,5 @@
 import handlebars from 'handlebars';
 import fs from 'fs';
-import fse from 'fs-extra';
 
 interface ICreateSorceConfig {
   templatePath: string;
