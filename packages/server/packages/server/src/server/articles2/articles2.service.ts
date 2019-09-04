@@ -18,7 +18,7 @@ export class Articles2Service implements IService<IArticleDTO> {
   query: (expression: string) => Promise<any>;
 
   async getAll(): Promise<IArticleDTO[]> {
-    const result = await this.query(`
+    return await this.query(`
       SELECT
         id,
         title,
@@ -44,11 +44,7 @@ export class Articles2Service implements IService<IArticleDTO> {
         baseCategoryId,
         endDate,
         cityId
-      FROM article
-      LIMIT 100`);
-    return result.map(
-      (i: IArticleDTO) => ({ id: i.id, title: i.title } as IArticleDTO),
-    );
+      FROM article`);
   }
 
   postItem(item: IArticleDTO): IArticleDTO {
