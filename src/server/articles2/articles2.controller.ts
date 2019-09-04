@@ -9,30 +9,30 @@ import {
 import { TID } from 'server/common/types';
 import { IController } from 'server/common/IController';
 import { IService } from 'server/common/IService';
-import { {{interfaceName}} } from 'server/{{saveFolder}}/{{tableName}}.dto';
+import { IArticleDTO } from 'server/articles2/article.dto';
 
-@Controller('{{controller}}')
-export class {{controllerName}}Controller implements IController<{{interfaceName}}> {
+@Controller('articles2')
+export class Articles2Controller implements IController<IArticleDTO> {
   constructor(
-    @Inject('IService') private readonly service: IService<{{interfaceName}}>,
+    @Inject('IService') private readonly service: IService<IArticleDTO>,
   ) {}
 
   @Get()
-  async getAll(): Promise<{{interfaceName}}[]> {
+  async getAll(): Promise<IArticleDTO[]> {
     return this.service.getAll();
   }
 
   @Post()
-  postItem(item: {{interfaceName}}): {{interfaceName}} {
+  postItem(item: IArticleDTO): IArticleDTO {
     throw new Error('Method not implemented.');
   }
 
   @Put()
-  putAll(item: {{interfaceName}}): {{interfaceName}} {
+  putAll(item: IArticleDTO): IArticleDTO {
     throw new Error('Method not implemented.');
   }
 
-  getItem(id: TID): {{interfaceName}} {
+  getItem(id: TID): IArticleDTO {
     throw new Error('Method not implemented.');
   }
 
@@ -42,11 +42,11 @@ export class {{controllerName}}Controller implements IController<{{interfaceName
   }
 
   @Put(':id')
-  putItem(id: TID, item: {{interfaceName}}): {{interfaceName}} {
+  putItem(id: TID, item: IArticleDTO): IArticleDTO {
     throw new Error('Method not implemented.');
   }
 
-  deleteItem(id: TID): {{interfaceName}} {
+  deleteItem(id: TID): IArticleDTO {
     throw new Error('Method not implemented.');
   }
 }
