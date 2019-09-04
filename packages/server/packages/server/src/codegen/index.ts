@@ -6,18 +6,14 @@ console.log('test');
 import { setEnvVariables } from 'common/serverConfig';
 setEnvVariables(__dirname + '/.env');
 
-import { Project } from 'ts-morph';
 import { createDTO } from './dto';
 import { getFields } from './getFields';
-
-
-interface ICodeData {
-  interfaceName: string;
-}
+import { createService } from './service';
 
 const main = async () => {
   const fields = await getFields('article');
-  createDTO()
+  createDTO('articles2', 'Article', fields);
+  createService('articles2', 'Articles', 'IArticleDTO', fields);
 };
 
 main();
