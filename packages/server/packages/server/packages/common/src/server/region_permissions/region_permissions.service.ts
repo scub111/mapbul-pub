@@ -1,12 +1,12 @@
 import * as mysql from 'mysql';
 import * as util from 'util';
 import { BaseService } from 'server/common/BaseService';
-import { {{interfaceName}} } from 'server/{{saveFolder}}/{{tableName}}.dto';
+import { IRegion_permissionDTO } from 'server/region_permissions/region_permission.dto';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { serverConfig } from 'common/serverConfig';
 
-export class {{serviceName}} extends BaseService<{{interfaceName}}> {
+export class Region_permissionsService extends BaseService<IRegion_permissionDTO> {
   constructor() {
     super();
     this.connection = mysql.createConnection(serverConfig.dbConnection);
@@ -16,37 +16,37 @@ export class {{serviceName}} extends BaseService<{{interfaceName}}> {
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(): Promise<{{interfaceName}}[]> {
+  async getAll(): Promise<IRegion_permissionDTO[]> {
     return await this.query(`
       SELECT
-        {{#each fields}}
-        {{field}}{{separator}}
-        {{/each}} 
-      FROM {{tableName}}`);
+        id,
+        regionId,
+        userId
+      FROM region_permission`);
   }
 
-  postItem(item: {{interfaceName}}): {{interfaceName}} {
+  postItem(item: IRegion_permissionDTO): IRegion_permissionDTO {
     throw new Error('Method not implemented.');
   }
-  putAll(item: {{interfaceName}}): {{interfaceName}} {
+  putAll(item: IRegion_permissionDTO): IRegion_permissionDTO {
     throw new Error('Method not implemented.');
   }
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
-  async getItem(id: TID): Promise<{{interfaceName}}> {
+  async getItem(id: TID): Promise<IRegion_permissionDTO> {
     return await this.query(`
       SELECT
-        {{#each fields}}
-        {{field}}{{separator}}
-        {{/each}} 
-      FROM {{tableName}}
+        id,
+        regionId,
+        userId
+      FROM region_permission
       WHERE id = ${id}`);
   }
-  putItem(id: TID): {{interfaceName}} {
+  putItem(id: TID): IRegion_permissionDTO {
     throw new Error('Method not implemented.');
   }
-  deleteItem(id: TID): {{interfaceName}} {
+  deleteItem(id: TID): IRegion_permissionDTO {
     throw new Error('Method not implemented.');
   }
 }

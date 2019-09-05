@@ -11,7 +11,7 @@ export abstract class BaseService<T> {
     return null;
   }
   public deleteAll(): void {}
-  public getItem(id: TID): T {
+  public getItem(id: TID): Promise<T> | T {
     return null;
   }
   public putItem(id: TID, item: T): T {
