@@ -1,13 +1,12 @@
 import * as mysql from 'mysql';
 import * as util from 'util';
-import { Injectable } from '@nestjs/common';
-import { IService } from 'server/common/IService';
+import { BaseService } from 'server/common/BaseService';
 import { IArticleDTO } from 'server/articles2/article.dto';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { serverConfig } from 'common/serverConfig';
 
-export class Articles2Service extends IService<IArticleDTO> {
+export class Articles2Service extends BaseService<IArticleDTO> {
   constructor() {
     super();
     this.connection = mysql.createConnection(serverConfig.dbConnection);
@@ -44,8 +43,7 @@ export class Articles2Service extends IService<IArticleDTO> {
         baseCategoryId,
         endDate,
         cityId
-      FROM article
-      LIMIT 1`);
+      FROM article`);
   }
 
   postItem(item: IArticleDTO): IArticleDTO {
