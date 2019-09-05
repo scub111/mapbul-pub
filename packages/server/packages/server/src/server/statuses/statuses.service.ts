@@ -1,12 +1,12 @@
 import * as mysql from 'mysql';
 import * as util from 'util';
 import { BaseService } from 'server/common/BaseService';
-import { {{interfaceName}} } from 'server/{{saveFolder}}/{{tableName}}.dto';
+import { IStatusDTO } from 'server/statuses/status.dto';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { serverConfig } from 'common/serverConfig';
 
-export class {{serviceName}} extends BaseService<{{interfaceName}}> {
+export class StatusesService extends BaseService<IStatusDTO> {
   constructor() {
     super();
     this.connection = mysql.createConnection(serverConfig.dbConnection);
@@ -16,37 +16,37 @@ export class {{serviceName}} extends BaseService<{{interfaceName}}> {
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(): Promise<{{interfaceName}}[]> {
+  async getAll(): Promise<IStatusDTO[]> {
     return await this.query(`
       SELECT
-        {{#each fields}}
-        {{field}}{{separator}}
-        {{/each}} 
-      FROM {{tableName}}`);
+        id,
+        tag,
+        description
+      FROM status`);
   }
 
-  postItem(item: {{interfaceName}}): {{interfaceName}} {
+  postItem(item: IStatusDTO): IStatusDTO {
     throw new Error('Method not implemented.');
   }
-  putAll(item: {{interfaceName}}): {{interfaceName}} {
+  putAll(item: IStatusDTO): IStatusDTO {
     throw new Error('Method not implemented.');
   }
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
-  async getItem(id: TID): Promise<{{interfaceName}}> {
+  async getItem(id: TID): Promise<IStatusDTO> {
     return await this.query(`
       SELECT
-        {{#each fields}}
-        {{field}}{{separator}}
-        {{/each}} 
-      FROM {{tableName}}
+        id,
+        tag,
+        description
+      FROM status
       WHERE id = ${id}`);
   }
-  putItem(id: TID): {{interfaceName}} {
+  putItem(id: TID): IStatusDTO {
     throw new Error('Method not implemented.');
   }
-  deleteItem(id: TID): {{interfaceName}} {
+  deleteItem(id: TID): IStatusDTO {
     throw new Error('Method not implemented.');
   }
 }
