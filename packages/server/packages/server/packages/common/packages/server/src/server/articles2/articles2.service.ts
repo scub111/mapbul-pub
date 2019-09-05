@@ -44,7 +44,8 @@ export class Articles2Service implements IService<IArticleDTO> {
         baseCategoryId,
         endDate,
         cityId
-      FROM article`);
+      FROM article
+      LIMIT 1`);
   }
 
   postItem(item: IArticleDTO): IArticleDTO {
