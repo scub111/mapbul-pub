@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Inject } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IController } from 'server/common/IController';
 import { IArticleDTO } from 'server/articles2/article.dto';
