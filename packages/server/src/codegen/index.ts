@@ -32,9 +32,9 @@ const main = async () => {
     templatePath: `${templateRootPath}/dto.hbs`,
     data: {
       interfaceName,
-      fields,
+      fields
     },
-    sourcePath: `${sourceRootPath}/${saveFolder}/${filePrefixDTO}.dto.ts`,
+    sourcePath: `${sourceRootPath}/${saveFolder}/${filePrefixDTO}.dto.ts`
   });
 
   // Create *.service.ts
@@ -45,9 +45,9 @@ const main = async () => {
       serviceName,
       interfaceName,
       saveFolder,
-      fields,
+      fields
     },
-    sourcePath: `${sourceRootPath}/${saveFolder}/${filePrefix}.service.ts`,
+    sourcePath: `${sourceRootPath}/${saveFolder}/${filePrefix}.service.ts`
   });
 
   // Create *.controller.ts
@@ -59,9 +59,9 @@ const main = async () => {
       controllerName,
       interfaceName,
       saveFolder,
-      fields,
+      fields
     },
-    sourcePath: `${sourceRootPath}/${saveFolder}/${filePrefix}.controller.ts`,
+    sourcePath: `${sourceRootPath}/${saveFolder}/${filePrefix}.controller.ts`
   });
 };
 

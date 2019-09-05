@@ -16,7 +16,7 @@ describe('AppController (e2e)', () => {
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
+      imports: [AppModule]
     }).compile();
 
     app = moduleFixture.createNestApplication();
@@ -49,7 +49,7 @@ describe('AppController (e2e)', () => {
   const get = async (url: string) => {
     try {
       // await request(url).get('/');
-      await axios({url});
+      await axios({ url });
     } catch (e) {
       console.log(e);
     }
@@ -75,10 +75,7 @@ describe('AppController (e2e)', () => {
     // const url = `http://localhost:8081/api/values`;
     // const url = `https://www.google.com/`;
     const threadCount = 50;
-    const pool = new promisePool(
-      generatePromises(iterationCount, url) as any,
-      threadCount,
-    );
+    const pool = new promisePool(generatePromises(iterationCount, url) as any, threadCount);
 
     pool.addEventListener('fulfilled', (event: any) => {
       // console.log('Fulfilled: ' + event.data.result);
