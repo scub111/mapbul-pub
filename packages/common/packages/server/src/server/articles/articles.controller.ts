@@ -8,13 +8,13 @@ import {
 } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IController } from 'server/common/IController';
-import { IService } from 'server/common/IService';
 import { IArticleDTO } from 'server/articles/article.dto';
+import { ArticlesService } from 'server/articles/articles.service';
 
 @Controller('articles')
 export class ArticlesController implements IController<IArticleDTO> {
   constructor(
-    @Inject('IService') private readonly articleService: IService<IArticleDTO>,
+    private readonly articleService: ArticlesService,
   ) {}
 
   @Get()
