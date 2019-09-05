@@ -15,12 +15,13 @@ const main = async () => {
   const service = 'articles2';
 
   const controller = service;
-  const serviceName = `${service[0].toUpperCase()}${service.slice(1)}`;
-  const controllerName = serviceName;
+  const baseName = `${service[0].toUpperCase()}${service.slice(1)}`;
+  const serviceName = `${baseName}Service`;
+  const controllerName = `${baseName}Controller`;
   const saveFolder = service;
   const interfaceName = `I${tableName[0].toUpperCase()}${tableName.slice(1)}DTO`;
   const filePrefixDTO = tableName.toLowerCase();
-  const filePrefix = serviceName.toLowerCase();
+  const filePrefix = baseName.toLowerCase();
 
   const templateRootPath = `${appRootPath.path}/src/codegen/templates`;
   const sourceRootPath = `${appRootPath.path}/src/server`;
@@ -57,6 +58,7 @@ const main = async () => {
       tableName,
       controller,
       controllerName,
+      serviceName,
       interfaceName,
       saveFolder,
       fields
