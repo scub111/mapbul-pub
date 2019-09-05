@@ -1,6 +1,6 @@
 import { TID } from 'server/common/types';
 
-export abstract class IService<T> {
+export abstract class BaseService<T> {
   public getAll(): Promise<T[]> | T[] {
     return null;
   }
