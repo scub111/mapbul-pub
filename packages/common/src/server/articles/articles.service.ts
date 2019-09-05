@@ -18,9 +18,7 @@ export class ArticlesService extends IService<IArticleDTO> {
 
   async getAll(): Promise<IArticleDTO[]> {
     const result = await this.query('SELECT id, title from article LIMIT 1');
-    return result.map(
-      (i: IArticleDTO) => ({ id: i.id, title: i.title } as IArticleDTO),
-    );
+    return result.map((i: IArticleDTO) => ({ id: i.id, title: i.title } as IArticleDTO));
   }
 
   postItem(item: IArticleDTO): IArticleDTO {

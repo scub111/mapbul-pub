@@ -1,3 +1,3 @@
 export interface IArticleDTO {
-    id: string;
+  id: string;
 }
