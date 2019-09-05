@@ -1,12 +1,12 @@
 import * as mysql from 'mysql';
 import * as util from 'util';
 import { BaseService } from 'server/common/BaseService';
-import { {{interfaceName}} } from 'server/{{saveFolder}}/{{tableName}}.dto';
+import { ITenantDTO } from 'server/tenants/tenant.dto';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { serverConfig } from 'common/serverConfig';
 
-export class {{serviceName}} extends BaseService<{{interfaceName}}> {
+export class TenantsService extends BaseService<ITenantDTO> {
   constructor() {
     super();
     this.connection = mysql.createConnection(serverConfig.dbConnection);
@@ -16,37 +16,49 @@ export class {{serviceName}} extends BaseService<{{interfaceName}}> {
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(): Promise<{{interfaceName}}[]> {
+  async getAll(): Promise<ITenantDTO[]> {
     return await this.query(`
       SELECT
-        {{#each fields}}
-        {{field}}{{separator}}
-        {{/each}} 
-      FROM {{tableName}}`);
+        id,
+        userId,
+        firstName,
+        middleName,
+        lastName,
+        gender,
+        phone,
+        birthDate,
+        address
+      FROM tenant`);
   }
 
-  postItem(item: {{interfaceName}}): {{interfaceName}} {
+  postItem(item: ITenantDTO): ITenantDTO {
     throw new Error('Method not implemented.');
   }
-  putAll(item: {{interfaceName}}): {{interfaceName}} {
+  putAll(item: ITenantDTO): ITenantDTO {
     throw new Error('Method not implemented.');
   }
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
-  async getItem(id: TID): Promise<{{interfaceName}}> {
+  async getItem(id: TID): Promise<ITenantDTO> {
     return await this.query(`
       SELECT
-        {{#each fields}}
-        {{field}}{{separator}}
-        {{/each}} 
-      FROM {{tableName}}
+        id,
+        userId,
+        firstName,
+        middleName,
+        lastName,
+        gender,
+        phone,
+        birthDate,
+        address
+      FROM tenant
       WHERE id = ${id}`);
   }
-  putItem(id: TID): {{interfaceName}} {
+  putItem(id: TID): ITenantDTO {
     throw new Error('Method not implemented.');
   }
-  deleteItem(id: TID): {{interfaceName}} {
+  deleteItem(id: TID): ITenantDTO {
     throw new Error('Method not implemented.');
   }
 }

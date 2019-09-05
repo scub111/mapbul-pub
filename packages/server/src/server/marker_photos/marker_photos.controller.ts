@@ -1,31 +1,31 @@
 import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IController } from 'server/common/IController';
-import { {{interfaceName}} } from 'server/{{saveFolder}}/{{tableName}}.dto';
-import { {{serviceName}} } from './{{saveFolder}}.service';
+import { IMarker_photosDTO } from 'server/marker_photos/marker_photos.dto';
+import { Marker_photosService } from './marker_photos.service';
 import { IGetParams } from 'server/common/interfaces';
 
-@Controller('{{controller}}')
-export class {{controllerName}} implements IController<{{interfaceName}}> {
-  constructor(private readonly service: {{serviceName}}) {}
+@Controller('marker_photos')
+export class Marker_photosController implements IController<IMarker_photosDTO> {
+  constructor(private readonly service: Marker_photosService) {}
 
   @Get()
-  async getAll(): Promise<{{interfaceName}}[]> {
+  async getAll(): Promise<IMarker_photosDTO[]> {
     return this.service.getAll();
   }
 
   @Post()
-  postItem(item: {{interfaceName}}): {{interfaceName}} {
+  postItem(item: IMarker_photosDTO): IMarker_photosDTO {
     throw new Error('Method not implemented.');
   }
 
   @Put()
-  putAll(item: {{interfaceName}}): {{interfaceName}} {
+  putAll(item: IMarker_photosDTO): IMarker_photosDTO {
     throw new Error('Method not implemented.');
   }
 
   @Get(':id')
-  async getItem(@Param() params: IGetParams): Promise<{{interfaceName}}> {
+  async getItem(@Param() params: IGetParams): Promise<IMarker_photosDTO> {
     return await this.service.getItem(params.id);
   }
 
@@ -35,11 +35,11 @@ export class {{controllerName}} implements IController<{{interfaceName}}> {
   }
 
   @Put(':id')
-  putItem(id: TID, item: {{interfaceName}}): {{interfaceName}} {
+  putItem(id: TID, item: IMarker_photosDTO): IMarker_photosDTO {
     throw new Error('Method not implemented.');
   }
 
-  deleteItem(id: TID): {{interfaceName}} {
+  deleteItem(id: TID): IMarker_photosDTO {
     throw new Error('Method not implemented.');
   }
 }
