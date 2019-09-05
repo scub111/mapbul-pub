@@ -1,16 +1,17 @@
-import { Controller, Get, Post, Put, Delete, Inject } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IController } from 'server/common/IController';
 import { IArticleDTO } from 'server/articles/article.dto';
-import { ArticlesService } from 'server/articles/articles.service';
+import { ArticlesService } from './articles.service';
+import { IGetParams } from 'server/common/interfaces';
 
 @Controller('articles')
 export class ArticlesController implements IController<IArticleDTO> {
-  constructor(private readonly articleService: ArticlesService) {}
+  constructor(private readonly service: ArticlesService) {}
 
   @Get()
   async getAll(): Promise<IArticleDTO[]> {
-    return this.articleService.getAll();
+    return this.service.getAll();
   }
 
   @Post()
@@ -23,8 +24,9 @@ export class ArticlesController implements IController<IArticleDTO> {
     throw new Error('Method not implemented.');
   }
 
-  getItem(id: TID): IArticleDTO {
-    throw new Error('Method not implemented.');
+  @Get(':id')
+  async getItem(@Param() params: IGetParams): Promise<IArticleDTO> {
+    return await this.service.getItem(params.id);
   }
 
   @Delete()
