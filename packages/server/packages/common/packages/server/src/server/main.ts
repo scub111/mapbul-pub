@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== 'development') {
   console.log('module-alias/register');
 }
 
-import { setEnvVariables, serverConfig} from 'common/serverConfig';
+import { setEnvVariables, serverConfig } from 'common/serverConfig';
 setEnvVariables(__dirname + '/.env');
 console.log(serverConfig);
 

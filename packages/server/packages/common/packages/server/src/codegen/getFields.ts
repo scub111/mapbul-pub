@@ -31,10 +31,13 @@ const traslateType = (type: string) => {
 
 export const getFields = async (tableName: string) => {
   const result: any[] = await query(`DESCRIBE ${tableName}`);
-  return result.map((row: IDescribeRowData, index: number) => ({
-    fieldOrigin: row.Field,
-    field: traslateField(row.Field),
-    type: traslateType(row.Type),
-    separator: index !== result.length - 1 ?  ',' : '',
-    } as IField));
+  return result.map(
+    (row: IDescribeRowData, index: number) =>
+      ({
+        fieldOrigin: row.Field,
+        field: traslateField(row.Field),
+        type: traslateType(row.Type),
+        separator: index !== result.length - 1 ? ',' : ''
+      } as IField)
+  );
 };

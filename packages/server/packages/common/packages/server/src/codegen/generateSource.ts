@@ -17,5 +17,5 @@ export const createSorce = (config: ICreateSorceConfig) => {
   if (!fs.existsSync(config.sourcePath)) {
     mkdirp.sync(dir);
   }
-  fs.writeFileSync(config.sourcePath, source, {encoding: 'utf8', flag: 'w'});
+  fs.writeFileSync(config.sourcePath, source, { encoding: 'utf8', flag: 'w' });
 };
