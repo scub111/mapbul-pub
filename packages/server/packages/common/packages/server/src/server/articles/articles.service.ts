@@ -18,7 +18,7 @@ export class ArticlesService implements IService<IArticleDTO> {
   query: (expression: string) => Promise<any>;
 
   async getAll(): Promise<IArticleDTO[]> {
-    const result = await this.query('SELECT id, title from article LIMIT 100');
+    const result = await this.query('SELECT id, title from article LIMIT 1');
     return result.map(
       (i: IArticleDTO) => ({ id: i.id, title: i.title } as IArticleDTO),
     );
