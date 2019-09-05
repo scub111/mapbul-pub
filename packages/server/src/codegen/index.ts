@@ -6,65 +6,11 @@ console.log('test2');
 import { setEnvVariables } from 'common/serverConfig';
 setEnvVariables(__dirname + '/.env');
 
-import { getFields } from './getFields';
-import { createSorce } from './generateSource';
-import appRootPath = require('app-root-path');
+import { generateController } from './generateController';
 
 const main = async () => {
-  const tableName = 'article';
-  const service = 'articles2';
-
-  const controller = service;
-  const baseName = `${service[0].toUpperCase()}${service.slice(1)}`;
-  const serviceName = `${baseName}Service`;
-  const controllerName = `${baseName}Controller`;
-  const saveFolder = service;
-  const interfaceName = `I${tableName[0].toUpperCase()}${tableName.slice(1)}DTO`;
-  const filePrefixDTO = tableName.toLowerCase();
-  const filePrefix = baseName.toLowerCase();
-
-  const templateRootPath = `${appRootPath.path}/src/codegen/templates`;
-  const sourceRootPath = `${appRootPath.path}/src/server`;
-
-  const fields = await getFields(tableName);
-
-  // Create *.dto.ts
-  createSorce({
-    templatePath: `${templateRootPath}/dto.hbs`,
-    data: {
-      interfaceName,
-      fields
-    },
-    sourcePath: `${sourceRootPath}/${saveFolder}/${filePrefixDTO}.dto.ts`
-  });
-
-  // Create *.service.ts
-  createSorce({
-    templatePath: `${templateRootPath}/service.hbs`,
-    data: {
-      tableName,
-      serviceName,
-      interfaceName,
-      saveFolder,
-      fields
-    },
-    sourcePath: `${sourceRootPath}/${saveFolder}/${filePrefix}.service.ts`
-  });
-
-  // Create *.controller.ts
-  createSorce({
-    templatePath: `${templateRootPath}/controller.hbs`,
-    data: {
-      tableName,
-      controller,
-      controllerName,
-      serviceName,
-      interfaceName,
-      saveFolder,
-      fields
-    },
-    sourcePath: `${sourceRootPath}/${saveFolder}/${filePrefix}.controller.ts`
-  });
+  await generateController('article', 'articles2');
+  await generateController('article', 'articles3');
 };
 
 main();
