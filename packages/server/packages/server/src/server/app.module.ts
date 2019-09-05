@@ -15,8 +15,12 @@ import { Articles2Controller } from 'server/articles2/articles2.controller';
     BooksService,
     {
       provide: 'IService',
-      useClass: Articles2Service,
+      useClass: ArticlesService,
     },
+    // {
+    //   provide: 'IService',
+    //   useClass: Articles2Service,
+    // },
   ],
   controllers: [AppController, BooksController, ArticlesController, Articles2Controller],
 })
