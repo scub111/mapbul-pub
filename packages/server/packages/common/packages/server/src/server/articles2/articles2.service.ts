@@ -7,9 +7,9 @@ import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { serverConfig } from 'common/serverConfig';
 
-@Injectable()
-export class Articles2Service implements IService<IArticleDTO> {
+export class Articles2Service extends IService<IArticleDTO> {
   constructor() {
+    super();
     this.connection = mysql.createConnection(serverConfig.dbConnection);
     this.query = util.promisify(this.connection.query).bind(this.connection);
   }

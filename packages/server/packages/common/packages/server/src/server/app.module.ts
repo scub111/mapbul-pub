@@ -13,15 +13,13 @@ import { Articles2Controller } from 'server/articles2/articles2.controller';
   providers: [
     AppService,
     BooksService,
-    {
-      provide: 'IService',
-      useClass: ArticlesService,
-    },
-    // {
-    //   provide: 'IService',
-    //   useClass: Articles2Service,
-    // },
+    ArticlesService,
+    Articles2Service,
   ],
-  controllers: [AppController, BooksController, ArticlesController, Articles2Controller],
+  controllers: [
+    AppController,
+    BooksController, 
+    ArticlesController, 
+    Articles2Controller],
 })
 export class AppModule {}

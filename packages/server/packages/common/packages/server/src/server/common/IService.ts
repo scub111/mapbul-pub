@@ -1,11 +1,11 @@
 import { TID } from 'server/common/types';
 
-export interface IService<T> {
-  getAll(): Promise<T[]> | T[];
-  postItem(item: T): T;
-  putAll(item: T): T;
-  deleteAll(): void;
-  getItem(id: TID): T;
-  putItem(id: TID, item: T): T;
-  deleteItem(id: TID): T;
+export abstract class IService<T> {
+  public getAll(): Promise<T[]> | T[] { return null; }
+  public postItem(item: T): T { return null; }
+  public putAll(item: T): T { return null; }
+  public deleteAll(): void {  }
+  public getItem(id: TID): T { return null; }
+  public putItem(id: TID, item: T): T { return null; }
+  public deleteItem(id: TID): T { return null; }
 }
