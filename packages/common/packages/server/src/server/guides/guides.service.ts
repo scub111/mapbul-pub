@@ -1,12 +1,12 @@
 import * as mysql from 'mysql';
 import * as util from 'util';
 import { BaseService } from 'server/common/BaseService';
-import { {{interfaceName}} } from 'server/{{saveFolder}}/{{tableName}}.dto';
+import { IGuideDTO } from 'server/guides/guide.dto';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { serverConfig } from 'common/serverConfig';
 
-export class {{serviceName}} extends BaseService<{{interfaceName}}> {
+export class GuidesService extends BaseService<IGuideDTO> {
   constructor() {
     super();
     this.connection = mysql.createConnection(serverConfig.dbConnection);
@@ -16,37 +16,51 @@ export class {{serviceName}} extends BaseService<{{interfaceName}}> {
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(): Promise<{{interfaceName}}[]> {
+  async getAll(): Promise<IGuideDTO[]> {
     return await this.query(`
       SELECT
-        {{#each fields}}
-        {{field}}{{separator}}
-        {{/each}} 
-      FROM {{tableName}}`);
+        id,
+        userId,
+        editorId,
+        firstName,
+        middleName,
+        lastName,
+        gender,
+        phone,
+        birthDate,
+        address
+      FROM guide`);
   }
 
-  postItem(item: {{interfaceName}}): {{interfaceName}} {
+  postItem(item: IGuideDTO): IGuideDTO {
     throw new Error('Method not implemented.');
   }
-  putAll(item: {{interfaceName}}): {{interfaceName}} {
+  putAll(item: IGuideDTO): IGuideDTO {
     throw new Error('Method not implemented.');
   }
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
-  async getItem(id: TID): Promise<{{interfaceName}}> {
+  async getItem(id: TID): Promise<IGuideDTO> {
     return await this.query(`
       SELECT
-        {{#each fields}}
-        {{field}}{{separator}}
-        {{/each}} 
-      FROM {{tableName}}
+        id,
+        userId,
+        editorId,
+        firstName,
+        middleName,
+        lastName,
+        gender,
+        phone,
+        birthDate,
+        address
+      FROM guide
       WHERE id = ${id}`);
   }
-  putItem(id: TID): {{interfaceName}} {
+  putItem(id: TID): IGuideDTO {
     throw new Error('Method not implemented.');
   }
-  deleteItem(id: TID): {{interfaceName}} {
+  deleteItem(id: TID): IGuideDTO {
     throw new Error('Method not implemented.');
   }
 }

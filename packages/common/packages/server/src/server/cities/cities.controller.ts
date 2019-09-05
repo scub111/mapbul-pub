@@ -1,31 +1,31 @@
 import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IController } from 'server/common/IController';
-import { {{interfaceName}} } from 'server/{{saveFolder}}/{{tableName}}.dto';
-import { {{serviceName}} } from './{{saveFolder}}.service';
+import { ICityDTO } from 'server/cities/city.dto';
+import { CitiesService } from './cities.service';
 import { IGetParams } from 'server/common/interfaces';
 
-@Controller('{{controller}}')
-export class {{controllerName}} implements IController<{{interfaceName}}> {
-  constructor(private readonly service: {{serviceName}}) {}
+@Controller('cities')
+export class CitiesController implements IController<ICityDTO> {
+  constructor(private readonly service: CitiesService) {}
 
   @Get()
-  async getAll(): Promise<{{interfaceName}}[]> {
+  async getAll(): Promise<ICityDTO[]> {
     return this.service.getAll();
   }
 
   @Post()
-  postItem(item: {{interfaceName}}): {{interfaceName}} {
+  postItem(item: ICityDTO): ICityDTO {
     throw new Error('Method not implemented.');
   }
 
   @Put()
-  putAll(item: {{interfaceName}}): {{interfaceName}} {
+  putAll(item: ICityDTO): ICityDTO {
     throw new Error('Method not implemented.');
   }
 
   @Get(':id')
-  async getItem(@Param() params: IGetParams): Promise<{{interfaceName}}> {
+  async getItem(@Param() params: IGetParams): Promise<ICityDTO> {
     return await this.service.getItem(params.id);
   }
 
@@ -35,11 +35,11 @@ export class {{controllerName}} implements IController<{{interfaceName}}> {
   }
 
   @Put(':id')
-  putItem(id: TID, item: {{interfaceName}}): {{interfaceName}} {
+  putItem(id: TID, item: ICityDTO): ICityDTO {
     throw new Error('Method not implemented.');
   }
 
-  deleteItem(id: TID): {{interfaceName}} {
+  deleteItem(id: TID): ICityDTO {
     throw new Error('Method not implemented.');
   }
 }
