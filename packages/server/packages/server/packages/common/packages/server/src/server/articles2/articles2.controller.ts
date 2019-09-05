@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Put,
-  Delete,
-  Inject,
-} from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Inject } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IController } from 'server/common/IController';
 import { IArticleDTO } from 'server/articles2/article.dto';
@@ -13,9 +6,7 @@ import { Articles2Service } from './articles2.service';
 
 @Controller('articles2')
 export class Articles2Controller implements IController<IArticleDTO> {
-  constructor(
-    private readonly service: Articles2Service,
-  ) {}
+  constructor(private readonly service: Articles2Service) {}
 
   @Get()
   async getAll(): Promise<IArticleDTO[]> {
