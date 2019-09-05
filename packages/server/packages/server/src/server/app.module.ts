@@ -10,16 +10,7 @@ import { Articles2Controller } from 'server/articles2/articles2.controller';
 
 @Module({
   imports: [],
-  providers: [
-    AppService,
-    BooksService,
-    ArticlesService,
-    Articles2Service,
-  ],
-  controllers: [
-    AppController,
-    BooksController, 
-    ArticlesController, 
-    Articles2Controller],
+  providers: [AppService, BooksService, ArticlesService, Articles2Service],
+  controllers: [AppController, BooksController, ArticlesController, Articles2Controller]
 })
 export class AppModule {}
