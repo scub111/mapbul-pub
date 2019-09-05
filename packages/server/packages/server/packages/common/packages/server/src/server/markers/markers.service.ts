@@ -1,12 +1,12 @@
 import * as mysql from 'mysql';
 import * as util from 'util';
 import { BaseService } from 'server/common/BaseService';
-import { IArticleDTO } from 'server/articles/article.dto';
+import { IMarkerDTO } from 'server/markers/marker.dto';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { serverConfig } from 'common/serverConfig';
 
-export class ArticlesService extends BaseService<IArticleDTO> {
+export class MarkersService extends BaseService<IMarkerDTO> {
   constructor() {
     super();
     this.connection = mysql.createConnection(serverConfig.dbConnection);
@@ -16,79 +16,87 @@ export class ArticlesService extends BaseService<IArticleDTO> {
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(): Promise<IArticleDTO[]> {
+  async getAll(): Promise<IMarkerDTO[]> {
     return await this.query(`
       SELECT
         id,
-        title,
-        titleEn,
-        titlePhoto,
-        photo,
-        sourceUrl,
-        sourceUrlEn,
-        sourcePhoto,
-        sourcePhotoEn,
+        name,
+        nameEn,
+        introduction,
+        introductionEn,
         description,
         descriptionEn,
-        text,
-        textEn,
-        authorId,
-        editorId,
+        cityId,
+        baseCategoryId,
+        lat,
+        lng,
+        entryTicket,
+        discountId,
+        street,
+        house,
+        buliding,
+        floor,
+        site,
+        email,
+        photo,
+        userId,
         addedDate,
         publishedDate,
-        markerId,
-        startDate,
-        startTime,
+        checkDate,
         statusId,
-        baseCategoryId,
-        endDate,
-        cityId
-      FROM article`);
+        logo,
+        wifi,
+        personal
+      FROM marker`);
   }
 
-  postItem(item: IArticleDTO): IArticleDTO {
+  postItem(item: IMarkerDTO): IMarkerDTO {
     throw new Error('Method not implemented.');
   }
-  putAll(item: IArticleDTO): IArticleDTO {
+  putAll(item: IMarkerDTO): IMarkerDTO {
     throw new Error('Method not implemented.');
   }
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
-  async getItem(id: TID): Promise<IArticleDTO> {
+  async getItem(id: TID): Promise<IMarkerDTO> {
     return await this.query(`
       SELECT
         id,
-        title,
-        titleEn,
-        titlePhoto,
-        photo,
-        sourceUrl,
-        sourceUrlEn,
-        sourcePhoto,
-        sourcePhotoEn,
+        name,
+        nameEn,
+        introduction,
+        introductionEn,
         description,
         descriptionEn,
-        text,
-        textEn,
-        authorId,
-        editorId,
+        cityId,
+        baseCategoryId,
+        lat,
+        lng,
+        entryTicket,
+        discountId,
+        street,
+        house,
+        buliding,
+        floor,
+        site,
+        email,
+        photo,
+        userId,
         addedDate,
         publishedDate,
-        markerId,
-        startDate,
-        startTime,
+        checkDate,
         statusId,
-        baseCategoryId,
-        endDate,
-        cityId
-      FROM article
+        logo,
+        wifi,
+        personal
+      FROM marker
       WHERE id = ${id}`);
   }
-  putItem(id: TID): IArticleDTO {
+  putItem(id: TID): IMarkerDTO {
     throw new Error('Method not implemented.');
   }
-  deleteItem(id: TID): IArticleDTO {
+  deleteItem(id: TID): IMarkerDTO {
     throw new Error('Method not implemented.');
   }
 }

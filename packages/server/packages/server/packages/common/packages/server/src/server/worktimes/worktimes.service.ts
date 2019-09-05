@@ -1,12 +1,12 @@
 import * as mysql from 'mysql';
 import * as util from 'util';
 import { BaseService } from 'server/common/BaseService';
-import { {{interfaceName}} } from 'server/{{saveFolder}}/{{tableName}}.dto';
+import { IWorktimeDTO } from 'server/worktimes/worktime.dto';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { serverConfig } from 'common/serverConfig';
 
-export class {{serviceName}} extends BaseService<{{interfaceName}}> {
+export class WorktimesService extends BaseService<IWorktimeDTO> {
   constructor() {
     super();
     this.connection = mysql.createConnection(serverConfig.dbConnection);
@@ -16,37 +16,41 @@ export class {{serviceName}} extends BaseService<{{interfaceName}}> {
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(): Promise<{{interfaceName}}[]> {
+  async getAll(): Promise<IWorktimeDTO[]> {
     return await this.query(`
       SELECT
-        {{#each fields}}
-        {{field}}{{separator}}
-        {{/each}} 
-      FROM {{tableName}}`);
+        id,
+        openTime,
+        closeTime,
+        markerId,
+        weekDayId
+      FROM worktime`);
   }
 
-  postItem(item: {{interfaceName}}): {{interfaceName}} {
+  postItem(item: IWorktimeDTO): IWorktimeDTO {
     throw new Error('Method not implemented.');
   }
-  putAll(item: {{interfaceName}}): {{interfaceName}} {
+  putAll(item: IWorktimeDTO): IWorktimeDTO {
     throw new Error('Method not implemented.');
   }
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
-  async getItem(id: TID): Promise<{{interfaceName}}> {
+  async getItem(id: TID): Promise<IWorktimeDTO> {
     return await this.query(`
       SELECT
-        {{#each fields}}
-        {{field}}{{separator}}
-        {{/each}} 
-      FROM {{tableName}}
+        id,
+        openTime,
+        closeTime,
+        markerId,
+        weekDayId
+      FROM worktime
       WHERE id = ${id}`);
   }
-  putItem(id: TID): {{interfaceName}} {
+  putItem(id: TID): IWorktimeDTO {
     throw new Error('Method not implemented.');
   }
-  deleteItem(id: TID): {{interfaceName}} {
+  deleteItem(id: TID): IWorktimeDTO {
     throw new Error('Method not implemented.');
   }
 }
