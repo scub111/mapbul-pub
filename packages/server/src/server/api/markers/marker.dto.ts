@@ -1,0 +1,30 @@
+export interface IMarkerDTO {
+  id: number;
+  name: string;
+  nameEn: string;
+  introduction: string;
+  introductionEn: string;
+  description: string;
+  descriptionEn: string;
+  cityId: number;
+  baseCategoryId: number;
+  lat: double;
+  lng: double;
+  entryTicket: string;
+  discountId: number;
+  street: string;
+  house: string;
+  buliding: string;
+  floor: string;
+  site: string;
+  email: string;
+  photo: string;
+  userId: number;
+  addedDate: Date;
+  publishedDate: Date;
+  checkDate: Date;
+  statusId: number;
+  logo: string;
+  wifi: bit(1);
+  personal: bit(1);
+}
