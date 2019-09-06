@@ -6,7 +6,8 @@ export const generateController = async (tableName: string, dto: string, service
   const baseName = `${service[0].toUpperCase()}${service.slice(1)}`;
   const serviceName = `${baseName}Service`;
   const controllerName = `${baseName}Controller`;
-  const router = `api/${service}`.toLowerCase();
+  const routerPath = `api/${service}`;
+  const router = routerPath.toLowerCase();
   console.log(router);
   const interfaceName = `I${dto[0].toUpperCase()}${dto.slice(1)}DTO`;
   const filePrefixDTO = dto;
@@ -24,7 +25,7 @@ export const generateController = async (tableName: string, dto: string, service
       interfaceName,
       fields
     },
-    sourcePath: `${sourceRootPath}/${router}/${filePrefixDTO}.dto.ts`
+    sourcePath: `${sourceRootPath}/${routerPath}/${filePrefixDTO}.dto.ts`
   });
 
   // Create *.service.ts
@@ -37,7 +38,7 @@ export const generateController = async (tableName: string, dto: string, service
       filePrefixDTO,
       fields
     },
-    sourcePath: `${sourceRootPath}/${router}/${filePrefix}.service.ts`
+    sourcePath: `${sourceRootPath}/${routerPath}/${filePrefix}.service.ts`
   });
 
   // Create *.controller.ts
@@ -52,6 +53,6 @@ export const generateController = async (tableName: string, dto: string, service
       interfaceName,
       fields
     },
-    sourcePath: `${sourceRootPath}/${router}/${filePrefix}.controller.ts`
+    sourcePath: `${sourceRootPath}/${routerPath}/${filePrefix}.controller.ts`
   });
 };
