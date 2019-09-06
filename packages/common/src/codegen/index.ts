@@ -10,14 +10,14 @@ import { generateController } from './generateController';
 
 const main = async () => {
   const t0 = new Date();
-  await generateController('admin', 'admins');
+  // await generateController('admin', 'admins');
   // await generateController('article', 'articles');
   // await generateController('articlesubcategory', 'articlesubcategories');
   // await generateController('category', 'categories');
   // await generateController('city', 'cities');
   // await generateController('city_permission', 'city_permissions');
   // await generateController('country', 'countries');
-  // await generateController('country_permission', 'country_permissions');
+  await generateController('country_permission', 'countryPermissions');
   // await generateController('discount', 'discounts');
   // await generateController('editor', 'editors');
   // await generateController('favorites_article', 'favorites_articles');
