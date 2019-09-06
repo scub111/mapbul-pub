@@ -2,15 +2,15 @@ import appRootPath = require('app-root-path');
 import { getFields } from './getFields';
 import { createSorce } from './generateSource';
 
-export const generateController = async (tableName: string, service: string) => {
+export const generateController = async (tableName: string, dto: string, service: string) => {
   const baseName = `${service[0].toUpperCase()}${service.slice(1)}`;
   const serviceName = `${baseName}Service`;
   const controllerName = `${baseName}Controller`;
-  const router = `api/${service}`;
+  const router = `api/${service}`.toLowerCase();
   console.log(router);
-  const interfaceName = `I${tableName[0].toUpperCase()}${tableName.slice(1)}DTO`;
-  const filePrefixDTO = tableName.toLowerCase();
-  const filePrefix = baseName.toLowerCase();
+  const interfaceName = `I${dto[0].toUpperCase()}${dto.slice(1)}DTO`;
+  const filePrefixDTO = dto;
+  const filePrefix = `${service[0].toLowerCase()}${service.slice(1)}`;
 
   const templateRootPath = `${appRootPath.path}/src/codegen/templates`;
   const sourceRootPath = `${appRootPath.path}/src/server`;
@@ -34,7 +34,7 @@ export const generateController = async (tableName: string, service: string) => 
       tableName,
       serviceName,
       interfaceName,
-      saveFolder: router,
+      filePrefixDTO,
       fields
     },
     sourcePath: `${sourceRootPath}/${router}/${filePrefix}.service.ts`
@@ -44,7 +44,7 @@ export const generateController = async (tableName: string, service: string) => 
   createSorce({
     templatePath: `${templateRootPath}/controller.hbs`,
     data: {
-      tableName,
+      filePrefixDTO,
       router,
       controllerName,
       service,
