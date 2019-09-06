@@ -1,8 +1,8 @@
 export interface ICityDTO {
   id: number;
   name: string;
-  lng: float;
-  lat: float;
+  lng: number;
+  lat: number;
   countryId: number;
   placeId: string;
 }
