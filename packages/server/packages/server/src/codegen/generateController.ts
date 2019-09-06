@@ -3,11 +3,11 @@ import { getFields } from './getFields';
 import { createSorce } from './generateSource';
 
 export const generateController = async (tableName: string, service: string) => {
-  const controller = service;
   const baseName = `${service[0].toUpperCase()}${service.slice(1)}`;
   const serviceName = `${baseName}Service`;
   const controllerName = `${baseName}Controller`;
-  const saveFolder = service;
+  const router = `api/${service}`;
+  console.log(router);
   const interfaceName = `I${tableName[0].toUpperCase()}${tableName.slice(1)}DTO`;
   const filePrefixDTO = tableName.toLowerCase();
   const filePrefix = baseName.toLowerCase();
@@ -24,7 +24,7 @@ export const generateController = async (tableName: string, service: string) => 
       interfaceName,
       fields
     },
-    sourcePath: `${sourceRootPath}/${saveFolder}/${filePrefixDTO}.dto.ts`
+    sourcePath: `${sourceRootPath}/${router}/${filePrefixDTO}.dto.ts`
   });
 
   // Create *.service.ts
@@ -34,10 +34,10 @@ export const generateController = async (tableName: string, service: string) => 
       tableName,
       serviceName,
       interfaceName,
-      saveFolder,
+      saveFolder: router,
       fields
     },
-    sourcePath: `${sourceRootPath}/${saveFolder}/${filePrefix}.service.ts`
+    sourcePath: `${sourceRootPath}/${router}/${filePrefix}.service.ts`
   });
 
   // Create *.controller.ts
@@ -45,13 +45,13 @@ export const generateController = async (tableName: string, service: string) => 
     templatePath: `${templateRootPath}/controller.hbs`,
     data: {
       tableName,
-      controller,
+      router,
       controllerName,
+      service,
       serviceName,
       interfaceName,
-      saveFolder,
       fields
     },
-    sourcePath: `${sourceRootPath}/${saveFolder}/${filePrefix}.controller.ts`
+    sourcePath: `${sourceRootPath}/${router}/${filePrefix}.controller.ts`
   });
 };
