@@ -19,7 +19,7 @@ const traslateField = (field: string) => {
 };
 
 const traslateType = (type: string) => {
-  if (type.includes('varchar') || type.includes('text')) {
+  if (type.includes('varchar') || type.includes('text') || type.includes('char')) {
     return 'string';
   } else if (type.includes('int')) {
     return 'number';
