@@ -5,5 +5,5 @@ export interface IUserDTO {
   guid: string;
   userTypeId: number;
   registrationDate: Date;
-  deleted: bit(1);
+  deleted: boolean;
 }

@@ -21,8 +21,10 @@ const traslateField = (field: string) => {
 const traslateType = (type: string) => {
   if (type.includes('varchar') || type.includes('text') || type.includes('char')) {
     return 'string';
-  } else if (type.includes('int')) {
+  } else if (type.includes('int') || type.includes('float') || type.includes('double')) {
     return 'number';
+  } else if (type.includes('bit')) {
+    return 'boolean';
   } else if (type.includes('data') || type.includes('time')) {
     return 'Date';
   }
