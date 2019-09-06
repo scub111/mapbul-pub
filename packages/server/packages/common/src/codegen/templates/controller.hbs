@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { {{interfaceName}} } from './{{tableName}}.dto';
+import { {{interfaceName}} } from './{{filePrefixDTO}}.dto';
 import { {{serviceName}} } from './{{service}}.service';
 
 @Controller('{{router}}')

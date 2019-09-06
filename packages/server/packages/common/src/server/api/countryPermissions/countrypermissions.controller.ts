@@ -2,30 +2,30 @@ import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { ICountry_permissionDTO } from './country_permission.dto';
+import { ICountryPermissionDTO } from './countryPermission.dto';
 import { CountryPermissionsService } from './countryPermissions.service';
 
-@Controller('api/countryPermissions')
-export class CountryPermissionsController implements IController<ICountry_permissionDTO> {
+@Controller('api/countrypermissions')
+export class CountryPermissionsController implements IController<ICountryPermissionDTO> {
   constructor(private readonly service: CountryPermissionsService) {}
 
   @Get()
-  async getAll(): Promise<ICountry_permissionDTO[]> {
+  async getAll(): Promise<ICountryPermissionDTO[]> {
     return this.service.getAll();
   }
 
   @Post()
-  postItem(item: ICountry_permissionDTO): ICountry_permissionDTO {
+  postItem(item: ICountryPermissionDTO): ICountryPermissionDTO {
     throw new Error('Method not implemented.');
   }
 
   @Put()
-  putAll(item: ICountry_permissionDTO): ICountry_permissionDTO {
+  putAll(item: ICountryPermissionDTO): ICountryPermissionDTO {
     throw new Error('Method not implemented.');
   }
 
   @Get(':id')
-  async getItem(@Param() params: IGetParams): Promise<ICountry_permissionDTO> {
+  async getItem(@Param() params: IGetParams): Promise<ICountryPermissionDTO> {
     return await this.service.getItem(params.id);
   }
 
@@ -35,11 +35,11 @@ export class CountryPermissionsController implements IController<ICountry_permis
   }
 
   @Put(':id')
-  putItem(id: TID, item: ICountry_permissionDTO): ICountry_permissionDTO {
+  putItem(id: TID, item: ICountryPermissionDTO): ICountryPermissionDTO {
     throw new Error('Method not implemented.');
   }
 
-  deleteItem(id: TID): ICountry_permissionDTO {
+  deleteItem(id: TID): ICountryPermissionDTO {
     throw new Error('Method not implemented.');
   }
 }

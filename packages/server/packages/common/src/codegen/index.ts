@@ -17,7 +17,7 @@ const main = async () => {
   // await generateController('city', 'cities');
   // await generateController('city_permission', 'city_permissions');
   // await generateController('country', 'countries');
-  await generateController('country_permission', 'countryPermissions');
+  await generateController('country_permission', 'countryPermission', 'countryPermissions');
   // await generateController('discount', 'discounts');
   // await generateController('editor', 'editors');
   // await generateController('favorites_article', 'favorites_articles');
