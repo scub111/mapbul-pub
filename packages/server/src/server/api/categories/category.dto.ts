@@ -7,5 +7,5 @@ export interface ICategoryDTO {
   icon: string;
   color: string;
   pin: string;
-  forArticle: bit(1);
+  forArticle: boolean;
 }
