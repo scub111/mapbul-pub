@@ -1,10 +1,10 @@
 import * as mysql from 'mysql';
 import * as util from 'util';
 import { BaseService } from 'server/common/BaseService';
-import { {{interfaceName}} } from 'server/{{saveFolder}}/{{tableName}}.dto';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { serverConfig } from 'common/serverConfig';
+import { {{interfaceName}} } from './{{filePrefixDTO}}.dto';
 
 export class {{serviceName}} extends BaseService<{{interfaceName}}> {
   constructor() {
