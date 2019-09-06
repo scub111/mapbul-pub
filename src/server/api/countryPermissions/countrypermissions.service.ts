@@ -1,12 +1,12 @@
 import * as mysql from 'mysql';
 import * as util from 'util';
 import { BaseService } from 'server/common/BaseService';
-import { ICountry_permissionDTO } from 'server/api/countryPermissions/country_permission.dto';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { serverConfig } from 'common/serverConfig';
+import { ICountryPermissionDTO } from './countryPermission.dto';
 
-export class CountryPermissionsService extends BaseService<ICountry_permissionDTO> {
+export class CountryPermissionsService extends BaseService<ICountryPermissionDTO> {
   constructor() {
     super();
     this.connection = mysql.createConnection(serverConfig.dbConnection);
@@ -16,7 +16,7 @@ export class CountryPermissionsService extends BaseService<ICountry_permissionDT
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(): Promise<ICountry_permissionDTO[]> {
+  async getAll(): Promise<ICountryPermissionDTO[]> {
     return await this.query(`
       SELECT
         id,
@@ -25,16 +25,16 @@ export class CountryPermissionsService extends BaseService<ICountry_permissionDT
       FROM country_permission`);
   }
 
-  postItem(item: ICountry_permissionDTO): ICountry_permissionDTO {
+  postItem(item: ICountryPermissionDTO): ICountryPermissionDTO {
     throw new Error('Method not implemented.');
   }
-  putAll(item: ICountry_permissionDTO): ICountry_permissionDTO {
+  putAll(item: ICountryPermissionDTO): ICountryPermissionDTO {
     throw new Error('Method not implemented.');
   }
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
-  async getItem(id: TID): Promise<ICountry_permissionDTO> {
+  async getItem(id: TID): Promise<ICountryPermissionDTO> {
     return await this.query(`
       SELECT
         id,
@@ -43,10 +43,10 @@ export class CountryPermissionsService extends BaseService<ICountry_permissionDT
       FROM country_permission
       WHERE id = ${id}`);
   }
-  putItem(id: TID): ICountry_permissionDTO {
+  putItem(id: TID): ICountryPermissionDTO {
     throw new Error('Method not implemented.');
   }
-  deleteItem(id: TID): ICountry_permissionDTO {
+  deleteItem(id: TID): ICountryPermissionDTO {
     throw new Error('Method not implemented.');
   }
 }

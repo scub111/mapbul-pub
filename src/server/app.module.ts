@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppService } from 'server/app.service';
 import { AppController } from 'server/app.controller';
-import { AdminsService } from 'server/api/admins/admins.service';
-import { AdminsController } from 'server/api/admins/admins.controller';
+import { CountryPermissionsService } from './api/countryPermissions/countryPermissions.service';
+import { CountryPermissionsController } from './api/countryPermissions/CountryPermissions.controller';
+// import { AdminsService } from 'server/api/admins/admins.service';
+// import { AdminsController } from 'server/api/admins/admins.controller';
 // import { ArticlesService } from 'server/articles/articles.service';
 // import { ArticlesController } from 'server/articles/articles.controller';
 // import { ArticlesubcategoriesService } from 'server/articlesubcategories/articlesubcategories.service';
@@ -14,14 +16,16 @@ import { AdminsController } from 'server/api/admins/admins.controller';
   imports: [],
   providers: [
     AppService,
-    AdminsService,
+    CountryPermissionsService,
+    // AdminsService,
     // ArticlesService,
     // ArticlesubcategoriesService,
     // CategoriesService,
   ],
   controllers: [
     AppController,
-    AdminsController,
+    CountryPermissionsController,
+    // AdminsController,
     // ArticlesController,
     // ArticlesubcategoriesController,
     // CategoriesController,
