@@ -8,8 +8,8 @@ export interface IMarkerDTO {
   descriptionEn: string;
   cityId: number;
   baseCategoryId: number;
-  lat: double;
-  lng: double;
+  lat: number;
+  lng: number;
   entryTicket: string;
   discountId: number;
   street: string;
@@ -25,6 +25,6 @@ export interface IMarkerDTO {
   checkDate: Date;
   statusId: number;
   logo: string;
-  wifi: bit(1);
-  personal: bit(1);
+  wifi: boolean;
+  personal: boolean;
 }
