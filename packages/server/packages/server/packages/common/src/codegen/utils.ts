@@ -9,6 +9,18 @@ export const makeSureSync = (filePath: string) => {
   }
 };
 
+export const deleteFileSync = (filePath: string) => {
+  if (fs.existsSync(filePath)) {
+    fs.unlinkSync(filePath);
+  }
+};
+
+export const readFileSync = (filePath: string) => {
+  if (fs.existsSync(filePath)) {
+    return fs.readFileSync(filePath, 'utf-8');
+  }
+};
+
 export const writeFileSync = (filePath: string, data: string) => {
   makeSureSync(filePath);
   fs.writeFileSync(filePath, data, { encoding: 'utf8', flag: 'w' });
@@ -16,5 +28,5 @@ export const writeFileSync = (filePath: string, data: string) => {
 
 export const appendFileSync = (filePath: string, data: string) => {
   makeSureSync(filePath);
-  fs.appendFileSync(filePath, data, { encoding: 'utf8', flag: 'w' });
+  fs.appendFileSync(filePath, data, { encoding: 'utf8' });
 };
