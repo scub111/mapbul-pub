@@ -80,7 +80,7 @@ import { ApiController } from 'server/api.controller';
     UsersService,
     UserTypesService,
     WeekDaysService,
-    WorkTimesService
+    WorkTimesService,
   ],
   controllers: [
     AppController,
@@ -108,7 +108,7 @@ import { ApiController } from 'server/api.controller';
     UsersController,
     UserTypesController,
     WeekDaysController,
-    WorkTimesController
-  ]
+    WorkTimesController,
+  ],
 })
 export class AppModule {}
