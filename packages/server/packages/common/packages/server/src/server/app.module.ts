@@ -13,8 +13,8 @@ import { CitiesService } from 'server/api/cities/cities.service';
 import { CitiesController } from 'server/api/cities/cities.controller';
 import { CityPermissionsService } from 'server/api/cityPermissions/cityPermissions.service';
 import { CityPermissionsController } from 'server/api/cityPermissions/cityPermissions.controller';
-import { CountryPermissionsService } from './api/countryPermissions/countryPermissions.service';
-import { CountryPermissionsController } from './api/countryPermissions/CountryPermissions.controller';
+import { CountryPermissionsService } from 'server/api/countryPermissions/countryPermissions.service';
+import { CountryPermissionsController } from 'server/api/countryPermissions/CountryPermissions.controller';
 import { DiscountsService } from 'server/api/discounts/discounts.service';
 import { DiscountsController } from 'server/api/discounts/discounts.controller';
 import { FavoritesArticlesService } from 'server/api/favoritesArticles/favoritesArticles.service';
@@ -50,6 +50,7 @@ import { WeekDaysService } from 'server/api/weekdays/weekdays.service';
 import { WeekDaysController } from 'server/api/weekdays/weekdays.controller';
 import { WorkTimesService } from 'server/api/worktimes/worktimes.service';
 import { WorkTimesController } from 'server/api/worktimes/worktimes.controller';
+import { ApiController } from 'server/api.controller';
 
 @Module({
   imports: [],
@@ -83,6 +84,7 @@ import { WorkTimesController } from 'server/api/worktimes/worktimes.controller';
   ],
   controllers: [
     AppController,
+    ApiController,
     CountryPermissionsController,
     AdminsController,
     ArticlesController,
