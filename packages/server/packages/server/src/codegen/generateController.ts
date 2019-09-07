@@ -23,9 +23,9 @@ export const generateController = async (tableName: string, dto: string, service
     templatePath: `${templateRootPath}/dto.hbs`,
     data: {
       interfaceName,
-      fields
+      fields,
     },
-    sourcePath: `${sourceRootPath}/${routerPath}/${filePrefixDTO}.dto.ts`
+    sourcePath: `${sourceRootPath}/${routerPath}/${filePrefixDTO}.dto.ts`,
   });
 
   // Create *.service.ts
@@ -36,9 +36,9 @@ export const generateController = async (tableName: string, dto: string, service
       serviceName,
       interfaceName,
       filePrefixDTO,
-      fields
+      fields,
     },
-    sourcePath: `${sourceRootPath}/${routerPath}/${filePrefix}.service.ts`
+    sourcePath: `${sourceRootPath}/${routerPath}/${filePrefix}.service.ts`,
   });
 
   // Create *.controller.ts
@@ -51,8 +51,8 @@ export const generateController = async (tableName: string, dto: string, service
       service,
       serviceName,
       interfaceName,
-      fields
+      fields,
     },
-    sourcePath: `${sourceRootPath}/${routerPath}/${filePrefix}.controller.ts`
+    sourcePath: `${sourceRootPath}/${routerPath}/${filePrefix}.controller.ts`,
   });
 };
