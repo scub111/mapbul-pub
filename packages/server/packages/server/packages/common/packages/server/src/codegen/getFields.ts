@@ -39,7 +39,7 @@ export const getFields = async (tableName: string) => {
         fieldOrigin: row.Field,
         field: traslateField(row.Field),
         type: traslateType(row.Type),
-        separator: index !== result.length - 1 ? ',' : ''
-      } as IField)
+        separator: index !== result.length - 1 ? ',' : '',
+      } as IField),
   );
 };
