@@ -2,7 +2,7 @@ import * as mysql from 'mysql';
 import * as util from 'util';
 import { Connection } from 'mysql';
 import { serverConfig } from 'common/serverConfig';
-import { IField } from './IField';
+import { IField } from 'codegen/IField';
 const connection: Connection = mysql.createConnection(serverConfig.dbConnection);
 const query: (expression: string) => Promise<any> = util.promisify(connection.query).bind(connection);
 
