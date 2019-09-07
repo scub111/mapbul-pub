@@ -1,6 +1,7 @@
-import appRootPath = require('app-root-path');
+import appRootPath from 'app-root-path';
 import { getFields } from 'codegen/getFields';
 import { createSorce } from 'codegen/generateSource';
+import { appendRouterSync } from './routerStorage';
 
 export const generateController = async (tableName: string, dto: string, service: string) => {
   const baseName = `${service[0].toUpperCase()}${service.slice(1)}`;
@@ -9,6 +10,7 @@ export const generateController = async (tableName: string, dto: string, service
   const routerPath = `api/${service}`;
   const router = routerPath.toLowerCase();
   console.log(router);
+  appendRouterSync(router);
   const interfaceName = `I${dto[0].toUpperCase()}${dto.slice(1)}DTO`;
   const filePrefixDTO = dto;
   const filePrefix = `${service[0].toLowerCase()}${service.slice(1)}`;
