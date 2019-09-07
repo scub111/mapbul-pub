@@ -7,9 +7,11 @@ import { setEnvVariables } from 'common/serverConfig';
 setEnvVariables(__dirname + '/.env');
 
 import { generateController } from 'codegen/generateController';
+import { deleteRouterSync } from './routerStorage';
 
 const main = async () => {
   const t0 = new Date();
+  deleteRouterSync();
   await generateController('admin', 'admin', 'admins');
   await generateController('article', 'article', 'articles');
   await generateController('articlesubcategory', 'articleSubcategory', 'articleSubcategories');
