@@ -11,10 +11,9 @@ export class ApiController {
     const apis = [];
     apiInits.forEach(item => {
       if (item !== '') {
-        apis.push(item.trim());
+        apis.push(`/${item.trim()}`);
       }
     });
-    console.log(apis);
-    return { message: 'Hello, API!' };
+    return { message: 'Hello, API!', apis };
   }
 }
