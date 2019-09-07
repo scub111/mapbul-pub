@@ -1,6 +1,5 @@
 import handlebars from 'handlebars';
-import fs from 'fs';
-import { writeFileSync } from 'codegen/utils';
+import { writeFileSync, readFileSync } from 'codegen/utils';
 
 interface ICreateSorceConfig {
   templatePath: string;
@@ -9,7 +8,7 @@ interface ICreateSorceConfig {
 }
 
 export const createSorce = (config: ICreateSorceConfig) => {
-  const templateFile = fs.readFileSync(config.templatePath, 'utf-8');
+  const templateFile = readFileSync(config.templatePath);
   const template = handlebars.compile(templateFile);
   const source = template(config.data);
   writeFileSync(config.sourcePath, source);
