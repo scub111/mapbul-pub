@@ -1,6 +1,6 @@
 import appRootPath = require('app-root-path');
-import { getFields } from './getFields';
-import { createSorce } from './generateSource';
+import { getFields } from 'codegen/getFields';
+import { createSorce } from 'codegen/generateSource';
 
 export const generateController = async (tableName: string, dto: string, service: string) => {
   const baseName = `${service[0].toUpperCase()}${service.slice(1)}`;
