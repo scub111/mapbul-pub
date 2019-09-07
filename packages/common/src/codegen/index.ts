@@ -6,7 +6,7 @@ console.log('test2');
 import { setEnvVariables } from 'common/serverConfig';
 setEnvVariables(__dirname + '/.env');
 
-import { generateController } from './generateController';
+import { generateController } from 'codegen/generateController';
 
 const main = async () => {
   const t0 = new Date();
