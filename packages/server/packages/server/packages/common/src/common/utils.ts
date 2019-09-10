@@ -1,5 +1,6 @@
 import path from 'path';
-import fs from 'fs';
+import fs, { PathLike } from 'fs';
+import * as fsExtra from 'fs-extra';
 import mkdirp from 'mkdirp';
 
 export const makeSureSync = (filePath: string) => {
@@ -9,10 +10,14 @@ export const makeSureSync = (filePath: string) => {
   }
 };
 
-export const deleteFileSync = (filePath: string) => {
+export const removeFileSync = (filePath: string) => {
   if (fs.existsSync(filePath)) {
     fs.unlinkSync(filePath);
   }
+};
+
+export const removeDirSync = (dirPath: string) => {
+  fsExtra.removeSync(dirPath);
 };
 
 export const readFileSync = (filePath: string) => {
@@ -30,3 +35,9 @@ export const appendFileSync = (filePath: string, data: string) => {
   makeSureSync(filePath);
   fs.appendFileSync(filePath, data, { encoding: 'utf8' });
 };
+
+export const copyFileSync = (source: string, destination: string, flags?: number) => {
+  makeSureSync(destination);
+  fs.copyFileSync(source, destination, flags);
+};
+
