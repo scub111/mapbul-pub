@@ -1,7 +1,7 @@
 import appRootPath from 'app-root-path';
 import { getFields } from 'codegen/getFields';
 import { createSorce } from 'codegen/generateSource';
-import { appendRouterSync } from './routerStorage';
+import { appendRouterSync } from 'codegen/routerStorage';
 
 export const generateController = async (tableName: string, dto: string, service: string) => {
   const baseName = `${service[0].toUpperCase()}${service.slice(1)}`;
