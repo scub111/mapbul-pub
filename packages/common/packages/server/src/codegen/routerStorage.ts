@@ -1,5 +1,5 @@
-import { appendFileSync, deleteFileSync, readFileSync } from './utils';
 import appRootPath from 'app-root-path';
+import { deleteFileSync, readFileSync, appendFileSync } from 'common/utils';
 
 const apiPath = `${appRootPath.path}/src/server/api.txt`;
 
