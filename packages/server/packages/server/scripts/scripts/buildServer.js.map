@@ -1,0 +1,1 @@
+{"version":3,"file":"buildServer.js","sourceRoot":"","sources":["../../src/scripts/buildServer.ts"],"names":[],"mappings":";;;;;AAAA,kEAAwC;AACxC,2CAA+C;AAE/C,OAAO,CAAC,GAAG,CAAC,MAAM,CAAC,CAAC;AACpB,MAAM,MAAM,GAAG,GAAG,uBAAW,CAAC,IAAI,MAAM,CAAC;AACzC,MAAM,OAAO,GAAG,GAAG,uBAAW,CAAC,IAAI,QAAQ,CAAC;AAC5C,oBAAY,CAAC,GAAG,MAAM,uBAAuB,EAAE,GAAG,OAAO,UAAU,CAAC,CAAC"}
