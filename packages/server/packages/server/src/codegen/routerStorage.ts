@@ -1,10 +1,10 @@
 import appRootPath from 'app-root-path';
-import { deleteFileSync, readFileSync, appendFileSync } from 'common/utils';
+import { removeFileSync, readFileSync, appendFileSync } from 'common/utils';
 
 const apiPath = `${appRootPath.path}/src/server/api.txt`;
 
 export const deleteRouterSync = () => {
-  deleteFileSync(apiPath);
+  removeFileSync(apiPath);
 };
 
 export const readRouterSync = () => {
