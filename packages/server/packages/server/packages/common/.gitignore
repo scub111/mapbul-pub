@@ -6,5 +6,6 @@
 *.rar
 *.html
 *.tsbuildinfo
+api.txt
 .env
 db-connection.json

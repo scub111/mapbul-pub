@@ -7,7 +7,7 @@ import { setEnvVariables } from 'common/serverConfig';
 setEnvVariables(__dirname + '/.env');
 
 import { generateController } from 'codegen/generateController';
-import { deleteRouterSync } from './routerStorage';
+import { deleteRouterSync } from 'codegen/routerStorage';
 
 const main = async () => {
   const t0 = new Date();
