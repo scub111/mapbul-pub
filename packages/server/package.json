@@ -5,8 +5,8 @@
    "author": "",
    "license": "MIT",
    "scripts": {
-      "server-build": "rimraf dist/server dist/tsconfig.server-build.tsbuildinfo && copyfiles src/server/.env dist/server -f && copyfiles src/server/views/* dist/server/views -f && copyfiles src/server/api.txt dist/server -f && tsc -p tsconfig.server-build.json --diagnostics | gnomon",
-      "server-build2": "node scripts/scripts/buildServer | gnomon",
+      "server-build": "node scripts/scripts/buildServer | gnomon",
+      "server-build-old": "rimraf dist/server dist/tsconfig.server-build.tsbuildinfo && copyfiles src/server/.env dist/server -f && copyfiles src/server/views/* dist/server/views -f && copyfiles src/server/api.txt dist/server -f && tsc -p tsconfig.server-build.json --diagnostics | gnomon",
       "server-debug": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/server/main.ts | gnomon",
       "format": "prettier --write \"src/**/*.ts\"",
       "start": "ts-node -r tsconfig-paths/register src/main.ts",

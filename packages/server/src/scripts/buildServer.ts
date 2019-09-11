@@ -3,15 +3,15 @@ import { copyFileSync, removeDirSync, removeFileSync } from '../common/fileUtils
 import { runSync } from '../common/processUtils';
 
 const main = () => {
-  console.log('Build was started 2');
-  const srcDir = `${appRootPath.path}/src/server`;
-  const distDir = `${appRootPath.path}/dist/server`;
+  console.log('Build was started');
+  const srcDir = `${appRootPath.path}/src`;
+  const distDir = `${appRootPath.path}/dist`;
   console.log('Dist folder is removing...');
-  removeDirSync(distDir);
+  removeDirSync(`${distDir}/server`);
   console.log('Files are copying...');
-  copyFileSync(`${srcDir}/.env`, `${distDir}/.env`);
-  copyFileSync(`${srcDir}/views/api.hbs`, `${distDir}/views/api.hbs`);
-  copyFileSync(`${srcDir}/api.txt`, `${distDir}/api.txt`);
+  copyFileSync(`${srcDir}/server/.env`, `${distDir}/server/.env`);
+  copyFileSync(`${srcDir}/server/views/api.hbs`, `${distDir}/server/views/api.hbs`);
+  copyFileSync(`${srcDir}/server/api.txt`, `${distDir}/server/api.txt`);
   console.log('Compiling...');
   const output = runSync(`tsc -p ${appRootPath.path}/tsconfig.server-build.json --diagnostics`);
   console.log(output);
