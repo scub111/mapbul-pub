@@ -1,5 +1,5 @@
 import handlebars from 'handlebars';
-import { readFileSync, writeFileSync } from 'common/utils';
+import { readFileSync, writeFileSync } from 'common/fileUtils';
 
 interface ICreateSorceConfig {
   templatePath: string;

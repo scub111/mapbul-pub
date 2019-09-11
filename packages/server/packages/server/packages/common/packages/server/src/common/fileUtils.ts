@@ -1,6 +1,6 @@
-import path from 'path';
-import fs, { PathLike } from 'fs';
 import * as fsExtra from 'fs-extra';
+import path from 'path';
+import fs from 'fs';
 import mkdirp from 'mkdirp';
 
 export const makeSureSync = (filePath: string) => {
