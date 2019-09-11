@@ -7,7 +7,11 @@ const main = () => {
   const srcDir = `${appRootPath.path}/src`;
   const distDir = `${appRootPath.path}/dist`;
   console.log('Dist folder is removing...');
-  removeDirSync(`${distDir}/server`);
+  try {
+    removeDirSync(`${distDir}/server`);
+  } catch (e) {
+    console.log(e);
+  }
   console.log('Files are copying...');
   copyFileSync(`${srcDir}/server/.env`, `${distDir}/server/.env`);
   copyFileSync(`${srcDir}/server/views/api.hbs`, `${distDir}/server/views/api.hbs`);
