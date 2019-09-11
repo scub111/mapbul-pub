@@ -4,7 +4,7 @@ import { runSync } from '../common/processUtils';
 
 const main = () => {
   console.log('Stoping site...');
-  const output = runSync(`%WINDIR%/system32/inetsrv/appcmd stop site /site.name:"mapbul.pub"`);
+  let output = runSync(`%WINDIR%/system32/inetsrv/appcmd stop site /site.name:"mapbul.pub"`);
   console.log('Building...');
   output = runSync(`npm run server-build`);
   console.log(output);
