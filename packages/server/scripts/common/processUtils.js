@@ -17,7 +17,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const childProcess = __importStar(require("child_process"));
 exports.runSync = (command) => {
-    childProcess.execSync(command);
+    return childProcess.execSync(command).toString();
 };
 exports.runAsync = (command) => __awaiter(this, void 0, void 0, function* () {
     const exec = childProcess.exec;
