@@ -1,19 +1,22 @@
 import appRootPath from 'app-root-path';
-import { copyFileSync, removeDirSync } from '../common/fileUtils';
-import { runSync, runAsync } from '../common/processUtils';
+import { copyFileSync, removeDirSync, removeFileSync } from '../common/fileUtils';
+import { runSync } from '../common/processUtils';
 
-const bootstrap = async () => {
-  console.log('Build was started');
-  const srcDir = `${appRootPath.path}/src`;
-  const distDir = `${appRootPath.path}/dist`;
+const main = () => {
+  console.log('Build was started 2');
+  const srcDir = `${appRootPath.path}/src/server`;
+  const distDir = `${appRootPath.path}/dist/server`;
   console.log('Dist folder is removing...');
   removeDirSync(distDir);
   console.log('Files are copying...');
-  copyFileSync(`${srcDir}/server/views/api.hbs`, `${distDir}/api.hbs`);
-  // const output = await runAsync('npm -v');
+  copyFileSync(`${srcDir}/.env`, `${distDir}/.env`);
+  copyFileSync(`${srcDir}/views/api.hbs`, `${distDir}/views/api.hbs`);
+  copyFileSync(`${srcDir}/api.txt`, `${distDir}/api.txt`);
   console.log('Compiling...');
-  const output = await runAsync(`tsc -p ${appRootPath.path}/tsconfig.server-build.json --diagnostics`);
+  const output = runSync(`tsc -p ${appRootPath.path}/tsconfig.server-build.json --diagnostics`);
   console.log(output);
+  console.log('Cleaning...');
+  removeFileSync(`${distDir}/tsconfig.server-build.tsbuildinfo`);
 };
 
-bootstrap();
+main();
