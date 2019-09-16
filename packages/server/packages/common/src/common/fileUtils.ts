@@ -40,4 +40,3 @@ export const copyFileSync = (source: string, destination: string, flags?: number
   makeSureSync(destination);
   fs.copyFileSync(source, destination, flags);
 };
-
