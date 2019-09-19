@@ -1,5 +1,0 @@
-npm i artillery -g
-npx artillery quick --count 100 -n 1000 http://pub.mapbul.scub111.com/articles
-npx artillery quick --count 100 -n 1000 http://localhost:3100/api/articles
-move-cli dist dist2/server2 --mkdirp
-echo y | hygen server dto Article --message id12 --abc 23
