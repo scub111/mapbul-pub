@@ -1,6 +1,6 @@
 import appRootPath from 'app-root-path';
-import { copyFileSync, removeDirSync, removeFileSync } from '../common/fileUtils';
-import { runSync } from '../common/processUtils';
+import { copyFileSync, removeDirSync, removeFileSync } from '../../common/fileUtils';
+import { runSync } from '../../common/processUtils';
 
 const main = () => {
   console.log('Build was started');

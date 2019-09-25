@@ -1,29 +1,13 @@
 {
-   "name": "mapbul-pub",
+   "name": "@mapbul-pub/server",
    "version": "0.1.1",
    "description": "",
    "author": "",
    "license": "MIT",
    "scripts": {
-      "server-build": "node scripts/scripts/buildServer | gnomon",
+      "server-build": "node scripts/buildServer | gnomon",
       "server-deploy": "npm ci && node scripts/scripts/deployServer | gnomon",
-      "server-build-old": "rimraf dist/server dist/tsconfig.server-build.tsbuildinfo && copyfiles src/server/.env dist/server -f && copyfiles src/server/views/* dist/server/views -f && copyfiles src/server/api.txt dist/server -f && tsc -p tsconfig.server-build.json --diagnostics | gnomon",
-      "server-debug": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/server/main.ts | gnomon",
-      "format": "prettier --write \"src/**/*.ts\"",
-      "start": "ts-node -r tsconfig-paths/register src/main.ts",
-      "start:dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node dist/main.js\"",
-      "start:debug": "tsc-watch -p tsconfig.build.json --onSuccess \"node --inspect=6589 dist/main.js\"",
-      "start:prod": "node dist/main.js",
-      "lint": "tslint -p tsconfig.json -c tslint.json",
-      "test": "jest",
-      "test:watch": "jest --watch",
-      "test:cov": "jest --coverage",
-      "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-      "test:e2e": "jest --config ./__test__/jest-e2e.json",
-      "codegen-build": "rimraf dist/codegen && tsc -p tsconfig.codegen-build.json --diagnostics | gnomon",
-      "codegen-debug": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/codegen/index.ts | gnomon",
-      "scripts-build": "rimraf scripts && tsc -p tsconfig.scripts-build.json --diagnostics | gnomon",
-      "scripts-debug": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/scripts/buildServer.ts | gnomon"
+      "server-debug": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/server/main.ts | gnomon"
    },
    "_moduleAliases": {
       "common": "dist/common/",
