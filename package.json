@@ -6,8 +6,10 @@
    "license": "MIT",
    "scripts": {
       "ls": "lerna ls",
-      "bootstrap": "lerna run bootstrap --hoist",
+      "bootstrap": "lerna bootstrap --hoist",
       "clean": "lerna run clean",
+      "clean:node": "rimraf node_modules && lerna run clean:node",
+      "build": "lerna run build",
       "server-build": "node scripts/scripts/buildServer | gnomon",
       "server-deploy": "npm ci && node scripts/scripts/deployServer | gnomon",
       "server-build-old": "rimraf dist/server dist/tsconfig.server-build.tsbuildinfo && copyfiles src/server/.env dist/server -f && copyfiles src/server/views/* dist/server/views -f && copyfiles src/server/api.txt dist/server -f && tsc -p tsconfig.server-build.json --diagnostics | gnomon",
