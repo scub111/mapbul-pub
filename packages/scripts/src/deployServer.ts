@@ -1,6 +1,6 @@
 import appRootPath from 'app-root-path';
-import { copyFileSync, removeDirSync, removeFileSync } from '../../common/fileUtils';
-import { runSync } from '../../common/processUtils';
+import { copyFileSync } from '@mapbul-pub/common/src/fileUtils';
+import { runSync } from '@mapbul-pub/common/src/processUtils';
 
 const main = () => {
   console.log('Stoping site...');
