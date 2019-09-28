@@ -1,7 +1,7 @@
 import * as fsExtra from 'fs-extra';
-import path from 'path';
-import fs from 'fs';
-import mkdirp from 'mkdirp';
+import * as path from 'path';
+import * as fs from 'fs';
+import * as mkdirp from 'mkdirp';
 
 export const makeSureSync = (filePath: string) => {
   const dir = path.dirname(filePath);
@@ -23,6 +23,8 @@ export const removeDirSync = (dirPath: string) => {
 export const readFileSync = (filePath: string) => {
   if (fs.existsSync(filePath)) {
     return fs.readFileSync(filePath, 'utf-8');
+  } else {
+    return null;
   }
 };
 

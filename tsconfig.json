@@ -1,29 +1,39 @@
 {
    "compilerOptions": {
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "declaration": true,
-      "removeComments": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "target": "es6",
-      "incremental": true,
-      "esModuleInterop": true,
-      "allowSyntheticDefaultImports": true,
-      "noImplicitAny": false,
-      "sourceMap": false,
-      "lib": [
-         "es6",
-         "es7",
-         "dom"
-      ],
-      "baseUrl": "./",  
-      "paths": {
-        "*": ["types/*"],
-          "common/*": ["./src/common/*"],
-          "server/*": ["./src/server/*"],
-          "client/*": ["./src/client/*"],
-          "codegen/*": ["./src/codegen/*"],
-      }
-   }
-}
+     "baseUrl": ".",
+     "module": "commonjs",
+     "target": "es5",
+     "lib": ["es2017", "dom"],
+     "strict": true,
+     "composite": true,
+     "declaration": true,
+     "declarationMap": true,
+     "sourceMap": true,
+     "moduleResolution": "node",
+     "allowSyntheticDefaultImports": true,
+     "esModuleInterop": true,
+     "forceConsistentCasingInFileNames": true,
+     "downlevelIteration": true,
+     "noImplicitReturns": true,
+     "noImplicitThis": true,
+     "noImplicitAny": true,
+     "preserveSymlinks": true,
+     "importHelpers": true,
+     "strictNullChecks": true,
+     "suppressImplicitAnyIndexErrors": true,
+     "noUnusedLocals": true,
+     "resolveJsonModule": true
+   },
+   "include": [],
+   "references": [
+     { "path": "./packages/browser" },
+     { "path": "./packages/core" },
+     { "path": "./packages/react-native" },
+     { "path": "./packages/utils" },
+     { "path": "./packages/qrcode-modal" },
+     { "path": "./packages/web3-subprovider" },
+     { "path": "./packages/web3-provider" },
+     { "path": "./packages/eth-provider" },
+     { "path": "./packages/channel-provider" }
+   ]
+ }

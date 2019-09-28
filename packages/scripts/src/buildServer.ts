@@ -1,6 +1,6 @@
 import appRootPath from 'app-root-path';
 import { copyFileSync, removeDirSync, removeFileSync } from '@mapbul-pub/common/src/fileUtils';
-import { runSync } from '@mapbul-pub/common/src/processUtils';
+import { runSync } from '@mapbul-pub/common/src';
 
 const main = () => {
   console.log('Build was started');

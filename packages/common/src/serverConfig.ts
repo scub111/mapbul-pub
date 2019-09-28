@@ -14,10 +14,10 @@ export const setEnvVariables = (path: string) => {
 export interface IServerConfig {
   isProduction: boolean;
   dbConnection: {
-    host: string;
-    user: string;
-    password: string;
-    database: string;
+    host: string | undefined;
+    user: string | undefined;
+    password: string | undefined;
+    database: string | undefined;
   };
 }
 
