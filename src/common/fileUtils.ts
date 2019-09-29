@@ -23,6 +23,8 @@ export const removeDirSync = (dirPath: string) => {
 export const readFileSync = (filePath: string) => {
   if (fs.existsSync(filePath)) {
     return fs.readFileSync(filePath, 'utf-8');
+  } else {
+    return null;
   }
 };
 

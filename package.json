@@ -27,6 +27,7 @@
       "test:e2e": "jest --config ./__test__/jest-e2e.json",
       "codegen-build": "rimraf dist/codegen && tsc -p tsconfig.codegen-build.json --diagnostics | gnomon",
       "codegen-debug": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/codegen/index.ts | gnomon",
+      "debug": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/test.ts",
       "scripts-build": "rimraf scripts && tsc -p tsconfig.scripts-build.json --diagnostics | gnomon",
       "scripts-debug": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register --inspect=6589 --respawn src/scripts/buildServer.ts | gnomon"
    },
