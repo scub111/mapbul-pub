@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    // "baseUrl": ".",
+    "outDir": "lib",
+    //"rootDir": ".",
+    "esModuleInterop": false,
+    "paths": {
+      "@mapbul-pub/common": ["./packages/common/src"],
+      "scripts/*": ["./packages/scripts/src/*"],
+    }  
+  },
+  // "include": ["./src/**/*"]
+}

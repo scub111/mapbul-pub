@@ -1,0 +1,15 @@
+{
+  "name": "@mapbul-pub/types",
+  "version": "1.0.0",
+  "description": "Typescript Types for WalletConnect",
+  "scripts": {},
+  "keywords": [
+    "tourism",
+    "bali"
+  ],
+  "author": "Biskub Konstantin <scub111@mail.ru>",
+  "homepage": "https://scub111.com",
+  "license": "LGPL-3.0",
+  "main": "",
+  "types": "index"
+}

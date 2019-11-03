@@ -1,26 +1,20 @@
 import appRootPath from 'app-root-path';
-import { copyFileSync, removeDirSync, removeFileSync } from '@mapbul-pub/common/src/fileUtils';
-import { runSync } from '@mapbul-pub/common/src';
+import { runSync, copyFileSync, removeDirSync, removeFileSync } from '@mapbul-pub/common';
 
-const main = () => {
+export const buildServer = () => {
   console.log('Build was started');
+  console.log('Compiling...');
+  const output = runSync(`npm run prebuild`);  
   const srcDir = `${appRootPath.path}/src`;
   const distDir = `${appRootPath.path}/dist`;
-  console.log('Dist folder is removing...');
-  try {
-    removeDirSync(`${distDir}/server`);
-  } catch (e) {
-    console.log(e);
-  }
   console.log('Files are copying...');
-  copyFileSync(`${srcDir}/server/.env`, `${distDir}/server/.env`);
-  copyFileSync(`${srcDir}/server/views/api.hbs`, `${distDir}/server/views/api.hbs`);
-  copyFileSync(`${srcDir}/server/api.txt`, `${distDir}/server/api.txt`);
-  console.log('Compiling...');
-  const output = runSync(`tsc -p ${appRootPath.path}/tsconfig.server-build.json --diagnostics`);
+  copyFileSync(`${srcDir}/.env`, `${distDir}/.env`);
+  copyFileSync(`${srcDir}/views/api.hbs`, `${distDir}/views/api.hbs`);
+  copyFileSync(`${srcDir}/api.txt`, `${distDir}/api.txt`);
+
   console.log(output);
   console.log('Cleaning...');
   removeFileSync(`${distDir}/tsconfig.server-build.tsbuildinfo`);
 };
 
-main();
+buildServer();

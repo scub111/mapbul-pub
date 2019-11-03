@@ -1,2 +1,2 @@
-export * from './buildServer';
-export * from './deployServer';
+export * from './buildServer'
+export * from './deployServer'

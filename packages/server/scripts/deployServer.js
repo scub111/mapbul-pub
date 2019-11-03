@@ -4,18 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_root_path_1 = __importDefault(require("app-root-path"));
-const fileUtils_1 = require("../common/fileUtils");
-const processUtils_1 = require("../common/processUtils");
-const main = () => {
+const common_1 = require("@mapbul-pub/common");
+exports.deployServer = () => {
     console.log('Stoping site...');
-    let output = processUtils_1.runSync(`%WINDIR%/system32/inetsrv/appcmd stop site /site.name:"mapbul.pub"`);
+    let output = common_1.runSync(`%WINDIR%/system32/inetsrv/appcmd stop site /site.name:"mapbul.pub"`);
     console.log('Building...');
-    output = processUtils_1.runSync(`npm run server-build`);
+    output = common_1.runSync(`npm run server-build`);
     console.log(output);
     console.log('Copying Web.config...');
-    fileUtils_1.copyFileSync(`${app_root_path_1.default.path}/iis/Web.config`, `${app_root_path_1.default.path}/Web.config`);
+    common_1.copyFileSync(`${app_root_path_1.default.path}/iis/Web.config`, `${app_root_path_1.default.path}/Web.config`);
     console.log('Starting site...');
-    output = processUtils_1.runSync(`%WINDIR%/system32/inetsrv/appcmd start site /site.name:"mapbul.pub"`);
+    output = common_1.runSync(`%WINDIR%/system32/inetsrv/appcmd start site /site.name:"mapbul.pub"`);
 };
-main();
-//# sourceMappingURL=deployServer.js.map
+exports.deployServer();

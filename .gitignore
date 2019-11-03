@@ -3,6 +3,9 @@ node_modules
 
 # ignore transpiled files
 packages/*/lib
+packages/codegen/tsconfig.json
+packages/scripts/tsconfig.json
+packages/server/tsconfig.json
 
 /dist
 /cache

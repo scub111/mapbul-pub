@@ -1,8 +1,7 @@
 import appRootPath from 'app-root-path';
-import { copyFileSync } from '@mapbul-pub/common/src';
-import { runSync } from '@mapbul-pub/common/src';
+import { runSync, copyFileSync } from '@mapbul-pub/common';
 
-const main = () => {
+export const deployServer = () => {
   console.log('Stoping site...');
   let output = runSync(`%WINDIR%/system32/inetsrv/appcmd stop site /site.name:"mapbul.pub"`);
   console.log('Building...');
@@ -14,4 +13,4 @@ const main = () => {
   output = runSync(`%WINDIR%/system32/inetsrv/appcmd start site /site.name:"mapbul.pub"`);
 };
 
-main();
+deployServer();
