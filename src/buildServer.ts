@@ -1,5 +1,5 @@
 import appRootPath from 'app-root-path';
-import { runSync, copyFileSync, removeDirSync, removeFileSync } from '@mapbul-pub/common';
+import { runSync, copyFileSync, removeDirSync, removeFileSync } from 'scub111-common';
 
 export const buildServer = () => {
   console.log('Build was started');

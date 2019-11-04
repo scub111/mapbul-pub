@@ -1,5 +1,5 @@
 // import appRootPath from 'app-root-path';
-import { runSync, copyFileSync } from '@mapbul-pub/common';
+import { runSync, copyFileSync } from 'scub111-common';
 
 export const deployServer = () => {
   console.log('Stoping site mapbul.pub...');
