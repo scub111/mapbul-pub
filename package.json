@@ -37,7 +37,9 @@
     "example": "npm run check-packages && cd example && npm run start",
     "deploy-old": "npm run check-packages && npm run publish",
     "deploy": "node scripts/deployServer",
-    "deploy:beta": "npm run bump-version && npm run routine && git commit -am 'package.lock' && npm run publish:beta"
+    "deploy:beta": "npm run bump-version && npm run routine && git commit -am 'package.lock' && npm run publish:beta",
+    "ncu": "ncu && lerna exec -- ncu",
+    "ncu:u": "ncu -u && lerna exec -- ncu -u"
   },
   "repository": {
     "type": "git",
@@ -47,23 +49,23 @@
     "url": "https://github.com/walletconnect/walletconnect-monorepo/issues"
   },
   "devDependencies": {
-    "app-root-path": "^2.2.1",
-    "archiver": "^3.0.0",
-    "babel-eslint": "^8.2.6",
-    "eslint": "^5.8.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "lerna": "^3.13.0",
+    "app-root-path": "^3.0.0",
+    "archiver": "^3.1.1",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.6.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "lerna": "^3.18.3",
     "prettier": "^1.18.2",
     "rimraf": "^3.0.0",
-    "scub111-common": "^1.0.1",
+    "scub111-common": "^1.0.2",
     "tslib": "^1.10.0",
-    "tslint": "^5.11.0",
-    "tslint-config-standard": "^8.0.1",
-    "typescript": "^3.4.3"
+    "tslint": "^5.20.0",
+    "tslint-config-standard": "^9.0.0",
+    "typescript": "^3.6.4"
   },
   "dependencies": {
     "@types/app-root-path": "^1.2.4"
