@@ -1,6 +1,6 @@
 import * as path from 'path';
 import appRootPath from 'app-root-path';
-import { removeFileSync, readFileSync, appendFileSync } from '@mapbul-pub/common';
+import { removeFileSync, readFileSync, appendFileSync } from 'scub111-common';
 
 const apiPath = path.join(appRootPath.path, '..', 'server/src/api.txt');
 console.log(apiPath);

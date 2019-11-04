@@ -54,7 +54,8 @@
     "@types/mysql": "^2.15.7",
     "app-root-path": "^2.2.1",
     "handlebars": "^4.4.3",
-    "mysql": "^2.17.1"
+    "mysql": "^2.17.1",
+    "scub111-common": "^1.0.1"
   },
   "gitHead": "165f7993c2acc907c653c02847fb02721052c6e7",
   "jest": {
