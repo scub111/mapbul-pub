@@ -14,6 +14,6 @@ export class ApiController {
         apis.push(`/${item.trim()}`);
       }
     });
-    return { message: 'Hello, API2!', apis };
+    return { title: 'API list!', apis };
   }
 }
