@@ -4,7 +4,7 @@ import { runSync, copyFileSync, removeDirSync, removeFileSync } from '@mapbul-pu
 export const buildServer = () => {
   console.log('Build was started');
   console.log('Compiling...');
-  const output = runSync(`npm run prebuild`);  
+  const output = runSync(`npm run prebuild`);
   const srcDir = `${appRootPath.path}/src`;
   const distDir = `${appRootPath.path}/dist`;
   console.log('Files are copying...');
