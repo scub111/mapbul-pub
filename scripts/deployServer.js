@@ -5,7 +5,7 @@ exports.deployServer = () => {
     console.log('Stoping site mapbul.pub...');
     let output = scub111_common_1.runSync(`%WINDIR%/system32/inetsrv/appcmd stop site /site.name:"mapbul.pub"`);
     console.log('Building...');
-    output = scub111_common_1.runSync(`npm run build:deploy`);
+    output = scub111_common_1.runSync(`npm run deploy:init`);
     console.log(output);
     console.log('Starting site mapbul.pub...');
     output = scub111_common_1.runSync(`%WINDIR%/system32/inetsrv/appcmd start site /site.name:"mapbul.pub"`);
