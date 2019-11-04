@@ -1,12 +1,10 @@
 {
   "name": "mapbul-pub-monorepo",
-  "description": "Monorepo for WalletConnect",
+  "description": "Core Library for WalletConnect",
   "private": true,
   "keywords": [
-    "walletconnect",
-    "ethereum",
-    "web3",
-    "crypto"
+    "tourism",
+    "bali"
   ],
   "author": "WalletConnect <walletconnect.org>",
   "homepage": "https://github.com/WalletConnect/walletconnect-monorepo/tree/v1.0.0-beta",
@@ -17,7 +15,6 @@
     "bootstrap:hoist": "lerna bootstrap --hoist",
     "bootstrap:example": "cd example && npm install",
     "build": "lerna run build",
-    "build:deploy": "npm run bootstrap && npm run build",
     "build:local": "rimraf lib && tsc -p tsconfig.local.json",
     "copy": "ncp tsconfig.json tsconf.tsx",
     "test": "lerna run test",
@@ -36,6 +33,7 @@
     "check-packages": "npm run clean  && npm run lint && npm run build && npm run test",
     "example": "npm run check-packages && cd example && npm run start",
     "deploy-old": "npm run check-packages && npm run publish",
+    "deploy:init": "npm run bootstrap && npm run build",
     "deploy": "node scripts/deployServer",
     "deploy:beta": "npm run bump-version && npm run routine && git commit -am 'package.lock' && npm run publish:beta",
     "ncu": "ncu && lerna exec -- ncu",
