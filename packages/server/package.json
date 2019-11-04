@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf dist",
-    "prebuild": "npm run clean && ncp tsconfig.build.json tsconfig.json && webpack | gnomon",
-    "build": "node scripts/buildServer | gnomon",
+    "build:init": "npm run clean && ncp tsconfig.build.json tsconfig.json && webpack | gnomon",
+    "build": "node scripts/buildServer",
     "build:tsc": "rimraf dist && tsc -p tsconfig.build.json",
     "debug": "ncp tsconfig.debug.json tsconfig.json && cross-env NODE_ENV=development ts-node-dev --project tsconfig.debug.json -r tsconfig-paths/register  --inspect=6590 --respawn src/main.ts",
     "format": "prettier --write \"src/**/*.ts\"",
