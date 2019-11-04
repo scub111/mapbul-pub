@@ -46,6 +46,7 @@
     "url": "https://github.com/walletconnect/walletconnect-monorepo/issues"
   },
   "devDependencies": {
+    "app-root-path": "^2.2.1",
     "archiver": "^3.0.0",
     "babel-eslint": "^8.2.6",
     "eslint": "^5.8.0",

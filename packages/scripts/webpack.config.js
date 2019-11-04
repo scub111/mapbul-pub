@@ -1,4 +1,5 @@
 const path = require('path');
+const nodeExternals = require('webpack-node-externals');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
@@ -7,6 +8,9 @@ module.exports = {
   //   dotenv: 'empty',
   // },
   mode: 'production',
+  externals: [
+    nodeExternals(),
+  ],
   entry: {
     index: './src/index.ts'
   },
