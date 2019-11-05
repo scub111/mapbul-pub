@@ -1,0 +1,45 @@
+import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { TID } from 'server/common/types';
+import { IGetParams } from 'server/common/interfaces';
+import { IController } from 'server/common/IController';
+import { {{interfaceName}} } from './{{filePrefixDTO}}.dto';
+import { {{serviceName}} } from './{{service}}.service';
+
+@Controller('{{router}}')
+export class {{controllerName}} implements IController<{{interfaceName}}> {
+  constructor(private readonly service: {{serviceName}}) {}
+
+  @Get()
+  async getAll(): Promise<{{interfaceName}}[]> {
+    return this.service.getAll();
+  }
+
+  @Post()
+  postItem(item: {{interfaceName}}): {{interfaceName}} {
+    throw new Error('Method not implemented.');
+  }
+
+  @Put()
+  putAll(item: {{interfaceName}}): {{interfaceName}} {
+    throw new Error('Method not implemented.');
+  }
+
+  @Get(':id')
+  async getItem(@Param() params: IGetParams): Promise<{{interfaceName}}> {
+    return await this.service.getItem(params.id);
+  }
+
+  @Delete()
+  deleteAll(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  @Put(':id')
+  putItem(id: TID, item: {{interfaceName}}): {{interfaceName}} {
+    throw new Error('Method not implemented.');
+  }
+
+  deleteItem(id: TID): {{interfaceName}} {
+    throw new Error('Method not implemented.');
+  }
+}

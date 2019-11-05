@@ -1,0 +1,78 @@
+{
+  "name": "@mapbul-pub/ssr",
+  "version": "1.0.0",
+  "description": "Core Library for WalletConnect",
+  "scripts": {
+    "clean": "rimraf lib",
+    "clean:node_modules": "rimraf node_modules",
+    "build": "ncp tsconfig.build.json tsconfig.json && npm run clean && webpack",
+    "start:prod": "node lib/index.js",
+    "debug": "ncp tsconfig.debug.json tsconfig.json && cross-env NODE_ENV=development ts-node-dev --project tsconfig.debug.json -r tsconfig-paths/register  --inspect=6591 --respawn src/debug.ts",
+    "start": "node scripts/start",
+    "test": "jest"
+  },
+  "keywords": [
+    "tourism",
+    "bali"
+  ],
+  "author": "Biskub Konstantin <scub111@mail.ru>",
+  "homepage": "https://scub111.com",
+  "license": "LGPL-3.0",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "files": [
+    "lib",
+    "src",
+    "test"
+  ],
+  "devDependencies": {
+    "@types/app-root-path": "^1.2.4",
+    "@types/fs-extra": "^8.0.1",
+    "@types/mkdirp": "^0.5.2",
+    "@types/node": "^12.12.5",
+    "cross-env": "^6.0.3",
+    "dotenv": "^8.2.0",
+    "fs": "0.0.2",
+    "fs-extra": "^8.1.0",
+    "mkdirp": "^0.5.1",
+    "path": "^0.12.7",
+    "ts-loader": "^6.2.1",
+    "ts-node-dev": "^1.0.0-pre.43",
+    "tsconfig-paths": "^3.9.0",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "@mapbul-pub/common": "^1.0.0",
+    "@mapbul-pub/types": "^1.0.0",
+    "@types/mysql": "^2.15.7",
+    "app-root-path": "^3.0.0",
+    "handlebars": "^4.5.1",
+    "mysql": "^2.17.1",
+    "scub111-common": "^1.0.2"
+  },
+  "gitHead": "165f7993c2acc907c653c02847fb02721052c6e7",
+  "jest": {
+    "rootDir": ".",
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "server/(.*)": "<rootDir>/src/$1"
+    }
+  }
+}
