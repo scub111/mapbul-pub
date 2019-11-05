@@ -1,9 +1,0 @@
-{
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "paths": {
-      "@mapbul-pub/common": ["./packages/common/src"],
-      "codegen/*": ["./packages/codegen/src/*"],
-    }  
-  },
-}
