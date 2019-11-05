@@ -1,1 +1,1 @@
-declare module '@mapbul-pub/common';
+declare module '@mapbul-pub/codegen';
