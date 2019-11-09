@@ -11,6 +11,7 @@ export class EditorsController implements IController<IEditorsDTO> {
   constructor(private readonly service: EditorsService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IEditorsDTO[]> {
     return this.service.getAll();
   }

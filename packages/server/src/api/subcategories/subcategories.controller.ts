@@ -11,6 +11,7 @@ export class SubcategoriesController implements IController<ISubcategoryDTO> {
   constructor(private readonly service: SubcategoriesService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<ISubcategoryDTO[]> {
     return this.service.getAll();
   }

@@ -11,6 +11,7 @@ export class StatusesController implements IController<IStatusDTO> {
   constructor(private readonly service: StatusesService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IStatusDTO[]> {
     return this.service.getAll();
   }

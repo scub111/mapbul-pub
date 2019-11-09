@@ -11,6 +11,7 @@ export class CategoriesController implements IController<ICategoryDTO> {
   constructor(private readonly service: CategoriesService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<ICategoryDTO[]> {
     return this.service.getAll();
   }

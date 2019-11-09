@@ -11,6 +11,7 @@ export class JournalistsController implements IController<IJournalistDTO> {
   constructor(private readonly service: JournalistsService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IJournalistDTO[]> {
     return this.service.getAll();
   }

@@ -11,6 +11,7 @@ export class RegionPermissionsController implements IController<IRegionPermissio
   constructor(private readonly service: RegionPermissionsService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IRegionPermissionDTO[]> {
     return this.service.getAll();
   }

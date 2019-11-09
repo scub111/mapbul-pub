@@ -11,6 +11,7 @@ export class RegionsController implements IController<IRegionDTO> {
   constructor(private readonly service: RegionsService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IRegionDTO[]> {
     return this.service.getAll();
   }

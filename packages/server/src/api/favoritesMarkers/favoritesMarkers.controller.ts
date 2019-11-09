@@ -11,6 +11,7 @@ export class FavoritesMarkersController implements IController<IFavoritesMarkerD
   constructor(private readonly service: FavoritesMarkersService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IFavoritesMarkerDTO[]> {
     return this.service.getAll();
   }

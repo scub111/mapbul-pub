@@ -11,6 +11,7 @@ export class PhonesController implements IController<IPhoneDTO> {
   constructor(private readonly service: PhonesService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IPhoneDTO[]> {
     return this.service.getAll();
   }

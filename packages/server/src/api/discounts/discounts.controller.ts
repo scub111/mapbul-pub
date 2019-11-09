@@ -11,6 +11,7 @@ export class DiscountsController implements IController<IDiscountDTO> {
   constructor(private readonly service: DiscountsService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IDiscountDTO[]> {
     return this.service.getAll();
   }

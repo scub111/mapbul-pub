@@ -11,6 +11,7 @@ export class WeekDaysController implements IController<IWeekDayDTO> {
   constructor(private readonly service: WeekDaysService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IWeekDayDTO[]> {
     return this.service.getAll();
   }

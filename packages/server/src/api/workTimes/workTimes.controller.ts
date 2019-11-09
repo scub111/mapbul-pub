@@ -11,6 +11,7 @@ export class WorkTimesController implements IController<IWorkTimeDTO> {
   constructor(private readonly service: WorkTimesService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IWorkTimeDTO[]> {
     return this.service.getAll();
   }

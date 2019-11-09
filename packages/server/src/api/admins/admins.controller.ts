@@ -11,6 +11,7 @@ export class AdminsController implements IController<IAdminDTO> {
   constructor(private readonly service: AdminsService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IAdminDTO[]> {
     return this.service.getAll();
   }

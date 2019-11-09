@@ -11,6 +11,7 @@ export class MarkerRequestSessionsController implements IController<IMarkerReque
   constructor(private readonly service: MarkerRequestSessionsService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IMarkerRequestSessionDTO[]> {
     return this.service.getAll();
   }

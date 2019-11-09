@@ -11,6 +11,7 @@ export class MarkerPhotosController implements IController<IMarkerPhotosDTO> {
   constructor(private readonly service: MarkerPhotosService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IMarkerPhotosDTO[]> {
     return this.service.getAll();
   }

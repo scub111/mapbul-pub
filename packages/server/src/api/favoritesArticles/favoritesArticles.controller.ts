@@ -11,6 +11,7 @@ export class FavoritesArticlesController implements IController<IFavoritesArticl
   constructor(private readonly service: FavoritesArticlesService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IFavoritesArticleDTO[]> {
     return this.service.getAll();
   }

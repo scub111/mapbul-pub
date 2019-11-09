@@ -11,6 +11,7 @@ export class CountryPermissionsController implements IController<ICountryPermiss
   constructor(private readonly service: CountryPermissionsService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<ICountryPermissionDTO[]> {
     return this.service.getAll();
   }

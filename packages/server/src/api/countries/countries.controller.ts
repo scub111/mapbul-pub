@@ -11,6 +11,7 @@ export class CountriesController implements IController<ICountryDTO> {
   constructor(private readonly service: CountriesService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<ICountryDTO[]> {
     return this.service.getAll();
   }

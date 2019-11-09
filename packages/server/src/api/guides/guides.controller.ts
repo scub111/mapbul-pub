@@ -11,6 +11,7 @@ export class GuidesController implements IController<IGuideDTO> {
   constructor(private readonly service: GuidesService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IGuideDTO[]> {
     return this.service.getAll();
   }

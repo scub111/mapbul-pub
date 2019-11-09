@@ -11,6 +11,7 @@ export class CitiesController implements IController<ICityDTO> {
   constructor(private readonly service: CitiesService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<ICityDTO[]> {
     return this.service.getAll();
   }

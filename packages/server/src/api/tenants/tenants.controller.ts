@@ -11,6 +11,7 @@ export class TenantsController implements IController<ITenantDTO> {
   constructor(private readonly service: TenantsService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<ITenantDTO[]> {
     return this.service.getAll();
   }

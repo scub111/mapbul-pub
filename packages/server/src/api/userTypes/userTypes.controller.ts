@@ -11,6 +11,7 @@ export class UserTypesController implements IController<IUserTypeDTO> {
   constructor(private readonly service: UserTypesService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<IUserTypeDTO[]> {
     return this.service.getAll();
   }

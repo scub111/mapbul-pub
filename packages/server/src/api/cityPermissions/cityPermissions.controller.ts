@@ -11,6 +11,7 @@ export class CityPermissionsController implements IController<ICityPermissionDTO
   constructor(private readonly service: CityPermissionsService) {}
 
   @Get()
+  @UseInterceptors(NotFoundInterceptor)
   async getAll(): Promise<ICityPermissionDTO[]> {
     return this.service.getAll();
   }
