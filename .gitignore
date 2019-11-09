@@ -7,7 +7,6 @@ packages/*/dist
 packages/codegen/tsconfig.json
 packages/scripts/tsconfig.json
 packages/server/tsconfig.json
-packages/ssr/tsconfig.json
 
 /lib
 /dist
