@@ -8,13 +8,12 @@ describe('serverConfig', () => {
       const serverConfig = GlobalVar.setup(path);
       const expected: IServerConfig = {
         isProduction: true,
-        dbConnection:
-        {
+        dbConnection: {
           host: 'localhost',
           user: 'root',
           password: '461301+MY',
           database: 'mapbul',
-        }
+        },
       };
       expect(serverConfig).toEqual(expected);
     });

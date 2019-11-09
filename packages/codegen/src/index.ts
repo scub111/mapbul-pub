@@ -15,5 +15,4 @@ export const test = () => {
   console.log('test 123');
 };
 
-
 console.log('index from codegen 3.4');

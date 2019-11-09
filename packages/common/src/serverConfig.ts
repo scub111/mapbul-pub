@@ -24,7 +24,7 @@ class GlobalVarClass {
       },
     };
     return this.env;
-  }
+  };
 }
 
 export const GlobalVar = new GlobalVarClass();
