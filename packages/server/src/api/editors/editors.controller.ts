@@ -2,9 +2,9 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nes
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IEditorsDTO } from 'server/api/editors/editors.dto';
 import { EditorsService } from 'server/api/editors/editors.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
+import { IEditorsDTO } from '@mapbul-pub/types';
 
 @Controller('api/editors')
 export class EditorsController implements IController<IEditorsDTO> {

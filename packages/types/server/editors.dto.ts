@@ -1,4 +1,4 @@
-export interface IEditorsDTO2 {
+export interface IEditorsDTO {
   id: number;
   userId: number;
   firstName: string;
