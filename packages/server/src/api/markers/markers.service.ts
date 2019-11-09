@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { IMarkerDTO } from './marker.dto';
+import { IMarkerDTO } from '@mapbul-pub/types';
 
 export class MarkersService extends BaseService<IMarkerDTO> {
   constructor() {

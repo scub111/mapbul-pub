@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { ISubcategoryDTO } from './subcategory.dto';
+import { ISubcategoryDTO } from '@mapbul-pub/types';
 
 export class SubcategoriesService extends BaseService<ISubcategoryDTO> {
   constructor() {

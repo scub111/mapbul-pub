@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nes
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IFavoritesArticleDTO } from 'server/api/favoritesarticles/favoritesArticle.dto';
+import { IFavoritesArticleDTO } from '@mapbul-pub/types';
 import { FavoritesArticlesService } from 'server/api/favoritesarticles/favoritesArticles.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 

@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { ICityPermissionDTO } from './cityPermission.dto';
+import { ICityPermissionDTO } from '@mapbul-pub/types';
 
 export class CityPermissionsService extends BaseService<ICityPermissionDTO> {
   constructor() {

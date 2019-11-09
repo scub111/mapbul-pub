@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { IGuideDTO } from './guide.dto';
+import { IGuideDTO } from '@mapbul-pub/types';
 
 export class GuidesService extends BaseService<IGuideDTO> {
   constructor() {

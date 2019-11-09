@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { ICategoryDTO } from './category.dto';
+import { ICategoryDTO } from '@mapbul-pub/types';
 
 export class CategoriesService extends BaseService<ICategoryDTO> {
   constructor() {

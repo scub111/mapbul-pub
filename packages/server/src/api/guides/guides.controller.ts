@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nes
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IGuideDTO } from 'server/api/guides/guide.dto';
+import { IGuideDTO } from '@mapbul-pub/types';
 import { GuidesService } from 'server/api/guides/guides.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 

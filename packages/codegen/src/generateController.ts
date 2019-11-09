@@ -12,13 +12,14 @@ export const generateController = async (query: queryFn, tableName: string, dto:
   const routerPath = `api/${service}`;
   const router = routerPath.toLowerCase();
   console.log(router);
-  appendRouterSync(router);
+  appendRouterSync(`${router};${dto}`);
   const interfaceName = `I${dto[0].toUpperCase()}${dto.slice(1)}DTO`;
   const filePrefixDTO = dto;
   const filePrefix = `${service[0].toLowerCase()}${service.slice(1)}`;
 
   const templateRootPath = `${appRootPath.path}/src/templates`;
-  const sourceRootPath = path.join(appRootPath.path, '..', '/server/src');
+  const serverRootPath = path.join(appRootPath.path, '..', '/server/src');
+  const typesRootPath = path.join(appRootPath.path, '..', '/types');
 
   const fields = await getFields(query, tableName);
 
@@ -29,7 +30,7 @@ export const generateController = async (query: queryFn, tableName: string, dto:
       interfaceName,
       fields,
     },
-    sourcePath: `${sourceRootPath}/${routerPath}/${filePrefixDTO}.dto.ts`,
+    sourcePath: `${typesRootPath}/server/${filePrefixDTO}.dto.ts`,
   });
 
   // Create *.service.ts
@@ -42,7 +43,7 @@ export const generateController = async (query: queryFn, tableName: string, dto:
       filePrefixDTO,
       fields,
     },
-    sourcePath: `${sourceRootPath}/${routerPath}/${filePrefix}.service.ts`,
+    sourcePath: `${serverRootPath}/${routerPath}/${filePrefix}.service.ts`,
   });
 
   // Create *.controller.ts
@@ -57,6 +58,6 @@ export const generateController = async (query: queryFn, tableName: string, dto:
       interfaceName,
       fields,
     },
-    sourcePath: `${sourceRootPath}/${routerPath}/${filePrefix}.controller.ts`,
+    sourcePath: `${serverRootPath}/${routerPath}/${filePrefix}.controller.ts`,
   });
 };

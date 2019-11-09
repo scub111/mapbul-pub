@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nes
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IJournalistDTO } from 'server/api/journalists/journalist.dto';
+import { IJournalistDTO } from '@mapbul-pub/types';
 import { JournalistsService } from 'server/api/journalists/journalists.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 

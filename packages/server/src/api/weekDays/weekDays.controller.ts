@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nes
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IWeekDayDTO } from 'server/api/weekdays/weekDay.dto';
+import { IWeekDayDTO } from '@mapbul-pub/types';
 import { WeekDaysService } from 'server/api/weekdays/weekDays.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 

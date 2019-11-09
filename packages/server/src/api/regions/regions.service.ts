@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { IRegionDTO } from './region.dto';
+import { IRegionDTO } from '@mapbul-pub/types';
 
 export class RegionsService extends BaseService<IRegionDTO> {
   constructor() {

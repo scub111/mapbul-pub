@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { IAdminDTO } from './admin.dto';
+import { IAdminDTO } from '@mapbul-pub/types';
 
 export class AdminsService extends BaseService<IAdminDTO> {
   constructor() {

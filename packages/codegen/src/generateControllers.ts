@@ -4,6 +4,7 @@
 // }
 import appRootPath from 'app-root-path';
 import { generateController } from 'codegen/generateController';
+import { generateCommonTypes } from 'codegen/generateCommonTypes';
 import { deleteRouterSync } from 'codegen/routerStorage';
 import { sleep } from 'scub111-common';
 import { GlobalVar, dbConnectionSingleton, test } from '@mapbul-pub/common';
@@ -47,8 +48,8 @@ export const generateControllers = async () => {
   await generateController(query, 'usertype', 'userType', 'userTypes');
   await generateController(query, 'weekday', 'weekDay', 'weekDays');
   await generateController(query, 'worktime', 'workTime', 'workTimes');
-  // closeConnection();
   dbConnection.destroy();
   const diff = new Date().valueOf() - t0.valueOf();
+  await generateCommonTypes();
   console.log(`${diff} ms`);
 };

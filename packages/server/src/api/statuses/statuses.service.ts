@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { IStatusDTO } from './status.dto';
+import { IStatusDTO } from '@mapbul-pub/types';
 
 export class StatusesService extends BaseService<IStatusDTO> {
   constructor() {

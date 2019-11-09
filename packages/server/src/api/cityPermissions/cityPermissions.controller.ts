@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nes
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { ICityPermissionDTO } from 'server/api/citypermissions/cityPermission.dto';
+import { ICityPermissionDTO } from '@mapbul-pub/types';
 import { CityPermissionsService } from 'server/api/citypermissions/cityPermissions.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 

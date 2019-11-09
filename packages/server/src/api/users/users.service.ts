@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { IUserDTO } from './user.dto';
+import { IUserDTO } from '@mapbul-pub/types';
 
 export class UsersService extends BaseService<IUserDTO> {
   constructor() {

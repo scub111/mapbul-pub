@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nes
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IMarkerDTO } from 'server/api/markers/marker.dto';
+import { IMarkerDTO } from '@mapbul-pub/types';
 import { MarkersService } from 'server/api/markers/markers.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 

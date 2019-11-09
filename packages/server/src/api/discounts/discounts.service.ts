@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { IDiscountDTO } from './discount.dto';
+import { IDiscountDTO } from '@mapbul-pub/types';
 
 export class DiscountsService extends BaseService<IDiscountDTO> {
   constructor() {
