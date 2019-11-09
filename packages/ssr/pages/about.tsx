@@ -9,10 +9,10 @@ import Link from '../src/Link';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      Copyright ©
       <MuiLink color="inherit" href="https://material-ui.com/">
         Your Website
-      </MuiLink>{' '}
+      </MuiLink>
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -26,7 +26,7 @@ export default function About() {
         <Typography variant="h4" component="h1" gutterBottom>
           Next.js with TypeScript example
         </Typography>
-        <Link href="/">Go to the main page</Link>
+        <Link href="/">Go to the main page 2</Link>
         <ProTip />
         <Copyright />
       </Box>
