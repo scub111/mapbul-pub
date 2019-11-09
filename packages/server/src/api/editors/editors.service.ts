@@ -41,7 +41,7 @@ export class EditorsService extends BaseService<IEditorsDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IEditorsDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`userId\`,
@@ -53,7 +53,7 @@ export class EditorsService extends BaseService<IEditorsDTO> {
         \`birthDate\`,
         \`address\`
       FROM editor
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IEditorsDTO {
     throw new Error('Method not implemented.');

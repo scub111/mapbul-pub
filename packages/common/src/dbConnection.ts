@@ -28,7 +28,6 @@ class DbConnection {
   }
 }
 
-// tslint:disable-next-line: max-classes-per-file
 export class DbConnectionSingleton {
   private static instance: DbConnection;
 
