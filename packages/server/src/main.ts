@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { AppModule } from './app.module';
+import { AppModule } from 'server/app.module';
 
 import { GlobalVar, test } from '@mapbul-pub/common';
 GlobalVar.setup(`${__dirname}/.env`);

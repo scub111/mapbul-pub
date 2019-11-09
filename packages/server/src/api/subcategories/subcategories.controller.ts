@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { ISubcategoryDTO } from './subcategory.dto';
-import { SubcategoriesService } from './subcategories.service';
+import { ISubcategoryDTO } from 'server/api/subcategories/subcategory.dto';
+import { SubcategoriesService } from 'server/api/subcategories/subcategories.service';
+import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/subcategories')
 export class SubcategoriesController implements IController<ISubcategoryDTO> {
@@ -25,6 +26,7 @@ export class SubcategoriesController implements IController<ISubcategoryDTO> {
   }
 
   @Get(':id')
+  @UseInterceptors(NotFoundInterceptor)
   async getItem(@Param() params: IGetParams): Promise<ISubcategoryDTO> {
     return await this.service.getItem(params.id);
   }

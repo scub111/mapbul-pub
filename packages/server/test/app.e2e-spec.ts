@@ -1,6 +1,6 @@
 import request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppModule } from './../src/app.module';
+import { AppModule } from 'server/app.module';
 import { GlobalVar } from '@mapbul-pub/common';
 import { readRouterSync } from '@mapbul-pub/codegen';
 import { NestExpressApplication } from '@nestjs/platform-express';

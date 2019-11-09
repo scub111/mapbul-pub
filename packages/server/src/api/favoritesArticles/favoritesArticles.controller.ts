@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IFavoritesArticleDTO } from './favoritesArticle.dto';
-import { FavoritesArticlesService } from './favoritesArticles.service';
+import { IFavoritesArticleDTO } from 'server/api/favoritesarticles/favoritesArticle.dto';
+import { FavoritesArticlesService } from 'server/api/favoritesarticles/favoritesArticles.service';
+import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/favoritesarticles')
 export class FavoritesArticlesController implements IController<IFavoritesArticleDTO> {
@@ -25,6 +26,7 @@ export class FavoritesArticlesController implements IController<IFavoritesArticl
   }
 
   @Get(':id')
+  @UseInterceptors(NotFoundInterceptor)
   async getItem(@Param() params: IGetParams): Promise<IFavoritesArticleDTO> {
     return await this.service.getItem(params.id);
   }

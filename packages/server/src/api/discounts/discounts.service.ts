@@ -34,12 +34,12 @@ export class DiscountsService extends BaseService<IDiscountDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IDiscountDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`value\`
       FROM discount
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IDiscountDTO {
     throw new Error('Method not implemented.');

@@ -35,13 +35,13 @@ export class AdminsService extends BaseService<IAdminDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IAdminDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`userId\`,
         \`superuser\`
       FROM admin
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IAdminDTO {
     throw new Error('Method not implemented.');

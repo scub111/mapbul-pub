@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IGuideDTO } from './guide.dto';
-import { GuidesService } from './guides.service';
+import { IGuideDTO } from 'server/api/guides/guide.dto';
+import { GuidesService } from 'server/api/guides/guides.service';
+import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/guides')
 export class GuidesController implements IController<IGuideDTO> {
@@ -25,6 +26,7 @@ export class GuidesController implements IController<IGuideDTO> {
   }
 
   @Get(':id')
+  @UseInterceptors(NotFoundInterceptor)
   async getItem(@Param() params: IGetParams): Promise<IGuideDTO> {
     return await this.service.getItem(params.id);
   }

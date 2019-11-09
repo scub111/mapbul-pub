@@ -36,14 +36,14 @@ export class MarkerPhotosService extends BaseService<IMarkerPhotosDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IMarkerPhotosDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`markerId\`,
         \`photo\`,
         \`photoMini\`
       FROM marker_photos
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IMarkerPhotosDTO {
     throw new Error('Method not implemented.');

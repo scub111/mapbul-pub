@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IRegionPermissionDTO } from './regionPermission.dto';
-import { RegionPermissionsService } from './regionPermissions.service';
+import { IRegionPermissionDTO } from 'server/api/regionpermissions/regionPermission.dto';
+import { RegionPermissionsService } from 'server/api/regionpermissions/regionPermissions.service';
+import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/regionpermissions')
 export class RegionPermissionsController implements IController<IRegionPermissionDTO> {
@@ -25,6 +26,7 @@ export class RegionPermissionsController implements IController<IRegionPermissio
   }
 
   @Get(':id')
+  @UseInterceptors(NotFoundInterceptor)
   async getItem(@Param() params: IGetParams): Promise<IRegionPermissionDTO> {
     return await this.service.getItem(params.id);
   }

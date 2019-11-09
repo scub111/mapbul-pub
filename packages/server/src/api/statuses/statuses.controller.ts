@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IStatusDTO } from './status.dto';
-import { StatusesService } from './statuses.service';
+import { IStatusDTO } from 'server/api/statuses/status.dto';
+import { StatusesService } from 'server/api/statuses/statuses.service';
+import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/statuses')
 export class StatusesController implements IController<IStatusDTO> {
@@ -25,6 +26,7 @@ export class StatusesController implements IController<IStatusDTO> {
   }
 
   @Get(':id')
+  @UseInterceptors(NotFoundInterceptor)
   async getItem(@Param() params: IGetParams): Promise<IStatusDTO> {
     return await this.service.getItem(params.id);
   }

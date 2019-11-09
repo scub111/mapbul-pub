@@ -35,13 +35,13 @@ export class MarkerRequestSessionsService extends BaseService<IMarkerRequestSess
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IMarkerRequestSessionDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`sessionId\`,
         \`markerId\`
       FROM marker_request_session
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IMarkerRequestSessionDTO {
     throw new Error('Method not implemented.');

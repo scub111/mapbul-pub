@@ -35,13 +35,13 @@ export class FavoritesMarkersService extends BaseService<IFavoritesMarkerDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IFavoritesMarkerDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`userId\`,
         \`markerId\`
       FROM favorites_marker
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IFavoritesMarkerDTO {
     throw new Error('Method not implemented.');

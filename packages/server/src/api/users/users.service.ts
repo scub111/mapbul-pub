@@ -39,7 +39,7 @@ export class UsersService extends BaseService<IUserDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IUserDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`email\`,
@@ -49,7 +49,7 @@ export class UsersService extends BaseService<IUserDTO> {
         \`registrationDate\`,
         \`deleted\`
       FROM user
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IUserDTO {
     throw new Error('Method not implemented.');

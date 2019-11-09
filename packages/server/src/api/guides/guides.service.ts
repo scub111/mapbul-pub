@@ -42,7 +42,7 @@ export class GuidesService extends BaseService<IGuideDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IGuideDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`userId\`,
@@ -55,7 +55,7 @@ export class GuidesService extends BaseService<IGuideDTO> {
         \`birthDate\`,
         \`address\`
       FROM guide
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IGuideDTO {
     throw new Error('Method not implemented.');

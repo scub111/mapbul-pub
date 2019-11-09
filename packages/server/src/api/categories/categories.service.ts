@@ -41,7 +41,7 @@ export class CategoriesService extends BaseService<ICategoryDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<ICategoryDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`name\`,
@@ -53,7 +53,7 @@ export class CategoriesService extends BaseService<ICategoryDTO> {
         \`pin\`,
         \`forArticle\`
       FROM category
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): ICategoryDTO {
     throw new Error('Method not implemented.');

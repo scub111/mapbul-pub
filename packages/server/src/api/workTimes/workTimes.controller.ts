@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IWorkTimeDTO } from './workTime.dto';
-import { WorkTimesService } from './workTimes.service';
+import { IWorkTimeDTO } from 'server/api/worktimes/workTime.dto';
+import { WorkTimesService } from 'server/api/worktimes/workTimes.service';
+import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/worktimes')
 export class WorkTimesController implements IController<IWorkTimeDTO> {
@@ -25,6 +26,7 @@ export class WorkTimesController implements IController<IWorkTimeDTO> {
   }
 
   @Get(':id')
+  @UseInterceptors(NotFoundInterceptor)
   async getItem(@Param() params: IGetParams): Promise<IWorkTimeDTO> {
     return await this.service.getItem(params.id);
   }

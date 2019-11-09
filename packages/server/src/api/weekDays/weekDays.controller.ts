@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IWeekDayDTO } from './weekDay.dto';
-import { WeekDaysService } from './weekDays.service';
+import { IWeekDayDTO } from 'server/api/weekdays/weekDay.dto';
+import { WeekDaysService } from 'server/api/weekdays/weekDays.service';
+import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/weekdays')
 export class WeekDaysController implements IController<IWeekDayDTO> {
@@ -25,6 +26,7 @@ export class WeekDaysController implements IController<IWeekDayDTO> {
   }
 
   @Get(':id')
+  @UseInterceptors(NotFoundInterceptor)
   async getItem(@Param() params: IGetParams): Promise<IWeekDayDTO> {
     return await this.service.getItem(params.id);
   }

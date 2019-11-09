@@ -36,14 +36,14 @@ export class RegionsService extends BaseService<IRegionDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IRegionDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`countryId\`,
         \`name\`,
         \`placeId\`
       FROM region
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IRegionDTO {
     throw new Error('Method not implemented.');

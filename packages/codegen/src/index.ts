@@ -6,8 +6,8 @@ import { generateControllers } from 'codegen/generateControllers';
 // console.log(path);
 // GlobalVar.setup(path);
 
-export * from './routerStorage';
-export * from './generateControllers';
+export * from 'codegen/routerStorage';
+export * from 'codegen/generateControllers';
 
 // generateControllers();
 

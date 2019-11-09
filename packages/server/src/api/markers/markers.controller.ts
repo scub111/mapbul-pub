@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IMarkerDTO } from './marker.dto';
-import { MarkersService } from './markers.service';
+import { IMarkerDTO } from 'server/api/markers/marker.dto';
+import { MarkersService } from 'server/api/markers/markers.service';
+import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/markers')
 export class MarkersController implements IController<IMarkerDTO> {
@@ -25,6 +26,7 @@ export class MarkersController implements IController<IMarkerDTO> {
   }
 
   @Get(':id')
+  @UseInterceptors(NotFoundInterceptor)
   async getItem(@Param() params: IGetParams): Promise<IMarkerDTO> {
     return await this.service.getItem(params.id);
   }

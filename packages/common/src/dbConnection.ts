@@ -1,7 +1,7 @@
 import * as mysql from 'mysql';
 import * as util from 'util';
 import { Connection } from 'mysql';
-import { GlobalVar } from '.';
+import { GlobalVar } from '@mapbul-pub/common';
 import { queryFn } from '@mapbul-pub/types';
 
 class DbConnection {

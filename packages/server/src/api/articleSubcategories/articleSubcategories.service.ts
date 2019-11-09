@@ -35,13 +35,13 @@ export class ArticleSubcategoriesService extends BaseService<IArticleSubcategory
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IArticleSubcategoryDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`articleId\`,
         \`categoryId\`
       FROM articlesubcategory
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IArticleSubcategoryDTO {
     throw new Error('Method not implemented.');

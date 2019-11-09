@@ -36,14 +36,14 @@ export class WeekDaysService extends BaseService<IWeekDayDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IWeekDayDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`tag\`,
         \`description\`,
         \`descriptionEn\`
       FROM weekday
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IWeekDayDTO {
     throw new Error('Method not implemented.');

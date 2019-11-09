@@ -37,7 +37,7 @@ export class WorkTimesService extends BaseService<IWorkTimeDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IWorkTimeDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`openTime\`,
@@ -45,7 +45,7 @@ export class WorkTimesService extends BaseService<IWorkTimeDTO> {
         \`markerId\`,
         \`weekDayId\`
       FROM worktime
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IWorkTimeDTO {
     throw new Error('Method not implemented.');

@@ -35,13 +35,13 @@ export class UserTypesService extends BaseService<IUserTypeDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IUserTypeDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`tag\`,
         \`description\`
       FROM usertype
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IUserTypeDTO {
     throw new Error('Method not implemented.');

@@ -36,14 +36,14 @@ export class PhonesService extends BaseService<IPhoneDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IPhoneDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`number\`,
         \`markerId\`,
         \`primary\`
       FROM phone
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IPhoneDTO {
     throw new Error('Method not implemented.');

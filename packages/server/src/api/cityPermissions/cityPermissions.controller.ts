@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { ICityPermissionDTO } from './cityPermission.dto';
-import { CityPermissionsService } from './cityPermissions.service';
+import { ICityPermissionDTO } from 'server/api/citypermissions/cityPermission.dto';
+import { CityPermissionsService } from 'server/api/citypermissions/cityPermissions.service';
+import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/citypermissions')
 export class CityPermissionsController implements IController<ICityPermissionDTO> {
@@ -25,6 +26,7 @@ export class CityPermissionsController implements IController<ICityPermissionDTO
   }
 
   @Get(':id')
+  @UseInterceptors(NotFoundInterceptor)
   async getItem(@Param() params: IGetParams): Promise<ICityPermissionDTO> {
     return await this.service.getItem(params.id);
   }

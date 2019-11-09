@@ -37,7 +37,7 @@ export class CountriesService extends BaseService<ICountryDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<ICountryDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`name\`,
@@ -45,7 +45,7 @@ export class CountriesService extends BaseService<ICountryDTO> {
         \`placeId\`,
         \`code\`
       FROM country
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): ICountryDTO {
     throw new Error('Method not implemented.');

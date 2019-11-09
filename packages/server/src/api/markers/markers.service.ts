@@ -60,7 +60,7 @@ export class MarkersService extends BaseService<IMarkerDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IMarkerDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`name\`,
@@ -91,7 +91,7 @@ export class MarkersService extends BaseService<IMarkerDTO> {
         \`wifi\`,
         \`personal\`
       FROM marker
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IMarkerDTO {
     throw new Error('Method not implemented.');

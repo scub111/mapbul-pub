@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Put, Delete, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { ICountryDTO } from './country.dto';
-import { CountriesService } from './countries.service';
+import { ICountryDTO } from 'server/api/countries/country.dto';
+import { CountriesService } from 'server/api/countries/countries.service';
+import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/countries')
 export class CountriesController implements IController<ICountryDTO> {
@@ -25,6 +26,7 @@ export class CountriesController implements IController<ICountryDTO> {
   }
 
   @Get(':id')
+  @UseInterceptors(NotFoundInterceptor)
   async getItem(@Param() params: IGetParams): Promise<ICountryDTO> {
     return await this.service.getItem(params.id);
   }

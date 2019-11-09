@@ -41,7 +41,7 @@ export class TenantsService extends BaseService<ITenantDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<ITenantDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`userId\`,
@@ -53,7 +53,7 @@ export class TenantsService extends BaseService<ITenantDTO> {
         \`birthDate\`,
         \`address\`
       FROM tenant
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): ITenantDTO {
     throw new Error('Method not implemented.');

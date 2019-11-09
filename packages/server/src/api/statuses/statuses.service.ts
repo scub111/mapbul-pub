@@ -35,13 +35,13 @@ export class StatusesService extends BaseService<IStatusDTO> {
     throw new Error('Method not implemented.');
   }
   async getItem(id: TID): Promise<IStatusDTO> {
-    return await this.query(`
+    return (await this.query(`
       SELECT
         \`id\`,
         \`tag\`,
         \`description\`
       FROM status
-      WHERE id = ${id}`);
+      WHERE id = ${id}`))[0];
   }
   putItem(id: TID): IStatusDTO {
     throw new Error('Method not implemented.');
