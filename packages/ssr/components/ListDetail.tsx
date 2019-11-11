@@ -1,14 +1,14 @@
 import * as React from 'react';
-
-import { User } from '../interfaces';
+import { IEditorsDTO } from '@mapbul-pub/types';
 
 type ListDetailProps = {
-  item: User;
+  item: IEditorsDTO;
 };
 
 const ListDetail: React.FunctionComponent<ListDetailProps> = ({ item: user }) => (
   <div>
-    <h1>Detail for {user.name}</h1>
+    <h1>Detail for {user.lastName}</h1>
+    <h2>Detail for {user.firstName}</h2>
     <p>ID: {user.id}</p>
   </div>
 );

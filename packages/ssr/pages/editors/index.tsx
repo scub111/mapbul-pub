@@ -1,13 +1,12 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
-
 import Layout from '../../components/Layout';
 import List from '../../components/List';
-import { User } from '../../interfaces';
 import { sampleFetchWrapper } from '../../utils/sample-api';
+import { IEditorsDTO } from '@mapbul-pub/types';
 
 type Props = {
-  items: User[];
+  items: Array<IEditorsDTO>;
   pathname: string;
 };
 
@@ -28,7 +27,7 @@ const WithInitialProps: NextPage<Props> = ({ items, pathname }) => (
 );
 
 WithInitialProps.getInitialProps = async ({ pathname }) => {
-  const items: User[] = await sampleFetchWrapper('http://api.mapbul.scub111.com/api/editors');
+  const items: Array<IEditorsDTO> = await sampleFetchWrapper('http://localhost:3100/api/editors');
 
   console.log(items, pathname);
 
