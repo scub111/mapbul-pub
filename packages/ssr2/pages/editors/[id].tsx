@@ -16,7 +16,9 @@ class InitialPropsDetail extends React.Component<Props> {
     try {
       const { id } = query
       const item = await sampleFetchWrapper(
-        `http://localhost:3000/api/users/${Array.isArray(id) ? id[0] : id}`
+        // `http://localhost:3100/api/editors/${Array.isArray(id) ? id[0] : id}`
+        // `http://localhost:3100/api/editors/${Array.isArray(id) ? id[0] : id}`
+        `http://api.tvmaze.com/shows/${Array.isArray(id) ? id[0] : id}`
       )
       return { item }
     } catch (err) {

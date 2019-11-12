@@ -1,5 +1,5 @@
 {
-  "name": "with-typescript",
+  "name": "@mapbul-pub/ssr2",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
@@ -8,6 +8,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@mapbul-pub/types": "^1.0.0",
     "isomorphic-unfetch": "3.0.0",
     "next": "latest",
     "react": "^16.10.1",

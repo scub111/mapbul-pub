@@ -23,8 +23,8 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the
           <a>About</a>
         </Link>
         |
-        <Link href="/users">
-          <a>Users List</a>
+        <Link href="/editors">
+          <a>Editors List</a>
         </Link>
       </nav>
     </header>
