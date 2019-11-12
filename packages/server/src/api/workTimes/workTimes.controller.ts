@@ -3,7 +3,7 @@ import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
 import { IWorkTimeDTO } from '@mapbul-pub/types';
-import { WorkTimesService } from 'server/api/worktimes/workTimes.service';
+import { WorkTimesService } from 'server/api/workTimes/workTimes.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/worktimes')

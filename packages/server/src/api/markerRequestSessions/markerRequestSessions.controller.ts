@@ -3,7 +3,7 @@ import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
 import { IMarkerRequestSessionDTO } from '@mapbul-pub/types';
-import { MarkerRequestSessionsService } from 'server/api/markerrequestsessions/markerRequestSessions.service';
+import { MarkerRequestSessionsService } from 'server/api/markerRequestSessions/markerRequestSessions.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/markerrequestsessions')

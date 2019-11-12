@@ -52,6 +52,7 @@ export const generateController = async (query: queryFn, tableName: string, dto:
     data: {
       filePrefixDTO,
       router,
+      routerPath,
       controllerName,
       service,
       serviceName,

@@ -3,7 +3,7 @@ import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
 import { IMarkerPhotosDTO } from '@mapbul-pub/types';
-import { MarkerPhotosService } from 'server/api/markerphotos/markerPhotos.service';
+import { MarkerPhotosService } from 'server/api/markerPhotos/markerPhotos.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/markerphotos')

@@ -3,7 +3,7 @@ import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
 import { ICityPermissionDTO } from '@mapbul-pub/types';
-import { CityPermissionsService } from 'server/api/citypermissions/cityPermissions.service';
+import { CityPermissionsService } from 'server/api/cityPermissions/cityPermissions.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/citypermissions')

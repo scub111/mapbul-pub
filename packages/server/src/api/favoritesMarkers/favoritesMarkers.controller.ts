@@ -3,7 +3,7 @@ import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
 import { IFavoritesMarkerDTO } from '@mapbul-pub/types';
-import { FavoritesMarkersService } from 'server/api/favoritesmarkers/favoritesMarkers.service';
+import { FavoritesMarkersService } from 'server/api/favoritesMarkers/favoritesMarkers.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/favoritesmarkers')

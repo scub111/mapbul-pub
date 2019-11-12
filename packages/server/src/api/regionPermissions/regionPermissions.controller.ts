@@ -3,7 +3,7 @@ import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
 import { IRegionPermissionDTO } from '@mapbul-pub/types';
-import { RegionPermissionsService } from 'server/api/regionpermissions/regionPermissions.service';
+import { RegionPermissionsService } from 'server/api/regionPermissions/regionPermissions.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/regionpermissions')
