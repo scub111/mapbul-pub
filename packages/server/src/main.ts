@@ -9,6 +9,7 @@ console.log(GlobalVar.env);
 async function bootstrap() {
   test();
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.enableCors();
   const port = process.env.PORT || 3100;
   app.setBaseViewsDir(`${__dirname}/views`);
   app.setViewEngine('hbs');

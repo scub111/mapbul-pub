@@ -34,9 +34,10 @@ WithInitialProps.getInitialProps = async ({ pathname }) => {
   // the component.
   const items: IEditorsDTO[] = await sampleFetchWrapper(
     // 'http://localhost:3000/api/users'
-    // 'http://localhost:3100/api/editors'
+    'editors'
     // 'http://api.tvmaze.com/shows'
-    'http://api.tvmaze.com/search/shows?q=batman'
+    // 'http://api.tvmaze.com/search/shows?q=batman'
+    // 'http://api.mapbul.scub111.com/api/editors'
   )
 
   return { items, pathname }
