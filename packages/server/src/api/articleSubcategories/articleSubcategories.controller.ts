@@ -3,7 +3,7 @@ import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
 import { IArticleSubcategoryDTO } from '@mapbul-pub/types';
-import { ArticleSubcategoriesService } from 'server/api/articlesubcategories/articleSubcategories.service';
+import { ArticleSubcategoriesService } from 'server/api/articleSubcategories/articleSubcategories.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 
 @Controller('api/articlesubcategories')
