@@ -44,7 +44,7 @@ export class SubcategoriesService extends BaseService<ISubcategoryDTO> {
         \`markerId\`,
         \`categoryId\`
       FROM subcategory
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): ISubcategoryDTO {

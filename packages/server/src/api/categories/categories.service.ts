@@ -56,7 +56,7 @@ export class CategoriesService extends BaseService<ICategoryDTO> {
         \`pin\`,
         \`forArticle\`
       FROM category
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): ICategoryDTO {

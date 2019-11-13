@@ -44,7 +44,7 @@ export class ArticleSubcategoriesService extends BaseService<IArticleSubcategory
         \`articleId\`,
         \`categoryId\`
       FROM articlesubcategory
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IArticleSubcategoryDTO {

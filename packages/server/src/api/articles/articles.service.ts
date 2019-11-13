@@ -86,7 +86,7 @@ export class ArticlesService extends BaseService<IArticleDTO> {
         \`endDate\`,
         \`cityId\`
       FROM article
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IArticleDTO {

@@ -44,7 +44,7 @@ export class StatusesService extends BaseService<IStatusDTO> {
         \`tag\`,
         \`description\`
       FROM status
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IStatusDTO {

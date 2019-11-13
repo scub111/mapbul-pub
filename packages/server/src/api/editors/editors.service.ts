@@ -56,7 +56,7 @@ export class EditorsService extends BaseService<IEditorsDTO> {
         \`birthDate\`,
         \`address\`
       FROM editor
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IEditorsDTO {

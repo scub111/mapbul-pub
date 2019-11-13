@@ -44,7 +44,7 @@ export class CityPermissionsService extends BaseService<ICityPermissionDTO> {
         \`cityId\`,
         \`userId\`
       FROM city_permission
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): ICityPermissionDTO {

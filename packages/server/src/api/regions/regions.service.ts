@@ -46,7 +46,7 @@ export class RegionsService extends BaseService<IRegionDTO> {
         \`name\`,
         \`placeId\`
       FROM region
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IRegionDTO {

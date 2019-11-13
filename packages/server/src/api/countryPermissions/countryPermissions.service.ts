@@ -44,7 +44,7 @@ export class CountryPermissionsService extends BaseService<ICountryPermissionDTO
         \`countryId\`,
         \`userId\`
       FROM country_permission
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): ICountryPermissionDTO {

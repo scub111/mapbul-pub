@@ -44,7 +44,7 @@ export class AdminsService extends BaseService<IAdminDTO> {
         \`userId\`,
         \`superuser\`
       FROM admin
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IAdminDTO {

@@ -58,7 +58,7 @@ export class JournalistsService extends BaseService<IJournalistDTO> {
         \`birthDate\`,
         \`address\`
       FROM journalist
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IJournalistDTO {

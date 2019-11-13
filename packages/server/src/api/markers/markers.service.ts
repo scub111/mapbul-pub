@@ -94,7 +94,7 @@ export class MarkersService extends BaseService<IMarkerDTO> {
         \`wifi\`,
         \`personal\`
       FROM marker
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IMarkerDTO {

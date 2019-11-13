@@ -44,7 +44,7 @@ export class FavoritesArticlesService extends BaseService<IFavoritesArticleDTO> 
         \`userId\`,
         \`articleId\`
       FROM favorites_article
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IFavoritesArticleDTO {

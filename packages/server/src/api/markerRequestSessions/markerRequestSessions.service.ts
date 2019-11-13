@@ -44,7 +44,7 @@ export class MarkerRequestSessionsService extends BaseService<IMarkerRequestSess
         \`sessionId\`,
         \`markerId\`
       FROM marker_request_session
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IMarkerRequestSessionDTO {

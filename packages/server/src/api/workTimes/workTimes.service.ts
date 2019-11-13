@@ -48,7 +48,7 @@ export class WorkTimesService extends BaseService<IWorkTimeDTO> {
         \`markerId\`,
         \`weekDayId\`
       FROM worktime
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IWorkTimeDTO {

@@ -44,7 +44,7 @@ export class {{serviceName}} extends BaseService<{{interfaceName}}> {
         \`{{field}}\`{{separator}}
         {{/each}} 
       FROM {{tableName}}
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): {{interfaceName}} {

@@ -46,7 +46,7 @@ export class PhonesService extends BaseService<IPhoneDTO> {
         \`markerId\`,
         \`primary\`
       FROM phone
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IPhoneDTO {

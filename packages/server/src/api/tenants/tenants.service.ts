@@ -56,7 +56,7 @@ export class TenantsService extends BaseService<ITenantDTO> {
         \`birthDate\`,
         \`address\`
       FROM tenant
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): ITenantDTO {

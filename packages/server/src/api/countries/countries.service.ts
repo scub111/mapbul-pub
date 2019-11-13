@@ -48,7 +48,7 @@ export class CountriesService extends BaseService<ICountryDTO> {
         \`placeId\`,
         \`code\`
       FROM country
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): ICountryDTO {

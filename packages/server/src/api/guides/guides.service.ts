@@ -58,7 +58,7 @@ export class GuidesService extends BaseService<IGuideDTO> {
         \`birthDate\`,
         \`address\`
       FROM guide
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IGuideDTO {

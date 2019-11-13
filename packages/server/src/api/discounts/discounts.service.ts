@@ -42,7 +42,7 @@ export class DiscountsService extends BaseService<IDiscountDTO> {
         \`id\`,
         \`value\`
       FROM discount
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IDiscountDTO {

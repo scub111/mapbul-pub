@@ -44,7 +44,7 @@ export class RegionPermissionsService extends BaseService<IRegionPermissionDTO> 
         \`regionId\`,
         \`userId\`
       FROM region_permission
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IRegionPermissionDTO {

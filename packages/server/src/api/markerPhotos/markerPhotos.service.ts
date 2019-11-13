@@ -46,7 +46,7 @@ export class MarkerPhotosService extends BaseService<IMarkerPhotosDTO> {
         \`photo\`,
         \`photoMini\`
       FROM marker_photos
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IMarkerPhotosDTO {

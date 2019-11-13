@@ -46,7 +46,7 @@ export class WeekDaysService extends BaseService<IWeekDayDTO> {
         \`description\`,
         \`descriptionEn\`
       FROM weekday
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IWeekDayDTO {

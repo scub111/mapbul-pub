@@ -44,7 +44,7 @@ export class UserTypesService extends BaseService<IUserTypeDTO> {
         \`tag\`,
         \`description\`
       FROM usertype
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IUserTypeDTO {

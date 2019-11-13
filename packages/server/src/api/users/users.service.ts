@@ -52,7 +52,7 @@ export class UsersService extends BaseService<IUserDTO> {
         \`registrationDate\`,
         \`deleted\`
       FROM user
-      WHERE id = ${id}`))[0]; ∂ ∂
+      WHERE id = ${id}`))[0];
   }
 
   putItem(id: TID): IUserDTO {
