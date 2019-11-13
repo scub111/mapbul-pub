@@ -29,12 +29,15 @@ export class PhonesService extends BaseService<IPhoneDTO> {
   postItem(item: IPhoneDTO): IPhoneDTO {
     throw new Error('Method not implemented.');
   }
+
   putAll(item: IPhoneDTO): IPhoneDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
+
   async getItem(id: TID): Promise<IPhoneDTO> {
     return (await this.query(`
       SELECT
@@ -43,11 +46,13 @@ export class PhonesService extends BaseService<IPhoneDTO> {
         \`markerId\`,
         \`primary\`
       FROM phone
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`))[0]; ∂ ∂
   }
+
   putItem(id: TID): IPhoneDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteItem(id: TID): IPhoneDTO {
     throw new Error('Method not implemented.');
   }

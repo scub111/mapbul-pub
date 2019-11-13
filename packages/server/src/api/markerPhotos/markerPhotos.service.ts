@@ -29,12 +29,15 @@ export class MarkerPhotosService extends BaseService<IMarkerPhotosDTO> {
   postItem(item: IMarkerPhotosDTO): IMarkerPhotosDTO {
     throw new Error('Method not implemented.');
   }
+
   putAll(item: IMarkerPhotosDTO): IMarkerPhotosDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
+
   async getItem(id: TID): Promise<IMarkerPhotosDTO> {
     return (await this.query(`
       SELECT
@@ -43,11 +46,13 @@ export class MarkerPhotosService extends BaseService<IMarkerPhotosDTO> {
         \`photo\`,
         \`photoMini\`
       FROM marker_photos
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`))[0]; ∂ ∂
   }
+
   putItem(id: TID): IMarkerPhotosDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteItem(id: TID): IMarkerPhotosDTO {
     throw new Error('Method not implemented.');
   }

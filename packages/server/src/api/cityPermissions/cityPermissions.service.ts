@@ -28,12 +28,15 @@ export class CityPermissionsService extends BaseService<ICityPermissionDTO> {
   postItem(item: ICityPermissionDTO): ICityPermissionDTO {
     throw new Error('Method not implemented.');
   }
+
   putAll(item: ICityPermissionDTO): ICityPermissionDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
+
   async getItem(id: TID): Promise<ICityPermissionDTO> {
     return (await this.query(`
       SELECT
@@ -41,11 +44,13 @@ export class CityPermissionsService extends BaseService<ICityPermissionDTO> {
         \`cityId\`,
         \`userId\`
       FROM city_permission
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`))[0]; ∂ ∂
   }
+
   putItem(id: TID): ICityPermissionDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteItem(id: TID): ICityPermissionDTO {
     throw new Error('Method not implemented.');
   }

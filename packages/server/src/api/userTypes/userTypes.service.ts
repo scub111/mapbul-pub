@@ -28,12 +28,15 @@ export class UserTypesService extends BaseService<IUserTypeDTO> {
   postItem(item: IUserTypeDTO): IUserTypeDTO {
     throw new Error('Method not implemented.');
   }
+
   putAll(item: IUserTypeDTO): IUserTypeDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
+
   async getItem(id: TID): Promise<IUserTypeDTO> {
     return (await this.query(`
       SELECT
@@ -41,11 +44,13 @@ export class UserTypesService extends BaseService<IUserTypeDTO> {
         \`tag\`,
         \`description\`
       FROM usertype
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`))[0]; ∂ ∂
   }
+
   putItem(id: TID): IUserTypeDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteItem(id: TID): IUserTypeDTO {
     throw new Error('Method not implemented.');
   }

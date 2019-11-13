@@ -53,12 +53,15 @@ export class MarkersService extends BaseService<IMarkerDTO> {
   postItem(item: IMarkerDTO): IMarkerDTO {
     throw new Error('Method not implemented.');
   }
+
   putAll(item: IMarkerDTO): IMarkerDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
+
   async getItem(id: TID): Promise<IMarkerDTO> {
     return (await this.query(`
       SELECT
@@ -91,11 +94,13 @@ export class MarkersService extends BaseService<IMarkerDTO> {
         \`wifi\`,
         \`personal\`
       FROM marker
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`))[0]; ∂ ∂
   }
+
   putItem(id: TID): IMarkerDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteItem(id: TID): IMarkerDTO {
     throw new Error('Method not implemented.');
   }

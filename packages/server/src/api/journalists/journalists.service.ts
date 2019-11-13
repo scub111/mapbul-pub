@@ -35,12 +35,15 @@ export class JournalistsService extends BaseService<IJournalistDTO> {
   postItem(item: IJournalistDTO): IJournalistDTO {
     throw new Error('Method not implemented.');
   }
+
   putAll(item: IJournalistDTO): IJournalistDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
+
   async getItem(id: TID): Promise<IJournalistDTO> {
     return (await this.query(`
       SELECT
@@ -55,11 +58,13 @@ export class JournalistsService extends BaseService<IJournalistDTO> {
         \`birthDate\`,
         \`address\`
       FROM journalist
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`))[0]; ∂ ∂
   }
+
   putItem(id: TID): IJournalistDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteItem(id: TID): IJournalistDTO {
     throw new Error('Method not implemented.');
   }

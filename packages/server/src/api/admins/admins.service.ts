@@ -28,12 +28,15 @@ export class AdminsService extends BaseService<IAdminDTO> {
   postItem(item: IAdminDTO): IAdminDTO {
     throw new Error('Method not implemented.');
   }
+
   putAll(item: IAdminDTO): IAdminDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
+
   async getItem(id: TID): Promise<IAdminDTO> {
     return (await this.query(`
       SELECT
@@ -41,11 +44,13 @@ export class AdminsService extends BaseService<IAdminDTO> {
         \`userId\`,
         \`superuser\`
       FROM admin
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`))[0]; ∂ ∂
   }
+
   putItem(id: TID): IAdminDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteItem(id: TID): IAdminDTO {
     throw new Error('Method not implemented.');
   }

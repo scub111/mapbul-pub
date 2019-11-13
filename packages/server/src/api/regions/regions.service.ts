@@ -29,12 +29,15 @@ export class RegionsService extends BaseService<IRegionDTO> {
   postItem(item: IRegionDTO): IRegionDTO {
     throw new Error('Method not implemented.');
   }
+
   putAll(item: IRegionDTO): IRegionDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
+
   async getItem(id: TID): Promise<IRegionDTO> {
     return (await this.query(`
       SELECT
@@ -43,11 +46,13 @@ export class RegionsService extends BaseService<IRegionDTO> {
         \`name\`,
         \`placeId\`
       FROM region
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`))[0]; ∂ ∂
   }
+
   putItem(id: TID): IRegionDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteItem(id: TID): IRegionDTO {
     throw new Error('Method not implemented.');
   }

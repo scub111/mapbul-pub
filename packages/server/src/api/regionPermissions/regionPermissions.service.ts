@@ -28,12 +28,15 @@ export class RegionPermissionsService extends BaseService<IRegionPermissionDTO> 
   postItem(item: IRegionPermissionDTO): IRegionPermissionDTO {
     throw new Error('Method not implemented.');
   }
+
   putAll(item: IRegionPermissionDTO): IRegionPermissionDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
+
   async getItem(id: TID): Promise<IRegionPermissionDTO> {
     return (await this.query(`
       SELECT
@@ -41,11 +44,13 @@ export class RegionPermissionsService extends BaseService<IRegionPermissionDTO> 
         \`regionId\`,
         \`userId\`
       FROM region_permission
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`))[0]; ∂ ∂
   }
+
   putItem(id: TID): IRegionPermissionDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteItem(id: TID): IRegionPermissionDTO {
     throw new Error('Method not implemented.');
   }

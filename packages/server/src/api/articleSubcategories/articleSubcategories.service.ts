@@ -28,12 +28,15 @@ export class ArticleSubcategoriesService extends BaseService<IArticleSubcategory
   postItem(item: IArticleSubcategoryDTO): IArticleSubcategoryDTO {
     throw new Error('Method not implemented.');
   }
+
   putAll(item: IArticleSubcategoryDTO): IArticleSubcategoryDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteAll(): void {
     throw new Error('Method not implemented.');
   }
+
   async getItem(id: TID): Promise<IArticleSubcategoryDTO> {
     return (await this.query(`
       SELECT
@@ -41,11 +44,13 @@ export class ArticleSubcategoriesService extends BaseService<IArticleSubcategory
         \`articleId\`,
         \`categoryId\`
       FROM articlesubcategory
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`))[0]; ∂ ∂
   }
+
   putItem(id: TID): IArticleSubcategoryDTO {
     throw new Error('Method not implemented.');
   }
+
   deleteItem(id: TID): IArticleSubcategoryDTO {
     throw new Error('Method not implemented.');
   }
