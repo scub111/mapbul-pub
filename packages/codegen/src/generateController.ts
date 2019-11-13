@@ -30,7 +30,7 @@ export const generateController = async (query: queryFn, tableName: string, dto:
       interfaceName,
       fields,
     },
-    sourcePath: `${typesRootPath}/server/${filePrefixDTO}.dto.ts`,
+    sourcePath: `${typesRootPath}/server/api/${filePrefixDTO}.dto.ts`,
   });
 
   // Create *.service.ts

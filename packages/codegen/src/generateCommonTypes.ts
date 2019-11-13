@@ -16,6 +16,6 @@ export const generateCommonTypes = async (): Promise<void> => {
     data: {
       routers,
     },
-    sourcePath: `${typesRootPath}/server/index.ts`,
+    sourcePath: `${typesRootPath}/server/api/index.ts`,
   });
 };
