@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } fro
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { ICategoryDTO } from '@mapbul-pub/types';
+import { Pagination, ICategoryDTO } from '@mapbul-pub/types';
 import { CategoriesService } from 'server/api/categories/categories.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
@@ -13,9 +13,8 @@ export class CategoriesController implements IController<ICategoryDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<ICategoryDTO[]> {
-    console.log(query);
-    return this.service.getAll();
+  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<ICategoryDTO>> {
+    return this.service.getAll(query);
   }
 
   @Post()

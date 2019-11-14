@@ -1,28 +1,33 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AdminsController } from './api/admins/admins.controller'
-import { AdminsService } from './api/admins/admins.service';
+import { CategoriesController } from './api/categories/categories.controller'
+import { CategoriesService } from './api/categories/categories.service';
 import { GlobalVar } from '@mapbul-pub/common';
 
 describe('AdminsController', () => {
-  let adminsController: AdminsController;
+  let controller: CategoriesController;
 
   beforeEach(async () => {
     GlobalVar.setup(`${__dirname}/.env`);
-    console.log(GlobalVar.env);
 
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [AdminsController],
-      providers: [AdminsService],
+      controllers: [CategoriesController],
+      providers: [CategoriesService],
     }).compile();
 
-    adminsController = app.get<AdminsController>(AdminsController);
+    controller = app.get<CategoriesController>(CategoriesController);
   });
 
   describe('root', () => {
-    it('should return lenght', async () => {
-      const result = await adminsController.getAll();
-      console.log(result.length);
-      expect(result.length).toBeGreaterThan(1);
+    it('should return all data', async () => {
+      const result = await controller.getAll({page: undefined, limit: undefined});
+      expect(result.data.length).toBe(136);
+      expect(result.totalPages).toBe(1);
+    });
+
+    it('should return first page', async () => {
+      const result = await controller.getAll({page: 1, limit: 10});
+      expect(result.data.length).toBe(10);
+      expect(result.totalPages).toBe(14);
     });
   });
 });

@@ -1,9 +1,10 @@
 import express from 'express';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
+import { Pagination, ICategoryDTO } from '@mapbul-pub/types';
 
 export interface IController<T> {
-  getAll(params: any): Promise<T[]> | T[];
+  getAll(params: any): Promise<Pagination<T>> | Pagination<T>;
   postItem(item: T): T;
   putAll(item: T): T;
   deleteAll(): void;
