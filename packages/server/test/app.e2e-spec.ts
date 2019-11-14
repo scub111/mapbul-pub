@@ -2,7 +2,7 @@ import request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from 'server/app.module';
 import { GlobalVar } from '@mapbul-pub/common';
-import { readRouterSync } from '@mapbul-pub/codegen';
+import { parseRouterSync, IParseRouter } from '@mapbul-pub/codegen';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
 describe('AppController (e2e)', () => {
@@ -38,10 +38,10 @@ describe('AppController (e2e)', () => {
     await check('/api');
   });
 
-  it('/api/admin (GET)', async () => {
+  it('check all apis (GET)', async () => {
     // await check('/api/admins');
-    const apiText = readRouterSync();
-    const apiInits = apiText.split(/\r?\n/);
+    const apiText = parseRouterSync();
+    const apiInits = apiText.map((i: IParseRouter) => i.router);
     apiInits.forEach(async (item: string) => {
       if (item !== '') {
         const url = `/${item.trim()}`;

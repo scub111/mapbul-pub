@@ -3,7 +3,7 @@ import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 
 export interface IController<T> {
-  getAll(): Promise<T[]> | T[];
+  getAll(params: any): Promise<T[]> | T[];
   postItem(item: T): T;
   putAll(item: T): T;
   deleteAll(): void;

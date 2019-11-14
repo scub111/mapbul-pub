@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
 import { IAdminDTO } from '@mapbul-pub/types';
 import { AdminsService } from 'server/api/admins/admins.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
+import { QueryDTO } from 'server/common/QueryDTO';
 
 @Controller('api/admins')
 export class AdminsController implements IController<IAdminDTO> {
@@ -12,7 +13,8 @@ export class AdminsController implements IController<IAdminDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(): Promise<IAdminDTO[]> {
+  async getAll(@Query() params: QueryDTO): Promise<IAdminDTO[]> {
+    console.log(params);
     return this.service.getAll();
   }
 
