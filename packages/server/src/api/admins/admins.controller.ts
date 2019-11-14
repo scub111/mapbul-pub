@@ -5,7 +5,7 @@ import { IController } from 'server/common/IController';
 import { IAdminDTO } from '@mapbul-pub/types';
 import { AdminsService } from 'server/api/admins/admins.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
-import { QueryDTO } from 'server/common/QueryDTO';
+import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 @Controller('api/admins')
 export class AdminsController implements IController<IAdminDTO> {
@@ -13,7 +13,7 @@ export class AdminsController implements IController<IAdminDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() params: QueryDTO): Promise<IAdminDTO[]> {
+  async getAll(@Query() params: GetAllQueryDTO): Promise<IAdminDTO[]> {
     console.log(params);
     return this.service.getAll();
   }
@@ -30,8 +30,8 @@ export class AdminsController implements IController<IAdminDTO> {
 
   @Get(':id')
   @UseInterceptors(NotFoundInterceptor)
-  async getItem(@Param() params: IGetParams): Promise<IAdminDTO> {
-    return await this.service.getItem(params.id);
+  async getItem(@Param('id') id: any): Promise<IAdminDTO> {
+    return await this.service.getItem(id);
   }
 
   @Delete()
