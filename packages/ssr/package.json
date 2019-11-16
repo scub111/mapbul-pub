@@ -5,6 +5,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "start:port": "next start -p",
     "type-check": "tsc"
   },
   "dependencies": {
