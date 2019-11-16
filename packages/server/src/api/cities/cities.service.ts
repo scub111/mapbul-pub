@@ -22,7 +22,7 @@ export class CitiesService extends BaseService<ICityDTO> {
     const isPagenation = query.page && query.limit;
     if (isPagenation) {
       const offset = (query.page - 1) * query.limit;
-      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM category`;
+      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM city`;
     }
     const records = await this.query(`
       SELECT

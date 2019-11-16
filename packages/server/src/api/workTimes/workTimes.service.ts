@@ -22,7 +22,7 @@ export class WorkTimesService extends BaseService<IWorkTimeDTO> {
     const isPagenation = query.page && query.limit;
     if (isPagenation) {
       const offset = (query.page - 1) * query.limit;
-      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM category`;
+      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM worktime`;
     }
     const records = await this.query(`
       SELECT

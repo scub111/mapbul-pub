@@ -22,7 +22,7 @@ export class RegionsService extends BaseService<IRegionDTO> {
     const isPagenation = query.page && query.limit;
     if (isPagenation) {
       const offset = (query.page - 1) * query.limit;
-      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM category`;
+      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM region`;
     }
     const records = await this.query(`
       SELECT

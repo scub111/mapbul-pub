@@ -22,7 +22,7 @@ export class ArticlesService extends BaseService<IArticleDTO> {
     const isPagenation = query.page && query.limit;
     if (isPagenation) {
       const offset = (query.page - 1) * query.limit;
-      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM category`;
+      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM article`;
     }
     const records = await this.query(`
       SELECT
