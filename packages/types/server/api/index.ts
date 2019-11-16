@@ -7,7 +7,7 @@ export * from './cityPermission.dto';
 export * from './country.dto';
 export * from './countryPermission.dto';
 export * from './discount.dto';
-export * from './editors.dto';
+export * from './editor.dto';
 export * from './favoritesArticle.dto';
 export * from './favoritesMarker.dto';
 export * from './guide.dto';

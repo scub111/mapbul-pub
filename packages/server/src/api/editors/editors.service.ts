@@ -4,10 +4,10 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { Pagination, IEditorsDTO } from '@mapbul-pub/types';
+import { Pagination, IEditorDTO } from '@mapbul-pub/types';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
-export class EditorsService extends BaseService<IEditorsDTO> {
+export class EditorsService extends BaseService<IEditorDTO> {
   constructor() {
     super();
     this.connection = mysql.createConnection({ ...GlobalVar.env.dbConnection, multipleStatements: true });
@@ -17,7 +17,7 @@ export class EditorsService extends BaseService<IEditorsDTO> {
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(query: GetAllQueryDTO): Promise<Pagination<IEditorsDTO>> {
+  async getAll(query: GetAllQueryDTO): Promise<Pagination<IEditorDTO>> {
     let additional = ''
     const isPagenation = query.page && query.limit;
     if (isPagenation) {
@@ -43,11 +43,11 @@ export class EditorsService extends BaseService<IEditorsDTO> {
     };
   }
 
-  postItem(item: IEditorsDTO): Promise<IEditorsDTO> {
+  postItem(item: IEditorDTO): Promise<IEditorDTO> {
     throw new Error('Method not implemented.');
   }
 
-  putAll(item: IEditorsDTO): IEditorsDTO {
+  putAll(item: IEditorDTO): IEditorDTO {
     throw new Error('Method not implemented.');
   }
 
@@ -55,7 +55,7 @@ export class EditorsService extends BaseService<IEditorsDTO> {
     throw new Error('Method not implemented.');
   }
 
-  async getItem(id: TID): Promise<IEditorsDTO> {
+  async getItem(id: TID): Promise<IEditorDTO> {
     return (await this.query(`
       SELECT
         \`id\`,
@@ -71,11 +71,11 @@ export class EditorsService extends BaseService<IEditorsDTO> {
       WHERE id = ${id}`))[0];
   }
 
-  putItem(id: TID): IEditorsDTO {
+  putItem(id: TID): IEditorDTO {
     throw new Error('Method not implemented.');
   }
 
-  deleteItem(id: TID): IEditorsDTO {
+  deleteItem(id: TID): IEditorDTO {
     throw new Error('Method not implemented.');
   }
 }

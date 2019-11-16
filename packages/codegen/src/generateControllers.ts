@@ -30,7 +30,7 @@ export const generateControllers = async () => {
   await generateController(query, 'country', 'country', 'countries');
   await generateController(query, 'country_permission', 'countryPermission', 'countryPermissions');
   await generateController(query, 'discount', 'discount', 'discounts');
-  await generateController(query, 'editor', 'editors', 'editors');
+  await generateController(query, 'editor', 'editor', 'editors');
   await generateController(query, 'favorites_article', 'favoritesArticle', 'favoritesArticles');
   await generateController(query, 'favorites_marker', 'favoritesMarker', 'favoritesMarkers');
   await generateController(query, 'guide', 'guide', 'guides');
