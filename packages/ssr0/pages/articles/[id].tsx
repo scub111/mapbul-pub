@@ -13,7 +13,7 @@ type Props = {
 const InitialPropsDetail: NextPage<Props> = ({ item, errors }) => {
   if (errors) {
     return (
-      <Layout title={`Error | Next.js + TypeScript Example`}>
+      <Layout title={`Mapbul. Ошибка`}>
         <p>
           <span style={{ color: 'red' }}>Error:</span> {errors}
         </p>
@@ -21,7 +21,7 @@ const InitialPropsDetail: NextPage<Props> = ({ item, errors }) => {
     );
   }
 
-  return <Layout title={`${item ? item.title : 'User Detail'} | Next.js + TypeScript Example`}>{item && <ListDetail item={item} />}</Layout>;
+  return <Layout title={`${item ? item.title : 'Mapbul. Детали статьи'} | Mapbul`}>{item && <ListDetail item={item} />}</Layout>;
 };
 
 InitialPropsDetail.getInitialProps = async ({ query }: NextPageContext) => {

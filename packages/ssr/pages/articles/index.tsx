@@ -12,7 +12,7 @@ type Props = {
 }
 
 const WithInitialProps: NextPage<Props> = ({ pagination, pathname }) => (
-  <Layout title="Users List | Next.js + TypeScript Example">
+  <Layout title="Mapbul. Главная">
     <h1>Articles List</h1>
     <p>You are currently on: {pathname}</p>
     <List items={pagination.data} />

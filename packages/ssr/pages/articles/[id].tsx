@@ -14,12 +14,7 @@ class InitialPropsDetail extends React.Component<Props> {
   static getInitialProps = async ({ query }: NextPageContext) => {
     try {
       const { id } = query
-      const item = await sampleFetchWrapper(
-        // `http://localhost:3100/api/editors/${Array.isArray(id) ? id[0] : id}`
-        `articles/${Array.isArray(id) ? id[0] : id}`
-        // `http://api.tvmaze.com/shows/${Array.isArray(id) ? id[0] : id}`
-        // `http://api.mapbul.scub111.com/api/editors/${Array.isArray(id) ? id[0] : id}`
-      )
+      const item = await sampleFetchWrapper(`articles/${Array.isArray(id) ? id[0] : id}`)
       return { item }
     } catch (err) {
       return { errors: err.message }
@@ -31,7 +26,7 @@ class InitialPropsDetail extends React.Component<Props> {
 
     if (errors) {
       return (
-        <Layout title={`Error | Next.js + TypeScript Example`}>
+        <Layout title={`Mapbul. Ошибка`}>
           <p>
             <span style={{ color: 'red' }}>Error:</span> {errors}
           </p>
@@ -42,8 +37,8 @@ class InitialPropsDetail extends React.Component<Props> {
     return (
       <Layout
         title={`${
-          item ? item : 'User Detail'
-        } | Next.js + TypeScript Example`}
+          item ? item : 'Mapbul. Детали статьи'
+        } | Mapbul`}
       >
         {item && <ListDetail item={item} />}
       </Layout>

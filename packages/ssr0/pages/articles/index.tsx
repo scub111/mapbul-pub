@@ -11,7 +11,7 @@ type Props = {
 };
 
 const WithInitialProps: NextPage<Props> = ({ items, pathname }) => (
-  <Layout title="Users List | Next.js + TypeScript Example">
+  <Layout title="Mapbul | Список статей">
     <h1>Users List</h1>
     <p>
       Example fetching data from inside <code>getInitialProps()</code>.
