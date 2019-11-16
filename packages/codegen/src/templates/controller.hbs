@@ -2,9 +2,10 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nes
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { {{interfaceName}} } from '@mapbul-pub/types';
+import { Pagination, {{interfaceName}} } from '@mapbul-pub/types';
 import { {{serviceName}} } from 'server/{{routerPath}}/{{service}}.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
+import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 @Controller('{{router}}')
 export class {{controllerName}} implements IController<{{interfaceName}}> {
@@ -12,7 +13,7 @@ export class {{controllerName}} implements IController<{{interfaceName}}> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(): Promise<{{interfaceName}}[]> {
+  async getAll(): Promise<Pagination<{{interfaceName}}>> {
     return this.service.getAll();
   }
 
