@@ -1,6 +1,6 @@
-import * as mysql from 'mysql';
+import * as mysql from '../node_modules/@types/mysql';
 import * as util from 'util';
-import { Connection } from 'mysql';
+import { Connection } from '../node_modules/@types/mysql';
 import { queryFn } from '@mapbul-pub/types';
 import { GlobalVar } from '.';
 

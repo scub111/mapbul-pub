@@ -34,7 +34,7 @@
     "example": "npm run check-packages && cd example && npm run start",
     "deploy-old": "npm run check-packages && npm run publish",
     "deploy:init": "npm run bootstrap && npm run build",
-    "deploy": "npm i && node scripts/deployServer",
+    "deploy": "npm i && node scripts/deploy",
     "deploy:beta": "npm run bump-version && npm run routine && git commit -am 'package.lock' && npm run publish:beta",
     "ncu": "ncu && lerna exec -- ncu",
     "ncu:u": "ncu -u && lerna exec -- ncu -u"
