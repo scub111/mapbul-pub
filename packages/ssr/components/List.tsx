@@ -8,9 +8,9 @@ type Props = {
 
 const List: React.FunctionComponent<Props> = ({ items }) => (
   <ul>
-    {items.map((item: any) => (
+    {items.map((item: IArticleDTO) => (
       <li key={item.id}>
-        <ListItem data={item} />
+        <ListItem item={item} />
       </li>
     ))}
   </ul>

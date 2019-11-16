@@ -1,16 +1,16 @@
 import * as React from 'react'
 import { IArticleDTO } from "@mapbul-pub/types"
+import { IMAGE_URL } from '../common/constants';
 
 type ListDetailProps = {
   item: IArticleDTO
 }
 
-const ListDetail: React.FunctionComponent<ListDetailProps> = ({
-  item: user,
-}) => (
+const ListDetail: React.FunctionComponent<ListDetailProps> = ({ item }) => (
   <div>
-    <h1>Detail for {user.title}</h1>
-    <p>ID: {user.id}</p>
+    <h1>{item.title}</h1>
+    <img src={`${IMAGE_URL}/${item.photo}`}></img>
+    <p>ID: {item.id}</p>
   </div>
 )
 
