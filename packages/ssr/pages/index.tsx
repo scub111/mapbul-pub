@@ -5,11 +5,11 @@ import { NextPage } from 'next'
 
 const IndexPage: NextPage = () => {
   return (
-    <Layout title="Home | Next.js + TypeScript Example">
-      <h1>Hello Next.js 👋</h1>
+    <Layout title="Mapbul">
+      <h1>Mapbul 👋</h1>
       <p>
         <Link href="/about">
-          <a>About</a>
+          <a>О компании</a>
         </Link>
       </p>
     </Layout>
