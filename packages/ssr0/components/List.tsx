@@ -1,9 +1,9 @@
 import * as React from 'react';
 import ListItem from './ListItem';
-import { IEditorsDTO } from '@mapbul-pub/types';
+import { IArticleDTO } from '@mapbul-pub/types';
 
 type Props = {
-  items: Array<IEditorsDTO>;
+  items: Array<IArticleDTO>;
 };
 
 const List: React.FunctionComponent<Props> = ({ items }) => (

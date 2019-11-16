@@ -21,7 +21,7 @@ const InitialPropsDetail: NextPage<Props> = ({ item, errors }) => {
     );
   }
 
-  return <Layout title={`${item ? item.lastName : 'User Detail'} | Next.js + TypeScript Example`}>{item && <ListDetail item={item} />}</Layout>;
+  return <Layout title={`${item ? item.title : 'User Detail'} | Next.js + TypeScript Example`}>{item && <ListDetail item={item} />}</Layout>;
 };
 
 InitialPropsDetail.getInitialProps = async ({ query }: NextPageContext) => {

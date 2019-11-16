@@ -1,15 +1,15 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { IEditorsDTO } from '@mapbul-pub/types';
+import { IArticleDTO } from '@mapbul-pub/types';
 
 type Props = {
-  data: IEditorsDTO;
+  data: IArticleDTO;
 };
 
 const ListItem: React.FunctionComponent<Props> = ({ data }) => (
   <Link href="/editors/[id]" as={`/editors/${data.id}`}>
     <a>
-      {data.id}: {data.lastName}
+      {data.id}: {data.title}
     </a>
   </Link>
 );
