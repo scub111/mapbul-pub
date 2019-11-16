@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IFavoritesArticleDTO } from '@mapbul-pub/types';
+import { Pagination, IFavoritesArticleDTO } from '@mapbul-pub/types';
 import { FavoritesArticlesService } from 'server/api/favoritesArticles/favoritesArticles.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
+import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 @Controller('api/favoritesarticles')
 export class FavoritesArticlesController implements IController<IFavoritesArticleDTO> {
@@ -12,8 +13,8 @@ export class FavoritesArticlesController implements IController<IFavoritesArticl
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(): Promise<IFavoritesArticleDTO[]> {
-    return this.service.getAll();
+  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IFavoritesArticleDTO>> {
+    return this.service.getAll(query);
   }
 
   @Post()

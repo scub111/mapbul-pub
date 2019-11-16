@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } fro
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IAdminDTO } from '@mapbul-pub/types';
+import { Pagination, IAdminDTO } from '@mapbul-pub/types';
 import { AdminsService } from 'server/api/admins/admins.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
@@ -13,9 +13,8 @@ export class AdminsController implements IController<IAdminDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() params: GetAllQueryDTO): Promise<IAdminDTO[]> {
-    console.log(params);
-    return this.service.getAll();
+  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IAdminDTO>> {
+    return this.service.getAll(query);
   }
 
   @Post()
@@ -30,8 +29,8 @@ export class AdminsController implements IController<IAdminDTO> {
 
   @Get(':id')
   @UseInterceptors(NotFoundInterceptor)
-  async getItem(@Param('id') id: any): Promise<IAdminDTO> {
-    return await this.service.getItem(id);
+  async getItem(@Param() params: IGetParams): Promise<IAdminDTO> {
+    return await this.service.getItem(params.id);
   }
 
   @Delete()

@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IStatusDTO } from '@mapbul-pub/types';
+import { Pagination, IStatusDTO } from '@mapbul-pub/types';
 import { StatusesService } from 'server/api/statuses/statuses.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
+import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 @Controller('api/statuses')
 export class StatusesController implements IController<IStatusDTO> {
@@ -12,8 +13,8 @@ export class StatusesController implements IController<IStatusDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(): Promise<IStatusDTO[]> {
-    return this.service.getAll();
+  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IStatusDTO>> {
+    return this.service.getAll(query);
   }
 
   @Post()

@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IDiscountDTO } from '@mapbul-pub/types';
+import { Pagination, IDiscountDTO } from '@mapbul-pub/types';
 import { DiscountsService } from 'server/api/discounts/discounts.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
+import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 @Controller('api/discounts')
 export class DiscountsController implements IController<IDiscountDTO> {
@@ -12,8 +13,8 @@ export class DiscountsController implements IController<IDiscountDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(): Promise<IDiscountDTO[]> {
-    return this.service.getAll();
+  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IDiscountDTO>> {
+    return this.service.getAll(query);
   }
 
   @Post()

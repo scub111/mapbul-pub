@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IArticleSubcategoryDTO } from '@mapbul-pub/types';
+import { Pagination, IArticleSubcategoryDTO } from '@mapbul-pub/types';
 import { ArticleSubcategoriesService } from 'server/api/articleSubcategories/articleSubcategories.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
+import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 @Controller('api/articlesubcategories')
 export class ArticleSubcategoriesController implements IController<IArticleSubcategoryDTO> {
@@ -12,8 +13,8 @@ export class ArticleSubcategoriesController implements IController<IArticleSubca
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(): Promise<IArticleSubcategoryDTO[]> {
-    return this.service.getAll();
+  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IArticleSubcategoryDTO>> {
+    return this.service.getAll(query);
   }
 
   @Post()

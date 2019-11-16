@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { ICityPermissionDTO } from '@mapbul-pub/types';
+import { Pagination, ICityPermissionDTO } from '@mapbul-pub/types';
 import { CityPermissionsService } from 'server/api/cityPermissions/cityPermissions.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
+import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 @Controller('api/citypermissions')
 export class CityPermissionsController implements IController<ICityPermissionDTO> {
@@ -12,8 +13,8 @@ export class CityPermissionsController implements IController<ICityPermissionDTO
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(): Promise<ICityPermissionDTO[]> {
-    return this.service.getAll();
+  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<ICityPermissionDTO>> {
+    return this.service.getAll(query);
   }
 
   @Post()

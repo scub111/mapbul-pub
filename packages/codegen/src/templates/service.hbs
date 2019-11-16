@@ -10,14 +10,14 @@ import { GetAllQueryDTO } from 'server/common/QueryDTO';
 export class {{serviceName}} extends BaseService<{{interfaceName}}> {
   constructor() {
     super();
-    this.connection = mysql.createConnection(GlobalVar.env.dbConnection);
+    this.connection = mysql.createConnection({ ...GlobalVar.env.dbConnection, multipleStatements: true });
     this.query = util.promisify(this.connection.query).bind(this.connection);
   }
 
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(): Promise<{{interfaceName}}[]> {
+  async getAll(query: GetAllQueryDTO): Promise<Pagination<{{interfaceName}}>> {
     let additional = ''
     const isPagenation = query.page && query.limit;
     if (isPagenation) {
@@ -37,7 +37,7 @@ export class {{serviceName}} extends BaseService<{{interfaceName}}> {
     };
   }
 
-  postItem(item: {{interfaceName}}): Promise<Pagination<{{interfaceName}}>> {
+  postItem(item: {{interfaceName}}): Promise<{{interfaceName}}> {
     throw new Error('Method not implemented.');
   }
 

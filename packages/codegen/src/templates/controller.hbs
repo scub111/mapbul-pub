@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
@@ -13,8 +13,8 @@ export class {{controllerName}} implements IController<{{interfaceName}}> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(): Promise<Pagination<{{interfaceName}}>> {
-    return this.service.getAll();
+  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<{{interfaceName}}>> {
+    return this.service.getAll(query);
   }
 
   @Post()

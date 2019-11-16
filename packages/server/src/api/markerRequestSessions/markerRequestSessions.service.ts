@@ -4,28 +4,40 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { IMarkerRequestSessionDTO } from '@mapbul-pub/types';
+import { Pagination, IMarkerRequestSessionDTO } from '@mapbul-pub/types';
+import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 export class MarkerRequestSessionsService extends BaseService<IMarkerRequestSessionDTO> {
   constructor() {
     super();
-    this.connection = mysql.createConnection(GlobalVar.env.dbConnection);
+    this.connection = mysql.createConnection({ ...GlobalVar.env.dbConnection, multipleStatements: true });
     this.query = util.promisify(this.connection.query).bind(this.connection);
   }
 
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(): Promise<IMarkerRequestSessionDTO[]> {
-    return await this.query(`
+  async getAll(query: GetAllQueryDTO): Promise<Pagination<IMarkerRequestSessionDTO>> {
+    let additional = ''
+    const isPagenation = query.page && query.limit;
+    if (isPagenation) {
+      const offset = (query.page - 1) * query.limit;
+      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM category`;
+    }
+    const records = await this.query(`
       SELECT
         \`id\`,
         \`sessionId\`,
         \`markerId\`
-      FROM marker_request_session`);
+      FROM marker_request_session ${additional}`);
+
+    return {
+      data: isPagenation ? records[0] : records,
+      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.limit)) : 1
+    };
   }
 
-  postItem(item: IMarkerRequestSessionDTO): IMarkerRequestSessionDTO {
+  postItem(item: IMarkerRequestSessionDTO): Promise<IMarkerRequestSessionDTO> {
     throw new Error('Method not implemented.');
   }
 

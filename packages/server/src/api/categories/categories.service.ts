@@ -10,7 +10,7 @@ import { GetAllQueryDTO } from 'server/common/QueryDTO';
 export class CategoriesService extends BaseService<ICategoryDTO> {
   constructor() {
     super();
-    this.connection = mysql.createConnection({ ...GlobalVar.env.dbConnection, multipleStatements: true});
+    this.connection = mysql.createConnection({ ...GlobalVar.env.dbConnection, multipleStatements: true });
     this.query = util.promisify(this.connection.query).bind(this.connection);
   }
 
@@ -35,7 +35,7 @@ export class CategoriesService extends BaseService<ICategoryDTO> {
         \`color\`,
         \`pin\`,
         \`forArticle\`
-      FROM category ${additional}`);    
+      FROM category ${additional}`);
 
     return {
       data: isPagenation ? records[0] : records,
@@ -43,7 +43,7 @@ export class CategoriesService extends BaseService<ICategoryDTO> {
     };
   }
 
-  postItem(item: ICategoryDTO): ICategoryDTO {
+  postItem(item: ICategoryDTO): Promise<ICategoryDTO> {
     throw new Error('Method not implemented.');
   }
 

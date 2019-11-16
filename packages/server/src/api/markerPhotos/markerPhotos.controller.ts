@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IMarkerPhotosDTO } from '@mapbul-pub/types';
+import { Pagination, IMarkerPhotosDTO } from '@mapbul-pub/types';
 import { MarkerPhotosService } from 'server/api/markerPhotos/markerPhotos.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
+import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 @Controller('api/markerphotos')
 export class MarkerPhotosController implements IController<IMarkerPhotosDTO> {
@@ -12,8 +13,8 @@ export class MarkerPhotosController implements IController<IMarkerPhotosDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(): Promise<IMarkerPhotosDTO[]> {
-    return this.service.getAll();
+  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IMarkerPhotosDTO>> {
+    return this.service.getAll(query);
   }
 
   @Post()

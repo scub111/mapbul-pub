@@ -4,20 +4,27 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { IArticleDTO } from '@mapbul-pub/types';
+import { Pagination, IArticleDTO } from '@mapbul-pub/types';
+import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 export class ArticlesService extends BaseService<IArticleDTO> {
   constructor() {
     super();
-    this.connection = mysql.createConnection(GlobalVar.env.dbConnection);
+    this.connection = mysql.createConnection({ ...GlobalVar.env.dbConnection, multipleStatements: true });
     this.query = util.promisify(this.connection.query).bind(this.connection);
   }
 
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(): Promise<IArticleDTO[]> {
-    return await this.query(`
+  async getAll(query: GetAllQueryDTO): Promise<Pagination<IArticleDTO>> {
+    let additional = ''
+    const isPagenation = query.page && query.limit;
+    if (isPagenation) {
+      const offset = (query.page - 1) * query.limit;
+      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM category`;
+    }
+    const records = await this.query(`
       SELECT
         \`id\`,
         \`title\`,
@@ -43,10 +50,15 @@ export class ArticlesService extends BaseService<IArticleDTO> {
         \`baseCategoryId\`,
         \`endDate\`,
         \`cityId\`
-      FROM article`);
+      FROM article ${additional}`);
+
+    return {
+      data: isPagenation ? records[0] : records,
+      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.limit)) : 1
+    };
   }
 
-  postItem(item: IArticleDTO): IArticleDTO {
+  postItem(item: IArticleDTO): Promise<IArticleDTO> {
     throw new Error('Method not implemented.');
   }
 

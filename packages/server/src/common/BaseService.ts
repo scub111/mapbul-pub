@@ -7,7 +7,7 @@ export abstract class BaseService<T> {
     return null;
   }
 
-  public postItem(item: T): T {
+  public postItem(item: T): Promise<T> | T {
     return null;
   }
 

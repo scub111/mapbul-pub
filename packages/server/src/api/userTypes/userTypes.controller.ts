@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Put, Delete, Param, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } from '@nestjs/common';
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { IUserTypeDTO } from '@mapbul-pub/types';
+import { Pagination, IUserTypeDTO } from '@mapbul-pub/types';
 import { UserTypesService } from 'server/api/userTypes/userTypes.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
+import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 @Controller('api/usertypes')
 export class UserTypesController implements IController<IUserTypeDTO> {
@@ -12,8 +13,8 @@ export class UserTypesController implements IController<IUserTypeDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(): Promise<IUserTypeDTO[]> {
-    return this.service.getAll();
+  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IUserTypeDTO>> {
+    return this.service.getAll(query);
   }
 
   @Post()

@@ -4,27 +4,39 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { IDiscountDTO } from '@mapbul-pub/types';
+import { Pagination, IDiscountDTO } from '@mapbul-pub/types';
+import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 export class DiscountsService extends BaseService<IDiscountDTO> {
   constructor() {
     super();
-    this.connection = mysql.createConnection(GlobalVar.env.dbConnection);
+    this.connection = mysql.createConnection({ ...GlobalVar.env.dbConnection, multipleStatements: true });
     this.query = util.promisify(this.connection.query).bind(this.connection);
   }
 
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(): Promise<IDiscountDTO[]> {
-    return await this.query(`
+  async getAll(query: GetAllQueryDTO): Promise<Pagination<IDiscountDTO>> {
+    let additional = ''
+    const isPagenation = query.page && query.limit;
+    if (isPagenation) {
+      const offset = (query.page - 1) * query.limit;
+      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM category`;
+    }
+    const records = await this.query(`
       SELECT
         \`id\`,
         \`value\`
-      FROM discount`);
+      FROM discount ${additional}`);
+
+    return {
+      data: isPagenation ? records[0] : records,
+      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.limit)) : 1
+    };
   }
 
-  postItem(item: IDiscountDTO): IDiscountDTO {
+  postItem(item: IDiscountDTO): Promise<IDiscountDTO> {
     throw new Error('Method not implemented.');
   }
 
