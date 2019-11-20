@@ -2,8 +2,8 @@ import * as React from 'react'
 import { NextPageContext } from 'next'
 import { sampleFetchWrapper } from '../../utils/sample-api'
 import { IArticleDTO } from "@mapbul-pub/types"
-import Layout from '../../components/Layout'
-import ListDetail from '../../components/ListDetail'
+import Layout from '../../src/components/Layout'
+import ListDetail from '../../src/components/ListDetail'
 
 type Props = {
   item?: IArticleDTO
