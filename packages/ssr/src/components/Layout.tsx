@@ -1,6 +1,6 @@
 import * as React from 'react'
-import Link from 'next/link'
 import Head from 'next/head'
+import Link from '../Link';
 
 type Props = {
   title?: string
@@ -19,15 +19,19 @@ const Layout: React.FunctionComponent<Props> = ({
       <header>
         <nav>
           <Link href="/">
-            <a>Главна</a>
+            Главна
           </Link>{' '}
-          |{' '}
+          |
           <Link href="/about">
-            <a>О компании</a>
+            О компании
           </Link>{' '}
-          |{' '}
+          |
           <Link href="/articles">
-            <a>Список статей</a>
+            Список статей
+          </Link>
+          |
+          <Link href="/blog">
+            Блог
           </Link>
         </nav>
       </header>

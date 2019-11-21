@@ -1,7 +1,8 @@
 import * as React from 'react'
-import Link from 'next/link'
+// import Link from 'next/link'
 import Layout from '../src/components/Layout'
 import { NextPage } from 'next'
+import Link from '../src/Link';
 
 const IndexPage: NextPage = () => {
   return (
@@ -9,7 +10,7 @@ const IndexPage: NextPage = () => {
       <h1>Mapbul 👋</h1>
       <p>
         <Link href="/about">
-          <a>О компании</a>
+          О компании
         </Link>
       </p>
     </Layout>

@@ -1,7 +1,7 @@
 import * as React from 'react'
-import Link from 'next/link'
 import { IArticleDTO } from "@mapbul-pub/types"
 import { IMAGE_URL } from '../common/constants';
+import Link from '../Link';
 
 type Props = {
   item: IArticleDTO
@@ -16,9 +16,7 @@ const ListItem: React.FunctionComponent<Props> = ({ item }) => (
       )
     }
     <Link href="/articles/[id]" as={`/articles/${item.id}`}>
-      <a>
         {item.id}: {item.title}
-      </a>
     </Link>
   </div>
 )

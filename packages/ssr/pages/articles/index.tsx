@@ -1,10 +1,9 @@
 import { NextPage } from 'next'
-import Link from 'next/link'
-
 import Layout from '../../src/components/Layout'
 import List from '../../src/components/List'
 import { sampleFetchWrapper } from '../../utils/sample-api'
 import { Pagination, IArticleDTO } from "@mapbul-pub/types"
+import Link from '../../src/Link';
 
 type Props = {
   pagination: Pagination<IArticleDTO>
@@ -18,7 +17,7 @@ const WithInitialProps: NextPage<Props> = ({ pagination, pathname }) => (
     <List items={pagination.data} />
     <p>
       <Link href="/">
-        <a>Go home</a>
+        Go home
       </Link>
     </p>
   </Layout>
