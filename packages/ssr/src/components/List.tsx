@@ -6,14 +6,11 @@ type Props = {
   items: Array<IArticleDTO>
 }
 
-const List: React.FunctionComponent<Props> = ({ items }) => (
-  <ul>
+const List: React.FunctionComponent<Props> = ({ items }) => 
+<>
     {items.map((item: IArticleDTO) => (
-      <li key={item.id}>
-        <ListItem item={item} />
-      </li>
+      <ListItem item={item} />
     ))}
-  </ul>
-)
+</>
 
 export default List
