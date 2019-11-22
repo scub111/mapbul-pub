@@ -18,7 +18,7 @@ export class CountriesService extends BaseService<ICountryDTO> {
   query: (expression: string) => Promise<any>;
 
   async getAll(query: GetAllQueryDTO): Promise<Pagination<ICountryDTO>> {
-    let additional = ''
+    let additional = '',
     const isPagenation = query.page && query.limit;
     if (isPagenation) {
       const offset = (query.page - 1) * query.limit;
@@ -35,7 +35,7 @@ export class CountriesService extends BaseService<ICountryDTO> {
 
     return {
       data: isPagenation ? records[0] : records,
-      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.limit)) : 1
+      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.limit)) : 1,
     };
   }
 

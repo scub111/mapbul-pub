@@ -18,7 +18,7 @@ export class SubcategoriesService extends BaseService<ISubcategoryDTO> {
   query: (expression: string) => Promise<any>;
 
   async getAll(query: GetAllQueryDTO): Promise<Pagination<ISubcategoryDTO>> {
-    let additional = ''
+    let additional = '',
     const isPagenation = query.page && query.limit;
     if (isPagenation) {
       const offset = (query.page - 1) * query.limit;
@@ -33,7 +33,7 @@ export class SubcategoriesService extends BaseService<ISubcategoryDTO> {
 
     return {
       data: isPagenation ? records[0] : records,
-      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.limit)) : 1
+      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.limit)) : 1,
     };
   }
 
