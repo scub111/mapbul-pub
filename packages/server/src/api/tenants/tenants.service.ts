@@ -18,7 +18,7 @@ export class TenantsService extends BaseService<ITenantDTO> {
   query: (expression: string) => Promise<any>;
 
   async getAll(query: GetAllQueryDTO): Promise<Pagination<ITenantDTO>> {
-    let additional = '',
+    let additional = '';
     const isPagenation = query.page && query.limit;
     if (isPagenation) {
       const offset = (query.page - 1) * query.limit;

@@ -18,7 +18,7 @@ export class PhonesService extends BaseService<IPhoneDTO> {
   query: (expression: string) => Promise<any>;
 
   async getAll(query: GetAllQueryDTO): Promise<Pagination<IPhoneDTO>> {
-    let additional = '',
+    let additional = '';
     const isPagenation = query.page && query.limit;
     if (isPagenation) {
       const offset = (query.page - 1) * query.limit;

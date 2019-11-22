@@ -18,7 +18,7 @@ export class MarkerPhotosService extends BaseService<IMarkerPhotosDTO> {
   query: (expression: string) => Promise<any>;
 
   async getAll(query: GetAllQueryDTO): Promise<Pagination<IMarkerPhotosDTO>> {
-    let additional = '',
+    let additional = '';
     const isPagenation = query.page && query.limit;
     if (isPagenation) {
       const offset = (query.page - 1) * query.limit;

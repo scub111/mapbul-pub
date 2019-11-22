@@ -18,7 +18,7 @@ export class MarkerRequestSessionsService extends BaseService<IMarkerRequestSess
   query: (expression: string) => Promise<any>;
 
   async getAll(query: GetAllQueryDTO): Promise<Pagination<IMarkerRequestSessionDTO>> {
-    let additional = '',
+    let additional = '';
     const isPagenation = query.page && query.limit;
     if (isPagenation) {
       const offset = (query.page - 1) * query.limit;
