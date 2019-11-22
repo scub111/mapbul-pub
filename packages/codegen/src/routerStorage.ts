@@ -18,13 +18,16 @@ export const readRouterSync = (path: string = apiPath): string => {
 };
 
 export const parseRouterSync = (path: string = apiPath): Array<IParseRouter> => {
-  return readFileSync(path).split(/\r?\n/).filter(i => i !== '').map(i => {
-    const fields = i.trim().split(';');
-    return {
-      router: fields[0],
-      dto: fields[1],
-    }
-  });
+  return readFileSync(path)
+    .split(/\r?\n/)
+    .filter(i => i !== '')
+    .map(i => {
+      const fields = i.trim().split(';');
+      return {
+        router: fields[0],
+        dto: fields[1],
+      };
+    });
 };
 
 export const appendRouterSync = (data: string) => {

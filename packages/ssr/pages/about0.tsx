@@ -1,6 +1,6 @@
-import * as React from 'react'
-import Link from 'next/link'
-import Layout from '../src/components/Layout'
+import * as React from 'react';
+import Link from 'next/link';
+import Layout from '../src/components/Layout';
 
 const AboutPage: React.FunctionComponent = () => (
   <Layout title="Mapbul. О компании">
@@ -12,6 +12,6 @@ const AboutPage: React.FunctionComponent = () => (
       </Link>
     </p>
   </Layout>
-)
+);
 
-export default AboutPage
+export default AboutPage;

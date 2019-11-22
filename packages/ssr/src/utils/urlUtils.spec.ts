@@ -1,4 +1,4 @@
-import { clearUrl } from "./urlUtils";
+import { clearUrl } from './urlUtils';
 
 describe('urlUtils', () => {
   describe('root', () => {

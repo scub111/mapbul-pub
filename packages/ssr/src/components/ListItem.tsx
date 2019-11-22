@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { IArticleDTO } from "@mapbul-pub/types"
+import * as React from 'react';
+import { IArticleDTO } from '@mapbul-pub/types';
 import { IMAGE_URL } from '../common/constants';
 // import Link from '../Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
@@ -7,23 +7,23 @@ import { Grid, CardActionArea, Card, CardContent, Typography, Hidden, CardMedia 
 import { clearUrl } from '../utils/urlUtils';
 
 type Props = {
-  item: IArticleDTO
-}
+  item: IArticleDTO;
+};
 
 const useStyles = makeStyles(() =>
   createStyles({
-      card: {
-        display: 'flex',
-      },
-      cardDetails: {
-        flex: 1,
-      },
-      cardMedia: {
-        // display: 'flex',
-        width: 200,
-        // height: 0, 
-        // paddingTop: '56.25%'
-      }
+    card: {
+      display: 'flex',
+    },
+    cardDetails: {
+      flex: 1,
+    },
+    cardMedia: {
+      // display: 'flex',
+      width: 200,
+      // height: 0,
+      // paddingTop: '56.25%'
+    },
   }),
 );
 
@@ -47,7 +47,7 @@ const ListItem: React.FunctionComponent<Props> = ({ item }) => {
               </Typography>
               <Typography variant="subtitle1" color="primary">
                 Continue reading...
-            </Typography>
+              </Typography>
             </CardContent>
           </div>
           {item.titlePhoto && (
@@ -57,14 +57,13 @@ const ListItem: React.FunctionComponent<Props> = ({ item }) => {
                 // image="https://source.unsplash.com/random"
                 image={clearUrl(`${IMAGE_URL}/${item.titlePhoto}`)}
                 title={item.title}
-              >
-              </CardMedia>
+              ></CardMedia>
             </Hidden>
           )}
         </Card>
       </CardActionArea>
     </Grid>
-  )
-}
+  );
+};
 
-export default ListItem
+export default ListItem;

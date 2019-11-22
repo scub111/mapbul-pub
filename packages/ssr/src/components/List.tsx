@@ -1,15 +1,14 @@
-import * as React from 'react'
-import ListItem from './ListItem'
-import { IArticleDTO } from "@mapbul-pub/types"
+import * as React from 'react';
+import ListItem from './ListItem';
+import { IArticleDTO } from '@mapbul-pub/types';
 import { Container, Grid } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
 
 // import Blog from '../../pages/blog';
 
 type Props = {
-  items: Array<IArticleDTO>
-}
+  items: Array<IArticleDTO>;
+};
 
 // const featuredPosts = [
 //   {
@@ -43,7 +42,7 @@ const List: React.FunctionComponent<Props> = ({ items }) => {
         </Grid>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default List
+export default List;

@@ -11,15 +11,7 @@ const NextComposed = React.forwardRef<HTMLAnchorElement, NextComposedProps>((pro
   const { as, href, replace, scroll, passHref, shallow, prefetch, ...other } = props;
 
   return (
-    <NextLink
-      href={href}
-      prefetch={prefetch}
-      as={as}
-      replace={replace}
-      scroll={scroll}
-      shallow={shallow}
-      passHref={passHref}
-    >
+    <NextLink href={href} prefetch={prefetch} as={as} replace={replace} scroll={scroll} shallow={shallow} passHref={passHref}>
       <a ref={ref} {...other} />
     </NextLink>
   );
@@ -36,13 +28,7 @@ type LinkProps = LinkPropsBase & NextComposedProps & Omit<MuiLinkProps, 'ref'>;
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/#with-link
 function Link(props: LinkProps) {
-  const {
-    activeClassName = 'active',
-    className: classNameProps,
-    innerRef,
-    naked,
-    ...other
-  } = props;
+  const { activeClassName = 'active', className: classNameProps, innerRef, naked, ...other } = props;
   const router = useRouter();
 
   const className = clsx(classNameProps, {
@@ -56,6 +42,4 @@ function Link(props: LinkProps) {
   return <MuiLink component={NextComposed} className={className} ref={innerRef} {...other} />;
 }
 
-export default React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => (
-  <Link {...props} innerRef={ref} />
-));
+export default React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => <Link {...props} innerRef={ref} />);

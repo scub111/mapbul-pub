@@ -105,31 +105,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const sections = [
-  'Technology',
-  'Design',
-  'Culture',
-  'Business',
-  'Politics',
-  'Opinion',
-  'Science',
-  'Health',
-  'Style',
-  'Travel',
-];
+const sections = ['Technology', 'Design', 'Culture', 'Business', 'Politics', 'Opinion', 'Science', 'Health', 'Style', 'Travel'];
 
 const featuredPosts = [
   {
     title: 'Featured post',
     date: 'Nov 12',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
+    description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
   },
   {
     title: 'Post title',
     date: 'Nov 11',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
+    description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
   },
 ];
 
@@ -161,14 +148,7 @@ export default function Blog() {
       <Container maxWidth="lg">
         <Toolbar className={classes.toolbar}>
           <Button size="small">Subscribe</Button>
-          <Typography
-            component="h2"
-            variant="h5"
-            color="inherit"
-            align="center"
-            noWrap
-            className={classes.toolbarTitle}
-          >
+          <Typography component="h2" variant="h5" color="inherit" align="center" noWrap className={classes.toolbarTitle}>
             Blog
           </Typography>
           <IconButton>
@@ -180,14 +160,7 @@ export default function Blog() {
         </Toolbar>
         <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
           {sections.map(section => (
-            <Link
-              color="inherit"
-              noWrap
-              key={section}
-              variant="body2"
-              href="#"
-              className={classes.toolbarLink}
-            >
+            <Link color="inherit" noWrap key={section} variant="body2" href="#" className={classes.toolbarLink}>
               {section}
             </Link>
           ))}
@@ -196,13 +169,7 @@ export default function Blog() {
           {/* Main featured post */}
           <Paper className={classes.mainFeaturedPost}>
             {/* Increase the priority of the hero background image */}
-            {
-              <img
-                style={{ display: 'none' }}
-                src="https://source.unsplash.com/user/erondu"
-                alt="background"
-              />
-            }
+            {<img style={{ display: 'none' }} src="https://source.unsplash.com/user/erondu" alt="background" />}
             <div className={classes.overlay} />
             <Grid container>
               <Grid item md={6}>
@@ -211,8 +178,8 @@ export default function Blog() {
                     Title of a longer featured blog post
                   </Typography>
                   <Typography variant="h5" color="inherit" paragraph>
-                    Multiple lines of text that form the lede, informing new readers quickly and
-                    efficiently about what&apos;s most interesting in this post&apos;s contents.
+                    Multiple lines of text that form the lede, informing new readers quickly and efficiently about what&apos;s most interesting in
+                    this post&apos;s contents.
                   </Typography>
                   <Link variant="subtitle1" href="#">
                     Continue reading…
@@ -245,11 +212,7 @@ export default function Blog() {
                       </CardContent>
                     </div>
                     <Hidden xsDown>
-                      <CardMedia
-                        className={classes.cardMedia}
-                        image="https://source.unsplash.com/random"
-                        title="Image title"
-                      />
+                      <CardMedia className={classes.cardMedia} image="https://source.unsplash.com/random" title="Image title" />
                     </Hidden>
                   </Card>
                 </CardActionArea>
@@ -278,8 +241,8 @@ export default function Blog() {
                   About
                 </Typography>
                 <Typography>
-                  Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit
-                  amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
+                  Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed
+                  consectetur.
                 </Typography>
               </Paper>
               <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
