@@ -2,7 +2,7 @@ import * as React from 'react';
 // import Link from 'next/link'
 import Layout from '../src/components/Layout';
 import { NextPage } from 'next';
-import Link from '../src/Link';
+import Link from 'next/link';
 
 const IndexPage: NextPage = () => {
   return (

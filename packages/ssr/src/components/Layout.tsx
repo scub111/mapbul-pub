@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Head from 'next/head';
-import Link from '../Link';
+import Link from 'next/link';
 import SearchIcon from '@material-ui/icons/Search';
 import { Container, Toolbar, Button, Typography, IconButton, makeStyles } from '@material-ui/core';
 
@@ -103,7 +103,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link href="https://material-ui.com/">
         Mapbool Website
       </Link>{' '}
       {new Date().getFullYear()}
@@ -140,7 +140,10 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the
           </Toolbar>
           <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
             {sections.map(section => (
-              <Link color="inherit" noWrap key={section.page} variant="body2" href={section.url} className={classes.toolbarLink}>
+              // <Link color="inherit" noWrap key={section.page} variant="body2" href={section.url} className={classes.toolbarLink}>
+              //   {section.page}
+              // </Link>
+              <Link key={section.page} href={section.url}>
                 {section.page}
               </Link>
             ))}
