@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IArticleDTO } from '@mapbul-pub/types';
 import { IMAGE_URL } from '../common/constants';
-// import Link from '../Link';
+import Link from '../Link';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Grid, CardActionArea, Card, CardContent, Typography, Hidden, CardMedia } from '@material-ui/core';
 import { clearUrl } from '../utils/urlUtils';
@@ -32,7 +32,7 @@ const ListItem: React.FunctionComponent<Props> = ({ item }) => {
 
   return (
     <Grid item key={item.title} xs={12} md={6}>
-      <CardActionArea component="a" href={`/articles/${item.id}`}>
+      <CardActionArea component={Link} href={`/articles/${item.id}`}>
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>

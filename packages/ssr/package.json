@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next -p 3200",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3200",
     "start:port": "next start -p",
     "type-check": "tsc",
     "test": "jest",
