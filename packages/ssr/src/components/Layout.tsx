@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { Link as MuiLink } from '@material-ui/core';
+import { Link as MuiLink, CssBaseline } from '@material-ui/core';
 
 import SearchIcon from '@material-ui/icons/Search';
 import { Container, Toolbar, Button, Typography, IconButton, makeStyles } from '@material-ui/core';
@@ -34,22 +34,14 @@ interface IPageUrl {
 }
 
 const sections: Array<IPageUrl> = [
-  { 
-    page: 'Главная', 
-    url: "/" 
-  }, 
-  { 
-    page: 'Статьи', 
-    url: "/articles" 
-  }, 
-  { 
-    page: 'О компании', 
-    url: "/about" 
+  {
+    page: 'Главная',
+    url: "/"
   },
-  { 
-    page: 'Блог', 
-    url: "/blog" 
-  }
+  {
+    page: 'Статьи',
+    url: "/articles"
+  },
 ];
 
 function Copyright() {
@@ -72,13 +64,14 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the
   const classes = useStyles();
   return (
     <div>
+      <CssBaseline />
       <Head>
         <title>{title}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <header>
-        <Container maxWidth="lg">
+      <Container maxWidth="lg">
+        <header>
           <Toolbar className={classes.toolbar}>
             <Button size="small">Подписаться</Button>
             <Typography component="h2" variant="h5" color="inherit" align="center" noWrap className={classes.toolbarTitle}>
@@ -93,9 +86,6 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the
           </Toolbar>
           <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
             {sections.map(section => (
-              // <Link color="inherit" noWrap key={section.page} variant="body2" href={section.url} className={classes.toolbarLink}>
-              //   {section.page}
-              // </Link>
               <Link key={section.page} href={section.url}>
                 <MuiLink color="inherit" noWrap key={section.page} variant="body2" href={section.url} className={classes.toolbarLink}>
                   {section.page}
@@ -103,17 +93,19 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the
               </Link>
             ))}
           </Toolbar>
-        </Container>
-      </header>
-      {children}
-      <footer className={classes.footer}>
-        <Container maxWidth="lg">
-          <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-            Все права защищены
+        </header>
+        <main>
+        {children}
+        </main>
+        <footer className={classes.footer}>
+          <Container maxWidth="lg">
+            <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+              Все права защищены
           </Typography>
-          <Copyright />
-        </Container>
-      </footer>
+            <Copyright />
+          </Container>
+        </footer>
+      </Container>
     </div>
   )
 };
