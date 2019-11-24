@@ -12,22 +12,6 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     padding: theme.spacing(2, 0),
   },
-  toolbarTitle: {
-    flex: 1,
-  },
-  toolbarSecondary: {
-    justifyContent: 'space-between',
-    overflowX: 'auto',
-  },
-  toolbarLink: {
-    padding: theme.spacing(1),
-    flexShrink: 0,
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    marginTop: theme.spacing(8),
-    padding: theme.spacing(6, 0),
-  },
 }));
 
 type Props = {
