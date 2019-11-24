@@ -6,7 +6,7 @@ import Layout from '../../src/components/Layout';
 import ListDetail from '../../src/components/ListDetail';
 
 type Props = {
-  item?: IArticleDTO;
+  item: IArticleDTO;
   errors?: string;
 };
 
@@ -34,7 +34,11 @@ class InitialPropsDetail extends React.Component<Props> {
       );
     }
 
-    return <Layout title={`${item ? item : 'Mapbul. Детали статьи'} | Mapbul`}>{item && <ListDetail item={item} />}</Layout>;
+    return (
+    <Layout title='Mapbul. Детали статьи'>
+      <ListDetail item={item} />
+    </Layout>
+    );
   }
 }
 

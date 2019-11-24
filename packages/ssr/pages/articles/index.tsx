@@ -35,7 +35,7 @@ const ArticlesPage: NextPage<Props> = ({ pagination }) => {
   const queryPage = getQueryPage(router.query);
   const classes = useStyles();
   return (
-    <Layout title="Mapbul. Главная">
+    <Layout title="Mapbul. Статьи">
       <List items={pagination.content} />
       <Container maxWidth="lg" className={classes.pagination}>
         <Pagination
