@@ -36,11 +36,11 @@ interface IPageUrl {
 const sections: Array<IPageUrl> = [
   {
     page: 'Главная',
-    url: "/"
+    url: '/',
   },
   {
     page: 'Статьи',
-    url: "/articles"
+    url: '/articles',
   },
 ];
 
@@ -48,9 +48,9 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link href="http://scub111.com:9090/">
+      {/* <Link href="http://scub111.com:9090/">
         Mapbul Website
-      </Link>{' '}
+      </Link>{' '} */}
       {new Date().getFullYear()}
     </Typography>
   );
@@ -58,7 +58,7 @@ function Copyright() {
 
 interface Props {
   title?: string;
-};
+}
 
 const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the default title' }) => {
   const classes = useStyles();
@@ -76,13 +76,13 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the
             <Button size="small">Подписаться</Button>
             <Typography component="h2" variant="h5" color="inherit" align="center" noWrap className={classes.toolbarTitle}>
               MapBul
-          </Typography>
+            </Typography>
             <IconButton>
               <SearchIcon />
             </IconButton>
             <Button variant="outlined" size="small">
               Войти
-          </Button>
+            </Button>
           </Toolbar>
           <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
             {sections.map(section => (
@@ -94,20 +94,18 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the
             ))}
           </Toolbar>
         </header>
-        <main>
-        {children}
-        </main>
+        <main>{children}</main>
         <footer className={classes.footer}>
           <Container maxWidth="lg">
             <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
               Все права защищены
-          </Typography>
+            </Typography>
             <Copyright />
           </Container>
         </footer>
       </Container>
     </div>
-  )
+  );
 };
 
 export default Layout;

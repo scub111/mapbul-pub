@@ -1,10 +1,15 @@
-import { NextPage } from 'next';
+import { NextPage, NextPageContext } from 'next';
+import Router from 'next/router';
 import Layout from '../../src/components/Layout';
 import List from '../../src/components/List';
 import { sampleFetchWrapper } from '../../src/utils/sample-api';
 import { Pagination as PaginationContent, IArticleDTO } from '@mapbul-pub/types';
-import Pagination from "material-ui-flat-pagination";
-import { Container, makeStyles } from '../../node_modules/@material-ui/core';
+import Pagination from 'material-ui-flat-pagination';
+import { Container, makeStyles } from '@material-ui/core';
+import { useRouter } from 'next/router';
+import { ParsedUrlQuery } from 'querystring';
+
+const ITEMS_PER_PAGE = 10;
 
 const useStyles = makeStyles(theme => ({
   pagination: {
@@ -16,29 +21,42 @@ const useStyles = makeStyles(theme => ({
 
 type Props = {
   pagination: PaginationContent<IArticleDTO>;
-  pathname: string;
+};
+
+const getQueryPage = (query: ParsedUrlQuery): number => {
+  if (query.page) {
+    return Number(query.page);
+  }
+  return 1;
 };
 
 const ArticlesPage: NextPage<Props> = ({ pagination }) => {
+  const router = useRouter();
+  const queryPage = getQueryPage(router.query);
   const classes = useStyles();
   return (
     <Layout title="Mapbul. Главная">
       <List items={pagination.content} />
       <Container maxWidth="lg" className={classes.pagination}>
         <Pagination
-          limit={10}
-          offset={1}
-          total={100}
-        // onClick={(e, offset) => this.handleClick(offset)}
+          limit={ITEMS_PER_PAGE}
+          offset={ITEMS_PER_PAGE * (queryPage - 1)}
+          total={ITEMS_PER_PAGE * pagination.totalPages}
+          onClick={(_: any, offset: number) => {
+            const queryPage = offset / ITEMS_PER_PAGE + 1;
+            Router.push(`/articles?page=${queryPage}`, `/articles?page=${queryPage}`);
+          }}
+          size="large"
         />
       </Container>
     </Layout>
-  )
+  );
 };
 
-ArticlesPage.getInitialProps = async ({ pathname }) => {
-  const pagination: PaginationContent<IArticleDTO> = await sampleFetchWrapper('articles?page=1&size=20');
-  return { pagination, pathname };
+ArticlesPage.getInitialProps = async (ctx: NextPageContext) => {
+  const queryPage = getQueryPage(ctx.query);
+  const pagination: PaginationContent<IArticleDTO> = await sampleFetchWrapper(`articles?page=${queryPage}&size=${ITEMS_PER_PAGE}`);
+  return { pagination };
 };
 
 export default ArticlesPage;

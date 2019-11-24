@@ -3,7 +3,6 @@ import Layout from '../src/components/Layout';
 import { NextPage } from 'next';
 import { Link, CardContent, makeStyles, Typography, CardActionArea, Paper, Grid, Card, Hidden, CardMedia, Divider } from '@material-ui/core';
 
-
 const useStyles = makeStyles(theme => ({
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
@@ -119,11 +118,11 @@ const IndexPage: NextPage = () => {
             <div className={classes.mainFeaturedPostContent}>
               <Typography component="h1" variant="h3" color="inherit" gutterBottom>
                 Title of a longer featured blog post
-                  </Typography>
+              </Typography>
               <Typography variant="h5" color="inherit" paragraph>
-                Multiple lines of text that form the lede, informing new readers quickly and efficiently about what&apos;s most interesting in
-                this post&apos;s contents.
-                  </Typography>
+                Multiple lines of text that form the lede, informing new readers quickly and efficiently about what&apos;s most interesting in this
+                post&apos;s contents.
+              </Typography>
               <Link variant="subtitle1" href="#">
                 Continue reading…
               </Link>
@@ -151,7 +150,7 @@ const IndexPage: NextPage = () => {
                     </Typography>
                     <Typography variant="subtitle1" color="primary">
                       Continue reading...
-                        </Typography>
+                    </Typography>
                   </CardContent>
                 </div>
                 <Hidden xsDown>
@@ -168,7 +167,7 @@ const IndexPage: NextPage = () => {
         <Grid item xs={12} md={8}>
           <Typography variant="h6" gutterBottom>
             From the Firehose
-              </Typography>
+          </Typography>
           <Divider />
           {/* {posts.map(post => (
                 <Markdown className={classes.markdown} key={post.substring(0, 40)}>
@@ -182,15 +181,15 @@ const IndexPage: NextPage = () => {
           <Paper elevation={0} className={classes.sidebarAboutBox}>
             <Typography variant="h6" gutterBottom>
               About
-                </Typography>
+            </Typography>
             <Typography>
               Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed
               consectetur.
-                </Typography>
+            </Typography>
           </Paper>
           <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
             Archives
-              </Typography>
+          </Typography>
           {archives.map(archive => (
             <Link display="block" variant="body1" href="#" key={archive}>
               {archive}
@@ -198,7 +197,7 @@ const IndexPage: NextPage = () => {
           ))}
           <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
             Social
-              </Typography>
+          </Typography>
           {social.map(network => (
             <Link display="block" variant="body1" href="#" key={network}>
               {network}

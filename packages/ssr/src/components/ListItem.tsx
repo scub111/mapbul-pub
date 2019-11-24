@@ -1,30 +1,28 @@
 import * as React from 'react';
+import Link from 'next/link';
+// import { formatDateToString } from "@mapbul-pub/common"
 import { IArticleDTO } from '@mapbul-pub/types';
 import { IMAGE_URL } from '../common/constants';
-import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Card, CardContent, Typography, Hidden, CardMedia, CardActionArea } from '@material-ui/core';
+import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea } from '@material-ui/core';
 import { clearUrl } from '../utils/urlUtils';
+// import { formatDateToString } from '../utils/dateUtils';
 
 type Props = {
   item: IArticleDTO;
 };
 
-const useStyles = makeStyles(() =>({
-    card: {
-      display: 'flex',
-    },
-    cardDetails: {
-      flex: 1,
-    },
-    cardMedia: {
-      // display: 'flex',
-      width: 200,
-      // height: 0,
-      // paddingTop: '56.25%'
-    },
-  }),
-);
+const useStyles = makeStyles(() => ({
+  card: {
+    display: 'flex',
+  },
+  cardDetails: {
+    flex: 1,
+  },
+  cardMedia: {
+    width: 200,
+  },
+}));
 
 const ListItem: React.FunctionComponent<Props> = ({ item }) => {
   const classes = useStyles();
@@ -45,20 +43,14 @@ const ListItem: React.FunctionComponent<Props> = ({ item }) => {
                 <Typography variant="subtitle1" paragraph>
                   {item.description}
                 </Typography>
-                <Typography variant="subtitle1" color="primary">
-                  Continue reading...
-              </Typography>
               </CardContent>
             </div>
             {item.titlePhoto && (
-              <Hidden xsDown>
-                <CardMedia
-                  className={classes.cardMedia}
-                  // image="https://source.unsplash.com/random"
-                  image={clearUrl(`${IMAGE_URL}/${item.titlePhoto}`)}
-                  title={item.title}
-                ></CardMedia>
-              </Hidden>
+              <CardMedia
+                className={classes.cardMedia}
+                image={clearUrl(`${IMAGE_URL}/${item.titlePhoto}`)}
+                title={item.title}
+              />
             )}
           </Card>
         </Link>
