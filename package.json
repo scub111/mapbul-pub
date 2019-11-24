@@ -1,5 +1,6 @@
 {
   "name": "mapbul-pub-monorepo",
+  "version": "0.1.0",
   "description": "Core Library for WalletConnect",
   "private": true,
   "keywords": [
