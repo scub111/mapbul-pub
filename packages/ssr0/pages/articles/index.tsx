@@ -1,7 +1,7 @@
 import { NextPage } from 'next';
 import Layout from '../../src/components/Layout';
 import List from '../../src/components/List';
-import { sampleFetchWrapper } from '../../utils/sample-api';
+import { sampleFetchWrapper } from '../../src/utils/sample-api';
 import { Pagination, IArticleDTO } from '@mapbul-pub/types';
 
 type Props = {

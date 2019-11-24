@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { sampleUserData } from '../../../utils/sample-data';
+import { sampleUserData } from '../../../src/utils/sample-data';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   try {
