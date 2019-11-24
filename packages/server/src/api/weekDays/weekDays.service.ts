@@ -19,8 +19,8 @@ export class WeekDaysService extends BaseService<IWeekDayDTO> {
 
   async getAll(query: GetAllQueryDTO): Promise<Pagination<IWeekDayDTO>> {
     let additional = '';
-    const isPagenation = query.page && query.size;
-    if (isPagenation) {
+    const isPagination = query.page && query.size;
+    if (isPagination) {
       const offset = (query.page - 1) * query.size;
       additional = `limit ${offset},${query.size}; SELECT count(*) FROM weekday`;
     }
@@ -33,8 +33,8 @@ export class WeekDaysService extends BaseService<IWeekDayDTO> {
       FROM weekday ${additional}`);
 
     return {
-      content: isPagenation ? records[0] : records,
-      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.size)) : 1,
+      content: isPagination ? records[0] : records,
+      totalPages: isPagination ? Number(Math.ceil(records[1][0]['count(*)'] / query.size)) : 1,
     };
   }
 

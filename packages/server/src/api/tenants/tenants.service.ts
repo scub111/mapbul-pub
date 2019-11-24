@@ -19,8 +19,8 @@ export class TenantsService extends BaseService<ITenantDTO> {
 
   async getAll(query: GetAllQueryDTO): Promise<Pagination<ITenantDTO>> {
     let additional = '';
-    const isPagenation = query.page && query.size;
-    if (isPagenation) {
+    const isPagination = query.page && query.size;
+    if (isPagination) {
       const offset = (query.page - 1) * query.size;
       additional = `limit ${offset},${query.size}; SELECT count(*) FROM tenant`;
     }
@@ -38,8 +38,8 @@ export class TenantsService extends BaseService<ITenantDTO> {
       FROM tenant ${additional}`);
 
     return {
-      content: isPagenation ? records[0] : records,
-      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.size)) : 1,
+      content: isPagination ? records[0] : records,
+      totalPages: isPagination ? Number(Math.ceil(records[1][0]['count(*)'] / query.size)) : 1,
     };
   }
 

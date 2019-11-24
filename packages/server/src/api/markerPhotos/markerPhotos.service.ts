@@ -19,8 +19,8 @@ export class MarkerPhotosService extends BaseService<IMarkerPhotosDTO> {
 
   async getAll(query: GetAllQueryDTO): Promise<Pagination<IMarkerPhotosDTO>> {
     let additional = '';
-    const isPagenation = query.page && query.size;
-    if (isPagenation) {
+    const isPagination = query.page && query.size;
+    if (isPagination) {
       const offset = (query.page - 1) * query.size;
       additional = `limit ${offset},${query.size}; SELECT count(*) FROM marker_photos`;
     }
@@ -33,8 +33,8 @@ export class MarkerPhotosService extends BaseService<IMarkerPhotosDTO> {
       FROM marker_photos ${additional}`);
 
     return {
-      content: isPagenation ? records[0] : records,
-      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.size)) : 1,
+      content: isPagination ? records[0] : records,
+      totalPages: isPagination ? Number(Math.ceil(records[1][0]['count(*)'] / query.size)) : 1,
     };
   }
 
