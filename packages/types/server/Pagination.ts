@@ -1,4 +1,4 @@
 export interface Pagination<T> {
-  data: Array<T>;
+  content: Array<T>;
   totalPages: number;
 }

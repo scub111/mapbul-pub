@@ -9,7 +9,7 @@ export const generateCommonTypes = async (): Promise<void> => {
 
   const routers = parseRouterSync();
   // console.log(routers);
-  
+
   // Create index.ts
   createSorce({
     templatePath: `${templateRootPath}/commonTypes.hbs`,

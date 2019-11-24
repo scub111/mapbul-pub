@@ -1,2 +1,2 @@
 export * from './api';
-export * from './Pagination'
+export * from './Pagination';

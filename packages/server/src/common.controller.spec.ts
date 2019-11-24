@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CategoriesController } from './api/categories/categories.controller'
+import { CategoriesController } from './api/categories/categories.controller';
 import { CategoriesService } from './api/categories/categories.service';
 import { GlobalVar } from '@mapbul-pub/common';
 
@@ -19,13 +19,13 @@ describe('AdminsController', () => {
 
   describe('root', () => {
     it('should return all data', async () => {
-      const result = await controller.getAll({page: undefined, limit: undefined});
+      const result = await controller.getAll({ page: undefined, limit: undefined });
       expect(result.data.length).toBe(136);
       expect(result.totalPages).toBe(1);
     });
 
     it('should return first page', async () => {
-      const result = await controller.getAll({page: 1, limit: 10});
+      const result = await controller.getAll({ page: 1, limit: 10 });
       expect(result.data.length).toBe(10);
       expect(result.totalPages).toBe(14);
     });

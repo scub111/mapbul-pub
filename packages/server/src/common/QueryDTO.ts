@@ -3,9 +3,11 @@ import { Transform } from 'class-transformer';
 
 const trasformParam = (param: string, defaultValue: number = 1) => {
   const paramInt = Number(param);
-  if (isNaN(paramInt)) { return defaultValue; }
+  if (isNaN(paramInt)) {
+    return defaultValue;
+  }
   return paramInt;
-}
+};
 
 export class GetAllQueryDTO {
   @Optional()
@@ -14,5 +16,5 @@ export class GetAllQueryDTO {
 
   @Optional()
   @Transform(value => trasformParam(value, 10))
-  limit: number;
+  size: number;
 }

@@ -18,11 +18,11 @@ export class MarkersService extends BaseService<IMarkerDTO> {
   query: (expression: string) => Promise<any>;
 
   async getAll(query: GetAllQueryDTO): Promise<Pagination<IMarkerDTO>> {
-    let additional = ''
-    const isPagenation = query.page && query.limit;
-    if (isPagenation) {
-      const offset = (query.page - 1) * query.limit;
-      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM marker`;
+    let additional = '';
+    const isPagination = query.page && query.size;
+    if (isPagination) {
+      const offset = (query.page - 1) * query.size;
+      additional = `limit ${offset},${query.size}; SELECT count(*) FROM marker`;
     }
     const records = await this.query(`
       SELECT
@@ -57,8 +57,8 @@ export class MarkersService extends BaseService<IMarkerDTO> {
       FROM marker ${additional}`);
 
     return {
-      data: isPagenation ? records[0] : records,
-      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.limit)) : 1
+      content: isPagination ? records[0] : records,
+      totalPages: isPagination ? Number(Math.ceil(records[1][0]['count(*)'] / query.size)) : 1,
     };
   }
 
