@@ -11,7 +11,7 @@ type Props = {
 
 const WithInitialProps: NextPage<Props> = ({ pagination }) => (
   <Layout title="Mapbul. Главная">
-    <List items={pagination.data} />
+    <List items={pagination.content} />
   </Layout>
 );
 

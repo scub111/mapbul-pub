@@ -39,7 +39,7 @@ export class GuidesService extends BaseService<IGuideDTO> {
       FROM guide ${additional}`);
 
     return {
-      data: isPagenation ? records[0] : records,
+      content: isPagenation ? records[0] : records,
       totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.size)) : 1,
     };
   }

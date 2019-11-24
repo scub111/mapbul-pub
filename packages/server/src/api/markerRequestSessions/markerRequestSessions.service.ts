@@ -32,7 +32,7 @@ export class MarkerRequestSessionsService extends BaseService<IMarkerRequestSess
       FROM marker_request_session ${additional}`);
 
     return {
-      data: isPagenation ? records[0] : records,
+      content: isPagenation ? records[0] : records,
       totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.size)) : 1,
     };
   }
