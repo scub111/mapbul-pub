@@ -16,7 +16,7 @@ const WithInitialProps: NextPage<Props> = ({ pagination }) => (
 );
 
 WithInitialProps.getInitialProps = async ({ pathname }) => {
-  const pagination: Pagination<IArticleDTO> = await sampleFetchWrapper('articles');
+  const pagination: Pagination<IArticleDTO> = await sampleFetchWrapper('articles?page=1&limit=20');
   return { pagination, pathname };
 };
 

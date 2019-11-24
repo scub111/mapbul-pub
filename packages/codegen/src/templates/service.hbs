@@ -19,10 +19,10 @@ export class {{serviceName}} extends BaseService<{{interfaceName}}> {
 
   async getAll(query: GetAllQueryDTO): Promise<Pagination<{{interfaceName}}>> {
     let additional = '';
-    const isPagenation = query.page && query.limit;
+    const isPagenation = query.page && query.size;
     if (isPagenation) {
-      const offset = (query.page - 1) * query.limit;
-      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM {{tableName}}`;
+      const offset = (query.page - 1) * query.size;
+      additional = `limit ${offset},${query.size}; SELECT count(*) FROM {{tableName}}`;
     }
     const records = await this.query(`
       SELECT

@@ -19,10 +19,10 @@ export class MarkerRequestSessionsService extends BaseService<IMarkerRequestSess
 
   async getAll(query: GetAllQueryDTO): Promise<Pagination<IMarkerRequestSessionDTO>> {
     let additional = '';
-    const isPagenation = query.page && query.limit;
+    const isPagenation = query.page && query.size;
     if (isPagenation) {
-      const offset = (query.page - 1) * query.limit;
-      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM marker_request_session`;
+      const offset = (query.page - 1) * query.size;
+      additional = `limit ${offset},${query.size}; SELECT count(*) FROM marker_request_session`;
     }
     const records = await this.query(`
       SELECT
@@ -33,7 +33,7 @@ export class MarkerRequestSessionsService extends BaseService<IMarkerRequestSess
 
     return {
       data: isPagenation ? records[0] : records,
-      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.limit)) : 1,
+      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.size)) : 1,
     };
   }
 

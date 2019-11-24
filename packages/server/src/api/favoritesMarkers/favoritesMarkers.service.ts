@@ -19,10 +19,10 @@ export class FavoritesMarkersService extends BaseService<IFavoritesMarkerDTO> {
 
   async getAll(query: GetAllQueryDTO): Promise<Pagination<IFavoritesMarkerDTO>> {
     let additional = '';
-    const isPagenation = query.page && query.limit;
+    const isPagenation = query.page && query.size;
     if (isPagenation) {
-      const offset = (query.page - 1) * query.limit;
-      additional = `limit ${offset},${query.limit}; SELECT count(*) FROM favorites_marker`;
+      const offset = (query.page - 1) * query.size;
+      additional = `limit ${offset},${query.size}; SELECT count(*) FROM favorites_marker`;
     }
     const records = await this.query(`
       SELECT
@@ -33,7 +33,7 @@ export class FavoritesMarkersService extends BaseService<IFavoritesMarkerDTO> {
 
     return {
       data: isPagenation ? records[0] : records,
-      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.limit)) : 1,
+      totalPages: isPagenation ? Number(Math.ceil(records[1][0]['count(*)'] / query.size)) : 1,
     };
   }
 

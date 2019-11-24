@@ -16,5 +16,5 @@ export class GetAllQueryDTO {
 
   @Optional()
   @Transform(value => trasformParam(value, 10))
-  limit: number;
+  size: number;
 }
