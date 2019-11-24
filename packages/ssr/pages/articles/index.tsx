@@ -9,15 +9,15 @@ type Props = {
   pathname: string;
 };
 
-const WithInitialProps: NextPage<Props> = ({ pagination }) => (
+const ArticlesPage: NextPage<Props> = ({ pagination }) => (
   <Layout title="Mapbul. Главная">
     <List items={pagination.content} />
   </Layout>
 );
 
-WithInitialProps.getInitialProps = async ({ pathname }) => {
-  const pagination: Pagination<IArticleDTO> = await sampleFetchWrapper('articles?page=1&limit=20');
+ArticlesPage.getInitialProps = async ({ pathname }) => {
+  const pagination: Pagination<IArticleDTO> = await sampleFetchWrapper('articles?page=1&size=20');
   return { pagination, pathname };
 };
 
-export default WithInitialProps;
+export default ArticlesPage;
