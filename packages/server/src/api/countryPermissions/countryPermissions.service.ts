@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { Pagination, ICountryPermissionDTO } from '@mapbul-pub/types';
+import { PageContent, ICountryPermissionDTO } from '@mapbul-pub/types';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 export class CountryPermissionsService extends BaseService<ICountryPermissionDTO> {
@@ -17,7 +17,7 @@ export class CountryPermissionsService extends BaseService<ICountryPermissionDTO
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(query: GetAllQueryDTO): Promise<Pagination<ICountryPermissionDTO>> {
+  async getAll(query: GetAllQueryDTO): Promise<PageContent<ICountryPermissionDTO>> {
     let additional = '';
     const isPagination = query.page && query.size;
     if (isPagination) {

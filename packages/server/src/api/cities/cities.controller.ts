@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } fro
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { Pagination, ICityDTO } from '@mapbul-pub/types';
+import { PageContent, ICityDTO } from '@mapbul-pub/types';
 import { CitiesService } from 'server/api/cities/cities.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
@@ -13,7 +13,7 @@ export class CitiesController implements IController<ICityDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<ICityDTO>> {
+  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<ICityDTO>> {
     return this.service.getAll(query);
   }
 

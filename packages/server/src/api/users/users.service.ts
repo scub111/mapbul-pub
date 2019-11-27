@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { Pagination, IUserDTO } from '@mapbul-pub/types';
+import { PageContent, IUserDTO } from '@mapbul-pub/types';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 export class UsersService extends BaseService<IUserDTO> {
@@ -17,7 +17,7 @@ export class UsersService extends BaseService<IUserDTO> {
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(query: GetAllQueryDTO): Promise<Pagination<IUserDTO>> {
+  async getAll(query: GetAllQueryDTO): Promise<PageContent<IUserDTO>> {
     let additional = '';
     const isPagination = query.page && query.size;
     if (isPagination) {

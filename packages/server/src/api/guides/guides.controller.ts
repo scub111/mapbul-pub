@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } fro
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { Pagination, IGuideDTO } from '@mapbul-pub/types';
+import { PageContent, IGuideDTO } from '@mapbul-pub/types';
 import { GuidesService } from 'server/api/guides/guides.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
@@ -13,7 +13,7 @@ export class GuidesController implements IController<IGuideDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IGuideDTO>> {
+  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IGuideDTO>> {
     return this.service.getAll(query);
   }
 

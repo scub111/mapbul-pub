@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } fro
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { Pagination, IStatusDTO } from '@mapbul-pub/types';
+import { PageContent, IStatusDTO } from '@mapbul-pub/types';
 import { StatusesService } from 'server/api/statuses/statuses.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
@@ -13,7 +13,7 @@ export class StatusesController implements IController<IStatusDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IStatusDTO>> {
+  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IStatusDTO>> {
     return this.service.getAll(query);
   }
 

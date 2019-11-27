@@ -1,9 +1,9 @@
 import { TID } from 'server/common/types';
 import { GetAllQueryDTO } from './QueryDTO';
-import { Pagination } from '@mapbul-pub/types';
+import { PageContent } from '@mapbul-pub/types';
 
 export abstract class BaseService<T> {
-  public getAll(query: GetAllQueryDTO): Promise<Pagination<T>> | Pagination<T> {
+  public getAll(query: GetAllQueryDTO): Promise<PageContent<T>> | PageContent<T> {
     return null;
   }
 

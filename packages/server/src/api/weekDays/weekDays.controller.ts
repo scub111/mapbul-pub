@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } fro
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { Pagination, IWeekDayDTO } from '@mapbul-pub/types';
+import { PageContent, IWeekDayDTO } from '@mapbul-pub/types';
 import { WeekDaysService } from 'server/api/weekDays/weekDays.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
@@ -13,7 +13,7 @@ export class WeekDaysController implements IController<IWeekDayDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IWeekDayDTO>> {
+  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IWeekDayDTO>> {
     return this.service.getAll(query);
   }
 

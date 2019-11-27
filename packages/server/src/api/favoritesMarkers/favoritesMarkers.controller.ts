@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } fro
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { Pagination, IFavoritesMarkerDTO } from '@mapbul-pub/types';
+import { PageContent, IFavoritesMarkerDTO } from '@mapbul-pub/types';
 import { FavoritesMarkersService } from 'server/api/favoritesMarkers/favoritesMarkers.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
@@ -13,7 +13,7 @@ export class FavoritesMarkersController implements IController<IFavoritesMarkerD
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IFavoritesMarkerDTO>> {
+  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IFavoritesMarkerDTO>> {
     return this.service.getAll(query);
   }
 

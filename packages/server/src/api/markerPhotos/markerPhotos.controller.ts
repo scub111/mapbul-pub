@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } fro
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { Pagination, IMarkerPhotosDTO } from '@mapbul-pub/types';
+import { PageContent, IMarkerPhotosDTO } from '@mapbul-pub/types';
 import { MarkerPhotosService } from 'server/api/markerPhotos/markerPhotos.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
@@ -13,7 +13,7 @@ export class MarkerPhotosController implements IController<IMarkerPhotosDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IMarkerPhotosDTO>> {
+  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IMarkerPhotosDTO>> {
     return this.service.getAll(query);
   }
 

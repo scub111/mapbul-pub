@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } fro
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { Pagination, IDiscountDTO } from '@mapbul-pub/types';
+import { PageContent, IDiscountDTO } from '@mapbul-pub/types';
 import { DiscountsService } from 'server/api/discounts/discounts.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
@@ -13,7 +13,7 @@ export class DiscountsController implements IController<IDiscountDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IDiscountDTO>> {
+  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IDiscountDTO>> {
     return this.service.getAll(query);
   }
 

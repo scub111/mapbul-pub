@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { Pagination, IFavoritesMarkerDTO } from '@mapbul-pub/types';
+import { PageContent, IFavoritesMarkerDTO } from '@mapbul-pub/types';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 export class FavoritesMarkersService extends BaseService<IFavoritesMarkerDTO> {
@@ -17,7 +17,7 @@ export class FavoritesMarkersService extends BaseService<IFavoritesMarkerDTO> {
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(query: GetAllQueryDTO): Promise<Pagination<IFavoritesMarkerDTO>> {
+  async getAll(query: GetAllQueryDTO): Promise<PageContent<IFavoritesMarkerDTO>> {
     let additional = '';
     const isPagination = query.page && query.size;
     if (isPagination) {

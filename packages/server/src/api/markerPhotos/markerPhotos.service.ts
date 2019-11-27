@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { Pagination, IMarkerPhotosDTO } from '@mapbul-pub/types';
+import { PageContent, IMarkerPhotosDTO } from '@mapbul-pub/types';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 export class MarkerPhotosService extends BaseService<IMarkerPhotosDTO> {
@@ -17,7 +17,7 @@ export class MarkerPhotosService extends BaseService<IMarkerPhotosDTO> {
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(query: GetAllQueryDTO): Promise<Pagination<IMarkerPhotosDTO>> {
+  async getAll(query: GetAllQueryDTO): Promise<PageContent<IMarkerPhotosDTO>> {
     let additional = '';
     const isPagination = query.page && query.size;
     if (isPagination) {

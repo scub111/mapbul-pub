@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } fro
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { Pagination, IJournalistDTO } from '@mapbul-pub/types';
+import { PageContent, IJournalistDTO } from '@mapbul-pub/types';
 import { JournalistsService } from 'server/api/journalists/journalists.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
@@ -13,7 +13,7 @@ export class JournalistsController implements IController<IJournalistDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IJournalistDTO>> {
+  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IJournalistDTO>> {
     return this.service.getAll(query);
   }
 

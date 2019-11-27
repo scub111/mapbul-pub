@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } fro
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { Pagination, IUserDTO } from '@mapbul-pub/types';
+import { PageContent, IUserDTO } from '@mapbul-pub/types';
 import { UsersService } from 'server/api/users/users.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
@@ -13,7 +13,7 @@ export class UsersController implements IController<IUserDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IUserDTO>> {
+  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IUserDTO>> {
     return this.service.getAll(query);
   }
 

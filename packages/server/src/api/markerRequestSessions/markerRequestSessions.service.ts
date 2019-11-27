@@ -4,7 +4,7 @@ import { BaseService } from 'server/common/BaseService';
 import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
 import { GlobalVar } from '@mapbul-pub/common';
-import { Pagination, IMarkerRequestSessionDTO } from '@mapbul-pub/types';
+import { PageContent, IMarkerRequestSessionDTO } from '@mapbul-pub/types';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 export class MarkerRequestSessionsService extends BaseService<IMarkerRequestSessionDTO> {
@@ -17,7 +17,7 @@ export class MarkerRequestSessionsService extends BaseService<IMarkerRequestSess
   connection: Connection;
   query: (expression: string) => Promise<any>;
 
-  async getAll(query: GetAllQueryDTO): Promise<Pagination<IMarkerRequestSessionDTO>> {
+  async getAll(query: GetAllQueryDTO): Promise<PageContent<IMarkerRequestSessionDTO>> {
     let additional = '';
     const isPagination = query.page && query.size;
     if (isPagination) {

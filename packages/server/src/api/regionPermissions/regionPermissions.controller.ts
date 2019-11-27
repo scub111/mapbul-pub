@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } fro
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { Pagination, IRegionPermissionDTO } from '@mapbul-pub/types';
+import { PageContent, IRegionPermissionDTO } from '@mapbul-pub/types';
 import { RegionPermissionsService } from 'server/api/regionPermissions/regionPermissions.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
@@ -13,7 +13,7 @@ export class RegionPermissionsController implements IController<IRegionPermissio
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IRegionPermissionDTO>> {
+  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IRegionPermissionDTO>> {
     return this.service.getAll(query);
   }
 

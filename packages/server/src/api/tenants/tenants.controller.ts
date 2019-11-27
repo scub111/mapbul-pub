@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } fro
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { Pagination, ITenantDTO } from '@mapbul-pub/types';
+import { PageContent, ITenantDTO } from '@mapbul-pub/types';
 import { TenantsService } from 'server/api/tenants/tenants.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
@@ -13,7 +13,7 @@ export class TenantsController implements IController<ITenantDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<ITenantDTO>> {
+  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<ITenantDTO>> {
     return this.service.getAll(query);
   }
 

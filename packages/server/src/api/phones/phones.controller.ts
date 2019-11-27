@@ -2,7 +2,7 @@ import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } fro
 import { TID } from 'server/common/types';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
-import { Pagination, IPhoneDTO } from '@mapbul-pub/types';
+import { PageContent, IPhoneDTO } from '@mapbul-pub/types';
 import { PhonesService } from 'server/api/phones/phones.service';
 import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
@@ -13,7 +13,7 @@ export class PhonesController implements IController<IPhoneDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<Pagination<IPhoneDTO>> {
+  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IPhoneDTO>> {
     return this.service.getAll(query);
   }
 
