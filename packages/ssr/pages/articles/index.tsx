@@ -3,11 +3,11 @@ import Router from 'next/router';
 import Layout from '../../src/components/Layout';
 import List from '../../src/components/List';
 import { sampleFetchWrapper } from '../../src/utils/sample-api';
-import { Pagination as PaginationContent, IArticleDTO } from '@mapbul-pub/types';
-import Pagination from 'material-ui-flat-pagination';
+import { PageContent, IArticleDTO } from '@mapbul-pub/types';
 import { Container, makeStyles } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
+import Pagination from 'material-ui-flat-pagination';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 type Props = {
-  pagination: PaginationContent<IArticleDTO>;
+  pagination: PageContent<IArticleDTO>;
 };
 
 const getQueryPage = (query: ParsedUrlQuery): number => {
@@ -55,7 +55,7 @@ const ArticlesPage: NextPage<Props> = ({ pagination }) => {
 
 ArticlesPage.getInitialProps = async (ctx: NextPageContext) => {
   const queryPage = getQueryPage(ctx.query);
-  const pagination: PaginationContent<IArticleDTO> = await sampleFetchWrapper(`articles?page=${queryPage}&size=${ITEMS_PER_PAGE}`);
+  const pagination: PageContent<IArticleDTO> = await sampleFetchWrapper(`articles?page=${queryPage}&size=${ITEMS_PER_PAGE}`);
   return { pagination };
 };
 
