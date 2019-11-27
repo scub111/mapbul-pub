@@ -15,7 +15,6 @@ export const generateControllers = async () => {
   const t0 = new Date();
   GlobalVar.setup(`${appRootPath}/.env`);
 
-  // const query = initConnection();
   const dbConnection = dbConnectionSingleton.getInstance();
   dbConnection.setup();
   const query = dbConnection.query;
