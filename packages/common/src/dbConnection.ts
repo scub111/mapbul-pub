@@ -4,26 +4,44 @@ import { Connection } from 'mysql';
 import { queryFn } from '@mapbul-pub/types';
 import { GlobalVar } from '.';
 
-class DbConnection {
-  private connectionInt: Connection;
-  private queryInt: queryFn;
+export class DbConnection {
+  private nativeConnection: Connection;
+  private nativeQuery: queryFn;
+  private isConnected: boolean;
 
-  public setup() {
-    this.connectionInt = mysql.createConnection(GlobalVar.env.dbConnection);
-    this.queryInt = util.promisify(this.connectionInt.query).bind(this.connectionInt);
+  setup() {
+    this.nativeConnection = mysql.createConnection({ ...GlobalVar.env.dbConnection, multipleStatements: true });
+    this.nativeQuery = util.promisify(this.nativeConnection.query).bind(this.nativeConnection);
+    function handleDisconnect(cnx: Connection) {
+      cnx.on('error', function (err: any) {
+        this.isConnected = false;
+      });
+    };
+    handleDisconnect(this.nativeConnection);
   }
 
-  public get connection(): Connection {
-    return this.connectionInt;
+  async query(expression: string): Promise<any> {
+    let records;
+    try {
+      if (!this.isConnected) {
+        this.setup();
+      }
+
+      records = await this.nativeQuery(expression);
+
+      this.isConnected = true;
+    }
+    catch (e) {
+      this.isConnected = false;
+      throw e;
+    }
+
+    return records;
   }
 
-  public get query(): queryFn {
-    return this.queryInt;
-  }
-
-  public destroy() {
-    if (this.connectionInt) {
-      this.connectionInt.destroy();
+  destroy() {
+    if (this.nativeConnection) {
+      this.nativeConnection.destroy();
     }
   }
 }
