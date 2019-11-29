@@ -1,15 +1,15 @@
 import * as mysql from 'mysql';
 import * as util from 'util';
 import { Connection } from 'mysql';
-import { queryFn } from '@mapbul-pub/types';
+import { IDbConnection, queryFn } from '@mapbul-pub/types';
 import { GlobalVar } from '.';
 
-export class DbConnection {
+class DbConnection implements IDbConnection {
   private nativeConnection: Connection;
   private nativeQuery: queryFn;
   private isConnected: boolean;
 
-  setup() {
+  connect() {
     this.nativeConnection = mysql.createConnection({ ...GlobalVar.env.dbConnection, multipleStatements: true });
     this.nativeQuery = util.promisify(this.nativeConnection.query).bind(this.nativeConnection);
     function handleDisconnect(cnx: Connection) {
@@ -24,7 +24,7 @@ export class DbConnection {
     let records;
     try {
       if (!this.isConnected) {
-        this.setup();
+        this.connect();
       }
 
       records = await this.nativeQuery(expression);
@@ -39,7 +39,7 @@ export class DbConnection {
     return records;
   }
 
-  destroy() {
+  disconnect() {
     if (this.nativeConnection) {
       this.nativeConnection.destroy();
     }
@@ -55,7 +55,7 @@ export class DbConnectionSingleton {
     }
   }
 
-  public getInstance(): DbConnection {
+  public getInstance(): IDbConnection {
     return DbConnectionSingleton.instance;
   }
 }

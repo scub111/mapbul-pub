@@ -16,7 +16,7 @@ export const generateControllers = async () => {
   GlobalVar.setup(`${appRootPath}/.env`);
 
   const dbConnection = dbConnectionSingleton.getInstance();
-  dbConnection.setup();
+  dbConnection.connect();
   const query = dbConnection.query;
   deleteRouterSync();
   await generateController(query, 'admin', 'admin', 'admins');
@@ -46,7 +46,7 @@ export const generateControllers = async () => {
   await generateController(query, 'usertype', 'userType', 'userTypes');
   await generateController(query, 'weekday', 'weekDay', 'weekDays');
   await generateController(query, 'worktime', 'workTime', 'workTimes');
-  dbConnection.destroy();
+  dbConnection.disconnect();
   const diff = new Date().valueOf() - t0.valueOf();
   await generateCommonTypes();
   console.log(`${diff} ms`);
