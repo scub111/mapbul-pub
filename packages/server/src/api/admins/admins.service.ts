@@ -19,7 +19,6 @@ export class AdminsService extends BaseService<IAdminDTO> {
       const offset = (query.page - 1) * query.size;
       additional = `limit ${offset},${query.size}; SELECT count(*) FROM admin`;
     }
-
     const records = await this.connection.query(`
       SELECT
         \`id\`,

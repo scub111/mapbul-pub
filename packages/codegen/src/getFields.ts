@@ -1,5 +1,5 @@
 import { IField } from 'codegen/IField';
-import { queryFn } from '@mapbul-pub/types';
+import { IDbConnection } from '@mapbul-pub/types';
 
 interface IDescribeRowData {
   Default: any;
@@ -26,8 +26,8 @@ const traslateType = (type: string) => {
   return type;
 };
 
-export const getFields = async (query: queryFn, tableName: string) => {
-  const result: any[] = await query(`DESCRIBE ${tableName}`);
+export const getFields = async (connection: IDbConnection, tableName: string) => {
+  const result: any[] = await connection.query(`DESCRIBE ${tableName}`);
   return result.map(
     (row: IDescribeRowData, index: number) =>
       ({

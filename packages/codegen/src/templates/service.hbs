@@ -1,7 +1,7 @@
 import { BaseService } from 'server/common/BaseService';
 import { TID } from 'server/common/types';
-import { dbConnectionSingleton, DbConnection } from '@mapbul-pub/common';
-import { PageContent, {{interfaceName}} } from '@mapbul-pub/types';
+import { dbConnectionSingleton } from '@mapbul-pub/common';
+import { IDbConnection, PageContent, {{interfaceName}} } from '@mapbul-pub/types';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 export class {{serviceName}} extends BaseService<{{interfaceName}}> {
@@ -10,7 +10,7 @@ export class {{serviceName}} extends BaseService<{{interfaceName}}> {
     this.connection = dbConnectionSingleton.getInstance();
   }
 
-  private connection: DbConnection;
+  private connection: IDbConnection;
 
   async getAll(query: GetAllQueryDTO): Promise<PageContent<{{interfaceName}}>> {
     let additional = '';

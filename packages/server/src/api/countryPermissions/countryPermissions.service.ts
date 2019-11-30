@@ -1,21 +1,16 @@
-import * as mysql from 'mysql';
-import * as util from 'util';
 import { BaseService } from 'server/common/BaseService';
-import { Connection } from 'mysql';
 import { TID } from 'server/common/types';
-import { GlobalVar } from '@mapbul-pub/common';
-import { PageContent, ICountryPermissionDTO } from '@mapbul-pub/types';
+import { dbConnectionSingleton } from '@mapbul-pub/common';
+import { IDbConnection, PageContent, ICountryPermissionDTO } from '@mapbul-pub/types';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
 export class CountryPermissionsService extends BaseService<ICountryPermissionDTO> {
   constructor() {
     super();
-    this.connection = mysql.createConnection({ ...GlobalVar.env.dbConnection, multipleStatements: true });
-    this.query = util.promisify(this.connection.query).bind(this.connection);
+    this.connection = dbConnectionSingleton.getInstance();
   }
 
-  connection: Connection;
-  query: (expression: string) => Promise<any>;
+  private connection: IDbConnection;
 
   async getAll(query: GetAllQueryDTO): Promise<PageContent<ICountryPermissionDTO>> {
     let additional = '';
@@ -24,7 +19,7 @@ export class CountryPermissionsService extends BaseService<ICountryPermissionDTO
       const offset = (query.page - 1) * query.size;
       additional = `limit ${offset},${query.size}; SELECT count(*) FROM country_permission`;
     }
-    const records = await this.query(`
+    const records = await this.connection.query(`
       SELECT
         \`id\`,
         \`countryId\`,
@@ -50,7 +45,7 @@ export class CountryPermissionsService extends BaseService<ICountryPermissionDTO
   }
 
   async getItem(id: TID): Promise<ICountryPermissionDTO> {
-    return (await this.query(`
+    return (await this.connection.query(`
       SELECT
         \`id\`,
         \`countryId\`,
