@@ -8,7 +8,6 @@ export class AdminsService extends BaseService<IAdminDTO> {
   constructor() {
     super();
     this.connection = dbConnectionSingleton.getInstance();
-    this.connection.connect();  
   }
 
   private connection: IDbConnection;
