@@ -1,7 +1,19 @@
 import * as React from 'react';
 import Layout from '../src/components/Layout';
 import { NextPage } from 'next';
-import { Link, CardContent, makeStyles, Typography, CardActionArea, Paper, Grid, Card, Hidden, CardMedia, Divider } from '@material-ui/core';
+import {
+  Link,
+  CardContent,
+  makeStyles,
+  Typography,
+  CardActionArea,
+  Paper,
+  Grid,
+  Card,
+  Hidden,
+  CardMedia,
+  Divider,
+} from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -120,8 +132,8 @@ const IndexPage: NextPage = () => {
                 Title of a longer featured blog post
               </Typography>
               <Typography variant="h5" color="inherit" paragraph>
-                Multiple lines of text that form the lede, informing new readers quickly and efficiently about what&apos;s most interesting in this
-                post&apos;s contents.
+                Multiple lines of text that form the lede, informing new readers quickly and efficiently about
+                what&apos;s most interesting in this post&apos;s contents.
               </Typography>
               <Link variant="subtitle1" href="#">
                 Continue reading…
@@ -154,7 +166,11 @@ const IndexPage: NextPage = () => {
                   </CardContent>
                 </div>
                 <Hidden xsDown>
-                  <CardMedia className={classes.cardMedia} image="https://source.unsplash.com/random" title="Image title" />
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image="https://source.unsplash.com/random"
+                    title="Image title"
+                  />
                 </Hidden>
               </Card>
             </CardActionArea>
@@ -183,8 +199,8 @@ const IndexPage: NextPage = () => {
               About
             </Typography>
             <Typography>
-              Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed
-              consectetur.
+              Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean
+              lacinia bibendum nulla sed consectetur.
             </Typography>
           </Paper>
           <Typography variant="h6" gutterBottom className={classes.sidebarSection}>

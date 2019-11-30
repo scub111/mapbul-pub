@@ -19,7 +19,10 @@ describe('AdminsController', () => {
 
   describe('root', () => {
     it('should return all data', async () => {
-      const result = await controller.getAll({ page: undefined, limit: undefined });
+      const result = await controller.getAll({
+        page: undefined,
+        limit: undefined,
+      });
       expect(result.data.length).toBe(136);
       expect(result.totalPages).toBe(1);
     });

@@ -1,3 +1,3 @@
 export * from './api';
 export * from './PageContent';
-export * from './IDbConnection'
+export * from './IDbConnection';

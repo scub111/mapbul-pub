@@ -5,7 +5,12 @@ import { createSorce } from 'codegen/generateSource';
 import { appendRouterSync } from 'codegen/routerStorage';
 import { IDbConnection } from '@mapbul-pub/types';
 
-export const generateController = async (connection: IDbConnection, tableName: string, dto: string, service: string): Promise<void> => {
+export const generateController = async (
+  connection: IDbConnection,
+  tableName: string,
+  dto: string,
+  service: string,
+): Promise<void> => {
   const baseName = `${service[0].toUpperCase()}${service.slice(1)}`;
   const serviceName = `${baseName}Service`;
   const controllerName = `${baseName}Controller`;

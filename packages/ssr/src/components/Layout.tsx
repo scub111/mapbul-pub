@@ -74,7 +74,14 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the
         <header>
           <Toolbar className={classes.toolbar}>
             <Button size="small">Подписаться</Button>
-            <Typography component="h2" variant="h5" color="inherit" align="center" noWrap className={classes.toolbarTitle}>
+            <Typography
+              component="h2"
+              variant="h5"
+              color="inherit"
+              align="center"
+              noWrap
+              className={classes.toolbarTitle}
+            >
               MapBul
             </Typography>
             <IconButton>
@@ -87,7 +94,14 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the
           <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
             {sections.map(section => (
               <Link key={section.page} href={section.url}>
-                <MuiLink color="inherit" noWrap key={section.page} variant="body2" href={section.url} className={classes.toolbarLink}>
+                <MuiLink
+                  color="inherit"
+                  noWrap
+                  key={section.page}
+                  variant="body2"
+                  href={section.url}
+                  className={classes.toolbarLink}
+                >
                   {section.page}
                 </MuiLink>
               </Link>

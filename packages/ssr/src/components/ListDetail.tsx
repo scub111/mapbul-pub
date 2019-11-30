@@ -37,28 +37,19 @@ const ListDetail: React.FunctionComponent<ListDetailProps> = ({ item }) => {
           </Typography>
         </Box>
         {item.titlePhoto && (
-          <img
-            className={classes.cardMedia}
-            src={clearUrl(`${IMAGE_URL}/${item.titlePhoto}`)}
-            title={item.title}
-          />
+          <img className={classes.cardMedia} src={clearUrl(`${IMAGE_URL}/${item.titlePhoto}`)} title={item.title} />
         )}
-
       </Box>
       {item.photo && (
         <Box>
           <Typography variant="subtitle1" paragraph>
             Фото
-            </Typography>
-          <img
-            className={classes.cardMedia}
-            src={clearUrl(`${IMAGE_URL}/${item.photo}`)}
-            title={item.title}
-          />
+          </Typography>
+          <img className={classes.cardMedia} src={clearUrl(`${IMAGE_URL}/${item.photo}`)} title={item.title} />
         </Box>
       )}
     </>
-  )
+  );
 };
 
 export default ListDetail;

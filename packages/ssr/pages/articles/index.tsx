@@ -55,7 +55,9 @@ const ArticlesPage: NextPage<Props> = ({ pagination }) => {
 
 ArticlesPage.getInitialProps = async (ctx: NextPageContext) => {
   const queryPage = getQueryPage(ctx.query);
-  const pagination: PageContent<IArticleDTO> = await sampleFetchWrapper(`articles?page=${queryPage}&size=${ITEMS_PER_PAGE}`);
+  const pagination: PageContent<IArticleDTO> = await sampleFetchWrapper(
+    `articles?page=${queryPage}&size=${ITEMS_PER_PAGE}`,
+  );
   return { pagination };
 };
 

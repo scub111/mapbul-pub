@@ -35,9 +35,9 @@ class InitialPropsDetail extends React.Component<Props> {
     }
 
     return (
-    <Layout title='Mapbul. Детали статьи'>
-      <ListDetail item={item} />
-    </Layout>
+      <Layout title="Mapbul. Детали статьи">
+        <ListDetail item={item} />
+      </Layout>
     );
   }
 }

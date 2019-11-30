@@ -10,13 +10,16 @@ class DbConnection implements IDbConnection {
   private isConnected: boolean;
 
   connect() {
-    this.nativeConnection = mysql.createConnection({ ...GlobalVar.env.dbConnection, multipleStatements: true });
+    this.nativeConnection = mysql.createConnection({
+      ...GlobalVar.env.dbConnection,
+      multipleStatements: true,
+    });
     this.nativeQuery = util.promisify(this.nativeConnection.query).bind(this.nativeConnection);
     function handleDisconnect(cnx: Connection) {
-      cnx.on('error', function (err: any) {
+      cnx.on('error', function(err: any) {
         this.isConnected = false;
       });
-    };
+    }
     handleDisconnect(this.nativeConnection);
   }
 
@@ -30,8 +33,7 @@ class DbConnection implements IDbConnection {
       records = await this.nativeQuery(expression);
 
       this.isConnected = true;
-    }
-    catch (e) {
+    } catch (e) {
       this.isConnected = false;
       throw e;
     }
