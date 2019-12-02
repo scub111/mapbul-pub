@@ -1,12 +1,11 @@
 import * as React from 'react';
 import Link from 'next/link';
-// import { formatDateToString } from "@mapbul-pub/common"
 import { IArticleDTO } from '@mapbul-pub/types';
 import { IMAGE_URL } from '../common/constants';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea } from '@material-ui/core';
 import { clearUrl } from '../utils/urlUtils';
-// import { formatDateToString } from '../utils/dateUtils';
+import { formatDateToString } from '@mapbul-pub/utils'
 
 type Props = {
   item: IArticleDTO;
@@ -38,7 +37,7 @@ const ListItem: React.FunctionComponent<Props> = ({ item }) => {
                   {item.title}
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                  {item.publishedDate}
+                  {formatDateToString(item.publishedDate)}
                 </Typography>
                 <Typography variant="subtitle1" paragraph>
                   {item.description}

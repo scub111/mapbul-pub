@@ -46,11 +46,9 @@
   "dependencies": {
     "@mapbul-pub/types": "^1.0.0",
     "app-root-path": "^3.0.0",
-    "dateformat": "^3.0.3",
     "dotenv": "^8.2.0",
     "fs": "0.0.2",
     "fs-extra": "^8.1.0",
-    "moment": "^2.24.0",
     "mysql": "^2.17.1"
   },
   "gitHead": "165f7993c2acc907c653c02847fb02721052c6e7",

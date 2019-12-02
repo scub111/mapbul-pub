@@ -3,6 +3,7 @@ import { IArticleDTO } from '@mapbul-pub/types';
 import { IMAGE_URL } from '../common/constants';
 import { clearUrl } from '../utils/urlUtils';
 import { makeStyles, Typography, Box } from '@material-ui/core';
+import { formatDateToString } from '@mapbul-pub/utils'
 
 const useStyles = makeStyles(() => ({
   card: {
@@ -30,7 +31,7 @@ const ListDetail: React.FunctionComponent<ListDetailProps> = ({ item }) => {
             {item.title}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            {item.publishedDate}
+            {formatDateToString(item.publishedDate)}
           </Typography>
           <Typography variant="subtitle1" paragraph>
             {item.description}
