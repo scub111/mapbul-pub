@@ -38,7 +38,7 @@ const ListItem: React.FunctionComponent<Props> = ({ item }) => {
                   {item.title}
                 </Typography>
                 <Typography variant="subtitle1" color="textSecondary">
-                  {item.addedDate}
+                  {item.publishedDate}
                 </Typography>
                 <Typography variant="subtitle1" paragraph>
                   {item.description}
