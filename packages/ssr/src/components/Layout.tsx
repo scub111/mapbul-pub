@@ -1,10 +1,15 @@
 import * as React from 'react';
+// import appRootPath from 'app-root-path';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Link as MuiLink, CssBaseline } from '@material-ui/core';
 
 import SearchIcon from '@material-ui/icons/Search';
 import { Container, Toolbar, Button, Typography, IconButton, makeStyles } from '@material-ui/core';
+// import { GlobalVar } from '../common/ssrConfig';
+
+// GlobalVar.setup(`${appRootPath}/.env`);
+// console.log(GlobalVar);
 
 const useStyles = makeStyles(theme => ({
   toolbar: {

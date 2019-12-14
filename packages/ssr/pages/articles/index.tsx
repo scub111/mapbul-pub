@@ -2,7 +2,7 @@ import { NextPage, NextPageContext } from 'next';
 import Router from 'next/router';
 import Layout from '../../src/components/Layout';
 import List from '../../src/components/List';
-import { sampleFetchWrapper } from '../../src/utils/sample-api';
+import { fetchWrapper } from '../../src/utils/fetchWrapper';
 import { PageContent, IArticleDTO } from '@mapbul-pub/types';
 import { Container, makeStyles } from '@material-ui/core';
 import { useRouter } from 'next/router';
@@ -55,7 +55,7 @@ const ArticlesPage: NextPage<Props> = ({ pagination }) => {
 
 ArticlesPage.getInitialProps = async (ctx: NextPageContext) => {
   const queryPage = getQueryPage(ctx.query);
-  const pagination: PageContent<IArticleDTO> = await sampleFetchWrapper(
+  const pagination: PageContent<IArticleDTO> = await fetchWrapper(
     `articles?page=${queryPage}&size=${ITEMS_PER_PAGE}`,
   );
   return { pagination };

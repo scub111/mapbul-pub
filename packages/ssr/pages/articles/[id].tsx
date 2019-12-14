@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { NextPageContext } from 'next';
-import { sampleFetchWrapper } from '../../src/utils/sample-api';
+import { fetchWrapper } from '../../src/utils/fetchWrapper';
 import { IArticleDTO } from '@mapbul-pub/types';
 import Layout from '../../src/components/Layout';
 import ListDetail from '../../src/components/ListDetail';
@@ -14,7 +14,7 @@ class InitialPropsDetail extends React.Component<Props> {
   static getInitialProps = async ({ query }: NextPageContext) => {
     try {
       const { id } = query;
-      const item = await sampleFetchWrapper(`articles/${Array.isArray(id) ? id[0] : id}`);
+      const item = await fetchWrapper(`articles/${Array.isArray(id) ? id[0] : id}`);
       return { item };
     } catch (err) {
       return { errors: err.message };
