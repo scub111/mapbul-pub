@@ -6,7 +6,7 @@ import appRootPath from 'app-root-path';
 import { generateController } from 'codegen/generateController';
 import { generateCommonTypes } from 'codegen/generateCommonTypes';
 import { deleteRouterSync } from 'codegen/routerStorage';
-import { sleep } from 'scub111-common';
+// import { sleep } from 'scub111-common';
 import { GlobalVar, dbConnectionSingleton } from '@mapbul-pub/common';
 
 export const generateControllers = async () => {

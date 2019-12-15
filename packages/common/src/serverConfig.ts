@@ -12,7 +12,8 @@ class GlobalVarClass {
   public env: IServerConfig;
 
   public setup = (path: string): IServerConfig => {
-    const result = require('dotenv').config({ path });
+    require('dotenv').config({ path });
+    // const result = require('dotenv').config({ path });
     // console.log(result);
     this.env = {
       isProduction: process.env.NODE_ENV !== 'development',

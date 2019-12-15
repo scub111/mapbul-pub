@@ -98,7 +98,7 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the
           </Toolbar>
           <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
             {sections.map(section => (
-              <Link key={section.page} href={section.url}>
+              <Link key={section.page} href={section.url} scroll={false}>
                 <MuiLink
                   color="inherit"
                   noWrap

@@ -26,15 +26,15 @@
     "test"
   ],
   "devDependencies": {
-    "@types/jest": "^24.0.21",
+    "@types/jest": "^24.0.23",
     "cross-env": "^6.0.3",
     "jest": "^24.9.0",
     "path": "^0.12.7",
-    "ts-jest": "^24.1.0",
+    "ts-jest": "^24.2.0",
     "ts-loader": "^6.2.1",
-    "ts-node-dev": "^1.0.0-pre.43",
+    "ts-node-dev": "^1.0.0-pre.44",
     "tsconfig-paths": "^3.9.0",
-    "typescript": "^3.6.4",
+    "typescript": "^3.7.3",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
   },

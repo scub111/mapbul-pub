@@ -16,7 +16,7 @@ class DbConnection implements IDbConnection {
     });
     this.nativeQuery = util.promisify(this.nativeConnection.query).bind(this.nativeConnection);
     function handleDisconnect(cnx: Connection) {
-      cnx.on('error', function(err: any) {
+      cnx.on('error', function() {
         this.isConnected = false;
       });
     }
