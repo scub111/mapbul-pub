@@ -4,9 +4,8 @@ import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IWeekDayDTO } from '@mapbul-pub/types';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
-export class WeekDaysService extends BaseService<IWeekDayDTO> {
+export class WeekDaysService implements BaseService<IWeekDayDTO> {
   constructor() {
-    super();
     this.connection = dbConnectionSingleton.getInstance();
   }
 
@@ -33,17 +32,17 @@ export class WeekDaysService extends BaseService<IWeekDayDTO> {
     };
   }
 
-  postItem(item: IWeekDayDTO): Promise<IWeekDayDTO> {
-    throw new Error('Method not implemented.');
-  }
+  //postItem(item: IWeekDayDTO): Promise<IWeekDayDTO> {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  putAll(item: IWeekDayDTO): IWeekDayDTO {
-    throw new Error('Method not implemented.');
-  }
+  //putAll(item: IWeekDayDTO): IWeekDayDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  deleteAll(): void {
-    throw new Error('Method not implemented.');
-  }
+  //deleteAll(): void {
+  //  throw new Error('Method not implemented.');
+  //}
 
   async getItem(id: TID): Promise<IWeekDayDTO> {
     return (await this.connection.query(`
@@ -56,11 +55,11 @@ export class WeekDaysService extends BaseService<IWeekDayDTO> {
       WHERE id = ${id}`))[0];
   }
 
-  putItem(id: TID): IWeekDayDTO {
-    throw new Error('Method not implemented.');
-  }
+  //putItem(id: TID): IWeekDayDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  deleteItem(id: TID): IWeekDayDTO {
-    throw new Error('Method not implemented.');
-  }
+  //deleteItem(id: TID): IWeekDayDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 }

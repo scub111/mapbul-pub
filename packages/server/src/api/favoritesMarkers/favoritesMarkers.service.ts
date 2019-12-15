@@ -4,9 +4,8 @@ import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IFavoritesMarkerDTO } from '@mapbul-pub/types';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
-export class FavoritesMarkersService extends BaseService<IFavoritesMarkerDTO> {
+export class FavoritesMarkersService implements BaseService<IFavoritesMarkerDTO> {
   constructor() {
-    super();
     this.connection = dbConnectionSingleton.getInstance();
   }
 
@@ -32,17 +31,17 @@ export class FavoritesMarkersService extends BaseService<IFavoritesMarkerDTO> {
     };
   }
 
-  postItem(item: IFavoritesMarkerDTO): Promise<IFavoritesMarkerDTO> {
-    throw new Error('Method not implemented.');
-  }
+  //postItem(item: IFavoritesMarkerDTO): Promise<IFavoritesMarkerDTO> {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  putAll(item: IFavoritesMarkerDTO): IFavoritesMarkerDTO {
-    throw new Error('Method not implemented.');
-  }
+  //putAll(item: IFavoritesMarkerDTO): IFavoritesMarkerDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  deleteAll(): void {
-    throw new Error('Method not implemented.');
-  }
+  //deleteAll(): void {
+  //  throw new Error('Method not implemented.');
+  //}
 
   async getItem(id: TID): Promise<IFavoritesMarkerDTO> {
     return (await this.connection.query(`
@@ -54,11 +53,11 @@ export class FavoritesMarkersService extends BaseService<IFavoritesMarkerDTO> {
       WHERE id = ${id}`))[0];
   }
 
-  putItem(id: TID): IFavoritesMarkerDTO {
-    throw new Error('Method not implemented.');
-  }
+  //putItem(id: TID): IFavoritesMarkerDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  deleteItem(id: TID): IFavoritesMarkerDTO {
-    throw new Error('Method not implemented.');
-  }
+  //deleteItem(id: TID): IFavoritesMarkerDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 }

@@ -4,9 +4,8 @@ import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, ICategoryDTO } from '@mapbul-pub/types';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
-export class CategoriesService extends BaseService<ICategoryDTO> {
+export class CategoriesService implements BaseService<ICategoryDTO> {
   constructor() {
-    super();
     this.connection = dbConnectionSingleton.getInstance();
   }
 
@@ -38,17 +37,17 @@ export class CategoriesService extends BaseService<ICategoryDTO> {
     };
   }
 
-  postItem(item: ICategoryDTO): Promise<ICategoryDTO> {
-    throw new Error('Method not implemented.');
-  }
+  //postItem(item: ICategoryDTO): Promise<ICategoryDTO> {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  putAll(item: ICategoryDTO): ICategoryDTO {
-    throw new Error('Method not implemented.');
-  }
+  //putAll(item: ICategoryDTO): ICategoryDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  deleteAll(): void {
-    throw new Error('Method not implemented.');
-  }
+  //deleteAll(): void {
+  //  throw new Error('Method not implemented.');
+  //}
 
   async getItem(id: TID): Promise<ICategoryDTO> {
     return (await this.connection.query(`
@@ -66,11 +65,11 @@ export class CategoriesService extends BaseService<ICategoryDTO> {
       WHERE id = ${id}`))[0];
   }
 
-  putItem(id: TID): ICategoryDTO {
-    throw new Error('Method not implemented.');
-  }
+  //putItem(id: TID): ICategoryDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  deleteItem(id: TID): ICategoryDTO {
-    throw new Error('Method not implemented.');
-  }
+  //deleteItem(id: TID): ICategoryDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 }

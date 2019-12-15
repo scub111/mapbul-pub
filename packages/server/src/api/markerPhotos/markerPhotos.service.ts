@@ -4,9 +4,8 @@ import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IMarkerPhotosDTO } from '@mapbul-pub/types';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
-export class MarkerPhotosService extends BaseService<IMarkerPhotosDTO> {
+export class MarkerPhotosService implements BaseService<IMarkerPhotosDTO> {
   constructor() {
-    super();
     this.connection = dbConnectionSingleton.getInstance();
   }
 
@@ -33,17 +32,17 @@ export class MarkerPhotosService extends BaseService<IMarkerPhotosDTO> {
     };
   }
 
-  postItem(item: IMarkerPhotosDTO): Promise<IMarkerPhotosDTO> {
-    throw new Error('Method not implemented.');
-  }
+  //postItem(item: IMarkerPhotosDTO): Promise<IMarkerPhotosDTO> {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  putAll(item: IMarkerPhotosDTO): IMarkerPhotosDTO {
-    throw new Error('Method not implemented.');
-  }
+  //putAll(item: IMarkerPhotosDTO): IMarkerPhotosDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  deleteAll(): void {
-    throw new Error('Method not implemented.');
-  }
+  //deleteAll(): void {
+  //  throw new Error('Method not implemented.');
+  //}
 
   async getItem(id: TID): Promise<IMarkerPhotosDTO> {
     return (await this.connection.query(`
@@ -56,11 +55,11 @@ export class MarkerPhotosService extends BaseService<IMarkerPhotosDTO> {
       WHERE id = ${id}`))[0];
   }
 
-  putItem(id: TID): IMarkerPhotosDTO {
-    throw new Error('Method not implemented.');
-  }
+  //putItem(id: TID): IMarkerPhotosDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  deleteItem(id: TID): IMarkerPhotosDTO {
-    throw new Error('Method not implemented.');
-  }
+  //deleteItem(id: TID): IMarkerPhotosDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 }

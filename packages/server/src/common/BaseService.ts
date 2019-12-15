@@ -2,30 +2,19 @@ import { TID } from 'server/common/types';
 import { GetAllQueryDTO } from './QueryDTO';
 import { PageContent } from '@mapbul-pub/types';
 
-export abstract class BaseService<T> {
-  public getAll(query: GetAllQueryDTO): Promise<PageContent<T>> | PageContent<T> {
-    return null;
-  }
+export interface BaseService<T> {
+  getAll(query: GetAllQueryDTO): Promise<PageContent<T>> | PageContent<T>;
 
-  public postItem(item: T): Promise<T> | T {
-    return null;
-  }
+  // public postItem(item: T): Promise<T> | T {
+  //   return null;
+  // }
 
-  public putAll(item: T): T {
-    return null;
-  }
+  // putAll(item: T): T;
 
-  public deleteAll(): void {}
+  // deleteAll(): void;
 
-  public getItem(id: TID): Promise<T> | T {
-    return null;
-  }
+  getItem(id: TID): Promise<T> | T;
+  // putItem(id: TID, item: T): T;
 
-  public putItem(id: TID, item: T): T {
-    return null;
-  }
-
-  public deleteItem(id: TID): T {
-    return null;
-  }
+  // deleteItem(id: TID): T;
 }

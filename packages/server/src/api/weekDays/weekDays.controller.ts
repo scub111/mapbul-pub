@@ -1,5 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, UseInterceptors, Query } from '@nestjs/common';
-import { TID } from 'server/common/types';
+import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
 import { IGetParams } from 'server/common/interfaces';
 import { IController } from 'server/common/IController';
 import { PageContent, IWeekDayDTO } from '@mapbul-pub/types';
@@ -17,15 +16,15 @@ export class WeekDaysController implements IController<IWeekDayDTO> {
     return this.service.getAll(query);
   }
 
-  @Post()
-  postItem(item: IWeekDayDTO): IWeekDayDTO {
-    throw new Error('Method not implemented.');
-  }
+  //@Post()
+  //postItem(item: IWeekDayDTO): IWeekDayDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  @Put()
-  putAll(item: IWeekDayDTO): IWeekDayDTO {
-    throw new Error('Method not implemented.');
-  }
+  //@Put()
+  //putAll(item: IWeekDayDTO): IWeekDayDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
   @Get(':id')
   @UseInterceptors(NotFoundInterceptor)
@@ -33,17 +32,17 @@ export class WeekDaysController implements IController<IWeekDayDTO> {
     return await this.service.getItem(params.id);
   }
 
-  @Delete()
-  deleteAll(): void {
-    throw new Error('Method not implemented.');
-  }
+  //@Delete()
+  //deleteAll(): void {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  @Put(':id')
-  putItem(id: TID, item: IWeekDayDTO): IWeekDayDTO {
-    throw new Error('Method not implemented.');
-  }
+  //@Put(':id')
+  //putItem(id: TID, item: IWeekDayDTO): IWeekDayDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  deleteItem(id: TID): IWeekDayDTO {
-    throw new Error('Method not implemented.');
-  }
+  //deleteItem(id: TID): IWeekDayDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 }

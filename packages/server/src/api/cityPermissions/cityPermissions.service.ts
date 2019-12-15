@@ -4,9 +4,8 @@ import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, ICityPermissionDTO } from '@mapbul-pub/types';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
-export class CityPermissionsService extends BaseService<ICityPermissionDTO> {
+export class CityPermissionsService implements BaseService<ICityPermissionDTO> {
   constructor() {
-    super();
     this.connection = dbConnectionSingleton.getInstance();
   }
 
@@ -32,17 +31,17 @@ export class CityPermissionsService extends BaseService<ICityPermissionDTO> {
     };
   }
 
-  postItem(item: ICityPermissionDTO): Promise<ICityPermissionDTO> {
-    throw new Error('Method not implemented.');
-  }
+  //postItem(item: ICityPermissionDTO): Promise<ICityPermissionDTO> {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  putAll(item: ICityPermissionDTO): ICityPermissionDTO {
-    throw new Error('Method not implemented.');
-  }
+  //putAll(item: ICityPermissionDTO): ICityPermissionDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  deleteAll(): void {
-    throw new Error('Method not implemented.');
-  }
+  //deleteAll(): void {
+  //  throw new Error('Method not implemented.');
+  //}
 
   async getItem(id: TID): Promise<ICityPermissionDTO> {
     return (await this.connection.query(`
@@ -54,11 +53,11 @@ export class CityPermissionsService extends BaseService<ICityPermissionDTO> {
       WHERE id = ${id}`))[0];
   }
 
-  putItem(id: TID): ICityPermissionDTO {
-    throw new Error('Method not implemented.');
-  }
+  //putItem(id: TID): ICityPermissionDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  deleteItem(id: TID): ICityPermissionDTO {
-    throw new Error('Method not implemented.');
-  }
+  //deleteItem(id: TID): ICityPermissionDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 }

@@ -4,9 +4,8 @@ import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IAdminDTO } from '@mapbul-pub/types';
 import { GetAllQueryDTO } from 'server/common/QueryDTO';
 
-export class AdminsService extends BaseService<IAdminDTO> {
+export class AdminsService implements BaseService<IAdminDTO> {
   constructor() {
-    super();
     this.connection = dbConnectionSingleton.getInstance();
   }
 
@@ -32,17 +31,17 @@ export class AdminsService extends BaseService<IAdminDTO> {
     };
   }
 
-  postItem(item: IAdminDTO): Promise<IAdminDTO> {
-    throw new Error('Method not implemented.');
-  }
+  //postItem(item: IAdminDTO): Promise<IAdminDTO> {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  putAll(item: IAdminDTO): IAdminDTO {
-    throw new Error('Method not implemented.');
-  }
+  //putAll(item: IAdminDTO): IAdminDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  deleteAll(): void {
-    throw new Error('Method not implemented.');
-  }
+  //deleteAll(): void {
+  //  throw new Error('Method not implemented.');
+  //}
 
   async getItem(id: TID): Promise<IAdminDTO> {
     return (await this.connection.query(`
@@ -54,11 +53,11 @@ export class AdminsService extends BaseService<IAdminDTO> {
       WHERE id = ${id}`))[0];
   }
 
-  putItem(id: TID): IAdminDTO {
-    throw new Error('Method not implemented.');
-  }
+  //putItem(id: TID): IAdminDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 
-  deleteItem(id: TID): IAdminDTO {
-    throw new Error('Method not implemented.');
-  }
+  //deleteItem(id: TID): IAdminDTO {
+  //  throw new Error('Method not implemented.');
+  //}
 }
