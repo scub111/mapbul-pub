@@ -5,9 +5,7 @@
     "declaration": false,
     "outDir": "dist",
     "paths": {
-      // "server/*": ["./src/*"],
-      "server/*": ["./packages/server/src/*"],
-      "codegen/*": ["./packages/codegen/src/*"],
+      "server/*": ["./packages/server/*"],
     }
   },
   "include": [

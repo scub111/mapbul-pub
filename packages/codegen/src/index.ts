@@ -1,2 +1,2 @@
-export * from 'codegen/routerStorage';
-export * from 'codegen/generateControllers';
+export * from './routerStorage';
+export * from './generateControllers';
