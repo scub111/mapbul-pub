@@ -1,8 +1,8 @@
-import { NextPage, NextPageContext } from 'next';
 import Router from 'next/router';
 import Layout from 'components/Layout';
 import List from 'components/List';
 import Pagination from 'material-ui-flat-pagination';
+import { NextPage, NextPageContext } from 'next';
 import { fetchWrapper } from 'utils/fetchWrapper';
 import { PageContent, IArticleDTO } from '@mapbul-pub/types';
 import { Container, makeStyles } from '@material-ui/core';
