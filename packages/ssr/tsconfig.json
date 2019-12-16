@@ -18,6 +18,11 @@
     "paths": {
       "ssr/*": ["./packages/ssr/*"],
       "ssrSrc/*": ["./packages/ssr/src/*"],
+      "common/*": ["./packages/ssr/common/*"],
+      "components/*": ["./packages/ssr/components/*"],
+      "interfaces/*": ["./packages/ssr/interfaces/*"],
+      "services/*": ["./packages/ssr/src/services/*"],
+      "utils/*": ["./packages/ssr/utils/*"],
     }  
   },
   "include": ["**/*.ts", "**/*.tsx"]

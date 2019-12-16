@@ -8,6 +8,8 @@ import { Container, makeStyles } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import Pagination from 'material-ui-flat-pagination';
+// import { ENDPOINTS } from 'ssrSrc/services/endpoints';
+import { ENDPOINTS } from 'services/endpoints';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -56,7 +58,7 @@ const ArticlesPage: NextPage<Props> = ({ pagination }) => {
 ArticlesPage.getInitialProps = async (ctx: NextPageContext) => {
   const queryPage = getQueryPage(ctx.query);
   const pagination: PageContent<IArticleDTO> = await fetchWrapper(
-    `articles?page=${queryPage}&size=${ITEMS_PER_PAGE}`,
+    ENDPOINTS.articles(queryPage, ITEMS_PER_PAGE),
   );
   return { pagination };
 };
