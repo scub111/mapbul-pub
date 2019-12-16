@@ -2,7 +2,7 @@ import * as React from 'react';
 import ListItem from './ListItem';
 import { IArticleDTO } from '@mapbul-pub/types';
 import { Grid } from '@material-ui/core';
-import { test } from '../utils/test';
+import { test } from 'utils/test';
 
 type Props = {
   items: Array<IArticleDTO>;

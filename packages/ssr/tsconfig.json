@@ -18,11 +18,11 @@
     "paths": {
       "ssr/*": ["./packages/ssr/*"],
       "ssrSrc/*": ["./packages/ssr/src/*"],
-      "common/*": ["./packages/ssr/common/*"],
-      "components/*": ["./packages/ssr/components/*"],
-      "interfaces/*": ["./packages/ssr/interfaces/*"],
+      "common/*": ["./packages/ssr/src/common/*"],
+      "components/*": ["./packages/ssr/src/components/*"],
+      "interfaces/*": ["./packages/ssr/src/interfaces/*"],
       "services/*": ["./packages/ssr/src/services/*"],
-      "utils/*": ["./packages/ssr/utils/*"],
+      "utils/*": ["./packages/ssr/src/utils/*"],
     }  
   },
   "include": ["**/*.ts", "**/*.tsx"]

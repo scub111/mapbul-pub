@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { NextPageContext } from 'next';
-import { fetchWrapper } from '../../src/utils/fetchWrapper';
+import { fetchWrapper } from 'utils/fetchWrapper';
 import { IArticleDTO } from '@mapbul-pub/types';
-import Layout from '../../src/components/Layout';
-import ListDetail from '../../src/components/ListDetail';
 import { ENDPOINTS } from 'services/endpoints';
+import Layout from 'components/Layout';
+import ListDetail from 'components/ListDetail';
 
 type Props = {
   item: IArticleDTO;

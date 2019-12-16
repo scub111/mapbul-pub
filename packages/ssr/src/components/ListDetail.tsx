@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IArticleDTO } from '@mapbul-pub/types';
-import { IMAGE_URL } from '../common/constants';
-import { clearUrl } from '../utils/urlUtils';
+import { IMAGE_URL } from 'common/constants';
+import { clearUrl } from 'utils/urlUtils';
 import { makeStyles, Typography, Box } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils'
 

@@ -19,7 +19,7 @@ module.exports = (phase, { defaultConfig }) => {
       alias['interfaces'] = `${__dirname}/src/interfaces`;
       alias['services'] = `${__dirname}/src/services`;
       alias['utils'] = `${__dirname}/src/utils`;
-      console.log(alias);
+      //console.log(alias);
       return config
     },
   };
