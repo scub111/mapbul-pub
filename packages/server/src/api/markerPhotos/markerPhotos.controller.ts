@@ -1,10 +1,10 @@
 import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
-import { IGetParams } from 'server/common/interfaces';
-import { IController } from 'server/common/IController';
+import { IGetParams } from 'serverSrc/common/interfaces';
+import { IController } from 'serverSrc/common/IController';
 import { PageContent, IMarkerPhotosDTO } from '@mapbul-pub/types';
-import { MarkerPhotosService } from 'server/api/markerPhotos/markerPhotos.service';
-import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
-import { GetAllQueryDTO } from 'server/common/QueryDTO';
+import { MarkerPhotosService } from 'serverSrc/api/markerPhotos/markerPhotos.service';
+import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
+import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 @Controller('api/markerphotos')
 export class MarkerPhotosController implements IController<IMarkerPhotosDTO> {

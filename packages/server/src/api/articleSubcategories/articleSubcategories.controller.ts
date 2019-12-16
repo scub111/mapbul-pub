@@ -1,10 +1,10 @@
 import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
-import { IGetParams } from 'server/common/interfaces';
-import { IController } from 'server/common/IController';
+import { IGetParams } from 'serverSrc/common/interfaces';
+import { IController } from 'serverSrc/common/IController';
 import { PageContent, IArticleSubcategoryDTO } from '@mapbul-pub/types';
-import { ArticleSubcategoriesService } from 'server/api/articleSubcategories/articleSubcategories.service';
-import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
-import { GetAllQueryDTO } from 'server/common/QueryDTO';
+import { ArticleSubcategoriesService } from 'serverSrc/api/articleSubcategories/articleSubcategories.service';
+import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
+import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 @Controller('api/articlesubcategories')
 export class ArticleSubcategoriesController implements IController<IArticleSubcategoryDTO> {

@@ -1,4 +1,4 @@
-import { IField } from 'src/IField';
+import { IField } from 'codegenSrc/IField';
 import { IDbConnection } from '@mapbul-pub/types';
 
 interface IDescribeRowData {

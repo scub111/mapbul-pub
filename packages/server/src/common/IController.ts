@@ -1,5 +1,5 @@
 import express from 'express';
-import { IGetParams } from 'server/common/interfaces';
+import { IGetParams } from 'src/common/interfaces';
 import { PageContent} from '@mapbul-pub/types';
 
 export interface IController<T> {

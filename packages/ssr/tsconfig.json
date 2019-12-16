@@ -17,6 +17,7 @@
     "target": "esnext",
     "paths": {
       "ssr/*": ["./packages/ssr/*"],
+      "ssrSrc/*": ["./packages/ssr/src/*"],
     }  
   },
   "include": ["**/*.ts", "**/*.tsx"]

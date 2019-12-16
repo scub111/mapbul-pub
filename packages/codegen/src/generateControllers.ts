@@ -3,9 +3,9 @@
 //   console.log('module-alias/register');
 // }
 import appRootPath from 'app-root-path';
-import { generateController } from 'src/generateController';
-import { generateCommonTypes } from 'src/generateCommonTypes';
-import { deleteRouterSync } from 'src/routerStorage';
+import { generateController } from 'codegenSrc/generateController';
+import { generateCommonTypes } from 'codegenSrc/generateCommonTypes';
+import { deleteRouterSync } from 'codegenSrc/routerStorage';
 // import { sleep } from 'scub111-common';
 import { GlobalVar, dbConnectionSingleton } from '@mapbul-pub/common';
 

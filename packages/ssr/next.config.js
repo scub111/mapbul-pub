@@ -13,7 +13,7 @@ module.exports = (phase, { defaultConfig }) => {
     webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
       let alias = config.resolve.alias;
       alias['ssr'] = path.join(__dirname);
-      console.log(config.resolve.alias);
+      alias['ssrSrc'] = path.join(__dirname, 'src');
       return config
     },
   };

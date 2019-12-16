@@ -4,7 +4,7 @@
     "baseUrl": "./",
     "outDir": "lib",
     "paths": {
-      "src/*": ["./src/*"],
+      "codegenSrc/*": ["./src/*"],
     }
   },
 }

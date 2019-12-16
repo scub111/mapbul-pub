@@ -1,10 +1,10 @@
 import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
-import { IGetParams } from 'server/common/interfaces';
-import { IController } from 'server/common/IController';
+import { IGetParams } from 'serverSrc/common/interfaces';
+import { IController } from 'serverSrc/common/IController';
 import { PageContent, IPhoneDTO } from '@mapbul-pub/types';
-import { PhonesService } from 'server/api/phones/phones.service';
-import { NotFoundInterceptor } from 'server/interceptors/NotFoundInterceptor';
-import { GetAllQueryDTO } from 'server/common/QueryDTO';
+import { PhonesService } from 'serverSrc/api/phones/phones.service';
+import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
+import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 @Controller('api/phones')
 export class PhonesController implements IController<IPhoneDTO> {

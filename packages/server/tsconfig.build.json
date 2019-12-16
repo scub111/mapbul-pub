@@ -1,11 +1,12 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "./",
     "allowJs": true,
     "declaration": false,
     "outDir": "dist",
     "paths": {
-      "server/*": ["./packages/server/*"],
+      "serverSrc/*": ["./src/*"],
     }
   },
   "include": [

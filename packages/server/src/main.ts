@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { AppModule } from 'server/app.module';
+import { AppModule } from 'serverSrc/app.module';
 import { ValidationPipe } from '@nestjs/common';
 
 import { GlobalVar } from '@mapbul-pub/common';

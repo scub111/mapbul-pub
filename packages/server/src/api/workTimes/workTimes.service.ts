@@ -1,8 +1,8 @@
-import { BaseService } from 'server/common/BaseService';
-import { TID } from 'server/common/types';
+import { BaseService } from 'serverSrc/common/BaseService';
+import { TID } from 'serverSrc/common/types';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IWorkTimeDTO } from '@mapbul-pub/types';
-import { GetAllQueryDTO } from 'server/common/QueryDTO';
+import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 export class WorkTimesService implements BaseService<IWorkTimeDTO> {
   constructor() {

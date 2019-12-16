@@ -1,7 +1,7 @@
 import * as path from 'path';
 import appRootPath from 'app-root-path';
-import { createSorce } from 'src/generateSource';
-import { parseRouterSync } from 'src/routerStorage';
+import { createSorce } from 'codegenSrc/generateSource';
+import { parseRouterSync } from 'codegenSrc/routerStorage';
 
 export const generateCommonTypes = async (): Promise<void> => {
   const templateRootPath = `${appRootPath.path}/src/templates`;

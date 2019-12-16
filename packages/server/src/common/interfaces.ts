@@ -1,4 +1,4 @@
-import { TID } from 'server/common/types';
+import { TID } from 'src/common/types';
 
 export interface IGetParams {
   id: TID;

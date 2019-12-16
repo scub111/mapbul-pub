@@ -1,8 +1,8 @@
 import * as path from 'path';
 import appRootPath from 'app-root-path';
-import { getFields } from 'src/getFields';
-import { createSorce } from 'src/generateSource';
-import { appendRouterSync } from 'src/routerStorage';
+import { getFields } from 'codegenSrc/getFields';
+import { createSorce } from 'codegenSrc/generateSource';
+import { appendRouterSync } from 'codegenSrc/routerStorage';
 import { IDbConnection } from '@mapbul-pub/types';
 
 export const generateController = async (
