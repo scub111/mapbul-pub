@@ -5,5 +5,5 @@ const getApiUrl = () => `${publicRuntimeConfig.BASE_URL}`;
 
 export const ENDPOINTS = {
   articles: (page: number, size: number) => `${getApiUrl()}/articles?page=${page}&size=${size}`,
-  articleById: (id: string) => `${getApiUrl()}/articles/${id}`,
+  article: (id: string) => `${getApiUrl()}/articles/${id}`,
 };

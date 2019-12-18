@@ -21,6 +21,7 @@
       "common/*": ["./packages/ssr/src/common/*"],
       "components/*": ["./packages/ssr/src/components/*"],
       "interfaces/*": ["./packages/ssr/src/interfaces/*"],
+      "models/*": ["./packages/ssr/src/models/*"],
       "services/*": ["./packages/ssr/src/services/*"],
       "utils/*": ["./packages/ssr/src/utils/*"],
     }  

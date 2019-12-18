@@ -1,14 +1,14 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { IArticleDTO } from '@mapbul-pub/types';
 import { IMAGE_URL } from 'common/constants';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea } from '@material-ui/core';
 import { clearUrl } from 'utils/urlUtils';
 import { formatDateToString } from '@mapbul-pub/utils'
+import { Article } from 'models/Article';
 
 type Props = {
-  item: IArticleDTO;
+  item: Article;
 };
 
 const useStyles = makeStyles(() => ({
