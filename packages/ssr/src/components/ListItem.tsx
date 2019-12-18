@@ -1,9 +1,7 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { IMAGE_URL } from 'common/constants';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea } from '@material-ui/core';
-import { clearUrl } from 'utils/urlUtils';
 import { formatDateToString } from '@mapbul-pub/utils'
 import { Article } from 'models';
 
@@ -47,7 +45,7 @@ const ListItem: React.FunctionComponent<Props> = ({ item }) => {
             {item.titlePhoto && (
               <CardMedia
                 className={classes.cardMedia}
-                image={clearUrl(`${IMAGE_URL}/${item.titlePhoto}`)}
+                image={item.titlePhoto}
                 title={item.title}
               />
             )}

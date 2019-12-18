@@ -2,8 +2,8 @@ export interface IArticleDTO {
   id: number;
   title: string;
   titleEn: string;
-  titlePhoto: string;
-  photo: string;
+  titlePhoto: string | null;
+  photo: string | null;
   sourceUrl: string;
   sourceUrlEn: string;
   sourcePhoto: string;

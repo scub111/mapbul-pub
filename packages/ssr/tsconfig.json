@@ -23,11 +23,13 @@
       "common/*": ["./src/common/*"],
       "components": ["./src/components"],
       "components/*": ["./src/components/*"],
+      "interfaces": ["./src/interfaces"],
       "interfaces/*": ["./src/interfaces/*"],
       "models": ["./src/models"],
       "models/*": ["./src/models/*"],
       "services": ["./src/services"],
       "services/*": ["./src/services/*"],
+      "utils": ["./src/utils"],
       "utils/*": ["./src/utils/*"],
     }  
   },

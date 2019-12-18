@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { IArticleDTO } from '@mapbul-pub/types';
-import { IMAGE_URL } from 'common/constants';
-import { clearUrl } from 'utils/urlUtils';
 import { makeStyles, Typography, Box } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils'
 
@@ -38,7 +36,7 @@ const ListDetail: React.FunctionComponent<ListDetailProps> = ({ item }) => {
           </Typography>
         </Box>
         {item.titlePhoto && (
-          <img className={classes.cardMedia} src={clearUrl(`${IMAGE_URL}/${item.titlePhoto}`)} title={item.title} />
+          <img className={classes.cardMedia} src={item.titlePhoto} title={item.title} />
         )}
       </Box>
       {item.photo && (
@@ -46,7 +44,7 @@ const ListDetail: React.FunctionComponent<ListDetailProps> = ({ item }) => {
           <Typography variant="subtitle1" paragraph>
             Фото
           </Typography>
-          <img className={classes.cardMedia} src={clearUrl(`${IMAGE_URL}/${item.photo}`)} title={item.title} />
+          <img className={classes.cardMedia} src={item.photo} title={item.title} />
         </Box>
       )}
     </>

@@ -14,6 +14,7 @@ export namespace articlesService {
         }
       });
   }
+  
   export function get(id: string): Promise<Article> {
     return api.get(ENDPOINTS.article(id))
       .then((data: IArticleDTO) => Article.New(data));

@@ -1,4 +1,6 @@
 import { IArticleDTO } from "@mapbul-pub/types";
+import { clearUrl } from "utils";
+import { IMAGE_URL } from "common/constants";
 
 export class Article implements IArticleDTO {
   public static async New(init: IArticleDTO) {
@@ -8,8 +10,8 @@ export class Article implements IArticleDTO {
   id: number;  
   title: string;
   titleEn: string;
-  titlePhoto: string;
-  photo: string;
+  titlePhoto: string | null;
+  photo: string | null;
   sourceUrl: string;
   sourceUrlEn: string;
   sourcePhoto: string;
@@ -34,8 +36,8 @@ export class Article implements IArticleDTO {
     this.id = init.id;
     this.title = init.title;
     this.titleEn = init.titleEn;
-    this.titlePhoto = init.titlePhoto;
-    this.photo = init.photo;
+    this.titlePhoto = init.titlePhoto ? clearUrl(`${IMAGE_URL}/${init.titlePhoto}`) : null;
+    this.photo = init.photo ? clearUrl(`${IMAGE_URL}/${init.photo}`) : null;
     this.sourceUrl = init.sourceUrl;
     this.sourceUrlEn = init.sourceUrlEn;
     this.sourcePhoto = init.sourcePhoto;
