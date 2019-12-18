@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea } from '@material-ui/core';
 import { clearUrl } from 'utils/urlUtils';
 import { formatDateToString } from '@mapbul-pub/utils'
-import { Article } from 'models/Article';
+import { Article } from 'models';
 
 type Props = {
   item: Article;

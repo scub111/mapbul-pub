@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "./",
     "allowJs": true,
     "alwaysStrict": true,
     "esModuleInterop": true,
@@ -16,14 +17,18 @@
     "strict": true,
     "target": "esnext",
     "paths": {
-      "ssr/*": ["./packages/ssr/*"],
-      "ssrSrc/*": ["./packages/ssr/src/*"],
-      "common/*": ["./packages/ssr/src/common/*"],
-      "components/*": ["./packages/ssr/src/components/*"],
-      "interfaces/*": ["./packages/ssr/src/interfaces/*"],
-      "models/*": ["./packages/ssr/src/models/*"],
-      "services/*": ["./packages/ssr/src/services/*"],
-      "utils/*": ["./packages/ssr/src/utils/*"],
+      "ssr/*": ["./*"],
+      "ssrSrc/*": ["./src/*"],
+      "common": ["./src/common"],
+      "common/*": ["./src/common/*"],
+      "components": ["./src/components"],
+      "components/*": ["./src/components/*"],
+      "interfaces/*": ["./src/interfaces/*"],
+      "models": ["./src/models"],
+      "models/*": ["./src/models/*"],
+      "services": ["./src/services"],
+      "services/*": ["./src/services/*"],
+      "utils/*": ["./src/utils/*"],
     }  
   },
   "include": ["**/*.ts", "**/*.tsx"]
