@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ListItem: React.FunctionComponent<Props> = ({ item }) => {
+export const ListItem: React.FunctionComponent<Props> = ({ item }) => {
   const classes = useStyles();
 
   return (
@@ -55,5 +55,3 @@ const ListItem: React.FunctionComponent<Props> = ({ item }) => {
     </Grid>
   );
 };
-
-export default ListItem;

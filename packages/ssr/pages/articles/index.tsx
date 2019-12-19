@@ -1,14 +1,14 @@
 import Router from 'next/router';
-import Layout from 'components/Layout';
-import List from 'components/List';
+import { Layout } from 'components';
+import { List } from 'components';
 import Pagination from 'material-ui-flat-pagination';
 import { NextPage, NextPageContext } from 'next';
 import { PageContent } from '@mapbul-pub/types';
 import { Container, makeStyles } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
-import { Article } from 'models/Article';
-import { articlesService } from 'services/articlesService';
+import { Article } from 'models';
+import { articlesService } from 'services';
 
 const ITEMS_PER_PAGE = 10;
 

@@ -1,31 +1,26 @@
 import { PageContent } from "@mapbul-pub/types";
-import { Article } from "models";
-import { api } from "./fetchWrapper";
+import { api } from "./api";
 import { ENDPOINTS } from "./endpoints";
 
-interface INew<TDto, TData> {
-  New: (item: TDto) => TData;
-}
+type TEndpointFn = (page: number, size: number) => string;
+type TMapFn<TDto, TData> = (dto: TDto) => Promise<TData>;
 
-export class BaseService<TDto, TData> {
-  private EntityClass: new () => INew<TDto, TData>;
-  constructor(EntityClass: new () => INew<TDto, TData>) {
-    this.EntityClass = EntityClass;
-  }
+export class BaseService<TDto, TModel> {
+  constructor(private endpointFn: TEndpointFn, private mapFn: TMapFn<TDto, TModel>) { }
 
-  list(page: number, size: number): Promise<PageContent<TData>> {
-    return api.get(ENDPOINTS.articles(page, size))
+  list(page: number, size: number): Promise<PageContent<TModel>> {
+    return api.get(this.endpointFn(page, size))
       .then(async (data: PageContent<TDto>) => {
-        const content = await Promise.all(data.content.map(item => (new this.EntityClass()).New(item)))
+        const content = await Promise.all(data.content.map(this.mapFn))
         return {
           content,
           totalPages: data.totalPages
         }
       });
   }
-  
-  get(id: string): Promise<TData> {
+
+  get(id: string): Promise<TModel> {
     return api.get(ENDPOINTS.article(id))
-      .then((data: TDto) => (new this.EntityClass()).New(data));
+      .then(this.mapFn);
   }
 }

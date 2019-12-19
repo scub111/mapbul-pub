@@ -19,7 +19,7 @@ type ListDetailProps = {
   item: IArticleDTO;
 };
 
-const ListDetail: React.FunctionComponent<ListDetailProps> = ({ item }) => {
+export const ListDetail: React.FunctionComponent<ListDetailProps> = ({ item }) => {
   const classes = useStyles();
   return (
     <>
@@ -50,5 +50,3 @@ const ListDetail: React.FunctionComponent<ListDetailProps> = ({ item }) => {
     </>
   );
 };
-
-export default ListDetail;

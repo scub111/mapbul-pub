@@ -1,22 +1,15 @@
+import { BaseService } from "./BaseService";
 import { Article } from "models/Article";
 import { ENDPOINTS } from "./endpoints";
-import { api } from "./fetchWrapper";
-import { IArticleDTO, PageContent } from "@mapbul-pub/types";
+import { IArticleDTO } from "@mapbul-pub/types";
 
-export namespace articlesService {
-  export function list(page: number, size: number): Promise<PageContent<Article>> {
-    return api.get(ENDPOINTS.articles(page, size))
-      .then(async (data: PageContent<IArticleDTO>) => {
-        const content = await Promise.all(data.content.map(item => Article.New(item)))
-        return {
-          content,
-          totalPages: data.totalPages
-        }
-      });
-  }
-  
-  export function get(id: string): Promise<Article> {
-    return api.get(ENDPOINTS.article(id))
-      .then((data: IArticleDTO) => Article.New(data));
+class ArticlesService extends BaseService<IArticleDTO, Article> {
+  constructor() {
+    super(
+      (page, size) => ENDPOINTS.articles(page, size),
+      item => Article.New(item)
+    )
   }
 }
+
+export const articlesService = new ArticlesService();
