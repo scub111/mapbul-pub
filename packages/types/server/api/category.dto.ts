@@ -1,6 +1,6 @@
 export interface ICategoryDTO {
   id: number;
-  name: string;
+  name: string | null;
   enName: string;
   parentId: number;
   addedDate: Date;

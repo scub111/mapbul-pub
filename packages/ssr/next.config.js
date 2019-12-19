@@ -1,5 +1,4 @@
 require('dotenv').config();
-var path = require('path');
 
 module.exports = (phase, { defaultConfig }) => {
   return {
