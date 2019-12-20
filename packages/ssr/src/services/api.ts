@@ -1,8 +1,21 @@
 import fetch from 'isomorphic-unfetch';
 
+const cache = new Map();
+const isCaching = true;
+
 async function fetchWrapper(endpoint: string, init?: RequestInit) {
   try {
-    const data = await fetch(endpoint, init).then(res => res.json());
+    let data;
+    if (isCaching) {
+      if (cache.has(endpoint)) {
+        data = cache.get(endpoint);
+      } else {
+        data = await fetch(endpoint, init).then(res => res.json());
+        cache.set(endpoint, data)
+      }
+    } else {
+      data = await fetch(endpoint, init).then(res => res.json());
+    }
     return data;
   } catch (err) {
     throw new Error(err.message);
