@@ -6,7 +6,7 @@ import { ENDPOINTS } from "./endpoints";
 class CategoriesService extends BaseService<ICategoryDTO, Category> {
   constructor() {
     super(
-      (page, size) => ENDPOINTS.articles(page, size),
+      ENDPOINTS.categories,
       item => Category.New(item)
     )
   }

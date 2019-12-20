@@ -21,6 +21,8 @@
       "ssrSrc/*": ["./src/*"],
       "common": ["./src/common"],
       "common/*": ["./src/common/*"],
+      "constants": ["./src/constants"],
+      "constants/*": ["./src/constants/*"],
       "components": ["./src/components"],
       "components/*": ["./src/components/*"],
       "interfaces": ["./src/interfaces"],

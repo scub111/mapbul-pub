@@ -1,12 +1,12 @@
 import { BaseService } from "./BaseService";
-import { Article } from "models/Article";
+import { Article } from "models";
 import { ENDPOINTS } from "./endpoints";
 import { IArticleDTO } from "@mapbul-pub/types";
 
 class ArticlesService extends BaseService<IArticleDTO, Article> {
   constructor() {
     super(
-      (page, size) => ENDPOINTS.articles(page, size),
+      ENDPOINTS.articles,
       item => Article.New(item)
     )
   }
