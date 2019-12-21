@@ -7,7 +7,7 @@ type Props = {
   items: Array<Article>;
 };
 
-export const List: React.FunctionComponent<Props> = ({ items }) => {
+export const List: React.FC<Props> = ({ items }) => {
   return (
     <Grid container spacing={4}>
       {items.map((item: Article, index: number) => (

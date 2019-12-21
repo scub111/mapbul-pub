@@ -59,7 +59,7 @@ interface Props {
   title?: string;
 }
 
-export const Layout: React.FunctionComponent<Props> = ({ children, title = 'This is the default title' }) => {
+export const Layout: React.FC<Props> = ({ children, title = 'This is the default title' }) => {
   const classes = useStyles();
   return (
     <div>

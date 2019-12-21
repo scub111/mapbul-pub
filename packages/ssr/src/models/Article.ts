@@ -1,12 +1,14 @@
 import { IArticleDTO } from "@mapbul-pub/types";
 import { clearUrl } from "utils";
 import { IMAGE_URL } from "common/constants";
-import { Category } from "./Category";
+import { Category } from ".";
+import { UserDescription } from "interfaces";
 
 export class Article implements IArticleDTO {
-  public static async New(init: IArticleDTO, category?: Category) {
+  public static async New(init: IArticleDTO, category?: Category, userDescription?: UserDescription) {
     const newArticle = new Article(init);
     newArticle.category = category;
+    newArticle.userDescription = userDescription;
     return newArticle;
   }
 
@@ -35,6 +37,7 @@ export class Article implements IArticleDTO {
   endDate: Date;
   cityId: number;
   category: Category | undefined;
+  userDescription: UserDescription | undefined;
 
   public constructor(init: IArticleDTO) {
     this.id = init.id;

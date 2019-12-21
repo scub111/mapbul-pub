@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export const ListItem: React.FunctionComponent<Props> = ({ item }) => {
+export const ListItem: React.FC<Props> = ({ item }) => {
   const classes = useStyles();
 
   return (
