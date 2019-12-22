@@ -5,15 +5,15 @@ const { publicRuntimeConfig } = getConfig();
 const getApiUrl = () => `${publicRuntimeConfig.BASE_URL}`;
 
 export interface IEndpointFn {
-  list: (page?: number, size?: number) => string;
+  list: (page?: number, size?: number, filter?: string) => string;
   get: (id: string | number) => string;
 }
 
 const getEndpointFn = (endpoint: string): IEndpointFn => {
   return {
-    list: (page?: number, size?: number) => page && size ?
-      `${getApiUrl()}/${endpoint}?page=${page}&size=${size}` :
-      `${getApiUrl()}/${endpoint}`,
+    list: (page?: number, size?: number, filter?: string) => page && size ?
+      `${getApiUrl()}/${endpoint}?page=${page}&size=${size}&filter=${filter}` :
+      `${getApiUrl()}/${endpoint}&filter=${filter}`,
     get: (id: string | number) => `${getApiUrl()}/${endpoint}/${id}`
   }
 }
