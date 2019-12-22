@@ -12,11 +12,15 @@ export class TenantsService implements BaseService<ITenantDTO> {
   private connection: IDbConnection;
 
   async getAll(query: GetAllQueryDTO): Promise<PageContent<ITenantDTO>> {
-    let additional = '';
+    let filter = '';
+    if ('filter' in query) {
+      filter += `WHERE ${query['filter']}`;
+    }
+    let additional = filter;
     const isPagination = query.page && query.size;
     if (isPagination) {
       const offset = (query.page - 1) * query.size;
-      additional = `limit ${offset},${query.size}; SELECT count(*) FROM tenant`;
+      additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM tenant ${filter}`;
     }
     const records = await this.connection.query(`
       SELECT
