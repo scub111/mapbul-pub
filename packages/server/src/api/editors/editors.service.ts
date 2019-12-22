@@ -2,7 +2,7 @@ import { BaseService } from 'serverSrc/common/BaseService';
 import { TID } from 'serverSrc/common/types';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IEditorDTO } from '@mapbul-pub/types';
-// import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
+import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 export class EditorsService implements BaseService<IEditorDTO> {
   constructor() {
@@ -11,20 +11,16 @@ export class EditorsService implements BaseService<IEditorDTO> {
 
   private connection: IDbConnection;
 
-  async getAll(query: any): Promise<PageContent<IEditorDTO>> {
-    console.log(query);
-    const whereCondition: Array<string> = [];
-    for (let param in query) {
-      if (param !== 'page' && param !== 'size') {
-        whereCondition.push(param);
-      }
+  async getAll(query: GetAllQueryDTO): Promise<PageContent<IEditorDTO>> {
+    let filter = '';
+    if ('filter' in query) {
+      filter += `WHERE ${query['filter']}`;
     }
-    console.log(whereCondition);
-    let additional = '';
+    let additional = filter;
     const isPagination = query.page && query.size;
     if (isPagination) {
       const offset = (query.page - 1) * query.size;
-      additional = `limit ${offset},${query.size}; SELECT count(*) FROM editor`;
+      additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM editor ${filter}`;
     }
     const records = await this.connection.query(`
       SELECT
