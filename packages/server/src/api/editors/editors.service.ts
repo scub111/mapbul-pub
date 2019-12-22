@@ -2,7 +2,7 @@ import { BaseService } from 'serverSrc/common/BaseService';
 import { TID } from 'serverSrc/common/types';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IEditorDTO } from '@mapbul-pub/types';
-import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
+// import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 export class EditorsService implements BaseService<IEditorDTO> {
   constructor() {
@@ -11,7 +11,11 @@ export class EditorsService implements BaseService<IEditorDTO> {
 
   private connection: IDbConnection;
 
-  async getAll(query: GetAllQueryDTO): Promise<PageContent<IEditorDTO>> {
+  async getAll(query: any): Promise<PageContent<IEditorDTO>> {
+    console.log(query);
+    for (let param in query) {
+      console.log(param, query[param]);
+    }
     let additional = '';
     const isPagination = query.page && query.size;
     if (isPagination) {

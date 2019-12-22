@@ -21,6 +21,7 @@ class ArticlesService extends BaseService<IArticleDTO, Article> {
         if (userType.tag === 'admin') {
           description = "Админстратор"
         } else if (userType.tag === 'edit') {
+          const editor = await editorsService.get(user.userTypeId);
           description = "Редактор";
         }
 
