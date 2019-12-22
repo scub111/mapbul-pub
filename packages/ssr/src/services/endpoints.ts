@@ -22,6 +22,7 @@ export const ENDPOINTS: Record<string, IEndpointFn> = {
   admins: getEndpointFn(Routes.admins),
   articles: getEndpointFn(Routes.articles),
   categories: getEndpointFn(Routes.categories),
+  editors: getEndpointFn(Routes.editors),
   users: getEndpointFn(Routes.users),
   userTypes: getEndpointFn(Routes.userTypes),
 };

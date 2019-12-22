@@ -13,9 +13,13 @@ export class EditorsService implements BaseService<IEditorDTO> {
 
   async getAll(query: any): Promise<PageContent<IEditorDTO>> {
     console.log(query);
+    const whereCondition: Array<string> = [];
     for (let param in query) {
-      console.log(param, query[param]);
+      if (param !== 'page' && param !== 'size') {
+        whereCondition.push(param);
+      }
     }
+    console.log(whereCondition);
     let additional = '';
     const isPagination = query.page && query.size;
     if (isPagination) {

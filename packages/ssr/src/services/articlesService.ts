@@ -2,7 +2,7 @@ import { BaseService } from "./BaseService";
 import { Article } from "models";
 import { ENDPOINTS } from "./endpoints";
 import { IArticleDTO } from "@mapbul-pub/types";
-import { categoriesService, usersService, userTypesService } from ".";
+import { categoriesService, usersService, userTypesService, editorsService } from ".";
 import { UserDescription } from "interfaces";
 
 class ArticlesService extends BaseService<IArticleDTO, Article> {
@@ -21,7 +21,8 @@ class ArticlesService extends BaseService<IArticleDTO, Article> {
         if (userType.tag === 'admin') {
           description = "Админстратор"
         } else if (userType.tag === 'edit') {
-          const editor = await editorsService.get(user.userTypeId);
+          const editor = await editorsService.get(2);
+          console.log(editor);
           description = "Редактор";
         }
 
