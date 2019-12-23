@@ -1,4 +1,4 @@
-import { PageContent } from "@mapbul-pub/types";
+import { PageContent, IGetAllQuery } from "@mapbul-pub/types";
 import { api } from ".";
 import { IEndpointFn } from ".";
 
@@ -11,8 +11,8 @@ export class BaseService<TDto, TModel> {
     private getFn?: TMapFn<TDto, TModel>
   ) { }
 
-  list(page?: number, size?: number, filter?: string): Promise<PageContent<TModel>> {
-    return api.get(this.endpointFn.list(page, size, filter))
+  list(query: IGetAllQuery): Promise<PageContent<TModel>> {
+    return api.get(this.endpointFn.list(query))
       .then(async (data: PageContent<TDto>) => {
         const content = await Promise.all(data.content.map(this.listFn))
         return {

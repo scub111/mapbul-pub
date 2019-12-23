@@ -56,7 +56,7 @@ const ArticlesPage: NextPage<Props> = ({ pagination }) => {
 
 ArticlesPage.getInitialProps = async (ctx: NextPageContext) => {
   const queryPage = getQueryPage(ctx.query);
-  const pagination: PageContent<Article> = await articlesService.list(queryPage, ITEMS_PER_PAGE);
+  const pagination: PageContent<Article> = await articlesService.list({ page: queryPage, size: ITEMS_PER_PAGE });
   return { pagination };
 };
 

@@ -1,5 +1,6 @@
 import getConfig from "next/config";
 import { Routes } from 'constants/routes';
+import { IGetAllQuery } from '@mapbul-pub/types';
 
 const { publicRuntimeConfig } = getConfig();
 const getApiUrl = () => `${publicRuntimeConfig.BASE_URL}`;
@@ -27,13 +28,13 @@ export const createPath = ({ endpoint, queryParams }: PathConfig) => {
 }
 
 export interface IEndpointFn {
-  list: (page?: number, size?: number, filter?: string) => string;
+  list: (query: IGetAllQuery) => string;
   get: (id: string | number) => string;
 }
 
 const getEndpointFn = (endpoint: string): IEndpointFn => {
   return {
-    list: (page?: number, size?: number, filter?: string) => createPath(
+    list: ({ page, size, filter }) => createPath(
       {
         endpoint: `${getApiUrl()}/${endpoint}`,
         queryParams: { page, size, filter }
