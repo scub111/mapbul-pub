@@ -34,11 +34,15 @@ describe('AdminsController', () => {
     });
 
     it('should return filtered page', async () => {
-      const result = await controller.getAll({ page: 1, size: 10 });
-      expect(result.content.length).toBe(10);
-      expect(result.totalPages).toBe(14);
+      const result = await controller.getAll({ filter: 'id>100' });
+      expect(result.content.length).toBe(49);
+      expect(result.totalPages).toBe(1);
     });
 
-
+    it('should return filtered page with pagination', async () => {
+      const result = await controller.getAll({ page: 1, size: 1, filter: 'id > 100 and enName = "money"' });
+      expect(result.content.length).toBe(1);
+      expect(result.totalPages).toBe(1);
+    });
   });
 });
