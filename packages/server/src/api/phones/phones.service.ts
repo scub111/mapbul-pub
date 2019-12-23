@@ -12,11 +12,15 @@ export class PhonesService implements BaseService<IPhoneDTO> {
   private connection: IDbConnection;
 
   async getAll(query: GetAllQueryDTO): Promise<PageContent<IPhoneDTO>> {
-    let additional = '';
+    let filter = '';
+    if ('filter' in query) {
+      filter += `WHERE ${query['filter']}`;
+    }
+    let additional = filter;
     const isPagination = query.page && query.size;
     if (isPagination) {
       const offset = (query.page - 1) * query.size;
-      additional = `limit ${offset},${query.size}; SELECT count(*) FROM phone`;
+      additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM phone ${filter}`;
     }
     const records = await this.connection.query(`
       SELECT

@@ -11,8 +11,8 @@ export class BaseService<TDto, TModel> {
     private getFn?: TMapFn<TDto, TModel>
   ) { }
 
-  list(page?: number, size?: number): Promise<PageContent<TModel>> {
-    return api.get(this.endpointFn.list(page, size))
+  list(page?: number, size?: number, filter?: string): Promise<PageContent<TModel>> {
+    return api.get(this.endpointFn.list(page, size, filter))
       .then(async (data: PageContent<TDto>) => {
         const content = await Promise.all(data.content.map(this.listFn))
         return {

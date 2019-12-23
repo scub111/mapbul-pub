@@ -12,11 +12,15 @@ export class SubcategoriesService implements BaseService<ISubcategoryDTO> {
   private connection: IDbConnection;
 
   async getAll(query: GetAllQueryDTO): Promise<PageContent<ISubcategoryDTO>> {
-    let additional = '';
+    let filter = '';
+    if ('filter' in query) {
+      filter += `WHERE ${query['filter']}`;
+    }
+    let additional = filter;
     const isPagination = query.page && query.size;
     if (isPagination) {
       const offset = (query.page - 1) * query.size;
-      additional = `limit ${offset},${query.size}; SELECT count(*) FROM subcategory`;
+      additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM subcategory ${filter}`;
     }
     const records = await this.connection.query(`
       SELECT
