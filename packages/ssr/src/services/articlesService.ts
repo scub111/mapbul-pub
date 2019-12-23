@@ -4,6 +4,7 @@ import { ENDPOINTS } from "./endpoints";
 import { IArticleDTO } from "@mapbul-pub/types";
 import { categoriesService, usersService, userTypesService, editorsService } from ".";
 import { UserDescription } from "interfaces";
+import { journalistsService } from "./journalistsService";
 
 class ArticlesService extends BaseService<IArticleDTO, Article> {
   constructor() {
@@ -26,7 +27,14 @@ class ArticlesService extends BaseService<IArticleDTO, Article> {
             const editor = editors.content[0];
             description = `Редактор ${editor.lastName} ${editor.firstName}`;
           }
+        } else if (userType.tag === 'journ') {
+          const journalists = await journalistsService.list({ page: 1, size: 1, filter: `userId=${user.id}` });
+          if (journalists.content.length > 0) {
+            const journalist = journalists.content[0];
+            description = `Журналист ${journalist.lastName} ${journalist.firstName}`;
+          }
         }
+
 
         const userDescription: UserDescription = {
           type: userType.tag,
