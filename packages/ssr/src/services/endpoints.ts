@@ -49,7 +49,9 @@ export const ENDPOINTS: Record<string, IEndpointFn> = {
   articles: getEndpointFn(Routes.articles),
   categories: getEndpointFn(Routes.categories),
   editors: getEndpointFn(Routes.editors),
+  guides: getEndpointFn(Routes.guides),
   journalists: getEndpointFn(Routes.journalists),
+  tenants: getEndpointFn(Routes.tenants),
   users: getEndpointFn(Routes.users),
   userTypes: getEndpointFn(Routes.userTypes),
 };

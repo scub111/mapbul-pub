@@ -12,6 +12,7 @@ const useStyles = makeStyles(() => ({
   },
   cardMedia: {
     width: 200,
+    alignItems: 'center'
   },
 }));
 
@@ -34,9 +35,6 @@ export const ListDetail: React.FC<ListDetailProps> = ({ item }) => {
           <Typography component="h2" variant="h5">
             {item.title}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            {formatDateToString(item.publishedDate)}
-          </Typography>
           <Typography variant="subtitle1" paragraph>
             {item.description}
           </Typography>
@@ -44,15 +42,22 @@ export const ListDetail: React.FC<ListDetailProps> = ({ item }) => {
             {item.text}
           </Typography>
         </Box>
-        {item.titlePhoto && (
-          <img className={classes.cardMedia} src={item.titlePhoto} title={item.title} />
-        )}
+        <Box>
+          <Typography variant="subtitle1" color="textSecondary">
+            {formatDateToString(item.publishedDate)}
+          </Typography>
+        </Box>
       </Box>
+      {item.titlePhoto && (
+        <Box style={{display: 'flex' }}>
+          <img className={classes.cardMedia} src={item.titlePhoto} title={item.title} />
+        </Box>
+      )}
       {item.photo && (
         <Box>
-          <Typography variant="subtitle1" paragraph>
+          {/* <Typography variant="subtitle1" paragraph>
             Фото
-          </Typography>
+          </Typography> */}
           <img className={classes.cardMedia} src={item.photo} title={item.title} />
         </Box>
       )}
