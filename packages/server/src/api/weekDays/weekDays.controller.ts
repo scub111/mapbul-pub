@@ -1,10 +1,9 @@
 import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
 import { IGetParams } from 'serverSrc/common/interfaces';
 import { IController } from 'serverSrc/common/IController';
-import { PageContent, IWeekDayDTO } from '@mapbul-pub/types';
+import { PageContent, IWeekDayDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { WeekDaysService } from 'serverSrc/api/weekDays/weekDays.service';
 import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
-import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 @Controller('api/weekdays')
 export class WeekDaysController implements IController<IWeekDayDTO> {
@@ -12,7 +11,7 @@ export class WeekDaysController implements IController<IWeekDayDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IWeekDayDTO>> {
+  async getAll(@Query() query: IGetAllQuery): Promise<PageContent<IWeekDayDTO>> {
     return this.service.getAll(query);
   }
 

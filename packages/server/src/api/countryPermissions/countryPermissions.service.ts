@@ -1,8 +1,7 @@
 import { BaseService } from 'serverSrc/common/BaseService';
 import { TID } from 'serverSrc/common/types';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
-import { IDbConnection, PageContent, ICountryPermissionDTO } from '@mapbul-pub/types';
-import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
+import { IDbConnection, PageContent, ICountryPermissionDTO, IGetAllQuery } from '@mapbul-pub/types';
 
 export class CountryPermissionsService implements BaseService<ICountryPermissionDTO> {
   constructor() {
@@ -11,10 +10,10 @@ export class CountryPermissionsService implements BaseService<ICountryPermission
 
   private connection: IDbConnection;
 
-  async getAll(query: GetAllQueryDTO): Promise<PageContent<ICountryPermissionDTO>> {
+  async getAll(query: IGetAllQuery): Promise<PageContent<ICountryPermissionDTO>> {
     let filter = '';
     if ('filter' in query) {
-      filter += `WHERE ${query['filter']}`;
+      filter += `WHERE ${query.filter}`;
     }
     let additional = filter;
     const isPagination = query.page && query.size;

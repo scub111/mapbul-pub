@@ -1,10 +1,9 @@
 import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
 import { IGetParams } from 'serverSrc/common/interfaces';
 import { IController } from 'serverSrc/common/IController';
-import { PageContent, ICityDTO } from '@mapbul-pub/types';
+import { PageContent, ICityDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { CitiesService } from 'serverSrc/api/cities/cities.service';
 import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
-import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 @Controller('api/cities')
 export class CitiesController implements IController<ICityDTO> {
@@ -12,7 +11,7 @@ export class CitiesController implements IController<ICityDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<ICityDTO>> {
+  async getAll(@Query() query: IGetAllQuery): Promise<PageContent<ICityDTO>> {
     return this.service.getAll(query);
   }
 

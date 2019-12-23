@@ -1,8 +1,7 @@
 import { BaseService } from 'serverSrc/common/BaseService';
 import { TID } from 'serverSrc/common/types';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
-import { IDbConnection, PageContent, IDiscountDTO } from '@mapbul-pub/types';
-import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
+import { IDbConnection, PageContent, IDiscountDTO, IGetAllQuery } from '@mapbul-pub/types';
 
 export class DiscountsService implements BaseService<IDiscountDTO> {
   constructor() {
@@ -11,10 +10,10 @@ export class DiscountsService implements BaseService<IDiscountDTO> {
 
   private connection: IDbConnection;
 
-  async getAll(query: GetAllQueryDTO): Promise<PageContent<IDiscountDTO>> {
+  async getAll(query: IGetAllQuery): Promise<PageContent<IDiscountDTO>> {
     let filter = '';
     if ('filter' in query) {
-      filter += `WHERE ${query['filter']}`;
+      filter += `WHERE ${query.filter}`;
     }
     let additional = filter;
     const isPagination = query.page && query.size;

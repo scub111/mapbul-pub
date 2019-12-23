@@ -1,10 +1,9 @@
 import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
 import { IGetParams } from 'serverSrc/common/interfaces';
 import { IController } from 'serverSrc/common/IController';
-import { PageContent, IFavoritesMarkerDTO } from '@mapbul-pub/types';
+import { PageContent, IFavoritesMarkerDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { FavoritesMarkersService } from 'serverSrc/api/favoritesMarkers/favoritesMarkers.service';
 import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
-import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 @Controller('api/favoritesmarkers')
 export class FavoritesMarkersController implements IController<IFavoritesMarkerDTO> {
@@ -12,7 +11,7 @@ export class FavoritesMarkersController implements IController<IFavoritesMarkerD
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IFavoritesMarkerDTO>> {
+  async getAll(@Query() query: IGetAllQuery): Promise<PageContent<IFavoritesMarkerDTO>> {
     return this.service.getAll(query);
   }
 

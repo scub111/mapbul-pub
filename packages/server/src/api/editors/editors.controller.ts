@@ -1,10 +1,9 @@
 import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
 import { IGetParams } from 'serverSrc/common/interfaces';
 import { IController } from 'serverSrc/common/IController';
-import { PageContent, IEditorDTO } from '@mapbul-pub/types';
+import { PageContent, IEditorDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { EditorsService } from 'serverSrc/api/editors/editors.service';
 import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
-import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 @Controller('api/editors')
 export class EditorsController implements IController<IEditorDTO> {
@@ -12,7 +11,7 @@ export class EditorsController implements IController<IEditorDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IEditorDTO>> {
+  async getAll(@Query() query: IGetAllQuery): Promise<PageContent<IEditorDTO>> {
     return this.service.getAll(query);
   }
 

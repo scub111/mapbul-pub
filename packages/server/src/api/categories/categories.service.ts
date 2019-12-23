@@ -13,7 +13,7 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
   async getAll(query: IGetAllQuery): Promise<PageContent<ICategoryDTO>> {
     let filter = '';
     if ('filter' in query) {
-      filter += `WHERE ${query['filter']}`;
+      filter += `WHERE ${query.filter}`;
     }
     let additional = filter;
     const isPagination = query.page && query.size;

@@ -1,10 +1,9 @@
 import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
 import { IGetParams } from 'serverSrc/common/interfaces';
 import { IController } from 'serverSrc/common/IController';
-import { PageContent, IUserTypeDTO } from '@mapbul-pub/types';
+import { PageContent, IUserTypeDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { UserTypesService } from 'serverSrc/api/userTypes/userTypes.service';
 import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
-import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 @Controller('api/usertypes')
 export class UserTypesController implements IController<IUserTypeDTO> {
@@ -12,7 +11,7 @@ export class UserTypesController implements IController<IUserTypeDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IUserTypeDTO>> {
+  async getAll(@Query() query: IGetAllQuery): Promise<PageContent<IUserTypeDTO>> {
     return this.service.getAll(query);
   }
 

@@ -1,10 +1,9 @@
 import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
 import { IGetParams } from 'serverSrc/common/interfaces';
 import { IController } from 'serverSrc/common/IController';
-import { PageContent, IWorkTimeDTO } from '@mapbul-pub/types';
+import { PageContent, IWorkTimeDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { WorkTimesService } from 'serverSrc/api/workTimes/workTimes.service';
 import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
-import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 @Controller('api/worktimes')
 export class WorkTimesController implements IController<IWorkTimeDTO> {
@@ -12,7 +11,7 @@ export class WorkTimesController implements IController<IWorkTimeDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IWorkTimeDTO>> {
+  async getAll(@Query() query: IGetAllQuery): Promise<PageContent<IWorkTimeDTO>> {
     return this.service.getAll(query);
   }
 

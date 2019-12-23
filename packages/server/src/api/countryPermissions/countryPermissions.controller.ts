@@ -1,10 +1,9 @@
 import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
 import { IGetParams } from 'serverSrc/common/interfaces';
 import { IController } from 'serverSrc/common/IController';
-import { PageContent, ICountryPermissionDTO } from '@mapbul-pub/types';
+import { PageContent, ICountryPermissionDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { CountryPermissionsService } from 'serverSrc/api/countryPermissions/countryPermissions.service';
 import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
-import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 @Controller('api/countrypermissions')
 export class CountryPermissionsController implements IController<ICountryPermissionDTO> {
@@ -12,7 +11,7 @@ export class CountryPermissionsController implements IController<ICountryPermiss
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<ICountryPermissionDTO>> {
+  async getAll(@Query() query: IGetAllQuery): Promise<PageContent<ICountryPermissionDTO>> {
     return this.service.getAll(query);
   }
 

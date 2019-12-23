@@ -1,8 +1,7 @@
 import { BaseService } from 'serverSrc/common/BaseService';
 import { TID } from 'serverSrc/common/types';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
-import { IDbConnection, PageContent, IMarkerDTO } from '@mapbul-pub/types';
-import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
+import { IDbConnection, PageContent, IMarkerDTO, IGetAllQuery } from '@mapbul-pub/types';
 
 export class MarkersService implements BaseService<IMarkerDTO> {
   constructor() {
@@ -11,10 +10,10 @@ export class MarkersService implements BaseService<IMarkerDTO> {
 
   private connection: IDbConnection;
 
-  async getAll(query: GetAllQueryDTO): Promise<PageContent<IMarkerDTO>> {
+  async getAll(query: IGetAllQuery): Promise<PageContent<IMarkerDTO>> {
     let filter = '';
     if ('filter' in query) {
-      filter += `WHERE ${query['filter']}`;
+      filter += `WHERE ${query.filter}`;
     }
     let additional = filter;
     const isPagination = query.page && query.size;

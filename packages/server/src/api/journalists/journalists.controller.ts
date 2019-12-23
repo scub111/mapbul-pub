@@ -1,10 +1,9 @@
 import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
 import { IGetParams } from 'serverSrc/common/interfaces';
 import { IController } from 'serverSrc/common/IController';
-import { PageContent, IJournalistDTO } from '@mapbul-pub/types';
+import { PageContent, IJournalistDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { JournalistsService } from 'serverSrc/api/journalists/journalists.service';
 import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
-import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 @Controller('api/journalists')
 export class JournalistsController implements IController<IJournalistDTO> {
@@ -12,7 +11,7 @@ export class JournalistsController implements IController<IJournalistDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<IJournalistDTO>> {
+  async getAll(@Query() query: IGetAllQuery): Promise<PageContent<IJournalistDTO>> {
     return this.service.getAll(query);
   }
 

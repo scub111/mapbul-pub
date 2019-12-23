@@ -1,10 +1,9 @@
 import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
 import { IGetParams } from 'serverSrc/common/interfaces';
 import { IController } from 'serverSrc/common/IController';
-import { PageContent, ISubcategoryDTO } from '@mapbul-pub/types';
+import { PageContent, ISubcategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { SubcategoriesService } from 'serverSrc/api/subcategories/subcategories.service';
 import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
-import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
 
 @Controller('api/subcategories')
 export class SubcategoriesController implements IController<ISubcategoryDTO> {
@@ -12,7 +11,7 @@ export class SubcategoriesController implements IController<ISubcategoryDTO> {
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
-  async getAll(@Query() query: GetAllQueryDTO): Promise<PageContent<ISubcategoryDTO>> {
+  async getAll(@Query() query: IGetAllQuery): Promise<PageContent<ISubcategoryDTO>> {
     return this.service.getAll(query);
   }
 
