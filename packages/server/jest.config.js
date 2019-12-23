@@ -13,7 +13,7 @@ module.exports = {
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "moduleNameMapper": {
-      "server/(.*)": "<rootDir>/src/$1"
+      "serverSrc/(.*)": "<rootDir>/src/$1"
     }
 }
 

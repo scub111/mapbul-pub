@@ -21,16 +21,24 @@ describe('AdminsController', () => {
     it('should return all data', async () => {
       const result = await controller.getAll({
         page: undefined,
-        limit: undefined,
+        size: undefined,
       });
-      expect(result.data.length).toBe(136);
+      expect(result.content.length).toBe(136);
       expect(result.totalPages).toBe(1);
     });
 
     it('should return first page', async () => {
-      const result = await controller.getAll({ page: 1, limit: 10 });
-      expect(result.data.length).toBe(10);
+      const result = await controller.getAll({ page: 1, size: 10 });
+      expect(result.content.length).toBe(10);
       expect(result.totalPages).toBe(14);
     });
+
+    it('should return filtered page', async () => {
+      const result = await controller.getAll({ page: 1, size: 10 });
+      expect(result.content.length).toBe(10);
+      expect(result.totalPages).toBe(14);
+    });
+
+
   });
 });

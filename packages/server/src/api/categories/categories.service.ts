@@ -1,8 +1,7 @@
 import { BaseService } from 'serverSrc/common/BaseService';
 import { TID } from 'serverSrc/common/types';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
-import { IDbConnection, PageContent, ICategoryDTO } from '@mapbul-pub/types';
-import { GetAllQueryDTO } from 'serverSrc/common/QueryDTO';
+import { IDbConnection, PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 
 export class CategoriesService implements BaseService<ICategoryDTO> {
   constructor() {
@@ -11,7 +10,7 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
 
   private connection: IDbConnection;
 
-  async getAll(query: GetAllQueryDTO): Promise<PageContent<ICategoryDTO>> {
+  async getAll(query: IGetAllQuery): Promise<PageContent<ICategoryDTO>> {
     let additional = '';
     const isPagination = query.page && query.size;
     if (isPagination) {
