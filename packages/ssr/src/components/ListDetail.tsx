@@ -4,16 +4,11 @@ import { formatDateToString } from '@mapbul-pub/utils'
 import { Article } from 'models';
 
 const useStyles = makeStyles(() => ({
-  card: {
+  imgCenter: {
     display: 'flex',
-  },
-  cardDetails: {
-    flex: 1,
-  },
-  cardMedia: {
-    width: 200,
+    flexDirection: 'column',
     alignItems: 'center'
-  },
+  }
 }));
 
 type ListDetailProps = {
@@ -23,23 +18,25 @@ type ListDetailProps = {
 export const ListDetail: React.FC<ListDetailProps> = ({ item }) => {
   const classes = useStyles();
   return (
-    <>
-      <Box className={classes.card}>
-        <Box className={classes.cardDetails}>
+    <Box style={{ padding: '0 30px' }}>
+      <Box style={{ display: 'flex' }}>
+        <Box style={{ flex: 1 }}>
           <Typography component="h2" variant="h6">
             {item.category ? item.category.name : ''}
           </Typography>
-          <Typography component="h2" variant="h6">
-            {item.userDescription ? item.userDescription.description : ''}
-          </Typography>
-          <Typography component="h2" variant="h5">
+          <Box style={{ display: 'flex', flexDirection: 'row' }}>
+            <Typography component="h2" variant="h6" style={{ paddingRight: '30px' }}>
+              {item.userDescription ? item.userDescription.description : ''}
+            </Typography>
+            <Typography component="h2" variant="h6">
+              {item.sourceUrl}
+            </Typography>
+          </Box>
+          <Typography component="h2" variant="h5" style={{ fontWeight: 600 }}>
             {item.title}
           </Typography>
           <Typography variant="subtitle1" paragraph>
             {item.description}
-          </Typography>
-          <Typography variant="subtitle1" paragraph>
-            {item.text}
           </Typography>
         </Box>
         <Box>
@@ -49,18 +46,21 @@ export const ListDetail: React.FC<ListDetailProps> = ({ item }) => {
         </Box>
       </Box>
       {item.titlePhoto && (
-        <Box style={{display: 'flex' }}>
-          <img className={classes.cardMedia} src={item.titlePhoto} title={item.title} />
+        <Box className={classes.imgCenter}>
+          <img style={{ width: '200px' }} src={item.titlePhoto} title={item.title} />
         </Box>
       )}
+      <Typography variant="subtitle1" paragraph>
+        {item.text}
+      </Typography>
       {item.photo && (
-        <Box>
+        <Box className={classes.imgCenter}>
           {/* <Typography variant="subtitle1" paragraph>
             Фото
           </Typography> */}
-          <img className={classes.cardMedia} src={item.photo} title={item.title} />
+          <img style={{ width: '500px' }} src={item.photo} title={item.title} />
         </Box>
       )}
-    </>
+    </Box>
   );
 };
