@@ -6,7 +6,6 @@ const isCaching = true;
 const mutex = new Mutex();
 
 async function fetchWrapper(endpoint: string, init?: RequestInit) {
-  console.log(endpoint);
   try {
     let data;
     if (isCaching) {

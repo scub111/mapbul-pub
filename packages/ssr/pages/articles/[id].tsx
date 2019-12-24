@@ -15,7 +15,6 @@ class InitialPropsDetail extends React.Component<Props> {
     try {
       const { id } = query;
       const item = await articlesService.get(Array.isArray(id) ? id[0] : id);
-      console.log(item);
       return { item };
     } catch (err) {
       return { errors: err.message };
