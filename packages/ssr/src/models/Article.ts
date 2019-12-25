@@ -1,8 +1,8 @@
-import { IArticleDTO } from "@mapbul-pub/types";
-import { clearUrl } from "utils";
-import { IMAGE_URL } from "common/constants";
-import { Category } from ".";
-import { UserDescription } from "interfaces";
+import { IArticleDTO } from '@mapbul-pub/types';
+import { clearUrl } from 'utils';
+import { IMAGE_URL } from 'common/constants';
+import { Category } from '.';
+import { UserDescription } from 'interfaces';
 
 export class Article implements IArticleDTO {
   public static async New(init: IArticleDTO, category?: Category, userDescription?: UserDescription) {
@@ -12,7 +12,7 @@ export class Article implements IArticleDTO {
     return newArticle;
   }
 
-  id: number;  
+  id: number;
   title: string;
   titleEn: string;
   titlePhoto: string | null;

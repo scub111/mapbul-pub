@@ -47,13 +47,15 @@ export class CityPermissionsService implements BaseService<ICityPermissionDTO> {
   //}
 
   async getItem(id: TID): Promise<ICityPermissionDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`cityId\`,
         \`userId\`
       FROM city_permission
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): ICityPermissionDTO {

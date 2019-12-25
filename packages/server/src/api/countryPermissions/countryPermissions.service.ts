@@ -47,13 +47,15 @@ export class CountryPermissionsService implements BaseService<ICountryPermission
   //}
 
   async getItem(id: TID): Promise<ICountryPermissionDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`countryId\`,
         \`userId\`
       FROM country_permission
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): ICountryPermissionDTO {

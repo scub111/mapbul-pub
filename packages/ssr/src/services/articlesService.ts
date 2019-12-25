@@ -1,9 +1,17 @@
-import { BaseService } from "./BaseService";
-import { Article, User } from "models";
-import { ENDPOINTS } from "./endpoints";
-import { IArticleDTO } from "@mapbul-pub/types";
-import { categoriesService, usersService, userTypesService, editorsService, journalistsService, guidesService, tenantsService } from ".";
-import { UserDescription } from "interfaces";
+import { BaseService } from './BaseService';
+import { Article, User } from 'models';
+import { ENDPOINTS } from './endpoints';
+import { IArticleDTO } from '@mapbul-pub/types';
+import {
+  categoriesService,
+  usersService,
+  userTypesService,
+  editorsService,
+  journalistsService,
+  guidesService,
+  tenantsService,
+} from '.';
+import { UserDescription } from 'interfaces';
 
 const analizeUserTag = async (service: BaseService<any, any>, user: User, caption: string): Promise<string> => {
   const journalists = await service.list({ page: 1, size: 1, filter: `userId=${user.id}` });
@@ -12,7 +20,7 @@ const analizeUserTag = async (service: BaseService<any, any>, user: User, captio
     return `${caption} ${journalist.lastName} ${journalist.firstName}`;
   }
   return '';
-}
+};
 
 class ArticlesService extends BaseService<IArticleDTO, Article> {
   constructor() {
@@ -22,13 +30,13 @@ class ArticlesService extends BaseService<IArticleDTO, Article> {
       async article => {
         const [category, user] = await Promise.all([
           categoriesService.get(article.baseCategoryId),
-          usersService.get(article.authorId)
+          usersService.get(article.authorId),
         ]);
         const userType = await userTypesService.get(user.userTypeId);
-        let description = "";
+        let description = '';
 
         if (userType.tag === 'admin') {
-          description = "Админстратор"
+          description = 'Админстратор';
         } else if (userType.tag === 'edit') {
           description = await analizeUserTag(editorsService, user, 'Редактор:');
         } else if (userType.tag === 'journ') {
@@ -41,11 +49,11 @@ class ArticlesService extends BaseService<IArticleDTO, Article> {
 
         const userDescription: UserDescription = {
           type: userType.tag,
-          description
+          description,
         };
-        return Article.New(article, category, userDescription)
-      }
-    )
+        return Article.New(article, category, userDescription);
+      },
+    );
   }
 }
 

@@ -72,7 +72,8 @@ export class MarkersService implements BaseService<IMarkerDTO> {
   //}
 
   async getItem(id: TID): Promise<IMarkerDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`name\`,
@@ -103,7 +104,8 @@ export class MarkersService implements BaseService<IMarkerDTO> {
         \`wifi\`,
         \`personal\`
       FROM marker
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IMarkerDTO {

@@ -5,7 +5,7 @@ export enum Routes {
   editors = 'editors',
   guides = 'guides',
   journalists = 'journalists',
-  tenants = 'tenants',  
+  tenants = 'tenants',
   users = 'users',
   userTypes = 'usertypes',
 }

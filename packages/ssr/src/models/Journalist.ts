@@ -1,4 +1,4 @@
-import { IJournalistDTO } from "@mapbul-pub/types";
+import { IJournalistDTO } from '@mapbul-pub/types';
 
 export class Journalist implements IJournalistDTO {
   public static async New(init: IJournalistDTO) {

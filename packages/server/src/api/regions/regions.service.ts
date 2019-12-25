@@ -48,14 +48,16 @@ export class RegionsService implements BaseService<IRegionDTO> {
   //}
 
   async getItem(id: TID): Promise<IRegionDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`countryId\`,
         \`name\`,
         \`placeId\`
       FROM region
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IRegionDTO {

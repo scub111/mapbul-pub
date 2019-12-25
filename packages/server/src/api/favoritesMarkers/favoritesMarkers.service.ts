@@ -47,13 +47,15 @@ export class FavoritesMarkersService implements BaseService<IFavoritesMarkerDTO>
   //}
 
   async getItem(id: TID): Promise<IFavoritesMarkerDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`userId\`,
         \`markerId\`
       FROM favorites_marker
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IFavoritesMarkerDTO {

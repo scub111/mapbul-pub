@@ -51,7 +51,8 @@ export class UsersService implements BaseService<IUserDTO> {
   //}
 
   async getItem(id: TID): Promise<IUserDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`email\`,
@@ -61,7 +62,8 @@ export class UsersService implements BaseService<IUserDTO> {
         \`registrationDate\`,
         \`deleted\`
       FROM user
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IUserDTO {

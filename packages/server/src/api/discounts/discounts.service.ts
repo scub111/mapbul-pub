@@ -46,12 +46,14 @@ export class DiscountsService implements BaseService<IDiscountDTO> {
   //}
 
   async getItem(id: TID): Promise<IDiscountDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`value\`
       FROM discount
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IDiscountDTO {

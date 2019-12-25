@@ -53,7 +53,8 @@ export class TenantsService implements BaseService<ITenantDTO> {
   //}
 
   async getItem(id: TID): Promise<ITenantDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`userId\`,
@@ -65,7 +66,8 @@ export class TenantsService implements BaseService<ITenantDTO> {
         \`birthDate\`,
         \`address\`
       FROM tenant
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): ITenantDTO {

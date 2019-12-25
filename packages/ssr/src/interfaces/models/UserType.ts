@@ -1,4 +1,4 @@
-import { IUserTypeDTO } from "@mapbul-pub/types";
+import { IUserTypeDTO } from '@mapbul-pub/types';
 
 export class UserType implements IUserTypeDTO {
   public static async New(init: IUserTypeDTO) {

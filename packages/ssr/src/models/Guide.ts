@@ -1,4 +1,4 @@
-import { IGuideDTO } from "@mapbul-pub/types";
+import { IGuideDTO } from '@mapbul-pub/types';
 
 export class Guide implements IGuideDTO {
   public static async New(init: IGuideDTO) {

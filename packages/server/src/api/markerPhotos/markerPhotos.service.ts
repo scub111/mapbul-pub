@@ -48,14 +48,16 @@ export class MarkerPhotosService implements BaseService<IMarkerPhotosDTO> {
   //}
 
   async getItem(id: TID): Promise<IMarkerPhotosDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`markerId\`,
         \`photo\`,
         \`photoMini\`
       FROM marker_photos
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IMarkerPhotosDTO {

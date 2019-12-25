@@ -47,13 +47,15 @@ export class UserTypesService implements BaseService<IUserTypeDTO> {
   //}
 
   async getItem(id: TID): Promise<IUserTypeDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`tag\`,
         \`description\`
       FROM usertype
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IUserTypeDTO {

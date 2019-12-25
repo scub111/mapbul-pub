@@ -50,7 +50,8 @@ export class CitiesService implements BaseService<ICityDTO> {
   //}
 
   async getItem(id: TID): Promise<ICityDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`name\`,
@@ -59,7 +60,8 @@ export class CitiesService implements BaseService<ICityDTO> {
         \`countryId\`,
         \`placeId\`
       FROM city
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): ICityDTO {

@@ -47,13 +47,15 @@ export class StatusesService implements BaseService<IStatusDTO> {
   //}
 
   async getItem(id: TID): Promise<IStatusDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`tag\`,
         \`description\`
       FROM status
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IStatusDTO {

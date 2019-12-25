@@ -49,7 +49,8 @@ export class WorkTimesService implements BaseService<IWorkTimeDTO> {
   //}
 
   async getItem(id: TID): Promise<IWorkTimeDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`openTime\`,
@@ -57,7 +58,8 @@ export class WorkTimesService implements BaseService<IWorkTimeDTO> {
         \`markerId\`,
         \`weekDayId\`
       FROM worktime
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IWorkTimeDTO {

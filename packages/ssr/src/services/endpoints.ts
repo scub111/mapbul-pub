@@ -1,4 +1,4 @@
-import getConfig from "next/config";
+import getConfig from 'next/config';
 import { Routes } from 'constants/routes';
 import { IGetAllQuery } from '@mapbul-pub/types';
 
@@ -28,7 +28,7 @@ export const createPath = ({ endpoint, queryParams }: PathConfig) => {
     return `${endpoint}?${searchString}`;
   }
   return endpoint;
-}
+};
 
 export interface IEndpointFn {
   list: (query: IGetAllQuery) => string;
@@ -37,15 +37,14 @@ export interface IEndpointFn {
 
 const getEndpointFn = (endpoint: string): IEndpointFn => {
   return {
-    list: ({ page, size, filter }) => createPath(
-      {
+    list: ({ page, size, filter }) =>
+      createPath({
         endpoint: `${getApiUrl()}/${endpoint}`,
-        queryParams: { page, size, filter }
-      }
-    ),
-    get: (id: string | number) => `${getApiUrl()}/${endpoint}/${id}`
-  }
-}
+        queryParams: { page, size, filter },
+      }),
+    get: (id: string | number) => `${getApiUrl()}/${endpoint}/${id}`,
+  };
+};
 
 export const ENDPOINTS: Record<string, IEndpointFn> = {
   admins: getEndpointFn(Routes.admins),

@@ -1,4 +1,4 @@
-import { IAdminDTO } from "@mapbul-pub/types";
+import { IAdminDTO } from '@mapbul-pub/types';
 
 export class Admin implements IAdminDTO {
   public static async New(init: IAdminDTO) {

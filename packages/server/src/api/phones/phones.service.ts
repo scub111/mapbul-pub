@@ -48,14 +48,16 @@ export class PhonesService implements BaseService<IPhoneDTO> {
   //}
 
   async getItem(id: TID): Promise<IPhoneDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`number\`,
         \`markerId\`,
         \`primary\`
       FROM phone
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IPhoneDTO {

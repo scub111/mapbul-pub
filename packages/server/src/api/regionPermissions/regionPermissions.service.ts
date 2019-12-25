@@ -47,13 +47,15 @@ export class RegionPermissionsService implements BaseService<IRegionPermissionDT
   //}
 
   async getItem(id: TID): Promise<IRegionPermissionDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`regionId\`,
         \`userId\`
       FROM region_permission
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IRegionPermissionDTO {

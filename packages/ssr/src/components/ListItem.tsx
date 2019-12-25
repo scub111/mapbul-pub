@@ -2,7 +2,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea } from '@material-ui/core';
-import { formatDateToString } from '@mapbul-pub/utils'
+import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
 
 type Props = {
@@ -42,13 +42,7 @@ export const ListItem: React.FC<Props> = ({ item }) => {
                 </Typography>
               </CardContent>
             </div>
-            {item.titlePhoto && (
-              <CardMedia
-                className={classes.cardMedia}
-                image={item.titlePhoto}
-                title={item.title}
-              />
-            )}
+            {item.titlePhoto && <CardMedia className={classes.cardMedia} image={item.titlePhoto} title={item.title} />}
           </Card>
         </Link>
       </CardActionArea>

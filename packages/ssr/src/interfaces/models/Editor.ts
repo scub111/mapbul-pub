@@ -1,9 +1,9 @@
-import { IEditorDTO } from "@mapbul-pub/types";
+import { IEditorDTO } from '@mapbul-pub/types';
 
 export class Editor implements IEditorDTO {
   public static async New(init: IEditorDTO) {
     return new Editor(init);
-  }  
+  }
 
   id: number;
   userId: number;

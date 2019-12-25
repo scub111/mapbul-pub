@@ -1,14 +1,11 @@
-import { BaseService } from "./BaseService";
-import { Editor } from "models";
-import { ENDPOINTS } from "./endpoints";
-import { IEditorDTO } from "@mapbul-pub/types";
+import { BaseService } from './BaseService';
+import { Editor } from 'models';
+import { ENDPOINTS } from './endpoints';
+import { IEditorDTO } from '@mapbul-pub/types';
 
 class EditorsService extends BaseService<IEditorDTO, Editor> {
   constructor() {
-    super(
-      ENDPOINTS.editors,
-      editor => Editor.New(editor),
-    )
+    super(ENDPOINTS.editors, editor => Editor.New(editor));
   }
 }
 

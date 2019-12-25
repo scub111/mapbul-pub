@@ -48,14 +48,16 @@ export class WeekDaysService implements BaseService<IWeekDayDTO> {
   //}
 
   async getItem(id: TID): Promise<IWeekDayDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`tag\`,
         \`description\`,
         \`descriptionEn\`
       FROM weekday
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IWeekDayDTO {

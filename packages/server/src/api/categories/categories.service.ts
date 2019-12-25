@@ -53,7 +53,8 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
   //}
 
   async getItem(id: TID): Promise<ICategoryDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`name\`,
@@ -65,7 +66,8 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
         \`pin\`,
         \`forArticle\`
       FROM category
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): ICategoryDTO {

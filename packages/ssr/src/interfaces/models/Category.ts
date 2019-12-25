@@ -1,4 +1,4 @@
-import { ICategoryDTO } from "@mapbul-pub/types";
+import { ICategoryDTO } from '@mapbul-pub/types';
 
 export class Category implements ICategoryDTO {
   public static async New(init: ICategoryDTO) {

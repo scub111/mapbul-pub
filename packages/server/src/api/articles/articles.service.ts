@@ -68,7 +68,8 @@ export class ArticlesService implements BaseService<IArticleDTO> {
   //}
 
   async getItem(id: TID): Promise<IArticleDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`title\`,
@@ -95,7 +96,8 @@ export class ArticlesService implements BaseService<IArticleDTO> {
         \`endDate\`,
         \`cityId\`
       FROM article
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IArticleDTO {

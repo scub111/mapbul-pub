@@ -47,13 +47,15 @@ export class SubcategoriesService implements BaseService<ISubcategoryDTO> {
   //}
 
   async getItem(id: TID): Promise<ISubcategoryDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`markerId\`,
         \`categoryId\`
       FROM subcategory
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): ISubcategoryDTO {

@@ -54,7 +54,8 @@ export class GuidesService implements BaseService<IGuideDTO> {
   //}
 
   async getItem(id: TID): Promise<IGuideDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`userId\`,
@@ -67,7 +68,8 @@ export class GuidesService implements BaseService<IGuideDTO> {
         \`birthDate\`,
         \`address\`
       FROM guide
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IGuideDTO {

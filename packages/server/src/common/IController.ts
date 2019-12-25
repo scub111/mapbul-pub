@@ -1,6 +1,6 @@
 import express from 'express';
 import { IGetParams } from 'src/common/interfaces';
-import { PageContent} from '@mapbul-pub/types';
+import { PageContent } from '@mapbul-pub/types';
 
 export interface IController<T> {
   getAll(params: any): Promise<PageContent<T>> | PageContent<T>;

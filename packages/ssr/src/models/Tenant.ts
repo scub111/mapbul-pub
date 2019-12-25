@@ -1,4 +1,4 @@
-import { ITenantDTO } from "@mapbul-pub/types";
+import { ITenantDTO } from '@mapbul-pub/types';
 
 export class Tenant implements ITenantDTO {
   public static async New(init: ITenantDTO) {

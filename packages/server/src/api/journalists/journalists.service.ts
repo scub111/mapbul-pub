@@ -54,7 +54,8 @@ export class JournalistsService implements BaseService<IJournalistDTO> {
   //}
 
   async getItem(id: TID): Promise<IJournalistDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`userId\`,
@@ -67,7 +68,8 @@ export class JournalistsService implements BaseService<IJournalistDTO> {
         \`birthDate\`,
         \`address\`
       FROM journalist
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IJournalistDTO {

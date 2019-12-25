@@ -1,14 +1,11 @@
-import { BaseService } from "./BaseService";
-import { Admin } from "models";
-import { ENDPOINTS } from "./endpoints";
-import { IAdminDTO } from "@mapbul-pub/types";
+import { BaseService } from './BaseService';
+import { Admin } from 'models';
+import { ENDPOINTS } from './endpoints';
+import { IAdminDTO } from '@mapbul-pub/types';
 
 class AdminsService extends BaseService<IAdminDTO, Admin> {
   constructor() {
-    super(
-      ENDPOINTS.admins,
-      admin => Admin.New(admin),
-    )
+    super(ENDPOINTS.admins, admin => Admin.New(admin));
   }
 }
 

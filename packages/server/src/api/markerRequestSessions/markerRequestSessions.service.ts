@@ -47,13 +47,15 @@ export class MarkerRequestSessionsService implements BaseService<IMarkerRequestS
   //}
 
   async getItem(id: TID): Promise<IMarkerRequestSessionDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`sessionId\`,
         \`markerId\`
       FROM marker_request_session
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IMarkerRequestSessionDTO {

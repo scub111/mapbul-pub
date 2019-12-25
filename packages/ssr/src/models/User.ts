@@ -1,4 +1,4 @@
-import { IUserDTO } from "@mapbul-pub/types";
+import { IUserDTO } from '@mapbul-pub/types';
 
 export class User implements IUserDTO {
   public static async New(init: IUserDTO) {
@@ -19,7 +19,7 @@ export class User implements IUserDTO {
     this.password = init.password;
     this.guid = init.guid;
     this.userTypeId = init.userTypeId;
-    this.registrationDate = init.registrationDate
+    this.registrationDate = init.registrationDate;
     this.deleted = init.deleted;
   }
 }

@@ -14,7 +14,7 @@ async function fetchWrapper(endpoint: string, init?: RequestInit) {
         data = cache.get(endpoint);
       } else {
         data = await fetch(endpoint, init).then(res => res.json());
-        cache.set(endpoint, data)
+        cache.set(endpoint, data);
       }
       unlock();
     } else {

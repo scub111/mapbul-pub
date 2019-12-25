@@ -47,13 +47,15 @@ export class AdminsService implements BaseService<IAdminDTO> {
   //}
 
   async getItem(id: TID): Promise<IAdminDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`userId\`,
         \`superuser\`
       FROM admin
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IAdminDTO {

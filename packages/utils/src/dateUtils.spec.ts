@@ -13,7 +13,7 @@ describe('dateUtils', () => {
     });
 
     it('formatDateToString method from string', () => {
-      const result = formatDateToString(new Date("2019-06-20T09:10:59.000Z"));
+      const result = formatDateToString(new Date('2019-06-20T09:10:59.000Z'));
       expect(result).toBe('20/06/2019');
     });
   });

@@ -53,7 +53,8 @@ export class EditorsService implements BaseService<IEditorDTO> {
   //}
 
   async getItem(id: TID): Promise<IEditorDTO> {
-    return (await this.connection.query(`
+    return (
+      await this.connection.query(`
       SELECT
         \`id\`,
         \`userId\`,
@@ -65,7 +66,8 @@ export class EditorsService implements BaseService<IEditorDTO> {
         \`birthDate\`,
         \`address\`
       FROM editor
-      WHERE id = ${id}`))[0];
+      WHERE id = ${id}`)
+    )[0];
   }
 
   //putItem(id: TID): IEditorDTO {
