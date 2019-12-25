@@ -3,6 +3,9 @@ import { Routes } from 'constants/routes';
 import { IGetAllQuery } from '@mapbul-pub/types';
 
 const { publicRuntimeConfig } = getConfig();
+
+//To verify BASE_URL for reloading specific page
+console.log(`BASE_URL = ${publicRuntimeConfig.BASE_URL}`);
 const getApiUrl = () => `${publicRuntimeConfig.BASE_URL}`;
 
 interface PathConfig {
