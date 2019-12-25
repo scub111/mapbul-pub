@@ -1,7 +1,7 @@
 import Router from 'next/router';
+import Pagination from 'material-ui-flat-pagination';
 import { Layout } from 'components';
 import { List } from 'components';
-import Pagination from 'material-ui-flat-pagination';
 import { NextPage, NextPageContext } from 'next';
 import { PageContent } from '@mapbul-pub/types';
 import { Container, makeStyles } from '@material-ui/core';
