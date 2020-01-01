@@ -21,6 +21,7 @@ pipeline {
       steps {
         print "Start building..."
         sh 'npm run build:local'
+        sh 'npm run build'
       }
     }
   }
