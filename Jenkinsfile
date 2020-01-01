@@ -24,7 +24,7 @@ pipeline {
         timeout(time: 1, unit: 'MINUTES') {
           print "Start building..."
           sh 'npm run build:local'
-          sh 'cd packages/common; npm run build'
+          sh 'cd packages/common; npm run build '
         }
       }
     }
