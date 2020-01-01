@@ -11,17 +11,21 @@ pipeline {
   stages {
     stage('NPM install'){
       steps {
-        sh 'npm -v'
-        sh 'npm i webpack lerna rimraf --global'
-        sh 'npm ci -q'
+        timeout(time: 2, unit: 'MINUTES') {
+          sh 'npm -v'
+          sh 'npm i webpack lerna rimraf -g'
+          sh 'npm ci -q'
+        }
       }
     }
 
     stage('Build'){
       steps {
-        print "Start building..."
-        sh 'npm run build:local'
-        sh 'lerna run --scope @mapbul-pub/common build'
+        timeout(time: 1, unit: 'MINUTES') {
+          print "Start building..."
+          sh 'npm run build:local'
+          sh 'lerna run ls'
+        }
       }
     }
   }
