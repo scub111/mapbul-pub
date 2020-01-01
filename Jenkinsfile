@@ -8,6 +8,7 @@ pipeline {
       steps {
         timeout(time: 2, unit: 'MINUTES') {
           sh 'npm -v'
+          sh 'lerna -v'
           sh 'npm run bootstrap'
         }
       }
