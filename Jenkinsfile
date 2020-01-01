@@ -22,9 +22,11 @@ pipeline {
     stage('Build'){
       steps {
         timeout(time: 1, unit: 'MINUTES') {
-          print "Start building..."
+          print "Start building..."          
+          sh 'uname -a'
+          sh 'pwd'
           sh 'npm run build:local'
-          sh 'cd packages/common; npm run build '
+          sh 'lerna run --scope @mapbul-pub/common build'
         }
       }
     }
