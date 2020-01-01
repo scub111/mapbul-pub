@@ -12,7 +12,7 @@ pipeline {
     stage('NPM install'){
       steps {
         sh 'npm -v'
-        sh 'npm i webpack lerna -g'
+        sh 'npm i webpack lerna -q'
         sh 'npm ci -q'
       }
     }
