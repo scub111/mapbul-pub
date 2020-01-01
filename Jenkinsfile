@@ -20,6 +20,7 @@ pipeline {
     stage('Build'){
       steps {
         print "Start building..."
+        sh 'cd packages/common'
         sh 'npm run build'
       }
     }
