@@ -13,7 +13,7 @@ pipeline {
       steps {
         timeout(time: 2, unit: 'MINUTES') {
           sh 'npm -v'
-          sh 'npm i webpack lerna rimraf -g'
+          sh 'npm i webpack webpack-cli lerna rimraf -g'
           sh 'npm ci -q'
         }
       }
