@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image 'node:10-alpine'
-      args '-u root:root'
-    }
-  }
+  agent any
   environment {
     HOME = '.'
   }
