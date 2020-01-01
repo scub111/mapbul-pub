@@ -20,7 +20,7 @@ pipeline {
     stage('Build'){
       steps {
         print "Start building..."
-        sh 'npm run build'
+        sh 'npm run build:local'
       }
     }
   }
