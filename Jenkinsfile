@@ -33,8 +33,8 @@ pipeline {
     stage('Server container'){
       steps {
         timeout(time: 3, unit: 'MINUTES') {
-          // sh 'docker stop mapbul-pub-server'
-          // sh 'docker rm mapbul-pub-server'
+          sh 'docker stop mapbul-pub-server'
+          sh 'docker rm mapbul-pub-server'
           sh 'docker run -d --name mapbul-pub-server --restart always -p 3100:3100 mapbul-pub-server'
         }
       }
@@ -51,8 +51,8 @@ pipeline {
     stage('SSR container'){
       steps {
         timeout(time: 3, unit: 'MINUTES') {
-          //sh 'docker stop mapbul-pub-ssr'
-          //sh 'docker rm mapbul-pub-ssr'
+          sh 'docker stop mapbul-pub-ssr'
+          sh 'docker rm mapbul-pub-ssr'
           sh 'docker run -d --name mapbul-pub-ssr --restart always -p 3300:3300 mapbul-pub-ssr'
         }
       }
