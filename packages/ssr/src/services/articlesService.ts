@@ -36,7 +36,7 @@ class ArticlesService extends BaseService<IArticleDTO, Article> {
         let description = '';
 
         if (userType.tag === 'admin') {
-          description = 'Админстратор';
+          description = 'Администратор';
         } else if (userType.tag === 'edit') {
           description = await analizeUserTag(editorsService, user, 'Редактор:');
         } else if (userType.tag === 'journ') {
