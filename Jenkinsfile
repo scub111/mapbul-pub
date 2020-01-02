@@ -33,9 +33,9 @@ pipeline {
     stage('Server container'){
       steps {
         timeout(time: 3, unit: 'MINUTES') {
-          sh 'docker stop mapbul-pub-server-cn'
-          sh 'docker rm mapbul-pub-server-cn'
-          sh 'docker run -d --name mapbul-pub-server-cn --restart always -p 3100:3100 mapbul-pub-server'
+          sh 'docker stop mapbul-pub-server'
+          sh 'docker rm mapbul-pub-server'
+          sh 'docker run -d --name mapbul-pub-server --restart always -p 3100:3100 mapbul-pub-server'
         }
       }
     }
