@@ -1,0 +1,14 @@
+FROM node:latest
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+COPY lerna.json .
+COPY packages/common packages/common
+COPY packages/types packages/types
+COPY packages/utils packages/utils
+COPY packages/ssr packages/ssr
+
+RUN npm run bootstrap
+EXPOSE 3300
+CMD cd packages/ssr && npm start

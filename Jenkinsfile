@@ -39,5 +39,23 @@ pipeline {
         }
       }
     }
+
+    stage('SSR image'){
+      steps {
+        timeout(time: 3, unit: 'MINUTES') {
+          sh 'docker build -t mapbul-pub-ssr -f Dockerfile.ssr .'
+        }
+      }
+    }
+
+    stage('SSR container'){
+      steps {
+        timeout(time: 3, unit: 'MINUTES') {
+          sh 'docker stop mapbul-pub-ssr'
+          sh 'docker rm mapbul-pub-ssr'
+          sh 'docker run -d --name mapbul-pub-ssr --restart always -p 3300:3300 mapbul-pub-ssr'
+        }
+      }
+    }
   }
 }
