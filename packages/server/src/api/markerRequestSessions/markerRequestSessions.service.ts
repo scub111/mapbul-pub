@@ -23,7 +23,7 @@ export class MarkerRequestSessionsService implements BaseService<IMarkerRequestS
     const isPagination = query.page && query.size;
     if (isPagination) {
       const offset = (query.page - 1) * query.size;
-      additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM category ${filter}`;
+      additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM marker_request_session ${filter}`;
     }
     const records = await this.connection.query(`
       SELECT

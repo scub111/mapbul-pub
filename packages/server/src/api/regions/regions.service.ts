@@ -23,7 +23,7 @@ export class RegionsService implements BaseService<IRegionDTO> {
     const isPagination = query.page && query.size;
     if (isPagination) {
       const offset = (query.page - 1) * query.size;
-      additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM category ${filter}`;
+      additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM region ${filter}`;
     }
     const records = await this.connection.query(`
       SELECT

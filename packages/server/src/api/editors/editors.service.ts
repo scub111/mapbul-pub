@@ -23,7 +23,7 @@ export class EditorsService implements BaseService<IEditorDTO> {
     const isPagination = query.page && query.size;
     if (isPagination) {
       const offset = (query.page - 1) * query.size;
-      additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM category ${filter}`;
+      additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM editor ${filter}`;
     }
     const records = await this.connection.query(`
       SELECT

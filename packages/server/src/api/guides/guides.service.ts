@@ -23,7 +23,7 @@ export class GuidesService implements BaseService<IGuideDTO> {
     const isPagination = query.page && query.size;
     if (isPagination) {
       const offset = (query.page - 1) * query.size;
-      additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM category ${filter}`;
+      additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM guide ${filter}`;
     }
     const records = await this.connection.query(`
       SELECT
