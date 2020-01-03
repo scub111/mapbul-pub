@@ -12,14 +12,18 @@ export class CityPermissionsService implements BaseService<ICityPermissionDTO> {
 
   async getAll(query: IGetAllQuery): Promise<PageContent<ICityPermissionDTO>> {
     let filter = '';
-    if ('filter' in query) {
+    if (query.filter) {
       filter += `WHERE ${query.filter}`;
     }
-    let additional = filter;
+    let sort = ''; 
+    if (query.sort) {
+      sort += `ORDER BY ${query.sort}`;
+    }
+    let additional = `${filter} ${sort}`;
     const isPagination = query.page && query.size;
     if (isPagination) {
       const offset = (query.page - 1) * query.size;
-      additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM city_permission ${filter}`;
+      additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM category ${filter}`;
     }
     const records = await this.connection.query(`
       SELECT
