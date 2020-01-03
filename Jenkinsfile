@@ -57,5 +57,13 @@ pipeline {
         }
       }
     }
+
+    stage('Docker prune'){
+      steps {
+        timeout(time: 3, unit: 'MINUTES') {
+          sh 'docker system prune -a -f'
+        }
+      }
+    }
   }
 }
