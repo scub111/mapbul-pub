@@ -46,7 +46,8 @@ const ArticlesPage: NextPage<Props> = ({ pagination }) => {
           total={ITEMS_PER_PAGE * pagination.totalPages}
           onClick={(_: any, offset: number) => {
             const queryPage = offset / ITEMS_PER_PAGE + 1;
-            Router.push(`/${Routes.articles}?page=${queryPage}`, `/${Routes.articles}?page=${queryPage}`);
+            Router.push(`/${Routes.articles}?page=${queryPage}`,
+              `/${Routes.articles}?page=${queryPage}`);
           }}
           size="large"
         />
@@ -57,7 +58,11 @@ const ArticlesPage: NextPage<Props> = ({ pagination }) => {
 
 ArticlesPage.getInitialProps = async (ctx: NextPageContext) => {
   const queryPage = getQueryPage(ctx.query);
-  const pagination: PageContent<Article> = await articlesService.list({ page: queryPage, size: ITEMS_PER_PAGE, filter: "statusId = 2" });
+  const pagination: PageContent<Article> = await articlesService.list({
+    page: queryPage,
+    size: ITEMS_PER_PAGE,
+    filter: "StatusId = 2 AND StartDate is null"
+  });
   return { pagination };
 };
 
