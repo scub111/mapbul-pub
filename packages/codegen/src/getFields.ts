@@ -13,6 +13,10 @@ const traslateField = (field: string) => {
   return field[0].toLowerCase() + field.slice(1);
 };
 
+const traslateNull = (nullable: string) => {
+  return nullable === 'YES';
+};
+
 const traslateType = (type: string) => {
   if (type.includes('varchar') || type.includes('text') || type.includes('char')) {
     return 'string';
@@ -28,12 +32,14 @@ const traslateType = (type: string) => {
 
 export const getFields = async (connection: IDbConnection, tableName: string) => {
   const result: any[] = await connection.query(`DESCRIBE ${tableName}`);
+  // console.log(result);
   return result.map(
     (row: IDescribeRowData, index: number) =>
       ({
         fieldOrigin: row.Field,
         field: traslateField(row.Field),
         type: traslateType(row.Type),
+        nullable: traslateNull(row.Null),
         separator: index !== result.length - 1 ? ',' : '',
       } as IField),
   );
