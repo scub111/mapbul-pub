@@ -61,7 +61,8 @@ ArticlesPage.getInitialProps = async (ctx: NextPageContext) => {
   const pagination: PageContent<Article> = await articlesService.list({
     page: queryPage,
     size: ITEMS_PER_PAGE,
-    filter: "StatusId = 2 AND StartDate is null"
+    filter: "StatusId = 2 AND StartDate is null",
+    sort: 'PublishedDate desc'
   });
   return { pagination };
 };

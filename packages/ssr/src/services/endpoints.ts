@@ -37,10 +37,10 @@ export interface IEndpointFn {
 
 const getEndpointFn = (endpoint: string): IEndpointFn => {
   return {
-    list: ({ page, size, filter }) =>
+    list: ({ page, size, filter, sort }) =>
       createPath({
         endpoint: `${getApiUrl()}/${endpoint}`,
-        queryParams: { page, size, filter },
+        queryParams: { page, size, filter, sort },
       }),
     get: (id: string | number) => `${getApiUrl()}/${endpoint}/${id}`,
   };
