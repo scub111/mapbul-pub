@@ -48,14 +48,14 @@ describe('AdminsController', () => {
     it('should return sorted page with pagination', async () => {
       const result = await controller.getAll({ page: 1, size: 1, sort: 'name desc' });
       expect(result.content.length).toBe(1);
-      expect(result.content[0].name).toBe("экология");
+      expect(result.content[0].name).toBe('экология');
       expect(result.totalPages).toBe(136);
     });
 
     it('should return sorted and filtered page with pagination', async () => {
       const result = await controller.getAll({ page: 1, size: 1, filter: 'id > 100', sort: 'name desc' });
       expect(result.content.length).toBe(1);
-      expect(result.content[0].name).toBe("экология");
+      expect(result.content[0].name).toBe('экология');
       expect(result.totalPages).toBe(49);
     });
   });

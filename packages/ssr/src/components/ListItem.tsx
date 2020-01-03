@@ -34,9 +34,11 @@ export const ListItem: React.FC<Props> = ({ item }) => {
                 <Typography component="h2" variant="h5">
                   {item.title}
                 </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  {formatDateToString(item.publishedDate)}
-                </Typography>
+                {item.publishedDate &&
+                  <Typography variant="subtitle1" color="textSecondary">
+                    {formatDateToString(item.publishedDate)}
+                  </Typography>
+                }
                 <Typography variant="subtitle1" paragraph>
                   {item.description}
                 </Typography>

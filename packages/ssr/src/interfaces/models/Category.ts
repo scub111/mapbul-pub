@@ -7,8 +7,8 @@ export class Category implements ICategoryDTO {
 
   id: number;
   name: string;
-  enName: string;
-  parentId: number;
+  enName: string | null;
+  parentId: number | null;
   addedDate: Date;
   icon: string;
   color: string;

@@ -15,7 +15,7 @@ export class ArticlesService implements BaseService<IArticleDTO> {
     if (query.filter) {
       filter += `WHERE ${query.filter}`;
     }
-    let sort = ''; 
+    let sort = '';
     if (query.sort) {
       sort += `ORDER BY ${query.sort}`;
     }
