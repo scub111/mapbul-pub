@@ -2,13 +2,15 @@ import fetch from 'isomorphic-unfetch';
 import { Mutex } from 'utils';
 
 const cache = new Map();
-const isCaching = true;
+const isCachingOnClient = true;
+const isClientEnviroment = typeof window !== 'undefined';
 const mutex = new Mutex();
 
+console.log(`isClientEnviroment = ${isClientEnviroment}`);
 async function fetchWrapper(endpoint: string, init?: RequestInit) {
   try {
     let data;
-    if (isCaching) {
+    if (isCachingOnClient && isClientEnviroment) {
       const unlock = await mutex.lock();
       if (cache.has(endpoint)) {
         data = cache.get(endpoint);
