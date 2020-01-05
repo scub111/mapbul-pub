@@ -6,7 +6,6 @@ const isCachingOnClient = true;
 const isClientEnviroment = typeof window !== 'undefined';
 const mutex = new Mutex();
 
-console.log(`isClientEnviroment = ${isClientEnviroment}`);
 async function fetchWrapper(endpoint: string, init?: RequestInit) {
   try {
     let data;
