@@ -4,14 +4,27 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
+import { green } from '@material-ui/core/colors';
 
 type Props = {
   item: Article;
 };
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   card: {
     display: 'flex',
+    [theme.breakpoints.up("xs")]: {
+      backgroundColor: "white"
+    },
+    [theme.breakpoints.up("sm")]: {
+      backgroundColor: "red"
+    },
+    [theme.breakpoints.up("md")]: {
+      backgroundColor: "blue"
+    },
+    [theme.breakpoints.up("lg")]: {
+      backgroundColor: green[500]
+    }
   },
   cardDetails: {
     flex: 1,
