@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
-import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea } from '@material-ui/core';
+import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea, Button } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
 // import { green } from '@material-ui/core/colors';
-import myTheme from '../theme';
+import theme from '../theme';
 
 type Props = {
   item: Article;
@@ -14,7 +14,7 @@ type Props = {
 const useStyles = makeStyles(() => ({
   card: {
     display: 'flex',
-    backgroundColor: myTheme.palette.primary.main,
+    // backgroundColor: myTheme.palette.primary.main,
     // [theme.breakpoints.up("xs")]: {
     //   backgroundColor: theme.palette.primary.main
     // },
@@ -37,10 +37,10 @@ const useStyles = makeStyles(() => ({
 }));
 
 export const ListItem: React.FC<Props> = ({ item }) => {
-  const classes = useStyles(myTheme);
+  const classes = useStyles(theme);
 
   return (
-    <ThemeProvider theme={myTheme}>
+    <ThemeProvider theme={theme}>
       <Grid item key={item.title} xs={12} md={6}>
         <CardActionArea>
           <Link href={`/articles/[id]`} as={`/articles/${item.id}`}>
@@ -64,6 +64,14 @@ export const ListItem: React.FC<Props> = ({ item }) => {
             </Card>
           </Link>
         </CardActionArea>
+        <Button
+          fullWidth
+          variant="contained"
+          color="secondary"
+          onClick={() => console.log('click')}
+        >
+          Submit
+        </Button>
       </Grid>
     </ThemeProvider>
   );

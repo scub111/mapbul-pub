@@ -13,9 +13,9 @@ import {
   Hidden,
   CardMedia,
   Divider,
-  ThemeProvider,
+  // ThemeProvider,
 } from '@material-ui/core';
-import myTheme from 'ssr/src/theme';
+// import theme from 'ssr/src/theme';
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -121,7 +121,7 @@ const social = ['GitHub', 'Twitter', 'Facebook'];
 const IndexPage: NextPage = () => {
   const classes = useStyles();
   return (
-    <ThemeProvider theme={myTheme}>
+    // <ThemeProvider theme={theme}>
       <Layout title="Mapbul">
         {/* Main featured post */}
         <Paper className={classes.mainFeaturedPost}>
@@ -226,7 +226,7 @@ const IndexPage: NextPage = () => {
           {/* End sidebar */}
         </Grid>
       </Layout>
-    </ThemeProvider>
+    // </ThemeProvider>
   );
 };
 
