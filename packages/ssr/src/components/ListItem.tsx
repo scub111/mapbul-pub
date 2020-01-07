@@ -1,20 +1,22 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea, Button } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
-// import { green } from '@material-ui/core/colors';
-import theme from '../theme';
 
 type Props = {
   item: Article;
 };
 
 const useStyles = makeStyles(() => ({
+  typography: {
+    // fontFamily: 'Raleway, Arial',
+    fontSize: 6, //14 - default
+  },
   card: {
     display: 'flex',
-    // backgroundColor: myTheme.palette.primary.main,
+    backgroundColor: 'red',
     // [theme.breakpoints.up("xs")]: {
     //   backgroundColor: theme.palette.primary.main
     // },
@@ -29,6 +31,7 @@ const useStyles = makeStyles(() => ({
     // }
   },
   cardDetails: {
+    // fontSize: 6,
     flex: 1,
   },
   cardMedia: {
@@ -37,17 +40,16 @@ const useStyles = makeStyles(() => ({
 }));
 
 export const ListItem: React.FC<Props> = ({ item }) => {
-  const classes = useStyles(theme);
+  const classes = useStyles();
 
   return (
-    <ThemeProvider theme={theme}>
       <Grid item key={item.title} xs={12} md={6}>
         <CardActionArea>
           <Link href={`/articles/[id]`} as={`/articles/${item.id}`}>
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
                 <CardContent>
-                  <Typography component="h2" variant="h5">
+                  <Typography variant="h5">
                     {item.title}
                   </Typography>
                   {item.publishedDate &&
@@ -73,6 +75,5 @@ export const ListItem: React.FC<Props> = ({ item }) => {
           Submit
         </Button>
       </Grid>
-    </ThemeProvider>
   );
 };
