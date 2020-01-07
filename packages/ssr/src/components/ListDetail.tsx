@@ -3,7 +3,10 @@ import { makeStyles, Typography, Box, Link } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(0, 1),
+  },
   imgCenter: {
     display: 'flex',
     flexDirection: 'column',
@@ -15,10 +18,18 @@ type ListDetailProps = {
   item: Article;
 };
 
+const PreText: React.FC<{text: string}> = ({text}) => {
+  return (
+    <>
+      {text.split('\r\n').map((item, index) => (<Typography key={index} variant="subtitle1">{item}</Typography>))}
+    </>
+  );
+}
+
 export const ListDetail: React.FC<ListDetailProps> = ({ item }) => {
   const classes = useStyles();
   return (
-    <Box style={{ padding: '0 30px' }}>
+    <Box className={classes.root}>
       <Box style={{ display: 'flex' }}>
         <Box style={{ flex: 1 }}>
           <Typography variant="h6">
@@ -63,8 +74,8 @@ export const ListDetail: React.FC<ListDetailProps> = ({ item }) => {
           }
         </Box>
       </Box>
-      <Typography variant="subtitle1" paragraph>
-        {item.text}
+      <Typography component="div" variant="subtitle1" paragraph>
+        <PreText text={item.text}/>
       </Typography>
       {item.photo && (
         <Box className={classes.imgCenter}>

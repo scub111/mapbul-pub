@@ -9,7 +9,7 @@ type Props = {
 
 export const List: React.FC<Props> = ({ items }) => {
   return (
-    <Grid container spacing={4}>
+    <Grid container spacing={2}>
       {items.map((item: Article, index: number) => (
         <ListItem key={index} item={item} />
       ))}
