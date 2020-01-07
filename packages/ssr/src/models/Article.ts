@@ -5,7 +5,6 @@ import { Category } from '.';
 import { UserDescription } from 'interfaces';
 
 export class Article implements IArticleDTO {
-
   public static async New(init: IArticleDTO, category?: Category, userDescription?: UserDescription) {
     const newArticle = new Article(init);
     newArticle.category = category;
@@ -37,7 +36,7 @@ export class Article implements IArticleDTO {
   baseCategoryId: number;
   endDate: Date | null;
   cityId: number | null;
-  
+
   category: Category | undefined;
   userDescription: UserDescription | undefined;
 

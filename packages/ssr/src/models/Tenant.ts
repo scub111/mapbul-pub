@@ -14,7 +14,7 @@ export class Tenant implements ITenantDTO {
   phone: string | null;
   birthDate: Date | null;
   address: string | null;
-  
+
   public constructor(init: ITenantDTO) {
     this.id = init.id;
     this.userId = init.userId;

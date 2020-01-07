@@ -33,7 +33,7 @@ const useStyles = makeStyles(() => ({
   cardDetails: {
     // fontSize: 6,
     flex: 1,
-    minWidth: '200px'
+    minWidth: '200px',
   },
   cardMedia: {
     width: '150px',
@@ -44,30 +44,28 @@ export const ListItem: React.FC<Props> = ({ item }) => {
   const classes = useStyles();
 
   return (
-      <Grid item key={item.title} xs={12} md={6}>
-        <CardActionArea>
-          <Link href={`/articles/[id]`} as={`/articles/${item.id}`}>
-            <Card className={classes.card}>
-              <div className={classes.cardDetails}>
-                <CardContent>
-                  <Typography variant="h5">
-                    {item.title}
+    <Grid item key={item.title} xs={12} md={6}>
+      <CardActionArea>
+        <Link href={`/articles/[id]`} as={`/articles/${item.id}`}>
+          <Card className={classes.card}>
+            <div className={classes.cardDetails}>
+              <CardContent>
+                <Typography variant="h5">{item.title}</Typography>
+                {item.publishedDate && (
+                  <Typography variant="subtitle1" color="textSecondary">
+                    {formatDateToString(item.publishedDate)}
                   </Typography>
-                  {item.publishedDate &&
-                    <Typography variant="subtitle1" color="textSecondary">
-                      {formatDateToString(item.publishedDate)}
-                    </Typography>
-                  }
-                  <Typography variant="subtitle1" paragraph>
-                    {item.description}
-                  </Typography>
-                </CardContent>
-              </div>
-              {item.titlePhoto && <CardMedia className={classes.cardMedia} image={item.titlePhoto} title={item.title} />}
-            </Card>
-          </Link>
-        </CardActionArea>
-        {/* <Button
+                )}
+                <Typography variant="subtitle1" paragraph>
+                  {item.description}
+                </Typography>
+              </CardContent>
+            </div>
+            {item.titlePhoto && <CardMedia className={classes.cardMedia} image={item.titlePhoto} title={item.title} />}
+          </Card>
+        </Link>
+      </CardActionArea>
+      {/* <Button
           fullWidth
           variant="contained"
           color="secondary"
@@ -75,6 +73,6 @@ export const ListItem: React.FC<Props> = ({ item }) => {
         >
           Submit
         </Button> */}
-      </Grid>
+    </Grid>
   );
 };
