@@ -49,9 +49,9 @@ export const ListDetail: React.FC<ListDetailProps> = ({ item }) => {
                             {item.userDescription ? item.userDescription.description : ''}
                         </Typography>
                     }
-                    {item.sourceUrl &&
-                        <Link display="block" variant="body1" href={item.sourceUrl} key={item.sourceUrl}>
-                            ссылка
+                    {item.sourcePhoto &&
+                        <Link display="block" variant="body1" href={item.sourcePhoto} key={item.sourcePhoto}>
+                            {item.sourcePhoto}
                         </Link>
                     }
                 </Box>
