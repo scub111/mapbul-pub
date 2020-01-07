@@ -1,4 +1,4 @@
-import red from '@material-ui/core/colors/red';
+// import red from '@material-ui/core/colors/red';
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 // Create a theme instance.
@@ -7,25 +7,25 @@ const innerTheme = createMuiTheme({
   // },
   typography: {
     // fontFamily: 'Raleway, Arial',
-    // fontSize: 10, //14 - default
+    fontSize: 12, //14 - default
   },
   palette: {
-    primary: {
-      main: '#ffffff',
-    },
-    secondary: {
-      main: '#ffffff',
-    },
-    error: {
-      main: red.A400,
-    },
-    background: {
-      default: '#fff',
-    },
+    // primary: {
+    //   main: '#ffffff',
+    // },
+    // secondary: {
+    //   main: '#ffffff',
+    // },
+    // error: {
+    //   main: red.A400,
+    // },
+    // background: {
+    //   default: '#fff',
+    // },
   },
 });
 
-export theme = responsiveFontSizes(innerTheme);
+export const theme = responsiveFontSizes(innerTheme);
 // theme.typography.subtitle1 = {
 //   fontSize: 12,
 //   // '@media (min-width:600px)': {

@@ -99,7 +99,7 @@ export const Layout: React.FC<Props> = ({ children, title = 'This is the default
                   color="inherit"
                   noWrap
                   key={section.page}
-                  variant="body2"
+                  variant="h6"
                   href={section.url}
                   className={classes.toolbarLink}
                 >

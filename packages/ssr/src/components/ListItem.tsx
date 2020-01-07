@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea, Button } from '@material-ui/core';
+import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
 
@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   },
   card: {
     display: 'flex',
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     // [theme.breakpoints.up("xs")]: {
     //   backgroundColor: theme.palette.primary.main
     // },
@@ -33,9 +33,10 @@ const useStyles = makeStyles(() => ({
   cardDetails: {
     // fontSize: 6,
     flex: 1,
+    minWidth: '200px'
   },
   cardMedia: {
-    width: 200,
+    width: '150px',
   },
 }));
 
@@ -66,14 +67,14 @@ export const ListItem: React.FC<Props> = ({ item }) => {
             </Card>
           </Link>
         </CardActionArea>
-        <Button
+        {/* <Button
           fullWidth
           variant="contained"
           color="secondary"
           onClick={() => console.log('click')}
         >
           Submit
-        </Button>
+        </Button> */}
       </Grid>
   );
 };
