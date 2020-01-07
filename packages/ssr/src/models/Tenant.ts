@@ -7,14 +7,14 @@ export class Tenant implements ITenantDTO {
 
   id: number;
   userId: number;
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  gender: string;
-  phone: string;
-  birthDate: Date;
-  address: string;
-
+  firstName: string | null;
+  middleName: string | null;
+  lastName: string | null;
+  gender: string | null;
+  phone: string | null;
+  birthDate: Date | null;
+  address: string | null;
+  
   public constructor(init: ITenantDTO) {
     this.id = init.id;
     this.userId = init.userId;

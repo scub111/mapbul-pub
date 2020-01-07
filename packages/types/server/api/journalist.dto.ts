@@ -1,7 +1,7 @@
 export interface IJournalistDTO {
   id: number;
   userId: number;
-  editorId: number;
+  editorId: number | null;
   firstName: string;
   middleName: string;
   lastName: string;

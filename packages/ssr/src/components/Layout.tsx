@@ -2,8 +2,10 @@ import * as React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import SearchIcon from '@material-ui/icons/Search';
-import { Link as MuiLink, CssBaseline } from '@material-ui/core';
+import { Link as MuiLink, CssBaseline, ThemeProvider } from '@material-ui/core';
 import { Container, Toolbar, Button, Typography, IconButton, makeStyles } from '@material-ui/core';
+import { theme } from '../theme';
+import { Routes } from '../constants';
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -39,7 +41,7 @@ const sections: Array<IPageUrl> = [
   },
   {
     page: 'Статьи',
-    url: '/articles',
+    url: `/${Routes.articles}`,
   },
 ];
 
@@ -62,7 +64,7 @@ interface Props {
 export const Layout: React.FC<Props> = ({ children, title = 'This is the default title' }) => {
   const classes = useStyles();
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <Head>
         <title>{title}</title>
@@ -72,7 +74,7 @@ export const Layout: React.FC<Props> = ({ children, title = 'This is the default
       <Container maxWidth="lg">
         <header>
           <Toolbar className={classes.toolbar}>
-            <Button size="small">Подписаться</Button>
+            {/* <Button size="small">Подписаться</Button> */}
             <Typography
               component="h2"
               variant="h5"
@@ -97,7 +99,7 @@ export const Layout: React.FC<Props> = ({ children, title = 'This is the default
                   color="inherit"
                   noWrap
                   key={section.page}
-                  variant="body2"
+                  variant="h6"
                   href={section.url}
                   className={classes.toolbarLink}
                 >
@@ -117,6 +119,6 @@ export const Layout: React.FC<Props> = ({ children, title = 'This is the default
           </Container>
         </footer>
       </Container>
-    </div>
+    </ThemeProvider>
   );
 };

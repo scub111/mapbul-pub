@@ -1,5 +1,5 @@
 // import appRootPath from 'app-root-path';
-import { runSync, copyFileSync } from 'scub111-common';
+import { runSync } from 'scub111-common';
 
 export const deployServer = () => {
   console.log('Stoping site mapbul.api...');

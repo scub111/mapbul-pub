@@ -34,7 +34,7 @@ describe('AdminsController', () => {
     });
 
     it('should return filtered page', async () => {
-      const result = await controller.getAll({ filter: 'id>100' });
+      const result = await controller.getAll({ filter: 'id > 100' });
       expect(result.content.length).toBe(49);
       expect(result.totalPages).toBe(1);
     });
@@ -43,6 +43,20 @@ describe('AdminsController', () => {
       const result = await controller.getAll({ page: 1, size: 1, filter: 'id > 100 and enName = "money"' });
       expect(result.content.length).toBe(1);
       expect(result.totalPages).toBe(1);
+    });
+
+    it('should return sorted page with pagination', async () => {
+      const result = await controller.getAll({ page: 1, size: 1, sort: 'name desc' });
+      expect(result.content.length).toBe(1);
+      expect(result.content[0].name).toBe('экология');
+      expect(result.totalPages).toBe(136);
+    });
+
+    it('should return sorted and filtered page with pagination', async () => {
+      const result = await controller.getAll({ page: 1, size: 1, filter: 'id > 100', sort: 'name desc' });
+      expect(result.content.length).toBe(1);
+      expect(result.content[0].name).toBe('экология');
+      expect(result.totalPages).toBe(49);
     });
   });
 });

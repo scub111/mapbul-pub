@@ -12,10 +12,14 @@ export class RegionsService implements BaseService<IRegionDTO> {
 
   async getAll(query: IGetAllQuery): Promise<PageContent<IRegionDTO>> {
     let filter = '';
-    if ('filter' in query) {
+    if (query.filter) {
       filter += `WHERE ${query.filter}`;
     }
-    let additional = filter;
+    let sort = '';
+    if (query.sort) {
+      sort += `ORDER BY ${query.sort}`;
+    }
+    let additional = `${filter} ${sort}`;
     const isPagination = query.page && query.size;
     if (isPagination) {
       const offset = (query.page - 1) * query.size;

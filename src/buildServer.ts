@@ -1,5 +1,5 @@
-import appRootPath from '../packages/codegen/node_modules/@types/app-root-path';
-import { runSync, copyFileSync, removeDirSync, removeFileSync } from '../packages/codegen/node_modules/scub111-common';
+import appRootPath from 'app-root-path';
+import { runSync, copyFileSync, removeFileSync } from 'scub111-common';
 
 export const buildServer = () => {
   console.log('Build was started');

@@ -1,0 +1,14 @@
+FROM node:latest
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+COPY lerna.json .
+COPY packages/common packages/common
+COPY packages/codegen packages/codegen
+COPY packages/types packages/types
+COPY packages/server packages/server
+
+RUN npm run bootstrap
+EXPOSE 3100
+CMD cd packages/server && npm run start:prod
