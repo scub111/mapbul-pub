@@ -41,7 +41,7 @@ export const ListDetail: React.FC<ListDetailProps> = ({ item }) => {
       </Box>
       {item.titlePhoto && (
         <Box className={classes.imgCenter}>
-          <img style={{ maxWidth: '200px' }} src={item.titlePhoto} title={item.title} />
+          <img style={{ maxWidth: '100%' }} src={item.titlePhoto} title={item.title} />
         </Box>
       )}
       <Box className={classes.imgCenter}>
@@ -66,7 +66,7 @@ export const ListDetail: React.FC<ListDetailProps> = ({ item }) => {
           {/* <Typography variant="subtitle1" paragraph>
             Фото
           </Typography> */}
-          <img style={{ maxWidth: '500px' }} src={item.photo} title={item.title} />
+          <img style={{ maxWidth: '100%' }} src={item.photo} title={item.title} />
         </Box>
       )}
     </Box>
