@@ -26,7 +26,7 @@ const PreText: React.FC<{ text: string }> = ({ text }) => {
   );
 };
 
-export const ItemDetail: React.FC<{ item: Article }> = ({ item }) => {
+export const Detail: React.FC<{ item: Article }> = ({ item }) => {
   const classes = useStyles();
   return (
     <Box className={classes.root}>
@@ -34,7 +34,7 @@ export const ItemDetail: React.FC<{ item: Article }> = ({ item }) => {
         <Box style={{ flex: 1 }}>
           <Typography variant="h6">{item.category ? item.category.name : ''}</Typography>
           {item.userDescription && !item.sourceUrl && (
-            <Typography variant="h6" color="textSecondary" style={{ paddingRight: '30px' }}>
+            <Typography variant="h6" color="textSecondary">
               {item.userDescription ? item.userDescription.description : ''}
             </Typography>
           )}

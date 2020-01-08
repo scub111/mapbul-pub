@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NextPageContext, NextPage } from 'next';
 import { articlesService } from 'services';
 import { Article } from 'models';
-import { PageLayout, ErrorText, ItemDetail } from 'components';
+import { PageLayout, ErrorText, Detail } from 'components';
 
 const ArticleDetailPage: NextPage<{
   item?: Article;
@@ -11,7 +11,7 @@ const ArticleDetailPage: NextPage<{
   return (
     <PageLayout title="Mapbul. Детали статьи">
       {error && <ErrorText error={error} />}
-      {item && <ItemDetail item={item} />}
+      {item && <Detail item={item} />}
     </PageLayout>
   );
 };
