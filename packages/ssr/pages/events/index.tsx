@@ -21,7 +21,7 @@ EventsPage.getInitialProps = async ({ query }: NextPageContext) => {
     const pagination: PageContent<Article> = await articlesService.list({
       page: queryPage,
       size: ITEMS_PER_PAGE,
-      filter: 'StatusId = 2 AND StartDate is not null',
+      filter: 'StatusId = 2 AND StartDate is not null AND EndDate is null',
       sort: 'PublishedDate desc',
     });
     return { pagination };
