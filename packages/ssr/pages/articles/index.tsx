@@ -1,6 +1,6 @@
 import Router from 'next/router';
 import Pagination from 'material-ui-flat-pagination';
-import { PageLayout } from 'components';
+import { PageLayout, ErrorText } from 'components';
 import { List } from 'components';
 import { NextPage, NextPageContext } from 'next';
 import { PageContent } from '@mapbul-pub/types';
@@ -22,7 +22,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 type Props = {
-  pagination: PageContent<Article>;
+  pagination?: PageContent<Article>;
+  error?: string;
 };
 
 const getQueryPage = (query: ParsedUrlQuery): number => {
@@ -32,30 +33,38 @@ const getQueryPage = (query: ParsedUrlQuery): number => {
   return 1;
 };
 
-const ArticlesPage: NextPage<Props> = ({ pagination }) => {
+const ArticlesPage: NextPage<Props> = ({ pagination, error }) => {
   const router = useRouter();
   const queryPage = getQueryPage(router.query);
   const classes = useStyles();
   return (
     <PageLayout title="Mapbul. Статьи">
-      <List items={pagination.content} />
-      <Container maxWidth="lg" className={classes.pagination}>
-        <Pagination
-          limit={ITEMS_PER_PAGE}
-          offset={ITEMS_PER_PAGE * (queryPage - 1)}
-          total={ITEMS_PER_PAGE * pagination.totalPages}
-          onClick={(_: any, offset: number) => {
-            const queryPage = offset / ITEMS_PER_PAGE + 1;
-            Router.push(`/${Routes.articles}?page=${queryPage}`, `/${Routes.articles}?page=${queryPage}`);
-          }}
-          size="large"
-        />
-      </Container>
+      {error &&
+        <ErrorText error={error} />
+      }
+      {pagination &&
+        <>
+          <List items={pagination.content} />
+          <Container maxWidth="lg" className={classes.pagination}>
+            <Pagination
+              limit={ITEMS_PER_PAGE}
+              offset={ITEMS_PER_PAGE * (queryPage - 1)}
+              total={ITEMS_PER_PAGE * pagination.totalPages}
+              onClick={(_: any, offset: number) => {
+                const queryPage = offset / ITEMS_PER_PAGE + 1;
+                Router.push(`/${Routes.articles}?page=${queryPage}`, `/${Routes.articles}?page=${queryPage}`);
+              }}
+              size="large"
+            />
+          </Container>
+        </>
+      }
     </PageLayout>
   );
 };
 
 ArticlesPage.getInitialProps = async ({ query }: NextPageContext) => {
+  try {
   const queryPage = getQueryPage(query);
   const pagination: PageContent<Article> = await articlesService.list({
     page: queryPage,
@@ -64,6 +73,9 @@ ArticlesPage.getInitialProps = async ({ query }: NextPageContext) => {
     sort: 'PublishedDate desc',
   });
   return { pagination };
+  } catch (err) {
+    return { error: err.message };
+  }
 };
 
 export default ArticlesPage;
