@@ -1,9 +1,9 @@
 import { ListPage, ITEMS_PER_PAGE } from 'components';
 import { NextPage, NextPageContext } from 'next';
-import { getQueryPage } from 'ssr/src/utils';
+import { getQueryPage } from 'utils';
 import { PageContent } from '@mapbul-pub/types';
-import { Article } from 'ssr/src/models';
-import { articlesService } from 'ssr/src/services';
+import { Article } from 'models';
+import { articlesService } from 'services';
 import { Routes } from 'ssr/src/constants';
 
 type Props = {
@@ -11,17 +11,17 @@ type Props = {
   error?: string;
 };
 
-const ArticlesPage: NextPage<Props> = ({ pagination, error }) => {
-  return <ListPage pagination={pagination} route={Routes.articles} error={error} />;
+const EventsPage: NextPage<Props> = ({ pagination, error }) => {
+  return <ListPage pagination={pagination} route={Routes.events} error={error} />;
 };
 
-ArticlesPage.getInitialProps = async ({ query }: NextPageContext) => {
+EventsPage.getInitialProps = async ({ query }: NextPageContext) => {
   try {
     const queryPage = getQueryPage(query);
     const pagination: PageContent<Article> = await articlesService.list({
       page: queryPage,
       size: ITEMS_PER_PAGE,
-      filter: 'StatusId = 2 AND StartDate is null',
+      filter: 'StatusId = 2 AND StartDate is not null',
       sort: 'PublishedDate desc',
     });
     return { pagination };
@@ -30,4 +30,4 @@ ArticlesPage.getInitialProps = async ({ query }: NextPageContext) => {
   }
 };
 
-export default ArticlesPage;
+export default EventsPage;

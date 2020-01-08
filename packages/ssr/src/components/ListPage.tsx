@@ -7,7 +7,6 @@ import { PageContent } from '@mapbul-pub/types';
 import { Container, makeStyles } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import { Article } from 'models';
-import { Routes } from 'ssr/src/constants';
 import { getQueryPage } from 'utils';
 
 export const ITEMS_PER_PAGE = 10;
@@ -21,9 +20,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const ListPage: React.FC<{
-  pagination?: PageContent<Article>;
+  pagination: PageContent<Article> | undefined;
+  route: string;
   error?: string;
-}> = ({ pagination, error }) => {
+}> = ({ pagination, route, error }) => {
   const router = useRouter();
   const queryPage = getQueryPage(router.query);
   const classes = useStyles();
@@ -32,7 +32,7 @@ export const ListPage: React.FC<{
       {error && <ErrorText error={error} />}
       {pagination && (
         <>
-          <List items={pagination.content} />
+          <List items={pagination.content} route={route}/>
           <Container maxWidth="lg" className={classes.pagination}>
             <Pagination
               limit={ITEMS_PER_PAGE}
@@ -40,7 +40,7 @@ export const ListPage: React.FC<{
               total={ITEMS_PER_PAGE * pagination.totalPages}
               onClick={(_: any, offset: number) => {
                 const queryPage = offset / ITEMS_PER_PAGE + 1;
-                Router.push(`/${Routes.articles}?page=${queryPage}`, `/${Routes.articles}?page=${queryPage}`);
+                Router.push(`/${route}?page=${queryPage}`, `/${route}?page=${queryPage}`);
               }}
               size="large"
             />
