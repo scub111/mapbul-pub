@@ -61,11 +61,7 @@ function Copyright() {
   );
 }
 
-interface Props {
-  title?: string;
-}
-
-export const PageLayout: React.FC<Props> = ({ children, title = 'This is the default title' }) => {
+export const PageLayout: React.FC<{ title?: string }> = ({ children, title = 'This is the default title' }) => {
   const classes = useStyles();
   return (
     <ThemeProvider theme={theme}>

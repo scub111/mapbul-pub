@@ -3,11 +3,7 @@ import { ListItem } from './ListItem';
 import { Grid } from '@material-ui/core';
 import { Article } from '../models/Article';
 
-type Props = {
-  items: Array<Article>;
-};
-
-export const List: React.FC<Props> = ({ items }) => {
+export const List: React.FC<{ items: Array<Article> }> = ({ items }) => {
   return (
     <Grid container spacing={2}>
       {items.map((item: Article, index: number) => (

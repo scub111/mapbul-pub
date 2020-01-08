@@ -4,10 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
-
-type Props = {
-  item: Article;
-};
+import { Routes } from '../constants';
 
 const useStyles = makeStyles(() => ({
   typography: {
@@ -40,13 +37,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export const ListItem: React.FC<Props> = ({ item }) => {
+export const ListItem: React.FC<{ item: Article }> = ({ item }) => {
   const classes = useStyles();
-
   return (
     <Grid item key={item.title} xs={12} md={6}>
       <CardActionArea>
-        <Link href={`/articles/[id]`} as={`/articles/${item.id}`}>
+        <Link href={`/${Routes.articles}/[id]`} as={`/${Routes.articles}/${item.id}`}>
           <Card className={classes.card}>
             <div className={classes.cardDetails}>
               <CardContent>

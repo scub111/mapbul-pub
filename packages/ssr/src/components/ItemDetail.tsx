@@ -14,10 +14,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-type ListDetailProps = {
-  item: Article;
-};
-
 const PreText: React.FC<{ text: string }> = ({ text }) => {
   return (
     <>
@@ -30,7 +26,7 @@ const PreText: React.FC<{ text: string }> = ({ text }) => {
   );
 };
 
-export const ListDetail: React.FC<ListDetailProps> = ({ item }) => {
+export const ItemDetail: React.FC<{ item: Article }> = ({ item }) => {
   const classes = useStyles();
   return (
     <Box className={classes.root}>

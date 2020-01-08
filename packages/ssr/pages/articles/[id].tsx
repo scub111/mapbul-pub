@@ -2,21 +2,19 @@ import * as React from 'react';
 import { NextPageContext, NextPage } from 'next';
 import { articlesService } from 'services';
 import { Article } from 'models';
-import { PageLayout, ErrorText, ListDetail } from 'components';
+import { PageLayout, ErrorText, ItemDetail } from 'components';
 
-type Props = {
+const ArticleDetailPage: NextPage<{
   item?: Article;
   error?: string;
-};
-
-const ArticleDetailPage: NextPage<Props> = ({ item, error }) => {
+}> = ({ item, error }) => {
   return (
     <PageLayout title="Mapbul. Детали статьи">
       {error &&
         <ErrorText error={error}/>
       }
       {item &&
-        <ListDetail item={item} />
+        <ItemDetail item={item} />
       }
     </PageLayout>
   );
