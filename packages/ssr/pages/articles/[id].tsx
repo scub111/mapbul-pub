@@ -2,18 +2,13 @@ import * as React from 'react';
 import { NextPageContext, NextPage } from 'next';
 import { articlesService } from 'services';
 import { Article } from 'models';
-import { PageLayout, ErrorText, Detail } from 'components';
+import { DetailPage } from 'components';
 
 const ArticleDetailPage: NextPage<{
   item?: Article;
   error?: string;
 }> = ({ item, error }) => {
-  return (
-    <PageLayout title="Mapbul. Детали статьи">
-      {error && <ErrorText error={error} />}
-      {item && <Detail item={item} />}
-    </PageLayout>
-  );
+  return <DetailPage item={item} error={error} />;
 };
 
 ArticleDetailPage.getInitialProps = async ({ query }: NextPageContext) => {
