@@ -1,45 +1,35 @@
 import * as React from 'react';
-import { NextPageContext } from 'next';
+import { NextPageContext, NextPage } from 'next';
 import { articlesService } from 'services';
 import { Article } from 'models';
-import { PageLayout } from 'components';
-import { ListDetail } from 'components';
+import { PageLayout, ErrorText, ListDetail } from 'components';
 
 type Props = {
-  item: Article;
-  errors?: string;
+  item?: Article;
+  error?: string;
 };
 
-class InitialPropsDetail extends React.Component<Props> {
-  static getInitialProps = async ({ query }: NextPageContext) => {
-    try {
-      const { id } = query;
-      const item = await articlesService.get(Array.isArray(id) ? id[0] : id);
-      return { item };
-    } catch (err) {
-      return { errors: err.message };
-    }
-  };
-
-  render() {
-    const { item, errors } = this.props;
-
-    if (errors) {
-      return (
-        <PageLayout title={`Mapbul. Ошибка`}>
-          <p>
-            <span style={{ color: 'red' }}>Error:</span> {errors}
-          </p>
-        </PageLayout>
-      );
-    }
-
-    return (
-      <PageLayout title="Mapbul. Детали статьи 2">
+const ArticleDetailPage: NextPage<Props> = ({ item, error }) => {
+  return (
+    <PageLayout title="Mapbul. Детали статьи">
+      {error &&
+        <ErrorText error={error}/>
+      }
+      {item &&
         <ListDetail item={item} />
-      </PageLayout>
-    );
-  }
-}
+      }
+    </PageLayout>
+  );
+};
 
-export default InitialPropsDetail;
+ArticleDetailPage.getInitialProps = async ({ query }: NextPageContext) => {
+  try {
+    const { id } = query;
+    const item = await articlesService.get(Array.isArray(id) ? id[0] : id);
+    return { item };
+  } catch (err) {
+    return { error: err.message };
+  }
+};
+
+export default ArticleDetailPage;
