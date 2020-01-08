@@ -1,4 +1,4 @@
-import { ParsedUrlQuery } from "querystring";
+import { ParsedUrlQuery } from 'querystring';
 
 export const getQueryPage = (query: ParsedUrlQuery): number => {
   if (query.page) {

@@ -10,12 +10,8 @@ const ArticleDetailPage: NextPage<{
 }> = ({ item, error }) => {
   return (
     <PageLayout title="Mapbul. Детали статьи">
-      {error &&
-        <ErrorText error={error}/>
-      }
-      {item &&
-        <ItemDetail item={item} />
-      }
+      {error && <ErrorText error={error} />}
+      {item && <ItemDetail item={item} />}
     </PageLayout>
   );
 };

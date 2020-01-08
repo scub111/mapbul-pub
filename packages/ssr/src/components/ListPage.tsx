@@ -29,10 +29,8 @@ export const ListPage: React.FC<{
   const classes = useStyles();
   return (
     <PageLayout title="Mapbul. Статьи">
-      {error &&
-        <ErrorText error={error} />
-      }
-      {pagination &&
+      {error && <ErrorText error={error} />}
+      {pagination && (
         <>
           <List items={pagination.content} />
           <Container maxWidth="lg" className={classes.pagination}>
@@ -48,9 +46,7 @@ export const ListPage: React.FC<{
             />
           </Container>
         </>
-      }
+      )}
     </PageLayout>
   );
 };
-
-

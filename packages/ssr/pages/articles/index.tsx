@@ -11,24 +11,19 @@ type Props = {
 };
 
 const ArticlesPage: NextPage<Props> = ({ pagination, error }) => {
-  return (
-    <ListPage 
-      pagination={pagination}
-      error={error}
-    />
-  );
+  return <ListPage pagination={pagination} error={error} />;
 };
 
 ArticlesPage.getInitialProps = async ({ query }: NextPageContext) => {
   try {
-  const queryPage = getQueryPage(query);
-  const pagination: PageContent<Article> = await articlesService.list({
-    page: queryPage,
-    size: ITEMS_PER_PAGE,
-    filter: 'StatusId = 2 AND StartDate is null',
-    sort: 'PublishedDate desc',
-  });
-  return { pagination };
+    const queryPage = getQueryPage(query);
+    const pagination: PageContent<Article> = await articlesService.list({
+      page: queryPage,
+      size: ITEMS_PER_PAGE,
+      filter: 'StatusId = 2 AND StartDate is null',
+      sort: 'PublishedDate desc',
+    });
+    return { pagination };
   } catch (err) {
     return { error: err.message };
   }
