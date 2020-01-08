@@ -1,6 +1,6 @@
 import Router from 'next/router';
 import Pagination from 'material-ui-flat-pagination';
-import { Layout } from 'components';
+import { PageLayout } from 'components';
 import { List } from 'components';
 import { NextPage, NextPageContext } from 'next';
 import { PageContent } from '@mapbul-pub/types';
@@ -37,7 +37,7 @@ const ArticlesPage: NextPage<Props> = ({ pagination }) => {
   const queryPage = getQueryPage(router.query);
   const classes = useStyles();
   return (
-    <Layout title="Mapbul. Статьи">
+    <PageLayout title="Mapbul. Статьи">
       <List items={pagination.content} />
       <Container maxWidth="lg" className={classes.pagination}>
         <Pagination
@@ -51,7 +51,7 @@ const ArticlesPage: NextPage<Props> = ({ pagination }) => {
           size="large"
         />
       </Container>
-    </Layout>
+    </PageLayout>
   );
 };
 

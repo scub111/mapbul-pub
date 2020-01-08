@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NextPageContext } from 'next';
 import { articlesService } from 'services';
 import { Article } from 'models';
-import { Layout } from 'components';
+import { PageLayout } from 'components';
 import { ListDetail } from 'components';
 
 type Props = {
@@ -26,18 +26,18 @@ class InitialPropsDetail extends React.Component<Props> {
 
     if (errors) {
       return (
-        <Layout title={`Mapbul. Ошибка`}>
+        <PageLayout title={`Mapbul. Ошибка`}>
           <p>
             <span style={{ color: 'red' }}>Error:</span> {errors}
           </p>
-        </Layout>
+        </PageLayout>
       );
     }
 
     return (
-      <Layout title="Mapbul. Детали статьи 2">
+      <PageLayout title="Mapbul. Детали статьи 2">
         <ListDetail item={item} />
-      </Layout>
+      </PageLayout>
     );
   }
 }

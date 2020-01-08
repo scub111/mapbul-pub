@@ -43,6 +43,10 @@ const sections: Array<IPageUrl> = [
     page: 'Статьи',
     url: `/${Routes.articles}`,
   },
+  {
+    page: 'События',
+    url: `/${Routes.events}`,
+  },
 ];
 
 function Copyright() {
@@ -61,7 +65,7 @@ interface Props {
   title?: string;
 }
 
-export const Layout: React.FC<Props> = ({ children, title = 'This is the default title' }) => {
+export const PageLayout: React.FC<Props> = ({ children, title = 'This is the default title' }) => {
   const classes = useStyles();
   return (
     <ThemeProvider theme={theme}>

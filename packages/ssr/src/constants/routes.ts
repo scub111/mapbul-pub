@@ -3,6 +3,7 @@ export enum Routes {
   admins = 'admins',
   categories = 'categories',
   editors = 'editors',
+  events = 'events',
   guides = 'guides',
   journalists = 'journalists',
   tenants = 'tenants',

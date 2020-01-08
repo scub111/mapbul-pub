@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Layout } from 'components';
+import { PageLayout } from 'components';
 import { NextPage } from 'next';
 import {
   Link,
@@ -120,7 +120,7 @@ const social = ['GitHub', 'Twitter', 'Facebook'];
 const IndexPage: NextPage = () => {
   const classes = useStyles();
   return (
-    <Layout title="Mapbul">
+    <PageLayout title="Mapbul">
       {/* Main featured post */}
       <Paper className={classes.mainFeaturedPost}>
         {/* Increase the priority of the hero background image */}
@@ -223,7 +223,7 @@ const IndexPage: NextPage = () => {
         </Grid>
         {/* End sidebar */}
       </Grid>
-    </Layout>
+    </PageLayout>
   );
 };
 
