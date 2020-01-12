@@ -19,6 +19,8 @@ module.exports = (phase, { defaultConfig }) => {
       alias['interfaces'] = `${__dirname}/src/interfaces`;
       alias['models'] = `${__dirname}/src/models`;
       alias['services'] = `${__dirname}/src/services`;
+      alias['stores'] = `${__dirname}/src/stores`;
+      alias['themes'] = `${__dirname}/src/themes`;
       alias['utils'] = `${__dirname}/src/utils`;
       //console.log(alias);
       return config
