@@ -15,7 +15,7 @@ export const ITEMS_PER_PAGE = 12;
 export interface ListPageProps {
   pagination?: PageContent<Article>;
   error?: string;
-};
+}
 
 export type ListLoadDataCb = (page: number) => Promise<ListPageProps>;
 
@@ -44,7 +44,7 @@ export const ListPage: React.FC<{
       {pagination && (
         <>
           <List items={state} route={route} />
-          {loadData &&
+          {loadData && (
             <Button
               fullWidth
               variant="contained"
@@ -54,13 +54,13 @@ export const ListPage: React.FC<{
                 console.log(data);
                 if (data.pagination) {
                   setCurrentPage(currentPage + 1);
-                  setState([...state, ...data.pagination.content])
+                  setState([...state, ...data.pagination.content]);
                 }
               }}
             >
               Submit
-          </Button>
-          }
+            </Button>
+          )}
           <Container maxWidth="lg" className={classes.pagination}>
             <Pagination
               limit={ITEMS_PER_PAGE}

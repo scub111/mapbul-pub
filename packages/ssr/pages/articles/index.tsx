@@ -7,7 +7,7 @@ import { articlesService } from 'ssr/src/services';
 import { Routes } from 'ssr/src/constants';
 
 const ArticlesPage: NextPage<ListPageProps> = ({ pagination, error }) => {
-  return <ListPage pagination={pagination} route={Routes.articles} error={error} loadData={loadData}/>;
+  return <ListPage pagination={pagination} route={Routes.articles} error={error} loadData={loadData} />;
 };
 
 const loadData = async (page: number): Promise<ListPageProps> => {
@@ -22,7 +22,7 @@ const loadData = async (page: number): Promise<ListPageProps> => {
   } catch (err) {
     return { error: err.message };
   }
-}
+};
 
 ArticlesPage.getInitialProps = async ({ query }: NextPageContext) => {
   const queryPage = getQueryPage(query);
