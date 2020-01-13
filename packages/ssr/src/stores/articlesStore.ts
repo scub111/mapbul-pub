@@ -1,0 +1,19 @@
+import { useSelector, useDispatch } from "react-redux";
+import { IState } from ".";
+import { Article } from "models";
+
+export const useArticles = () => {
+  const articles = useSelector((state: IState) => state.articles);
+  const dispatch = useDispatch();
+  const setArticles = (newArticles: Array<Article>) =>
+    dispatch({
+      type: 'SET_ARTICLES',
+      articles: newArticles,
+    });
+  const addArticles = (newArticles: Array<Article>) =>
+    dispatch({
+      type: 'ADD_ARTICLES',
+      articles: newArticles,
+    });
+  return {articles, setArticles, addArticles};
+}

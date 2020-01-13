@@ -1,10 +1,19 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { Article } from 'models';
 
-const initialState = {
+export interface IState {
+  lastUpdate: number,
+  light: boolean,
+  count: number,
+  articles: Array<Article>,
+}
+
+const initialState: IState = {
   lastUpdate: 0,
   light: false,
   count: 0,
+  articles: [],
 };
 
 const reducer = (state = initialState, action: any) => {
@@ -29,6 +38,21 @@ const reducer = (state = initialState, action: any) => {
       return {
         ...state,
         count: initialState.count,
+      };
+    case 'SET':
+      return {
+        ...state,
+        count: action.count,
+      };
+    case 'SET_ARTICLES':
+      return {
+        ...state,
+        articles: action.articles,
+      };
+    case 'ADD_ARTICLES':
+      return {
+        ...state,
+        articles: [...state.articles, ...action.articles],
       };
     default:
       return state;

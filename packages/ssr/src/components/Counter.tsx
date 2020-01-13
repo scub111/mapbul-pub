@@ -1,8 +1,10 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { Button } from '@material-ui/core'
+import { IState } from 'stores'
 
 const useCounter = () => {
-  const count = useSelector((state: any) => state.count)
+  const count = useSelector((state: IState) => state.count)
   const dispatch = useDispatch()
   const increment = () =>
     dispatch({
@@ -16,19 +18,45 @@ const useCounter = () => {
     dispatch({
       type: 'RESET',
     })
-  return { count, increment, decrement, reset }
+  const set = () =>
+    dispatch({
+      type: 'SET',
+      count: 99
+    })
+  return { count, increment, decrement, reset, set }
 }
 
 export const Counter = () => {
-  const { count, increment, decrement, reset } = useCounter()
+  const { count, increment, decrement, reset, set } = useCounter()
   return (
     <div>
       <h1>
         Count: <span>{count}</span>
       </h1>
-      <button onClick={increment}>+1</button>
-      <button onClick={decrement}>-1</button>
-      <button onClick={reset}>Reset</button>
+      <Button
+        variant="contained"
+        onClick={increment}
+      >
+        +1
+      </Button>
+      <Button
+        variant="contained"
+        onClick={decrement}
+      >
+        -1
+      </Button>
+      <Button
+        variant="contained"
+        onClick={reset}
+      >
+        Reset
+      </Button>
+      <Button
+        variant="contained"
+        onClick={set}
+      >
+        Set
+      </Button>
     </div>
   )
 }

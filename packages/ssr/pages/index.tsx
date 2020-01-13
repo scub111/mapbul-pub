@@ -14,8 +14,6 @@ import {
   CardMedia,
   Divider,
 } from '@material-ui/core';
-import { Counter } from 'components/Counter';
-import { withRedux } from 'ssr/src/redux';
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -123,7 +121,6 @@ const IndexPage: NextPage = () => {
   return (
     <PageLayout title="Mapbul">
       {/* Main featured post */}
-      <Counter />
       <Paper className={classes.mainFeaturedPost}>
         {/* Increase the priority of the hero background image */}
         {<img style={{ display: 'none' }} src="https://source.unsplash.com/user/erondu" alt="background" />}
@@ -229,4 +226,4 @@ const IndexPage: NextPage = () => {
   );
 };
 
-export default withRedux(IndexPage);
+export default IndexPage;

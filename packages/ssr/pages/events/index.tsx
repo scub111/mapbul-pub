@@ -5,14 +5,15 @@ import { PageContent } from '@mapbul-pub/types';
 import { Article } from 'models';
 import { articlesService } from 'services';
 import { Routes } from 'ssr/src/constants';
+import { withRedux } from 'ssr/src/stores';
 
 type Props = {
   pagination?: PageContent<Article>;
   error?: string;
 };
 
-const EventsPage: NextPage<Props> = ({ pagination, error }) => {
-  return <ListPage pagination={pagination} route={Routes.events} error={error} />;
+const EventsPage: NextPage<Props> = ({ error }) => {
+  return <ListPage route={Routes.events} error={error} />;
 };
 
 EventsPage.getInitialProps = async ({ query }: NextPageContext) => {
@@ -30,4 +31,4 @@ EventsPage.getInitialProps = async ({ query }: NextPageContext) => {
   }
 };
 
-export default EventsPage;
+export default withRedux(EventsPage);

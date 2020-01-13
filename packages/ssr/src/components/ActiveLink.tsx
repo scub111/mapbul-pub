@@ -32,7 +32,6 @@ export const ActiveLink: React.FC<IPageUrl> = ({ page, url }) => {
       <MuiLink
         color="inherit"
         noWrap
-        key={page}
         variant="h6"
         href={url}
         className={classes.root}

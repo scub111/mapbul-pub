@@ -3,7 +3,7 @@ import Head from 'next/head';
 import SearchIcon from '@material-ui/icons/Search';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import { Container, Toolbar, Button, Typography, IconButton, makeStyles } from '@material-ui/core';
-import { theme } from '../theme';
+import { theme } from 'themes';
 import { Routes } from '../constants';
 import { IPageUrl, ActiveLink } from './ActiveLink';
 
@@ -84,19 +84,7 @@ export const PageLayout: React.FC<{ title?: string }> = ({ children, title = 'Th
           </Toolbar>
           <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
             {sections.map(section => (
-              <ActiveLink page={section.page} url={section.url} />
-              // <Link key={section.page} href={section.url} scroll={false}>
-              //   <MuiLink
-              //     color="inherit"
-              //     noWrap
-              //     key={section.page}
-              //     variant="h6"
-              //     href={section.url}
-              //     className={classes.toolbarLink}
-              //   >
-              //     {section.page}
-              //   </MuiLink>
-              // </Link>
+              <ActiveLink key={section.page} page={section.page} url={section.url} />
             ))}
           </Toolbar>
         </header>
