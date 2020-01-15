@@ -19,6 +19,8 @@
     "paths": {
       "ssr/*": ["./*"],
       "ssrSrc/*": ["./src/*"],
+      "actions": ["./src/actions"],
+      "actions/*": ["./src/actions/*"],
       "common": ["./src/common"],
       "common/*": ["./src/common/*"],
       "constants": ["./src/constants"],
@@ -29,6 +31,8 @@
       "interfaces/*": ["./src/interfaces/*"],
       "models": ["./src/models"],
       "models/*": ["./src/models/*"],
+      "reducers": ["./src/reducers"],
+      "reducers/*": ["./src/reducers/*"],
       "services": ["./src/services"],
       "services/*": ["./src/services/*"],
       "stores": ["./src/stores"],

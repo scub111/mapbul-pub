@@ -1,28 +1,28 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button } from '@material-ui/core'
-import { IState } from 'stores'
+import { IState } from 'reducers'
+import { counterActions } from 'actions'
 
 const useCounter = () => {
   const count = useSelector((state: IState) => state.count)
   const dispatch = useDispatch()
-  const increment = () =>
-    dispatch({
-      type: 'INCREMENT',
-    })
-  const decrement = () =>
-    dispatch({
-      type: 'DECREMENT',
-    })
-  const reset = () =>
-    dispatch({
-      type: 'RESET',
-    })
-  const set = () =>
-    dispatch({
-      type: 'SET',
-      count: 99
-    })
+  // const increment = () =>
+  //   dispatch({
+  //     type: 'INCREMENT',
+  //   })
+
+  const increment = () => dispatch(counterActions.increment());
+  const decrement = () => dispatch(counterActions.decrement());
+  const reset = () => dispatch(counterActions.reset());
+  const set = () => dispatch(counterActions.set(89));
+
+  // const set = () =>
+  //   dispatch({
+  //     type: 'SET',
+  //     payload: 99
+  //   })
+
   return { count, increment, decrement, reset, set }
 }
 

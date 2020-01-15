@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { IState } from ".";
+import { IState } from "reducers";
 import { Article } from "models";
 
 export const useArticles = () => {
@@ -8,12 +8,12 @@ export const useArticles = () => {
   const setArticles = (newArticles: Array<Article>) =>
     dispatch({
       type: 'SET_ARTICLES',
-      articles: newArticles,
+      payload: newArticles,
     });
   const addArticles = (newArticles: Array<Article>) =>
     dispatch({
       type: 'ADD_ARTICLES',
-      articles: newArticles,
+      payload: newArticles,
     });
   return {articles, setArticles, addArticles};
 }
