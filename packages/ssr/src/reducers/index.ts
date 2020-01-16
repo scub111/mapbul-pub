@@ -1,13 +1,13 @@
 import { Article } from 'models';
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
-import { counterActions } from 'actions'
+import { counterActions } from 'actions';
 
 export interface IState {
-  lastUpdate: number,
-  light: boolean,
-  count: number,
-  articles: Array<Article>,
+  lastUpdate: number;
+  light: boolean;
+  count: number;
+  articles: Array<Article>;
 }
 
 export const initialState: IState = {
@@ -80,27 +80,29 @@ export const reducer = handleActions<IState, number & Array<Article>>(
         count: 0,
       };
     },
-    [counterActions.set.toString()]: (state, {payload}) => {
+    [counterActions.set.toString()]: (state, { payload }) => {
       return {
         ...state,
         count: payload,
       };
     },
-    [counterActions.setArticles.toString()]: (state, {payload}) => {
+    [counterActions.setArticles.toString()]: (state, { payload }) => {
       return {
         ...state,
         articles: payload,
       };
     },
-    [counterActions.addArticles.toString()]: (state, {payload}) => {
+    [counterActions.addArticles.toString()]: (state, { payload }) => {
       return {
         ...state,
         articles: [...state.articles, ...payload],
       };
     },
-  }, initialState);
+  },
+  initialState,
+);
 
 export const rootReducer = combineReducers({
   // todos: todoReducer as any
-  articles: reducer
+  articles: reducer,
 });

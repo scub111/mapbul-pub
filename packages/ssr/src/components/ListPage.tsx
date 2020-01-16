@@ -25,7 +25,6 @@ export type ListLoadDataCb = (page: number) => Promise<ListPageProps>;
 //   },
 // }));
 
-
 export const ListPage: React.FC<{
   route: string;
   error?: string;

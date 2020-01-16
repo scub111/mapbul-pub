@@ -1,13 +1,13 @@
-import { createAction } from 'redux-actions'
-import { Article } from 'models'
+import { createAction } from 'redux-actions';
+import { Article } from 'models';
 
 enum CounterActionType {
-  INCREMENT = "INCREMENT",
-  DECREMENT = "DECREMENT",
-  RESET = "RESET",
-  SET = "SET",
-  SET_ARTICLES = "SET_ARTICLES",
-  ADD_ARTICLES = "ADD_ARTICLES",
+  INCREMENT = 'INCREMENT',
+  DECREMENT = 'DECREMENT',
+  RESET = 'RESET',
+  SET = 'SET',
+  SET_ARTICLES = 'SET_ARTICLES',
+  ADD_ARTICLES = 'ADD_ARTICLES',
 }
 
 export const counterActions = {
@@ -17,4 +17,4 @@ export const counterActions = {
   set: createAction<number>(CounterActionType.SET),
   setArticles: createAction<Array<Article>>(CounterActionType.SET_ARTICLES),
   addArticles: createAction<Array<Article>>(CounterActionType.ADD_ARTICLES),
-}
+};

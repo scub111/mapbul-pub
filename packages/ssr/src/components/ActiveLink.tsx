@@ -29,13 +29,7 @@ export const ActiveLink: React.FC<IPageUrl> = ({ page, url }) => {
   const classes = useStyles({ isActive: getActive(url, router.pathname) });
   return (
     <Link key={page} href={url} scroll={false}>
-      <MuiLink
-        color="inherit"
-        noWrap
-        variant="h6"
-        href={url}
-        className={classes.root}
-      >
+      <MuiLink color="inherit" noWrap variant="h6" href={url} className={classes.root}>
         {page}
       </MuiLink>
     </Link>

@@ -38,7 +38,7 @@ ArticlesPage.getInitialProps = async ({ query, reduxStore }: Context) => {
     dispatch({
       type: 'SET_ARTICLES',
       payload: listPage?.pagination?.content,
-    })
+    });
 
     return listPage;
   }

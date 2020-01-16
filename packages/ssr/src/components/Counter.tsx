@@ -1,12 +1,12 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Button } from '@material-ui/core'
-import { IState } from 'reducers'
-import { counterActions } from 'actions'
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Button } from '@material-ui/core';
+import { IState } from 'reducers';
+import { counterActions } from 'actions';
 
 const useCounter = () => {
-  const count = useSelector((state: IState) => state.count)
-  const dispatch = useDispatch()
+  const count = useSelector((state: IState) => state.count);
+  const dispatch = useDispatch();
   // const increment = () =>
   //   dispatch({
   //     type: 'INCREMENT',
@@ -23,40 +23,28 @@ const useCounter = () => {
   //     payload: 99
   //   })
 
-  return { count, increment, decrement, reset, set }
-}
+  return { count, increment, decrement, reset, set };
+};
 
 export const Counter = () => {
-  const { count, increment, decrement, reset, set } = useCounter()
+  const { count, increment, decrement, reset, set } = useCounter();
   return (
     <div>
       <h1>
         Count: <span>{count}</span>
       </h1>
-      <Button
-        variant="contained"
-        onClick={increment}
-      >
+      <Button variant="contained" onClick={increment}>
         +1
       </Button>
-      <Button
-        variant="contained"
-        onClick={decrement}
-      >
+      <Button variant="contained" onClick={decrement}>
         -1
       </Button>
-      <Button
-        variant="contained"
-        onClick={reset}
-      >
+      <Button variant="contained" onClick={reset}>
         Reset
       </Button>
-      <Button
-        variant="contained"
-        onClick={set}
-      >
+      <Button variant="contained" onClick={set}>
         Set
       </Button>
     </div>
-  )
-}
+  );
+};
