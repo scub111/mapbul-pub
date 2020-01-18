@@ -1,27 +1,16 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from '@material-ui/core';
-import { IState } from 'reducers';
 import { counterActions } from 'actions';
+import { IRootState } from 'reducers';
 
 const useCounter = () => {
-  const count = useSelector((state: IState) => state.count);
+  const count = useSelector((state: IRootState) => state.articles.count);
   const dispatch = useDispatch();
-  // const increment = () =>
-  //   dispatch({
-  //     type: 'INCREMENT',
-  //   })
-
   const increment = () => dispatch(counterActions.increment());
   const decrement = () => dispatch(counterActions.decrement());
   const reset = () => dispatch(counterActions.reset());
   const set = () => dispatch(counterActions.set(89));
-
-  // const set = () =>
-  //   dispatch({
-  //     type: 'SET',
-  //     payload: 99
-  //   })
 
   return { count, increment, decrement, reset, set };
 };

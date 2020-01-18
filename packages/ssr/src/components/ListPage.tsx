@@ -31,7 +31,7 @@ export const ListPage: React.FC<{
   loadData?: ListLoadDataCb;
 }> = ({ route, error, loadData }) => {
   const { articles, addArticles } = useArticles();
-  console.log(articles);
+  // console.log(articles);
   const [currentPage, setCurrentPage] = useState<number>(2);
   return (
     <PageLayout title="Mapbul. Статьи">

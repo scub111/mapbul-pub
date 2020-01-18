@@ -6,6 +6,9 @@ import { Article } from 'models';
 import { articlesService } from 'services';
 import { Routes } from 'ssr/src/constants';
 import { withRedux } from 'stores';
+import { IRootState } from 'reducers';
+import { Store } from 'redux';
+import { counterActions } from 'actions';
 
 const ArticlesPage: NextPage<ListPageProps> = ({ error }) => {
   return <ListPage route={Routes.articles} error={error} loadData={loadData} />;
@@ -25,21 +28,13 @@ const loadData = async (page: number): Promise<ListPageProps> => {
   }
 };
 
-type Context = NextPageContext & { reduxStore: any };
-
-// ArticlesPage.getInitialProps = async (context: any) => {
-ArticlesPage.getInitialProps = async ({ query, reduxStore }: Context) => {
-  const state = reduxStore.getState();
-  console.log(state);
-  if (state.articles.length === 0) {
+ArticlesPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & { reduxStore: Store }) => {
+  const state: IRootState = reduxStore.getState();
+  if (state.articles.list.length === 0) {
     const queryPage = getQueryPage(query);
     const listPage = await loadData(queryPage);
     const { dispatch } = reduxStore;
-    dispatch({
-      type: 'SET_ARTICLES',
-      payload: listPage?.pagination?.content,
-    });
-
+    dispatch(counterActions.setArticles(listPage?.pagination?.content || []));
     return listPage;
   }
   return {};

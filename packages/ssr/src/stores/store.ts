@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { reducer } from 'reducers';
+import { rootReducer, rootState } from 'reducers';
 
-export const initializeStore = (initialState?: any) => {
-  return createStore(reducer, initialState, composeWithDevTools(applyMiddleware()));
+export const initializeStore = (initialState = rootState) => {
+  return createStore(rootReducer, initialState, composeWithDevTools(applyMiddleware()));
 };
