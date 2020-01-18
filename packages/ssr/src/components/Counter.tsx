@@ -5,7 +5,7 @@ import { counterActions } from 'actions';
 import { IRootState } from 'reducers';
 
 const useCounter = () => {
-  const count = useSelector((state: IRootState) => state.articles.count);
+  const count = useSelector((state: IRootState) => state.counter.count);
   const dispatch = useDispatch();
   const increment = () => dispatch(counterActions.increment());
   const decrement = () => dispatch(counterActions.decrement());

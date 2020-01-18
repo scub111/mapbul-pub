@@ -8,7 +8,7 @@ import { Routes } from 'ssr/src/constants';
 import { withRedux } from 'stores';
 import { IRootState } from 'reducers';
 import { Store } from 'redux';
-import { counterActions } from 'actions';
+import { articlesActions } from 'actions';
 
 const ArticlesPage: NextPage<ListPageProps> = ({ error }) => {
   return <ListPage route={Routes.articles} error={error} loadData={loadData} />;
@@ -34,7 +34,7 @@ ArticlesPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & {
     const queryPage = getQueryPage(query);
     const listPage = await loadData(queryPage);
     const { dispatch } = reduxStore;
-    dispatch(counterActions.setArticles(listPage?.pagination?.content || []));
+    dispatch(articlesActions.setArticles(listPage?.pagination?.content || []));
     return listPage;
   }
   return {};
