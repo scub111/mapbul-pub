@@ -1,12 +1,13 @@
 import * as React from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 import { PageLayout, ErrorText } from 'components';
 import { List } from 'components';
 import { PageContent } from '@mapbul-pub/types';
-import { Button } from '@material-ui/core';
+// import { Button } from '@material-ui/core';
 import { Article } from 'models';
 import { useArticles } from 'stores';
 
-export const ITEMS_PER_PAGE = 12;
+export const ITEMS_PER_PAGE = 10;
 
 export interface ListPageProps {
   pagination?: PageContent<Article>;
@@ -29,30 +30,37 @@ export const ListPage: React.FC<{
   loadData?: ListLoadDataCb;
 }> = ({ route, error, loadData }) => {
   const { articles, currentPage, totalPages, incrementCurrentPage, addArticles } = useArticles();
-  const isNeedLoad = currentPage < totalPages;
+  const hasMore = currentPage < totalPages;
+  const next = async () => {
+    if (loadData && hasMore) {
+      const data = await loadData(currentPage + 1);
+      if (data.pagination) {
+        incrementCurrentPage();
+        addArticles(data.pagination.content);
+      }
+    }
+  }
+
   return (
     <PageLayout title="Mapbul. Статьи">
       {error && <ErrorText error={error} />}
       {articles && (
-        <>
-          <List items={articles} route={route} />
-          {loadData && isNeedLoad && (
+        <InfiniteScroll
+          hasMore={hasMore}
+          loadMore={next}
+        >
+          <List items={articles} route={route} />          
+          {/* {loadData && hasMore && (
             <Button
               fullWidth
               variant="contained"
               color="secondary"
-              onClick={async () => {
-                const data = await loadData(currentPage + 1);
-                if (data.pagination) {
-                  incrementCurrentPage();
-                  addArticles(data.pagination.content);
-                }
-              }}
+              onClick={next}
             >
               Submit
             </Button>
-          )}
-        </>
+          )} */}
+        </InfiniteScroll>
       )}
     </PageLayout>
   );
