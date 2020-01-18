@@ -35,6 +35,7 @@ ArticlesPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & {
     const listPage = await loadData(queryPage);
     const { dispatch } = reduxStore;
     dispatch(articlesActions.setArticles(listPage?.pagination?.content || []));
+    dispatch(articlesActions.setTotalPages(listPage?.pagination?.totalPages || 0));
     return listPage;
   }
   return {};

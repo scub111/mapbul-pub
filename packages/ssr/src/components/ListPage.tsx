@@ -4,7 +4,6 @@ import { List } from 'components';
 import { PageContent } from '@mapbul-pub/types';
 import { Button } from '@material-ui/core';
 import { Article } from 'models';
-import { useState } from 'react';
 import { useArticles } from 'stores';
 
 export const ITEMS_PER_PAGE = 12;
@@ -29,23 +28,23 @@ export const ListPage: React.FC<{
   error?: string;
   loadData?: ListLoadDataCb;
 }> = ({ route, error, loadData }) => {
-  const { articles, addArticles } = useArticles();
-  const [currentPage, setCurrentPage] = useState<number>(2);
+  const { articles, currentPage, totalPages, incrementCurrentPage, addArticles } = useArticles();
+  const isNeedLoad = currentPage < totalPages;
   return (
     <PageLayout title="Mapbul. Статьи">
       {error && <ErrorText error={error} />}
       {articles && (
         <>
           <List items={articles} route={route} />
-          {loadData && (
+          {loadData && isNeedLoad && (
             <Button
               fullWidth
               variant="contained"
               color="secondary"
               onClick={async () => {
-                const data = await loadData(currentPage);
+                const data = await loadData(currentPage + 1);
                 if (data.pagination) {
-                  setCurrentPage(currentPage + 1);
+                  incrementCurrentPage();
                   addArticles(data.pagination.content);
                 }
               }}
