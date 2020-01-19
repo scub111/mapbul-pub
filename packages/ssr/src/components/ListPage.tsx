@@ -5,6 +5,7 @@ import { List } from 'components';
 import { PageContent } from '@mapbul-pub/types';
 // import { Button } from '@material-ui/core';
 import { Article } from 'models';
+import { IPageProps } from 'hocs';
 
 export const ITEMS_PER_PAGE = 10;
 
@@ -13,7 +14,6 @@ export interface ListPageProps {
   error?: string;
 }
 
-export type ListLoadMoreCb = (page: number) => Promise<void>;
 
 // const useStyles = makeStyles(theme => ({
 //   pagination: {
@@ -23,14 +23,7 @@ export type ListLoadMoreCb = (page: number) => Promise<void>;
 //   },
 // }));
 
-export const ListPage: React.FC<{
-  route: string;
-  articles: Array<Article>
-  title: string;
-  error?: string;
-  hasMore?: boolean;
-  loadMore?: ListLoadMoreCb;
-}> = ({ route, articles, title, error, hasMore, loadMore }) => {
+export const ListPage: React.FC<IPageProps> = ({ route, articles, title, error, hasMore, loadMore }) => {
   return (
     <PageLayout title={title}>
       {error && <ErrorText error={error} />}
