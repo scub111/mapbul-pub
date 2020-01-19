@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import SearchIcon from '@material-ui/icons/Search';
-import { Link as MuiLink, CssBaseline, ThemeProvider } from '@material-ui/core';
+import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import { Container, Toolbar, Button, Typography, IconButton, makeStyles } from '@material-ui/core';
-import { theme } from '../theme';
+import { theme } from 'themes';
 import { Routes } from '../constants';
+import { IPageUrl, ActiveLink } from './ActiveLink';
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -18,21 +18,11 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
     overflowX: 'auto',
   },
-  toolbarLink: {
-    padding: theme.spacing(1),
-    flexShrink: 0,
-  },
   footer: {
     backgroundColor: theme.palette.background.paper,
-    // marginTop: theme.spacing(8),
     padding: theme.spacing(6, 0),
   },
 }));
-
-interface IPageUrl {
-  page: string;
-  url: string;
-}
 
 const sections: Array<IPageUrl> = [
   {
@@ -94,18 +84,7 @@ export const PageLayout: React.FC<{ title?: string }> = ({ children, title = 'Th
           </Toolbar>
           <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
             {sections.map(section => (
-              <Link key={section.page} href={section.url} scroll={false}>
-                <MuiLink
-                  color="inherit"
-                  noWrap
-                  key={section.page}
-                  variant="h6"
-                  href={section.url}
-                  className={classes.toolbarLink}
-                >
-                  {section.page}
-                </MuiLink>
-              </Link>
+              <ActiveLink key={section.page} page={section.page} url={section.url} />
             ))}
           </Toolbar>
         </header>

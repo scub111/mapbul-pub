@@ -14,7 +14,6 @@ import {
   CardMedia,
   Divider,
 } from '@material-ui/core';
-// import theme from 'ssr/src/theme';
 
 const useStyles = makeStyles(theme => ({
   toolbar: {

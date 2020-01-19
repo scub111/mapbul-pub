@@ -1,25 +1,27 @@
-import { ListPage, ITEMS_PER_PAGE } from 'components';
-import { NextPage, NextPageContext } from 'next';
-import { getQueryPage } from 'ssr/src/utils';
+import * as React from 'react';
 import { PageContent } from '@mapbul-pub/types';
-import { Article } from 'ssr/src/models';
-import { articlesService } from 'ssr/src/services';
+import { withRedux, useArticles } from "stores";
+import { withPage, IPageProps, IPageConfig, ListPageProps } from "hocs";
 import { Routes } from 'ssr/src/constants';
+import { ListPage, ITEMS_PER_PAGE } from 'components';
+import { Article } from 'models';
+import { articlesService } from 'services';
 
-type Props = {
-  pagination?: PageContent<Article>;
-  error?: string;
+const View: React.FC<IPageProps<Article>> = ({ route, articles, title, error, hasMore, loadMore }) => {
+  return <ListPage
+    route={route}
+    articles={articles}
+    title={title}
+    error={error}
+    hasMore={hasMore}
+    loadMore={loadMore}
+  />;
 };
 
-const ArticlesPage: NextPage<Props> = ({ pagination, error }) => {
-  return <ListPage pagination={pagination} route={Routes.articles} error={error} />;
-};
-
-ArticlesPage.getInitialProps = async ({ query }: NextPageContext) => {
+const loadData = async (page: number): Promise<ListPageProps<Article>> => {
   try {
-    const queryPage = getQueryPage(query);
     const pagination: PageContent<Article> = await articlesService.list({
-      page: queryPage,
+      page,
       size: ITEMS_PER_PAGE,
       filter: 'StatusId = 2 AND StartDate is null',
       sort: 'PublishedDate desc',
@@ -30,4 +32,11 @@ ArticlesPage.getInitialProps = async ({ query }: NextPageContext) => {
   }
 };
 
-export default ArticlesPage;
+const config: IPageConfig<Article> = {
+  route: Routes.articles,
+  title: 'Mapbul. Статьи',
+  loadData,
+  useList: useArticles
+}
+
+export default withRedux(withPage<Article>(config)(View));

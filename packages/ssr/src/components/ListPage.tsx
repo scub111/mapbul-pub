@@ -1,51 +1,42 @@
 import * as React from 'react';
-import Router from 'next/router';
-import Pagination from 'material-ui-flat-pagination';
+import InfiniteScroll from 'react-infinite-scroller';
 import { PageLayout, ErrorText } from 'components';
 import { List } from 'components';
-import { PageContent } from '@mapbul-pub/types';
-import { Container, makeStyles } from '@material-ui/core';
-import { useRouter } from 'next/router';
+// import { Button } from '@material-ui/core';
 import { Article } from 'models';
-import { getQueryPage } from 'utils';
+import { IPageProps } from 'hocs';
 
 export const ITEMS_PER_PAGE = 10;
 
-const useStyles = makeStyles(theme => ({
-  pagination: {
-    display: 'flex',
-    justifyContent: 'center',
-    padding: theme.spacing(2, 0),
-  },
-}));
+// const useStyles = makeStyles(theme => ({
+//   pagination: {
+//     display: 'flex',
+//     justifyContent: 'center',
+//     padding: theme.spacing(2, 0),
+//   },
+// }));
 
-export const ListPage: React.FC<{
-  pagination: PageContent<Article> | undefined;
-  route: string;
-  error?: string;
-}> = ({ pagination, route, error }) => {
-  const router = useRouter();
-  const queryPage = getQueryPage(router.query);
-  const classes = useStyles();
+export const ListPage: React.FC<IPageProps<Article>> = ({ route, articles, title, error, hasMore, loadMore }) => {
   return (
-    <PageLayout title="Mapbul. Статьи">
+    <PageLayout title={title}>
       {error && <ErrorText error={error} />}
-      {pagination && (
-        <>
-          <List items={pagination.content} route={route}/>
-          <Container maxWidth="lg" className={classes.pagination}>
-            <Pagination
-              limit={ITEMS_PER_PAGE}
-              offset={ITEMS_PER_PAGE * (queryPage - 1)}
-              total={ITEMS_PER_PAGE * pagination.totalPages}
-              onClick={(_: any, offset: number) => {
-                const queryPage = offset / ITEMS_PER_PAGE + 1;
-                Router.push(`/${route}?page=${queryPage}`, `/${route}?page=${queryPage}`);
-              }}
-              size="large"
-            />
-          </Container>
-        </>
+      {articles && (
+        <InfiniteScroll
+          hasMore={hasMore}
+          loadMore={async (page) => loadMore && await loadMore(page)}
+        >
+          <List items={articles} route={route} />          
+          {/* {loadData && hasMore && (
+            <Button
+              fullWidth
+              variant="contained"
+              color="secondary"
+              onClick={next}
+            >
+              Submit
+            </Button>
+          )} */}
+        </InfiniteScroll>
       )}
     </PageLayout>
   );

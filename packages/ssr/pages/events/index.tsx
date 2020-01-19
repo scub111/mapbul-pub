@@ -1,27 +1,29 @@
-import { ListPage, ITEMS_PER_PAGE } from 'components';
-import { NextPage, NextPageContext } from 'next';
-import { getQueryPage } from 'utils';
+import * as React from 'react';
 import { PageContent } from '@mapbul-pub/types';
+import { withRedux, useEvents } from "stores";
+import { withPage, IPageProps, IPageConfig, ListPageProps } from "hocs";
+import { Routes } from 'ssr/src/constants';
+import { ListPage, ITEMS_PER_PAGE } from 'components';
 import { Article } from 'models';
 import { articlesService } from 'services';
-import { Routes } from 'ssr/src/constants';
 
-type Props = {
-  pagination?: PageContent<Article>;
-  error?: string;
+const View: React.FC<IPageProps<Article>> = ({ route, articles, title, error, hasMore, loadMore }) => {
+  return <ListPage
+    route={route}
+    articles={articles}
+    title={title}
+    error={error}
+    hasMore={hasMore}
+    loadMore={loadMore}
+  />;
 };
 
-const EventsPage: NextPage<Props> = ({ pagination, error }) => {
-  return <ListPage pagination={pagination} route={Routes.events} error={error} />;
-};
-
-EventsPage.getInitialProps = async ({ query }: NextPageContext) => {
+const loadData = async (page: number): Promise<ListPageProps<Article>> => {
   try {
-    const queryPage = getQueryPage(query);
     const pagination: PageContent<Article> = await articlesService.list({
-      page: queryPage,
+      page: page,
       size: ITEMS_PER_PAGE,
-      filter: 'StatusId = 2 AND StartDate is not null',
+      filter: 'StatusId = 2 AND StartDate is not null AND EndDate is null',
       sort: 'PublishedDate desc',
     });
     return { pagination };
@@ -30,4 +32,11 @@ EventsPage.getInitialProps = async ({ query }: NextPageContext) => {
   }
 };
 
-export default EventsPage;
+const config: IPageConfig<Article> = {
+  route: Routes.articles,
+  title: 'Mapbul. События',
+  loadData,
+  useList: useEvents
+}
+
+export default withRedux(withPage<Article>(config)(View));

@@ -1,3 +1,4 @@
+export * from './Counter';
 export * from './Detail';
 export * from './DetailPage';
 export * from './ErrorText';
