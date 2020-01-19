@@ -55,7 +55,6 @@ export const withRedux = (PageComponent: any, { ssr = true } = {}) => {
 
 let reduxStore: any;
 const getOrInitializeStore = (initialState?: any) => {
-  console.log('getOrInitializeStore');
   // Always make a new store if server, otherwise state is shared between requests
   if (typeof window === 'undefined') {
     return initializeStore(initialState);
