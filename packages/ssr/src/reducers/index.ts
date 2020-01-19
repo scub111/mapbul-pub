@@ -22,3 +22,5 @@ export const rootReducer = combineReducers({
   articles: articlesReducer,
   events: eventsReducer
 });
+
+export * from './utils';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PageContent } from '@mapbul-pub/types';
-import { withRedux, useArticles } from "stores";
+import { withRedux, useEvents } from "stores";
 import { withPage, IPageProps, IPageConfig, ListPageProps } from "hocs";
 import { Routes } from 'ssr/src/constants';
 import { ListPage, ITEMS_PER_PAGE } from 'components';
@@ -36,7 +36,7 @@ const config: IPageConfig<Article> = {
   route: Routes.articles,
   title: 'Mapbul. События',
   loadData,
-  useList: useArticles
+  useList: useEvents
 }
 
 export default withRedux(withPage<Article>(config)(View));
