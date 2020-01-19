@@ -17,6 +17,7 @@ module.exports = (phase, { defaultConfig }) => {
       alias['common'] = `${__dirname}/src/common`;
       alias['components'] = `${__dirname}/src/components`;
       alias['constants'] = `${__dirname}/src/constants`;
+      alias['hocs'] = `${__dirname}/src/hocs`;
       alias['interfaces'] = `${__dirname}/src/interfaces`;
       alias['models'] = `${__dirname}/src/models`;
       alias['reducers'] = `${__dirname}/src/reducers`;

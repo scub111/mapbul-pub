@@ -5,7 +5,6 @@ import { List } from 'components';
 import { PageContent } from '@mapbul-pub/types';
 // import { Button } from '@material-ui/core';
 import { Article } from 'models';
-import { useArticles } from 'stores';
 
 export const ITEMS_PER_PAGE = 10;
 
@@ -14,7 +13,7 @@ export interface ListPageProps {
   error?: string;
 }
 
-export type ListLoadDataCb = (page: number) => Promise<ListPageProps>;
+export type ListLoadMoreCb = (page: number) => Promise<void>;
 
 // const useStyles = makeStyles(theme => ({
 //   pagination: {
@@ -26,28 +25,19 @@ export type ListLoadDataCb = (page: number) => Promise<ListPageProps>;
 
 export const ListPage: React.FC<{
   route: string;
+  articles: Array<Article>
+  title: string;
   error?: string;
-  loadData?: ListLoadDataCb;
-}> = ({ route, error, loadData }) => {
-  const { articles, currentPage, totalPages, incrementCurrentPage, addArticles } = useArticles();
-  const hasMore = currentPage < totalPages;
-  const next = async () => {
-    if (loadData && hasMore) {
-      const data = await loadData(currentPage + 1);
-      if (data.pagination) {
-        incrementCurrentPage();
-        addArticles(data.pagination.content);
-      }
-    }
-  }
-
+  hasMore?: boolean;
+  loadMore?: ListLoadMoreCb;
+}> = ({ route, articles, title, error, hasMore, loadMore }) => {
   return (
-    <PageLayout title="Mapbul. Статьи">
+    <PageLayout title={title}>
       {error && <ErrorText error={error} />}
       {articles && (
         <InfiniteScroll
           hasMore={hasMore}
-          loadMore={next}
+          loadMore={async (page) => loadMore && await loadMore(page)}
         >
           <List items={articles} route={route} />          
           {/* {loadData && hasMore && (
