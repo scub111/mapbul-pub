@@ -17,8 +17,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export type PageType = 'article' | 'event';
-
 export const ListPage: React.FC<IPageProps<Article>> = ({ route, list, title, error, hasMore, loadMore, loading }) => {
   const classes = useStyles();
   return (
