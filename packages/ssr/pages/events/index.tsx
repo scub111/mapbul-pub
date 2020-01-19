@@ -34,26 +34,9 @@ const loadData = async (page: number): Promise<ListPageProps<Article>> => {
 
 const config: IPageConfig<Article> = {
   route: Routes.articles,
-  title: 'Mapbul. Статьи',
+  title: 'Mapbul. События',
   loadData,
   useList: useArticles
 }
 
 export default withRedux(withPage<Article>(config)(View));
-
-
-
-// EventsPage.getInitialProps = async ({ query }: NextPageContext) => {
-//   try {
-//     const queryPage = getQueryPage(query);
-//     const pagination: PageContent<Article> = await articlesService.list({
-//       page: queryPage,
-//       size: ITEMS_PER_PAGE,
-//       filter: 'StatusId = 2 AND StartDate is not null AND EndDate is null',
-//       sort: 'PublishedDate desc',
-//     });
-//     return { pagination };
-//   } catch (err) {
-//     return { error: err.message };
-//   }
-// };

@@ -20,8 +20,8 @@ export const useArticles = (reduxStore?: Store): IUseList<Article> => {
   }
   
   const incrementCurrentPage = () => dispatch(articlesActions.incrementCurrentPage());
-  const setList = (newArticles: Array<Article>) => dispatch(articlesActions.setArticles(newArticles));
-  const addList = (newArticles: Array<Article>) => dispatch(articlesActions.addArticles(newArticles));
+  const setList = (newArticles: Array<Article>) => dispatch(articlesActions.setList(newArticles));
+  const addList = (newArticles: Array<Article>) => dispatch(articlesActions.addList(newArticles));
   const setTotalPages = (totalPages: number) => dispatch(articlesActions.setTotalPages(totalPages));
   return { articles, currentPage, totalPages, incrementCurrentPage, setList, addList, setTotalPages };
 };

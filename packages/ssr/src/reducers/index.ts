@@ -1,18 +1,24 @@
 import { combineReducers } from 'redux';
+import { Article } from 'models';
 import { counterReducer, counterState, ICounterState } from './counterReducer';
-import { articlesReducer, articlesState, IArticlesState } from './articlesReducer';
+import { articlesState, articlesReducer } from './articlesReducer';
+import { eventsState, eventsReducer } from './eventsReducer';
+import { IPageState } from './utils';
 
 export interface IRootState {
   counter: ICounterState;
-  articles: IArticlesState;
+  articles: IPageState<Article>;
+  events: IPageState<Article>;
 }
 
-export const rootState = {
+export const rootState: IRootState = {
   counter: counterState,
   articles: articlesState,
+  events: eventsState,
 }
 
 export const rootReducer = combineReducers({
   counter: counterReducer,
-  articles: articlesReducer
+  articles: articlesReducer,
+  events: eventsReducer
 });

@@ -2,8 +2,8 @@ import { NextPage, NextPageContext } from 'next';
 import { getQueryPage } from 'utils';
 import { IRootState } from 'reducers';
 import { Store } from 'redux';
-import { Action } from 'redux-actions';
 import { PageContent } from '@mapbul-pub/types';
+import { IActionSet } from 'actions';
 
 export interface ListPageProps<T> {
   pagination?: PageContent<T>;
@@ -26,14 +26,10 @@ export interface IPageConfig<T> {
   useList: (reduxStore?: Store) => IUseList<T>
 }
 
-export interface IUseList<T> {
+export interface IUseList<T> extends IActionSet<T> {
   articles: Array<T>;
   currentPage: number;
   totalPages: number;
-  incrementCurrentPage: () => Action<any>;
-  setList: (newList: Array<T>) => Action<Array<T>>;
-  addList: (newList: Array<T>) => Action<Array<T>>;
-  setTotalPages: (totalPages: number) => Action<number>;
 }
 
 export const withPage = <T extends object>(config: IPageConfig<T>) => (Component: React.FC<IPageProps<T>>) => {
