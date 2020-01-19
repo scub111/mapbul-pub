@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { withRedux } from "stores";
-import { withPage, IPageProps, IPageConfig } from "hocs";
-import { Routes } from 'ssr/src/constants';
-import { ListPage, ITEMS_PER_PAGE, ListPageProps } from 'components';
 import { PageContent } from '@mapbul-pub/types';
+import { withRedux, useArticles } from "stores";
+import { withPage, IPageProps, IPageConfig, ListPageProps } from "hocs";
+import { Routes } from 'ssr/src/constants';
+import { ListPage, ITEMS_PER_PAGE } from 'components';
 import { Article } from 'models';
 import { articlesService } from 'services';
 
-
-const View: React.FC<IPageProps> = ({ route, articles, title, error, hasMore, loadMore }) => {
+const View: React.FC<IPageProps<Article>> = ({ route, articles, title, error, hasMore, loadMore }) => {
   return <ListPage
     route={route}
     articles={articles}
@@ -19,10 +18,10 @@ const View: React.FC<IPageProps> = ({ route, articles, title, error, hasMore, lo
   />;
 };
 
-const loadData = async (page: number): Promise<ListPageProps> => {
+const loadData = async (page: number): Promise<ListPageProps<Article>> => {
   try {
     const pagination: PageContent<Article> = await articlesService.list({
-      page: page,
+      page,
       size: ITEMS_PER_PAGE,
       filter: 'StatusId = 2 AND StartDate is null',
       sort: 'PublishedDate desc',
@@ -33,10 +32,11 @@ const loadData = async (page: number): Promise<ListPageProps> => {
   }
 };
 
-const config: IPageConfig = {
+const config: IPageConfig<Article> = {
   route: Routes.articles,
   title: 'Mapbul. Статьи',
-  loadData 
+  loadData,
+  useList: useArticles
 }
 
-export default withRedux(withPage(config)(View));
+export default withRedux(withPage<Article>(config)(View));

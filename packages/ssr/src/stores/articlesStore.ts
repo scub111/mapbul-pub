@@ -3,8 +3,9 @@ import { Article } from 'models';
 import { articlesActions } from 'actions';
 import { IRootState } from 'reducers';
 import { Store, Dispatch } from 'redux';
+import { IUseList } from 'hocs';
 
-export const useArticles = (reduxStore?: Store) => {
+export const useArticles = (reduxStore?: Store): IUseList<Article> => {
   let articles:Array<Article> = [];
   let currentPage = 0;
   let totalPages = 0;
@@ -19,8 +20,8 @@ export const useArticles = (reduxStore?: Store) => {
   }
   
   const incrementCurrentPage = () => dispatch(articlesActions.incrementCurrentPage());
-  const setArticles = (newArticles: Array<Article>) => dispatch(articlesActions.setArticles(newArticles));
-  const addArticles = (newArticles: Array<Article>) => dispatch(articlesActions.addArticles(newArticles));
+  const setList = (newArticles: Array<Article>) => dispatch(articlesActions.setArticles(newArticles));
+  const addList = (newArticles: Array<Article>) => dispatch(articlesActions.addArticles(newArticles));
   const setTotalPages = (totalPages: number) => dispatch(articlesActions.setTotalPages(totalPages));
-  return { articles, currentPage, totalPages, incrementCurrentPage, setArticles, addArticles, setTotalPages };
+  return { articles, currentPage, totalPages, incrementCurrentPage, setList, addList, setTotalPages };
 };

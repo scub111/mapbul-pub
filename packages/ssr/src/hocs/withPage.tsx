@@ -1,40 +1,44 @@
-import { ListPageProps } from 'components';
 import { NextPage, NextPageContext } from 'next';
 import { getQueryPage } from 'utils';
-import { Article } from 'models';
 import { IRootState } from 'reducers';
 import { Store } from 'redux';
-import { useArticles } from 'stores';
 import { Action } from 'redux-actions';
+import { PageContent } from '@mapbul-pub/types';
 
-export type LoadMoreCb = (page: number) => Promise<void>;
-export type LoadDataCb = (page: number) => Promise<ListPageProps>;
+export interface ListPageProps<T> {
+  pagination?: PageContent<T>;
+  error?: string;
+}
 
-export interface IPageProps {
+export interface IPageProps<T> {
   route: string;
-  articles: Array<Article>
+  articles: Array<T>
   title: string;
   error?: string;
   hasMore?: boolean;
-  loadMore?: LoadMoreCb;
+  loadMore?: (page: number) => Promise<void>;
 }
 
-export interface IPageConfig {
+export interface IPageConfig<T> {
   route: string;
   title: string;
-  loadData: LoadDataCb;
+  loadData: (page: number) => Promise<ListPageProps<T>>;
+  useList: (reduxStore?: Store) => IUseList<T>
 }
 
 export interface IUseList<T> {
   articles: Array<T>;
   currentPage: number;
   totalPages: number;
-  incrementCurrentPage: () => Action<any>
+  incrementCurrentPage: () => Action<any>;
+  setList: (newList: Array<T>) => Action<Array<T>>;
+  addList: (newList: Array<T>) => Action<Array<T>>;
+  setTotalPages: (totalPages: number) => Action<number>;
 }
 
-export const withPage = (config: IPageConfig) => (Component: React.FC<IPageProps>) => {
-  const ArticlesPage: NextPage<ListPageProps> = ({ error }) => {
-    const { articles, currentPage, totalPages, incrementCurrentPage, addArticles } = useArticles();
+export const withPage = <T extends object>(config: IPageConfig<T>) => (Component: React.FC<IPageProps<T>>) => {
+  const ArticlesPage: NextPage<ListPageProps<T>> = ({ error }) => {
+    const { articles, currentPage, totalPages, incrementCurrentPage, addList } = config.useList();
     const hasMore = currentPage < totalPages;
 
     const loadMore = async (_: number) => {
@@ -42,7 +46,7 @@ export const withPage = (config: IPageConfig) => (Component: React.FC<IPageProps
         const data = await config.loadData(currentPage + 1);
         if (data.pagination) {
           incrementCurrentPage();
-          addArticles(data.pagination.content);
+          addList(data.pagination.content);
         }
       }
     }
@@ -62,8 +66,8 @@ export const withPage = (config: IPageConfig) => (Component: React.FC<IPageProps
     if (state.articles.list.length === 0) {
       const queryPage = getQueryPage(query);
       const listPage = await config.loadData(queryPage);
-      const { setArticles, setTotalPages} = useArticles(reduxStore);
-      setArticles(listPage?.pagination?.content || []);
+      const { setList, setTotalPages} = config.useList(reduxStore);
+      setList(listPage?.pagination?.content || []);
       setTotalPages(listPage?.pagination?.totalPages || 0);
       return listPage;
     }
