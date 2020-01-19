@@ -1,4 +1,4 @@
-import { createAction, Action } from "redux-actions";
+import { createAction, Action } from 'redux-actions';
 
 export interface IActionSet<T> {
   incrementCurrentPage: () => Action<any>;
@@ -16,4 +16,4 @@ export const makePageActions = <T extends object>(name: string): IActionSet<T> =
     setTotalPages: createAction<number>(`${name}_SET_TOTAL_PAGES`),
     setLoading: createAction<boolean>(`${name}_SET_LOADING`),
   };
-}
+};

@@ -1,5 +1,5 @@
-import { handleActions } from "redux-actions";
-import { counterActions } from "actions";
+import { handleActions } from 'redux-actions';
+import { counterActions } from 'actions';
 
 export interface ICounterState {
   lastUpdate: number;

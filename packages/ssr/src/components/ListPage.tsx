@@ -23,16 +23,13 @@ export const ListPage: React.FC<IPageProps<Article>> = ({ route, list, title, er
     <PageLayout title={title}>
       {error && <ErrorText error={error} />}
       {list && (
-        <InfiniteScroll
-          hasMore={hasMore}
-          loadMore={async (page) => loadMore && await loadMore(page)}
-        >
+        <InfiniteScroll hasMore={hasMore} loadMore={async page => loadMore && (await loadMore(page))}>
           <List items={list} route={route} />
-          {loading &&
+          {loading && (
             <Grid className={classes.loader}>
               <CircularProgress />
             </Grid>
-          }
+          )}
           {/* {loadData && hasMore && (
             <Button
               fullWidth

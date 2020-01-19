@@ -15,12 +15,12 @@ export const rootState: IRootState = {
   counter: counterState,
   articles: articlesState,
   events: eventsState,
-}
+};
 
 export const rootReducer = combineReducers({
   counter: counterReducer,
   articles: articlesReducer,
-  events: eventsReducer
+  events: eventsReducer,
 });
 
 export * from './utils';
