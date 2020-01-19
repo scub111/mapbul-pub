@@ -12,7 +12,7 @@ export interface ListPageProps<T> {
 
 export interface IPageProps<T> {
   route: string;
-  list: Array<T>
+  list: Array<T>;
   title: string;
   error?: string;
   hasMore?: boolean;
@@ -24,10 +24,10 @@ export interface IPageConfig<T> {
   route: string;
   title: string;
   loadData: (page: number) => Promise<ListPageProps<T>>;
-  useList: (reduxStore?: Store) => IUseList<T>
+  useList: (reduxStore?: Store) => IUseList<T>;
 }
 
-export interface IUseList<T> extends IActionSet<T>, IPageState<T> { }
+export interface IUseList<T> extends IActionSet<T>, IPageState<T> {}
 
 export const withPage = <T extends object>(config: IPageConfig<T>) => (Component: React.FC<IPageProps<T>>) => {
   const ArticlesPage: NextPage<ListPageProps<T>> = ({ error }) => {
@@ -45,17 +45,19 @@ export const withPage = <T extends object>(config: IPageConfig<T>) => (Component
         }
         // setLoading(false);
       }
-    }
+    };
 
-    return <Component
-      route={config.route}
-      list={list}
-      title={config.title}
-      error={error}
-      hasMore={hasMore}
-      loadMore={loadMore}
-      loading={loading}
-    />;
+    return (
+      <Component
+        route={config.route}
+        list={list}
+        title={config.title}
+        error={error}
+        hasMore={hasMore}
+        loadMore={loadMore}
+        loading={loading}
+      />
+    );
   };
 
   ArticlesPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & { reduxStore: Store }) => {
@@ -72,4 +74,4 @@ export const withPage = <T extends object>(config: IPageConfig<T>) => (Component
   };
 
   return ArticlesPage;
-}
+};

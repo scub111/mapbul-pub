@@ -4,8 +4,11 @@ import { IRootState, IPageState } from 'reducers';
 import { Store, Dispatch } from 'redux';
 import { IUseList } from 'hocs';
 
-export const makeUseList = <T extends object>(selectState: (state: IRootState) => IPageState<T>, actions: IActionSet<T>) => (reduxStore?: Store): IUseList<T> => {
-  let list:Array<T> = [];
+export const makeUseList = <T extends object>(
+  selectState: (state: IRootState) => IPageState<T>,
+  actions: IActionSet<T>,
+) => (reduxStore?: Store): IUseList<T> => {
+  let list: Array<T> = [];
   let currentPage = 0;
   let totalPages = 0;
   let loading = false;
@@ -19,7 +22,7 @@ export const makeUseList = <T extends object>(selectState: (state: IRootState) =
   } else {
     dispatch = reduxStore.dispatch;
   }
-  
+
   const incrementCurrentPage = () => dispatch(actions.incrementCurrentPage());
   const setList = (newList: Array<T>) => dispatch(actions.setList(newList));
   const addList = (newList: Array<T>) => dispatch(actions.addList(newList));

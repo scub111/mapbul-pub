@@ -10,7 +10,7 @@ export class BaseService<TDto, TModel> {
     private endpointFn: IEndpointFn,
     private listFn: TMapFn<TDto, TModel>,
     private getFn?: TMapFn<TDto, TModel>,
-  ) { }
+  ) {}
 
   list(query: IGetAllQuery): Promise<PageContent<TModel>> {
     return api.get(this.endpointFn.list(query)).then(async (data: PageContent<TDto>) => {

@@ -1,5 +1,5 @@
-import { handleActions } from "redux-actions";
-import { IActionSet } from "actions";
+import { handleActions } from 'redux-actions';
+import { IActionSet } from 'actions';
 
 export interface IPageState<T> {
   currentPage: number;
@@ -14,8 +14,8 @@ export const makePageState = <T extends object>(): IPageState<T> => {
     list: [],
     totalPages: 0,
     loading: false,
-  }
-}
+  };
+};
 
 export const makePageReducer = <T extends object>(actions: IActionSet<T>, initialState: IPageState<T>) => {
   return handleActions<IPageState<T>, any>(
@@ -53,4 +53,4 @@ export const makePageReducer = <T extends object>(actions: IActionSet<T>, initia
     },
     initialState,
   );
-}
+};
