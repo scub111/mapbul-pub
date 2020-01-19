@@ -1,8 +1,8 @@
 import { NextPage, NextPageContext } from 'next';
-import { getQueryPage } from 'utils';
-import { IRootState, IPageState } from 'reducers';
-import { Store } from 'redux';
 import { PageContent } from '@mapbul-pub/types';
+import { getQueryPage } from 'utils';
+import { IPageState } from 'reducers';
+import { Store } from 'redux';
 import { IActionSet } from 'actions';
 
 export interface ListPageProps<T> {
@@ -27,10 +27,10 @@ export interface IPageConfig<T> {
   useList: (reduxStore?: Store) => IUseList<T>;
 }
 
-export interface IUseList<T> extends IActionSet<T>, IPageState<T> {}
+export interface IUseList<T> extends IActionSet<T>, IPageState<T> { }
 
 export const withPage = <T extends object>(config: IPageConfig<T>) => (Component: React.FC<IPageProps<T>>) => {
-  const ArticlesPage: NextPage<ListPageProps<T>> = ({ error }) => {
+  const MainPage: NextPage<ListPageProps<T>> = ({ error }) => {
     const { list, currentPage, totalPages, loading, incrementCurrentPage, addList } = config.useList();
     const hasMore = currentPage < totalPages;
 
@@ -60,10 +60,9 @@ export const withPage = <T extends object>(config: IPageConfig<T>) => (Component
     );
   };
 
-  ArticlesPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & { reduxStore: Store }) => {
-    const state: IRootState = reduxStore.getState();
-    if (state.articles.list.length === 0) {
-      const { setList, setTotalPages } = config.useList(reduxStore);
+  MainPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & { reduxStore: Store }) => {
+    const { list, setList, setTotalPages } = config.useList(reduxStore);
+    if (list.length === 0) {
       const queryPage = getQueryPage(query);
       const listPage = await config.loadData(queryPage);
       setList(listPage?.pagination?.content || []);
@@ -73,5 +72,5 @@ export const withPage = <T extends object>(config: IPageConfig<T>) => (Component
     return {};
   };
 
-  return ArticlesPage;
+  return MainPage;
 };
