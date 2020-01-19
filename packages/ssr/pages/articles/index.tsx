@@ -7,14 +7,15 @@ import { ListPage, ITEMS_PER_PAGE } from 'components';
 import { Article } from 'models';
 import { articlesService } from 'services';
 
-const View: React.FC<IPageProps<Article>> = ({ route, articles, title, error, hasMore, loadMore }) => {
+const View: React.FC<IPageProps<Article>> = ({ route, list, title, error, hasMore, loadMore, loading }) => {
   return <ListPage
     route={route}
-    articles={articles}
+    list={list}
     title={title}
     error={error}
     hasMore={hasMore}
     loadMore={loadMore}
+    loading={loading}
   />;
 };
 

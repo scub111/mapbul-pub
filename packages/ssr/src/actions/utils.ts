@@ -5,6 +5,7 @@ export interface IActionSet<T> {
   setList: (newList: Array<T>) => Action<Array<T>>;
   addList: (newList: Array<T>) => Action<Array<T>>;
   setTotalPages: (totalPages: number) => Action<number>;
+  setLoading: (loading: boolean) => Action<any>;
 }
 
 export const makePageActions = <T extends object>(name: string): IActionSet<T> => {
@@ -13,5 +14,6 @@ export const makePageActions = <T extends object>(name: string): IActionSet<T> =
     setList: createAction<Array<T>>(`${name}_SET_LIST`),
     addList: createAction<Array<T>>(`${name}_ADD_LIST`),
     setTotalPages: createAction<number>(`${name}_SET_TOTAL_PAGES`),
+    setLoading: createAction<boolean>(`${name}_SET_LOADING`),
   };
 }

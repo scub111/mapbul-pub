@@ -7,10 +7,10 @@ import { ListPage, ITEMS_PER_PAGE } from 'components';
 import { Article } from 'models';
 import { articlesService } from 'services';
 
-const View: React.FC<IPageProps<Article>> = ({ route, articles, title, error, hasMore, loadMore }) => {
+const View: React.FC<IPageProps<Article>> = ({ route, list, title, error, hasMore, loadMore }) => {
   return <ListPage
     route={route}
-    articles={articles}
+    list={list}
     title={title}
     error={error}
     hasMore={hasMore}
@@ -33,7 +33,7 @@ const loadData = async (page: number): Promise<ListPageProps<Article>> => {
 };
 
 const config: IPageConfig<Article> = {
-  route: Routes.articles,
+  route: Routes.events,
   title: 'Mapbul. События',
   loadData,
   useList: useEvents

@@ -5,27 +5,34 @@ import { List } from 'components';
 // import { Button } from '@material-ui/core';
 import { Article } from 'models';
 import { IPageProps } from 'hocs';
+import { CircularProgress, Grid, makeStyles } from '@material-ui/core';
 
 export const ITEMS_PER_PAGE = 10;
 
-// const useStyles = makeStyles(theme => ({
-//   pagination: {
-//     display: 'flex',
-//     justifyContent: 'center',
-//     padding: theme.spacing(2, 0),
-//   },
-// }));
+const useStyles = makeStyles(theme => ({
+  loader: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: theme.spacing(2),
+  },
+}));
 
-export const ListPage: React.FC<IPageProps<Article>> = ({ route, articles, title, error, hasMore, loadMore }) => {
+export const ListPage: React.FC<IPageProps<Article>> = ({ route, list, title, error, hasMore, loadMore, loading }) => {
+  const classes = useStyles();
   return (
     <PageLayout title={title}>
       {error && <ErrorText error={error} />}
-      {articles && (
+      {list && (
         <InfiniteScroll
           hasMore={hasMore}
           loadMore={async (page) => loadMore && await loadMore(page)}
         >
-          <List items={articles} route={route} />          
+          <List items={list} route={route} />
+          {loading &&
+            <Grid className={classes.loader}>
+              <CircularProgress />
+            </Grid>
+          }
           {/* {loadData && hasMore && (
             <Button
               fullWidth
