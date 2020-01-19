@@ -20,6 +20,11 @@ export const makeUseList = <T extends object>(
     loading = useSelector((state: IRootState) => selectState(state).loading);
     dispatch = useDispatch();
   } else {
+    const state: IRootState = reduxStore.getState();
+    list = selectState(state).list;
+    currentPage = selectState(state).currentPage;
+    totalPages = selectState(state).totalPages;
+    loading = selectState(state).loading;
     dispatch = reduxStore.dispatch;
   }
 

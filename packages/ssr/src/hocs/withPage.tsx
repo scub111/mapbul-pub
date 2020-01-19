@@ -1,8 +1,8 @@
 import { NextPage, NextPageContext } from 'next';
-import { PageContent } from '@mapbul-pub/types';
 import { getQueryPage } from 'utils';
 import { IPageState } from 'reducers';
 import { Store } from 'redux';
+import { PageContent } from '@mapbul-pub/types';
 import { IActionSet } from 'actions';
 
 export interface ListPageProps<T> {
