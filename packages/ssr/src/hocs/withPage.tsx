@@ -27,7 +27,7 @@ export interface IPageConfig<T> {
   useList: (reduxStore?: Store) => IUseList<T>;
 }
 
-export interface IUseList<T> extends IActionSet<T>, IPageState<T> { }
+export interface IUseList<T> extends IActionSet<T>, IPageState<T> {}
 
 export const withPage = <T extends object>(config: IPageConfig<T>) => (Component: React.FC<IPageProps<T>>) => {
   const MainPage: NextPage<ListPageProps<T>> = ({ error }) => {

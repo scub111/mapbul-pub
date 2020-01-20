@@ -10,6 +10,6 @@ export const useTypeRoute = (): TypeRoute => {
     return cacheMatch;
   }
   const match = keys.find(key => router.pathname.includes(key));
-  cacheMatch = match ? Routes[match] : 'unknown'
+  cacheMatch = match ? Routes[match] : 'unknown';
   return cacheMatch;
-}
+};

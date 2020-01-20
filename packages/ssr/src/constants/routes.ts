@@ -11,20 +11,21 @@
 //   userTypes = 'usertypes',
 // }
 
-export type TypeRoute = 'articles' 
-| 'articles'
-| 'admins'
-| 'categories'
-| 'editors'
-| 'events'
-| 'guides'
-| 'journalists'
-| 'tenants'
-| 'users'
-| 'usertypes'
-| 'unknown'
+export type TypeRoute =
+  | 'articles'
+  | 'articles'
+  | 'admins'
+  | 'categories'
+  | 'editors'
+  | 'events'
+  | 'guides'
+  | 'journalists'
+  | 'tenants'
+  | 'users'
+  | 'usertypes'
+  | 'unknown';
 
-export const Routes: {[key: string]: TypeRoute} = {
+export const Routes: { [key: string]: TypeRoute } = {
   articles: 'articles',
   admins: 'admins',
   categories: 'categories',
@@ -36,4 +37,4 @@ export const Routes: {[key: string]: TypeRoute} = {
   users: 'users',
   userTypes: 'usertypes',
   unknown: 'unknown',
-}
+};
