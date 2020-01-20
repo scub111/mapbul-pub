@@ -21,7 +21,7 @@ export class CountryPermissionsService implements BaseService<ICountryPermission
     }
     let additional = `${filter} ${sort}`;
     const isPagination = query.page && query.size;
-    if (isPagination) {
+    if (isPagination && query.page && query.size) {
       const offset = (query.page - 1) * query.size;
       additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM country_permission ${filter}`;
     }
@@ -34,7 +34,7 @@ export class CountryPermissionsService implements BaseService<ICountryPermission
 
     return {
       content: isPagination ? records[0] : records,
-      totalPages: isPagination ? Number(Math.ceil(records[1][0]['count(*)'] / query.size)) : 1,
+      totalPages: isPagination ? Number(Math.ceil(records[1][0]['count(*)'] / (query?.size || 1))) : 1,
     };
   }
 

@@ -21,7 +21,7 @@ export class CitiesService implements BaseService<ICityDTO> {
     }
     let additional = `${filter} ${sort}`;
     const isPagination = query.page && query.size;
-    if (isPagination) {
+    if (isPagination && query.page && query.size) {
       const offset = (query.page - 1) * query.size;
       additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM city ${filter}`;
     }
@@ -37,7 +37,7 @@ export class CitiesService implements BaseService<ICityDTO> {
 
     return {
       content: isPagination ? records[0] : records,
-      totalPages: isPagination ? Number(Math.ceil(records[1][0]['count(*)'] / query.size)) : 1,
+      totalPages: isPagination ? Number(Math.ceil(records[1][0]['count(*)'] / (query?.size || 1))) : 1,
     };
   }
 
