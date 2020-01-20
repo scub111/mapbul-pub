@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
-import { Routes, TypeRoutes } from '../constants';
+import { Routes, TypeRoute } from '../constants';
 
-let cacheMatch: TypeRoutes = 'unknown';
+let cacheMatch: TypeRoute = 'unknown';
 
-export const useTypeRoutes = (): TypeRoutes => {
+export const useTypeRoute = (): TypeRoute => {
   const router = useRouter();
   const keys = Object.keys(Routes);
   if (cacheMatch !== 'unknown' && router.pathname.includes(cacheMatch)) {

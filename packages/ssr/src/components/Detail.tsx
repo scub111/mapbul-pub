@@ -2,11 +2,17 @@ import * as React from 'react';
 import { makeStyles, Typography, Box, Link } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
-import { useTypeRoutes } from 'utils';
+import { useTypeRoute } from 'utils';
 
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(0, 1),
+  },
+  articleUserDescription: {
+    paddingBottom: theme.spacing(2),
+  },
+  eventUserDescription: {
+    paddingBottom: theme.spacing(2),
   },
   imgCenter: {
     display: 'flex',
@@ -29,15 +35,15 @@ const PreText: React.FC<{ text: string }> = ({ text }) => {
 
 export const Detail: React.FC<{ item: Article }> = ({ item }) => {
   const classes = useStyles();
-  const typeRoutes = useTypeRoutes();
-  console.log(typeRoutes);
+  const typeRoute = useTypeRoute();
+  const isActicle = typeRoute === 'articles';
   return (
     <Box className={classes.root}>
       <Box style={{ display: 'flex' }}>
         <Box style={{ flex: 1 }}>
           <Typography variant="h6">{item.category ? item.category.name : ''}</Typography>
-          {item.userDescription && !item.sourceUrl && (
-            <Typography variant="h6" color="textSecondary">
+          {isActicle && item.userDescription && !item.sourceUrl && (
+            <Typography variant="h6" color="textSecondary" className={classes.articleUserDescription}>
               {item.userDescription ? item.userDescription.description : ''}
             </Typography>
           )}
@@ -56,7 +62,7 @@ export const Detail: React.FC<{ item: Article }> = ({ item }) => {
         {item.publishedDate && (
           <Box>
             <Typography variant="subtitle1" color="textSecondary">
-              {formatDateToString(typeRoutes === 'articles' ? item.publishedDate : item.startDate)}
+              {formatDateToString(isActicle ? item.publishedDate : item.startDate)}
             </Typography>
           </Box>
         )}
@@ -77,6 +83,11 @@ export const Detail: React.FC<{ item: Article }> = ({ item }) => {
       </Box>
       <Typography component="div" variant="subtitle1" paragraph>
         <PreText text={item.text} />
+        {!isActicle && item.userDescription && !item.sourceUrl && (
+          <Typography variant="h6" color="textSecondary" className={classes.eventUserDescription}>
+            {item.userDescription ? item.userDescription.description : ''}
+          </Typography>
+        )}
       </Typography>
       {item.photo && (
         <Box className={classes.imgCenter}>
