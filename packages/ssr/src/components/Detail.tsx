@@ -2,6 +2,7 @@ import * as React from 'react';
 import { makeStyles, Typography, Box, Link } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
+import { useTypeRoutes } from 'utils';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,6 +29,8 @@ const PreText: React.FC<{ text: string }> = ({ text }) => {
 
 export const Detail: React.FC<{ item: Article }> = ({ item }) => {
   const classes = useStyles();
+  const typeRoutes = useTypeRoutes();
+  console.log(typeRoutes);
   return (
     <Box className={classes.root}>
       <Box style={{ display: 'flex' }}>
@@ -53,7 +56,7 @@ export const Detail: React.FC<{ item: Article }> = ({ item }) => {
         {item.publishedDate && (
           <Box>
             <Typography variant="subtitle1" color="textSecondary">
-              {formatDateToString(item.publishedDate)}
+              {formatDateToString(typeRoutes === 'articles' ? item.publishedDate : item.startDate)}
             </Typography>
           </Box>
         )}

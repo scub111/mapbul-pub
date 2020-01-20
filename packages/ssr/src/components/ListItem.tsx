@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
+import { useTypeRoutes } from 'utils';
 
 const useStyles = makeStyles(() => ({
   typography: {
@@ -38,6 +39,8 @@ const useStyles = makeStyles(() => ({
 
 export const ListItem: React.FC<{ item: Article; route: string }> = ({ item, route }) => {
   const classes = useStyles();
+  const rout = useTypeRoutes();
+  console.log(rout);
   return (
     <Grid item key={item.title} xs={12} md={6}>
       <CardActionArea>

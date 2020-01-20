@@ -15,13 +15,13 @@ export class StatusesService implements BaseService<IStatusDTO> {
     if (query.filter) {
       filter += `WHERE ${query.filter}`;
     }
-    let sort = '';
+    let sort = ''; 
     if (query.sort) {
       sort += `ORDER BY ${query.sort}`;
     }
     let additional = `${filter} ${sort}`;
     const isPagination = query.page && query.size;
-    if (isPagination) {
+    if (isPagination && query.page && query.size) {
       const offset = (query.page - 1) * query.size;
       additional += ` LIMIT ${offset},${query.size}; SELECT count(*) FROM status ${filter}`;
     }
@@ -34,7 +34,7 @@ export class StatusesService implements BaseService<IStatusDTO> {
 
     return {
       content: isPagination ? records[0] : records,
-      totalPages: isPagination ? Number(Math.ceil(records[1][0]['count(*)'] / query.size)) : 1,
+      totalPages: isPagination ? Number(Math.ceil(records[1][0]['count(*)'] / (query?.size || 1))) : 1,
     };
   }
 
