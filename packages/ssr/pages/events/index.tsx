@@ -16,8 +16,8 @@ const loadData = async (page: number): Promise<ListPageProps<Article>> => {
     const pagination: PageContent<Article> = await articlesService.list({
       page: page,
       size: ITEMS_PER_PAGE,
-      filter: 'StatusId = 2 AND StartDate is not null AND EndDate is null',
-      sort: 'StartDate desc',
+      filter: 'StatusId = 2 AND StartDate > CURDATE() AND EndDate is null',
+      sort: 'StartDate',
     });
     return { pagination };
   } catch (err) {
