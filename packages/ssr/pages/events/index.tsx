@@ -22,7 +22,6 @@ const loadData = async (page: number): Promise<ListPageProps<Article>> => {
     return { pagination };
   } catch (err) {
     return { error: err.message };
-    
   }
 };
 
