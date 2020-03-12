@@ -1,22 +1,13 @@
 import * as React from 'react';
 import { PageLayout, List } from 'components';
 import { NextPage, NextPageContext } from 'next';
-import {
-  Link,
-  CardContent,
-  makeStyles,
-  Typography,
-  CardActionArea,
-  Paper,
-  Grid,
-  Card,
-  Hidden,
-  CardMedia,
-  Divider,
-} from '@material-ui/core';
+import { makeStyles, Typography, Paper } from '@material-ui/core';
 import { Store } from 'redux';
-import { withRedux, useArticles } from 'stores';
-import { Routes } from 'ssr/src/constants';
+import { withRedux, useTopArticles } from 'stores';
+import { Routes } from 'constants/routes';
+import { loadArticlesData } from 'common';
+import { IUseList, ListPageProps } from 'hocs';
+import { Article } from 'models';
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -89,160 +80,44 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const featuredPosts = [
-  {
-    title: 'Featured post',
-    date: 'Nov 12',
-    description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
-  },
-  {
-    title: 'Post title',
-    date: 'Nov 11',
-    description: 'This is a wider card with supporting text below as a natural lead-in to additional content.',
-  },
-];
-
-const archives = [
-  'March 2020',
-  'February 2020',
-  'January 2020',
-  'December 2019',
-  'November 2019',
-  'October 2019',
-  'September 2019',
-  'August 2019',
-  'July 2019',
-  'June 2019',
-  'May 2019',
-  'April 2019',
-];
-
-const social = ['GitHub', 'Twitter', 'Facebook'];
+const TopList = ({ useList }: { useList: (reduxStore?: Store) => IUseList<Article> }) => {
+  const classes = useStyles();
+  const { list } = useList();
+  return (
+    <Paper elevation={0} className={classes.sidebarAboutBox}>
+      <Typography variant="h6" gutterBottom>
+        Последние 4 статьи
+      </Typography>
+      {/* <Divider /> */}
+      <List items={list} route={Routes.articles} />
+    </Paper>
+  );
+};
 
 const IndexPage: NextPage = () => {
-  const classes = useStyles();
-  const { list } = useArticles();
   return (
     <PageLayout title="Mapbul">
-      <List items={list} route={Routes.articles} />
-      {/* Main featured post */}
-      {/* <Paper className={classes.mainFeaturedPost}>
-        {<img style={{ display: 'none' }} src="https://source.unsplash.com/user/erondu" alt="background" />}
-        <div className={classes.overlay} />
-        <Grid container>
-          <Grid item md={6}>
-            <div className={classes.mainFeaturedPostContent}>
-              <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                Title of a longer featured blog post
-              </Typography>
-              <Typography variant="h5" color="inherit" paragraph>
-                Multiple lines of text that form the lede, informing new readers quickly and efficiently about
-                what&apos;s most interesting in this post&apos;s contents.
-              </Typography>
-              <Link variant="subtitle1" href="#">
-                Continue reading…
-              </Link>
-            </div>
-          </Grid>
-        </Grid>
-      </Paper> */}
-      {/* End main featured post */}
-      {/* Sub featured posts */}
-      <Grid container spacing={4}>
-        {featuredPosts.map(post => (
-          <Grid item key={post.title} xs={12} md={6}>
-            <CardActionArea component="a" href="#">
-              <Card className={classes.card}>
-                <div className={classes.cardDetails}>
-                  <CardContent>
-                    <Typography component="h2" variant="h5">
-                      {post.title}
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                      {post.date}
-                    </Typography>
-                    <Typography variant="subtitle1" paragraph>
-                      {post.description}
-                    </Typography>
-                    <Typography variant="subtitle1" color="primary">
-                      Continue reading...
-                    </Typography>
-                  </CardContent>
-                </div>
-                <Hidden xsDown>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
-                  />
-                </Hidden>
-              </Card>
-            </CardActionArea>
-          </Grid>
-        ))}
-      </Grid>
-      {/* End sub featured posts */}
-      <Grid container spacing={5} className={classes.mainGrid}>
-        {/* Main content */}
-        <Grid item xs={12} md={8}>
-          <Typography variant="h6" gutterBottom>
-            From the Firehose
-          </Typography>
-          <Divider />
-          {/* {posts.map(post => (
-                <Markdown className={classes.markdown} key={post.substring(0, 40)}>
-                  {post}
-                </Markdown>
-              ))} */}
-        </Grid>
-        {/* End main content */}
-        {/* Sidebar */}
-        <Grid item xs={12} md={4}>
-          <Paper elevation={0} className={classes.sidebarAboutBox}>
-            <Typography variant="h6" gutterBottom>
-              About
-            </Typography>
-            <Typography>
-              Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean
-              lacinia bibendum nulla sed consectetur.
-            </Typography>
-          </Paper>
-          <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
-            Archives
-          </Typography>
-          {archives.map(archive => (
-            <Link display="block" variant="body1" href="#" key={archive}>
-              {archive}
-            </Link>
-          ))}
-          <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
-            Social
-          </Typography>
-          {social.map(network => (
-            <Link display="block" variant="body1" href="#" key={network}>
-              {network}
-            </Link>
-          ))}
-        </Grid>
-        {/* End sidebar */}
-      </Grid>
+      <TopList useList={useTopArticles} />
     </PageLayout>
   );
 };
 
-IndexPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & { reduxStore: Store }) => {
-  // const { list, setList, setTotalPages } = config.useList(reduxStore);
-  // if (list.length === 0) {
-  //   const queryPage = getQueryPage(query);
-  //   const listPage = await config.loadData(queryPage);
-  //   setList(listPage?.pagination?.content || []);
-  //   setTotalPages(listPage?.pagination?.totalPages || 0);
-  //   return listPage;
-  // }
-  // return {};
-  console.log(query, reduxStore);
-  return {};
+const getInitialPropsData = async <T extends object>(
+  reduxStore: Store,
+  useList: (reduxStore?: Store) => IUseList<T>,
+  loadData: (page: number) => Promise<ListPageProps<T>>,
+): Promise<void> => {
+  const { list, setList, setTotalPages } = useList(reduxStore);
+  if (list.length === 0) {
+    const listPage = await loadData(1);
+    setList(listPage?.pagination?.content || []);
+    setTotalPages(listPage?.pagination?.totalPages || 0);
+  }
 };
 
+IndexPage.getInitialProps = async ({ reduxStore }: NextPageContext & { reduxStore: Store }) => {
+  await getInitialPropsData(reduxStore, useTopArticles, loadArticlesData(4));
+  await getInitialPropsData(reduxStore, useTopArticles, loadArticlesData(4));
+};
 
 export default withRedux(IndexPage);

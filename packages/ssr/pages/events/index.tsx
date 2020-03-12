@@ -1,34 +1,19 @@
 import * as React from 'react';
-import { PageContent } from '@mapbul-pub/types';
 import { withRedux, useEvents } from 'stores';
-import { withPage, IPageProps, IPageConfig, ListPageProps } from 'hocs';
-import { Routes } from 'ssr/src/constants';
+import { withPage, IPageProps, IPageConfig } from 'hocs';
+import { Routes } from 'constants/routes';
 import { ListPage, ITEMS_PER_PAGE } from 'components';
 import { Article } from 'models';
-import { articlesService } from 'services';
+import { loadEventsData } from 'common';
 
 const View: React.FC<IPageProps<Article>> = ({ route, list, title, error, hasMore, loadMore }) => {
   return <ListPage route={route} list={list} title={title} error={error} hasMore={hasMore} loadMore={loadMore} />;
 };
 
-const loadData = async (page: number): Promise<ListPageProps<Article>> => {
-  try {
-    const pagination: PageContent<Article> = await articlesService.list({
-      page: page,
-      size: ITEMS_PER_PAGE,
-      filter: 'StatusId = 2 AND StartDate > CURDATE() AND EndDate is null',
-      sort: 'StartDate',
-    });
-    return { pagination };
-  } catch (err) {
-    return { error: err.message };
-  }
-};
-
 const config: IPageConfig<Article> = {
   route: Routes.events,
   title: 'Mapbul. События',
-  loadData,
+  loadData: loadEventsData(ITEMS_PER_PAGE),
   useList: useEvents,
 };
 
