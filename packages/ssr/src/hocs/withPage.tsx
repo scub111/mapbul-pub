@@ -1,5 +1,4 @@
 import { NextPage, NextPageContext } from 'next';
-import { getQueryPage } from 'utils';
 import { IPageState } from 'reducers';
 import { Store } from 'redux';
 import { PageContent } from '@mapbul-pub/types';
@@ -60,11 +59,13 @@ export const withPage = <T extends object>(config: IPageConfig<T>) => (Component
     );
   };
 
-  MainPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & { reduxStore: Store }) => {
+  // MainPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & { reduxStore: Store }) => {
+  MainPage.getInitialProps = async ({ reduxStore }: NextPageContext & { reduxStore: Store }) => {
     const { list, setList, setTotalPages } = config.useList(reduxStore);
     if (list.length === 0) {
-      const queryPage = getQueryPage(query);
-      const listPage = await config.loadData(queryPage);
+      // const queryPage = getQueryPage(query);
+      // const listPage = await config.loadData(queryPage);
+      const listPage = await config.loadData(1);
       setList(listPage?.pagination?.content || []);
       setTotalPages(listPage?.pagination?.totalPages || 0);
       return listPage;
