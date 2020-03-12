@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PageLayout } from 'components';
+import { PageLayout, List } from 'components';
 import { NextPage, NextPageContext } from 'next';
 import {
   Link,
@@ -15,7 +15,8 @@ import {
   Divider,
 } from '@material-ui/core';
 import { Store } from 'redux';
-import { withRedux } from 'stores';
+import { withRedux, useArticles } from 'stores';
+import { Routes } from 'ssr/src/constants';
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -120,8 +121,10 @@ const social = ['GitHub', 'Twitter', 'Facebook'];
 
 const IndexPage: NextPage = () => {
   const classes = useStyles();
+  const { list } = useArticles();
   return (
     <PageLayout title="Mapbul">
+      <List items={list} route={Routes.articles} />
       {/* Main featured post */}
       {/* <Paper className={classes.mainFeaturedPost}>
         {<img style={{ display: 'none' }} src="https://source.unsplash.com/user/erondu" alt="background" />}
