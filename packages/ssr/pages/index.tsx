@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PageLayout } from 'components';
-import { NextPage } from 'next';
+import { NextPage, NextPageContext } from 'next';
 import {
   Link,
   CardContent,
@@ -14,6 +14,8 @@ import {
   CardMedia,
   Divider,
 } from '@material-ui/core';
+import { Store } from 'redux';
+import { withRedux } from 'stores';
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -121,8 +123,7 @@ const IndexPage: NextPage = () => {
   return (
     <PageLayout title="Mapbul">
       {/* Main featured post */}
-      <Paper className={classes.mainFeaturedPost}>
-        {/* Increase the priority of the hero background image */}
+      {/* <Paper className={classes.mainFeaturedPost}>
         {<img style={{ display: 'none' }} src="https://source.unsplash.com/user/erondu" alt="background" />}
         <div className={classes.overlay} />
         <Grid container>
@@ -141,7 +142,7 @@ const IndexPage: NextPage = () => {
             </div>
           </Grid>
         </Grid>
-      </Paper>
+      </Paper> */}
       {/* End main featured post */}
       {/* Sub featured posts */}
       <Grid container spacing={4}>
@@ -226,4 +227,19 @@ const IndexPage: NextPage = () => {
   );
 };
 
-export default IndexPage;
+IndexPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & { reduxStore: Store }) => {
+  // const { list, setList, setTotalPages } = config.useList(reduxStore);
+  // if (list.length === 0) {
+  //   const queryPage = getQueryPage(query);
+  //   const listPage = await config.loadData(queryPage);
+  //   setList(listPage?.pagination?.content || []);
+  //   setTotalPages(listPage?.pagination?.totalPages || 0);
+  //   return listPage;
+  // }
+  // return {};
+  console.log(query, reduxStore);
+  return {};
+};
+
+
+export default withRedux(IndexPage);
