@@ -34,8 +34,8 @@ const TopList = ({ title, route, useList }: { title: string; route: string; useL
 const IndexPage: NextPage = () => {
   return (
     <PageLayout title="Mapbul">
-      <TopList title="Последние 4 статьи" route={Routes.articles} useList={useTopArticles} />
-      <TopList title="Последние 4 события" route={Routes.events} useList={useTopEvents} />
+      <TopList title="Последние 6 статей" route={Routes.articles} useList={useTopArticles} />
+      <TopList title="Последние 6 событий" route={Routes.events} useList={useTopEvents} />
     </PageLayout>
   );
 };
@@ -54,8 +54,8 @@ const getInitialPropsData = async <T extends object>(
 };
 
 IndexPage.getInitialProps = async ({ reduxStore }: NextPageContext & { reduxStore: Store }) => {
-  await getInitialPropsData(reduxStore, useTopArticles, loadArticlesData(4));
-  await getInitialPropsData(reduxStore, useTopEvents, loadEventsData(4));
+  await getInitialPropsData(reduxStore, useTopArticles, loadArticlesData(6));
+  await getInitialPropsData(reduxStore, useTopEvents, loadEventsData(6));
 };
 
 export default withRedux(IndexPage);
