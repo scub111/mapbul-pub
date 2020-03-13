@@ -34,8 +34,8 @@ const TopList = ({ title, route, useList }: { title: string; route: string; useL
 const IndexPage: NextPage = () => {
   return (
     <PageLayout title="Mapbul">
-      <TopList title="6 последних статей" route={Routes.articles} useList={useTopArticles} />
-      <TopList title="6 ближайших событий" route={Routes.events} useList={useTopEvents} />
+      <TopList title="Последние статьи" route={Routes.articles} useList={useTopArticles} />
+      <TopList title="Ближайшие события" route={Routes.events} useList={useTopEvents} />
     </PageLayout>
   );
 };
