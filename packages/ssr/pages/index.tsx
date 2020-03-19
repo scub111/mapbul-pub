@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PageLayout, List } from 'components';
 import { NextPage, NextPageContext } from 'next';
-import { makeStyles, Typography, Paper } from '@material-ui/core';
+import { Typography, Divider, makeStyles } from '@material-ui/core';
 import { Store } from 'redux';
 import { withRedux, useTopArticles, useTopEvents } from 'stores';
 import { Routes } from 'constants/routes';
@@ -11,12 +11,18 @@ import { Article } from 'models';
 
 const useStyles = makeStyles(theme => ({
   topList: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(2, 0),
     marginBottom: theme.spacing(2),
     backgroundColor: theme.palette.grey[200],
   },
   head: {
     textAlign: 'center',
+  },
+  container: {
+    marginBottom: theme.spacing(2),
+  },
+  list: {
+    marginBottom: theme.spacing(1),
   }
 }));
 
@@ -24,13 +30,15 @@ const TopList = ({ title, route, useList }: { title: string; route: string; useL
   const classes = useStyles();
   const { list } = useList();
   return (
-    <Paper elevation={0} className={classes.topList}>
+    <div className={classes.container}>
+    {/* <Paper elevation={0} className={classes.topList}> */}
       <Typography variant="h6" gutterBottom className={classes.head}>
         {title}
       </Typography>
-      {/* <Divider /> */}
-      <List items={list} route={route} />
-    </Paper>
+      <List items={list} route={route} className={classes.list}/>
+      <Divider />    
+    {/* </Paper> */}
+    </div>
   );
 };
 
