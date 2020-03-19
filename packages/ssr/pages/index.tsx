@@ -15,6 +15,9 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2),
     backgroundColor: theme.palette.grey[200],
   },
+  head: {
+    textAlign: 'center',
+  }
 }));
 
 const TopList = ({ title, route, useList }: { title: string; route: string; useList: (reduxStore?: Store) => IUseList<Article> }) => {
@@ -22,7 +25,7 @@ const TopList = ({ title, route, useList }: { title: string; route: string; useL
   const { list } = useList();
   return (
     <Paper elevation={0} className={classes.topList}>
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6" gutterBottom className={classes.head}>
         {title}
       </Typography>
       {/* <Divider /> */}
@@ -33,7 +36,7 @@ const TopList = ({ title, route, useList }: { title: string; route: string; useL
 
 const IndexPage: NextPage = () => {
   return (
-    <PageLayout title="Mapbul">
+    <PageLayout title="X-island">
       <TopList title="6 последних статей" route={Routes.articles} useList={useTopArticles} />
       <TopList title="6 ближайших событий" route={Routes.events} useList={useTopEvents} />
     </PageLayout>

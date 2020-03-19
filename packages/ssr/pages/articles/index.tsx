@@ -38,7 +38,7 @@ const View: React.FC<IPageProps<Article>> = ({ route, list, title, error, hasMor
 
 const config: IPageConfig<Article> = {
   route: Routes.articles,
-  title: 'Mapbul. Статьи',
+  title: 'X-island. Статьи',
   loadData: loadArticlesData(ITEMS_PER_PAGE),
   useList: useArticles,
 };

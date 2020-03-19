@@ -12,7 +12,7 @@ const View: React.FC<IPageProps<Article>> = ({ route, list, title, error, hasMor
 
 const config: IPageConfig<Article> = {
   route: Routes.events,
-  title: 'Mapbul. События',
+  title: 'X-island. События',
   loadData: loadEventsData(ITEMS_PER_PAGE),
   useList: useEvents,
 };

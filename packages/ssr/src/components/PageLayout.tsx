@@ -73,7 +73,7 @@ export const PageLayout: React.FC<{ title?: string }> = ({ children, title = 'Th
               noWrap
               className={classes.toolbarTitle}
             >
-              MapBul
+              X-island
             </Typography>
             <IconButton>
               <SearchIcon />
