@@ -7,7 +7,7 @@ export const DetailPage: React.FC<{
   error?: string;
 }> = ({ item, error }) => {
   return (
-    <PageLayout title="Mapbul. Детали статьи">
+    <PageLayout title="X-island. Детали статьи">
       {error && <ErrorText error={error} />}
       {item && <Detail item={item} />}
     </PageLayout>
