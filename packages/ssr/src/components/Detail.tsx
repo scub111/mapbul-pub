@@ -25,10 +25,7 @@ const PreText: React.FC<{ text: string }> = ({ text }) => {
   return (
     <>
       {text.split('\r\n').map((item, index) => (
-        <Typography key={index} variant="subtitle1">
-          {item}
-          <br/>
-        </Typography>
+        <Typography key={index} variant="subtitle1" dangerouslySetInnerHTML={{ __html: `${item} <br />`  }} />
       ))}
     </>
   );
