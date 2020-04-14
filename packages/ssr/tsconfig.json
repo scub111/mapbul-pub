@@ -41,6 +41,8 @@
       "stores/*": ["./src/stores/*"],
       "themes": ["./src/themes"],
       "themes/*": ["./src/themes/*"],
+      "translations": ["./src/translations"],
+      "translations/*": ["./src/translations/*"],
       "utils": ["./src/utils"],
       "utils/*": ["./src/utils/*"],
     }  
