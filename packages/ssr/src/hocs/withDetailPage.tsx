@@ -16,7 +16,6 @@ export const withDetailPage = () => {
   ArticleDetailPage.getInitialProps = async ({ query }: NextPageContext) => {
     try {
       const { lang, id } = query;
-      console.log(111, lang, id);
       GlobalVar.setLang(lang);
       const item = await articlesService.get(Array.isArray(id) ? id[0] : id);
       return { item };

@@ -35,6 +35,7 @@ export const Detail: React.FC<{ item: Article }> = ({ item }) => {
   const classes = useStyles();
   const typeRoute = useTypeRoute();
   const isActicle = typeRoute === 'articles';
+
   return (
     <Box className={classes.root}>
       <Box style={{ display: 'flex' }}>

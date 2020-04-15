@@ -27,7 +27,9 @@ class ArticlesService extends BaseService<IArticleDTO, Article> {
   constructor() {
     super(
       ENDPOINTS.articles,
-      article => Article.New(article),
+      async article => {
+        return Article.New(article);
+      },
       async article => {
         const [category, user] = await Promise.all([
           categoriesService.get(article.baseCategoryId),
@@ -43,7 +45,7 @@ class ArticlesService extends BaseService<IArticleDTO, Article> {
         } else if (userType.tag === 'journ') {
           description = await analizeUserTag(journalistsService, user, GlobalVar.isRus ? 'Журналист:' : 'Journalist');
         } else if (userType.tag === 'guide') {
-          description = await analizeUserTag(guidesService, user,  GlobalVar.isRus ? 'Гид:' : 'Guide');
+          description = await analizeUserTag(guidesService, user, GlobalVar.isRus ? 'Гид:' : 'Guide');
         } else if (userType.tag === 'tenant') {
           description = await analizeUserTag(tenantsService, user, GlobalVar.isRus ? 'Житель:' : 'Tenant');
         }

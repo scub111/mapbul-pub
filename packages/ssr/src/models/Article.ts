@@ -16,21 +16,16 @@ export class Article implements IArticleDTO {
   id: number;
   title: string;
   titleEn: string | null;
-  titleLang: string | null;
   titlePhoto: string | null;
   photo: string | null;
   sourceUrl: string | null;
   sourceUrlEn: string | null;
-  sourceUrlLang: string | null;
   sourcePhoto: string | null;
   sourcePhotoEn: string | null;
-  sourcePhotoLang: string | null;
   description: string;
   descriptionEn: string | null;
-  descriptionLang: string | null;
   text: string;
   textEn: string | null;
-  textLang: string | null;
   authorId: number;
   editorId: number | null;
   addedDate: Date;
@@ -46,25 +41,40 @@ export class Article implements IArticleDTO {
   category: Category | undefined;
   userDescription: UserDescription | undefined;
 
+  public get titleLang() {
+    return GlobalVar.isRus ? this.title : this.titleEn;
+  }
+
+  public get sourceUrlLang() {
+    return GlobalVar.isRus ? this.sourceUrl : this.sourceUrlEn;
+  }
+
+  public get sourcePhotoLang() {
+    return GlobalVar.isRus ? this.sourcePhoto : this.sourcePhotoEn;
+  }
+
+  public get descriptionLang() {
+    return GlobalVar.isRus ? this.description : this.descriptionEn;
+  }
+
+  public get textLang() {
+    return GlobalVar.isRus ? this.text : this.textEn;;
+  }
+
   public constructor(init: IArticleDTO) {
     this.id = init.id;
     this.title = init.title;
     this.titleEn = init.titleEn;
-    this.titleLang = GlobalVar.isRus ? init.title : init.titleEn;
     this.titlePhoto = init.titlePhoto ? clearUrl(`${IMAGE_URL}/${init.titlePhoto}`) : null;
     this.photo = init.photo ? clearUrl(`${IMAGE_URL}/${init.photo}`) : null;
     this.sourceUrl = init.sourceUrl;
     this.sourceUrlEn = init.sourceUrlEn;
-    this.sourceUrlLang = GlobalVar.isRus ? init.sourceUrl : init.sourceUrlEn;
     this.sourcePhoto = init.sourcePhoto;
     this.sourcePhotoEn = init.sourcePhotoEn;
-    this.sourcePhotoLang = GlobalVar.isRus ? init.sourcePhoto : init.sourcePhotoEn;
     this.description = init.description;
     this.descriptionEn = init.descriptionEn;
-    this.descriptionLang = GlobalVar.isRus ? init.description : init.descriptionEn;
     this.text = init.text;
     this.textEn = init.textEn;
-    this.textLang = GlobalVar.isRus ? init.text : init.textEn;
     this.authorId = init.authorId;
     this.editorId = init.editorId;
     this.addedDate = init.addedDate;

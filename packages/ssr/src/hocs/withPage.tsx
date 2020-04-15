@@ -4,6 +4,7 @@ import { IPageState } from 'reducers';
 import { Store } from 'redux';
 import { PageContent } from '@mapbul-pub/types';
 import { IActionSet } from 'actions';
+import { GlobalVar } from '../config';
 
 export interface ListPageProps<T> {
   pagination?: PageContent<T>;
@@ -60,11 +61,11 @@ export const withPage = <T extends object>(config: IPageConfig<T>) => (Component
     );
   };
 
-  // MainPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & { reduxStore: Store }) => {
   MainPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & { reduxStore: Store }) => {
     const { list, setList, setTotalPages } = config.useList(reduxStore);
     const { lang } = query;
-    console.log(111, lang);
+    GlobalVar.setLang(lang);
+
     if (list.length === 0) {
       // const queryPage = getQueryPage(query);
       // const listPage = await config.loadData(queryPage);
