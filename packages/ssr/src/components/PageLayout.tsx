@@ -30,15 +30,15 @@ const useStyles = makeStyles(theme => ({
 const sections: Array<IPageUrl> = [
   {
     page: 'main',
-    url: '/',
+    url: '',
   },
   {
     page: 'articles',
-    url: `/${Routes.articles}`,
+    url: `${Routes.articles}`,
   },
   {
     page: 'events',
-    url: `/${Routes.events}`,
+    url: `${Routes.events}`,
   },
 ];
 

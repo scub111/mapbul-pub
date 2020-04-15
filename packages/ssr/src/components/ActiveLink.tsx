@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Link as MuiLink, makeStyles } from '@material-ui/core';
+import { useTranslation } from 'hooks';
 
 export interface IPageUrl {
   page: string;
@@ -27,8 +28,9 @@ const getActive = (url: string, pathname: string): boolean => {
 export const ActiveLink: React.FC<IPageUrl> = ({ page, url }) => {
   const router = useRouter();
   const classes = useStyles({ isActive: getActive(url, router.pathname) });
+  const { locale } = useTranslation();
   return (
-    <Link key={page} href={url} scroll={false}>
+    <Link key={page} href={`/[lang]/${url}`} as={`/${locale}/${url}`} scroll={false}>
       <MuiLink color="inherit" noWrap variant="h6" href={url} className={classes.root}>
         {page}
       </MuiLink>
