@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { NextPage, NextPageContext } from 'next';
 import { IPageState } from 'reducers';
 import { Store } from 'redux';
@@ -60,8 +61,10 @@ export const withPage = <T extends object>(config: IPageConfig<T>) => (Component
   };
 
   // MainPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & { reduxStore: Store }) => {
-  MainPage.getInitialProps = async ({ reduxStore }: NextPageContext & { reduxStore: Store }) => {
+  MainPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & { reduxStore: Store }) => {
     const { list, setList, setTotalPages } = config.useList(reduxStore);
+    const { lang } = query;
+    console.log(111, lang);
     if (list.length === 0) {
       // const queryPage = getQueryPage(query);
       // const listPage = await config.loadData(queryPage);

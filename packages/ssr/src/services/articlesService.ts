@@ -12,6 +12,7 @@ import {
   tenantsService,
 } from '.';
 import { UserDescription } from 'interfaces';
+import { GlobalVar } from '../config';
 
 const analizeUserTag = async (service: BaseService<any, any>, user: User, caption: string): Promise<string> => {
   const journalists = await service.list({ page: 1, size: 1, filter: `userId=${user.id}` });
@@ -36,15 +37,15 @@ class ArticlesService extends BaseService<IArticleDTO, Article> {
         let description = '';
 
         if (userType.tag === 'admin') {
-          description = 'Администратор';
+          description = GlobalVar.isRus ? 'Администратор' : 'Admin';
         } else if (userType.tag === 'edit') {
-          description = await analizeUserTag(editorsService, user, 'Редактор:');
+          description = await analizeUserTag(editorsService, user, GlobalVar.isRus ? 'Редактор:' : 'Editor:');
         } else if (userType.tag === 'journ') {
-          description = await analizeUserTag(journalistsService, user, 'Журналист:');
+          description = await analizeUserTag(journalistsService, user, GlobalVar.isRus ? 'Журналист:' : 'Journalist');
         } else if (userType.tag === 'guide') {
-          description = await analizeUserTag(guidesService, user, 'Гид:');
+          description = await analizeUserTag(guidesService, user,  GlobalVar.isRus ? 'Гид:' : 'Guide');
         } else if (userType.tag === 'tenant') {
-          description = await analizeUserTag(tenantsService, user, 'Житель:');
+          description = await analizeUserTag(tenantsService, user, GlobalVar.isRus ? 'Житель:' : 'Tenant');
         }
 
         const userDescription: UserDescription = {

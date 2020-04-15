@@ -25,6 +25,8 @@
       "common/*": ["./src/common/*"],
       "components": ["./src/components"],
       "components/*": ["./src/components/*"],
+      "config": ["./src/config"],
+      "config/*": ["./src/config/*"],
       "constants": ["./src/constants"],
       "constants/*": ["./src/constants/*"],
       "hocs": ["./src/hocs"],

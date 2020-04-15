@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { Routes, TypeRoute } from '../constants';
+import { TLangs } from 'config';
 
 let cacheMatch: TypeRoute = 'unknown';
 
@@ -12,4 +13,10 @@ export const useTypeRoute = (): TypeRoute => {
   const match = keys.find(key => router.pathname.includes(key));
   cacheMatch = match ? Routes[match] : 'unknown';
   return cacheMatch;
+};
+
+export const useLang = (): TLangs => {
+  const router = useRouter();
+  const { lang } = router.query;
+  return lang as TLangs;
 };
