@@ -1,2 +1,3 @@
-export * from './withPage';
 export * from './withDetailPage';
+export * from './withLocale';
+export * from './withPage';

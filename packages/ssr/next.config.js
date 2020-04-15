@@ -17,7 +17,9 @@ module.exports = (phase, { defaultConfig }) => {
       alias['components'] = `${__dirname}/src/components`;
       alias['config'] = `${__dirname}/src/config`;
       alias['constants'] = `${__dirname}/src/constants`;
+      alias['context'] = `${__dirname}/src/context`;
       alias['hocs'] = `${__dirname}/src/hocs`;
+      alias['hooks'] = `${__dirname}/src/hooks`;
       alias['interfaces'] = `${__dirname}/src/interfaces`;
       alias['models'] = `${__dirname}/src/models`;
       alias['reducers'] = `${__dirname}/src/reducers`;
@@ -25,6 +27,7 @@ module.exports = (phase, { defaultConfig }) => {
       alias['stores'] = `${__dirname}/src/stores`;
       alias['themes'] = `${__dirname}/src/themes`;
       alias['translations'] = `${__dirname}/src/translations`;
+      alias['ui'] = `${__dirname}/src/ui`;
       alias['utils'] = `${__dirname}/src/utils`;
       //console.log(alias);
       return config;

@@ -29,8 +29,12 @@
       "config/*": ["./src/config/*"],
       "constants": ["./src/constants"],
       "constants/*": ["./src/constants/*"],
+      "context": ["./src/context"],
+      "context/*": ["./src/context/*"],
       "hocs": ["./src/hocs"],
       "hocs/*": ["./src/hocs/*"],
+      "hooks": ["./src/hooks"],
+      "hooks/*": ["./src/hooks/*"],
       "interfaces": ["./src/interfaces"],
       "interfaces/*": ["./src/interfaces/*"],
       "models": ["./src/models"],
@@ -47,6 +51,8 @@
       "translations/*": ["./src/translations/*"],
       "utils": ["./src/utils"],
       "utils/*": ["./src/utils/*"],
+      "ui": ["./src/ui"],
+      "ui/*": ["./src/ui/*"],
     }  
   },
   "include": ["**/*.ts", "**/*.tsx"]

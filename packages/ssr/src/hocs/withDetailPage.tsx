@@ -7,7 +7,6 @@ import { GlobalVar } from '../config';
 
 export const withDetailPage = () => {
   const ArticleDetailPage: NextPage<{
-    lang?: string;
     item?: Article;
     error?: string;
   }> = ({ item, error }) => {
@@ -20,7 +19,7 @@ export const withDetailPage = () => {
       console.log(111, lang, id);
       GlobalVar.setLang(lang);
       const item = await articlesService.get(Array.isArray(id) ? id[0] : id);
-      return { lang: lang as string, item };
+      return { item };
     } catch (err) {
       return { error: err.message };
     }

@@ -1,11 +1,14 @@
 import * as React from 'react';
 import Head from 'next/head';
-import SearchIcon from '@material-ui/icons/Search';
+// import SearchIcon from '@material-ui/icons/Search';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
-import { Container, Toolbar, Button, Typography, IconButton, makeStyles } from '@material-ui/core';
+// import { Container, Toolbar, Button, Typography, IconButton, makeStyles } from '@material-ui/core';
+import { Container, Toolbar, Typography, makeStyles } from '@material-ui/core';
 import { theme } from 'themes';
 import { Routes } from '../constants';
 import { IPageUrl, ActiveLink } from './ActiveLink';
+import { useTranslation } from 'hooks';
+import { LocaleSwitcher } from '.';
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -26,15 +29,15 @@ const useStyles = makeStyles(theme => ({
 
 const sections: Array<IPageUrl> = [
   {
-    page: 'Главная',
+    page: 'main',
     url: '/',
   },
   {
-    page: 'Статьи',
+    page: 'articles',
     url: `/${Routes.articles}`,
   },
   {
-    page: 'События',
+    page: 'events',
     url: `/${Routes.events}`,
   },
 ];
@@ -53,6 +56,7 @@ function Copyright() {
 
 export const PageLayout: React.FC<{ title?: string }> = ({ children, title = 'This is the default title' }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -75,16 +79,17 @@ export const PageLayout: React.FC<{ title?: string }> = ({ children, title = 'Th
             >
               X-island
             </Typography>
-            <IconButton>
+            <LocaleSwitcher />
+            {/* <IconButton>
               <SearchIcon />
             </IconButton>
             <Button variant="outlined" size="small">
               Войти
-            </Button>
+            </Button> */}
           </Toolbar>
           <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
             {sections.map(section => (
-              <ActiveLink key={section.page} page={section.page} url={section.url} />
+              <ActiveLink key={section.page} page={t(section.page)} url={section.url} />
             ))}
           </Toolbar>
         </header>

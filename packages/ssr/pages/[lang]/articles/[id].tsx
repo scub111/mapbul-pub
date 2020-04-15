@@ -1,3 +1,3 @@
-import { withDetailPage } from 'hocs';
+import { withLocale, withDetailPage } from 'hocs';
 
-export default withDetailPage();
+export default withLocale(withDetailPage());
