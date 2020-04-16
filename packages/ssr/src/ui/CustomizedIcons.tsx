@@ -1,10 +1,25 @@
 import * as React from 'react';
+import styled from 'styled-components';
 
 export interface IIConProps {
   hover?: boolean;
   component: React.ElementType;
   [name: string]: any;
 }
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${(props: IIConProps) =>
+    props.hover &&
+    `
+    &:hover {
+      opacity: 0.7;
+    }
+  `}
+`;
 
 class Icon extends React.Component<IIConProps> {
   private ref: any;
@@ -25,16 +40,9 @@ class Icon extends React.Component<IIConProps> {
     const { hover, onClick, component: Component, ...params } = this.props;
 
     return (
-      <div
-        ref={(ref: any) => (this.ref = ref)}
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Component {...params}  />
-      </div>
+      <Container ref={(ref: any) => (this.ref = ref)} hover={hover}>
+        <Component {...params} />
+      </Container>
     );
   }
 

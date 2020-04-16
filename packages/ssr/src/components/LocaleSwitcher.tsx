@@ -17,8 +17,8 @@ export const LocaleSwitcher: React.FC = () => {
 
   return (
     <div onClick={onClick}>
-      {locale === 'en' && <EnglishIcon style={{ width: 48, height: 25, border: '1px solid black' }} />}
-      {locale === 'ru' && <RussiaIcon style={{ width: 48, height: 25, border: '1px solid black' }} />}
+      {locale === 'en' && <EnglishIcon style={{ width: 48, height: 25, border: '1px solid black' }} hover/>}
+      {locale === 'ru' && <RussiaIcon style={{ width: 48, height: 25, border: '1px solid black' }} hover/>}
     </div>
   );
 };
