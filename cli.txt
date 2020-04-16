@@ -1,8 +1,11 @@
 npm i artillery -g
 npx artillery quick --count 100 -n 200 http://localhost:3200/api/categories
 npx artillery quick --count 100 -n 200 http://api.mapbul.scub111.com/api/categories
+
 npx artillery quick --count 100 -n 200 http://localhost:3100/api/categories
 2019.11.14 - 212 RPS
+2020.04.16 - 251 RPS
+
 npx artillery quick --count 100 -n 200 http://localhost:3000/articles/101
 move-cli dist dist2/server2 --mkdirp
 echo y | hygen server dto Article --message id12 --abc 23
@@ -10,3 +13,6 @@ echo y | hygen server dto Article --message id12 --abc 23
 lerna run build-webpack
 lerna run --scope @mapbul-pub/common build-webpack
 lerna exec -- npm i ts-loader -D
+
+npx artillery quick --count 100 -n 200 http://localhost:3300/ru/articles
+2020.04.16 - 67 RPS
