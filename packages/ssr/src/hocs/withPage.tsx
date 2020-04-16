@@ -5,6 +5,7 @@ import { Store } from 'redux';
 import { PageContent } from '@mapbul-pub/types';
 import { IActionSet } from 'actions';
 import { GlobalVar } from '../config';
+import { useTranslation } from 'hooks';
 
 export interface ListPageProps<T> {
   pagination?: PageContent<T>;
@@ -23,7 +24,6 @@ export interface IPageProps<T> {
 
 export interface IPageConfig<T> {
   route: string;
-  title: string;
   loadData: (page: number) => Promise<ListPageProps<T>>;
   useList: (reduxStore?: Store) => IUseList<T>;
 }
@@ -34,6 +34,8 @@ export const withPage = <T extends object>(config: IPageConfig<T>) => (Component
   const MainPage: NextPage<ListPageProps<T>> = ({ error }) => {
     const { list, currentPage, totalPages, loading, incrementCurrentPage, addList } = config.useList();
     const hasMore = currentPage < totalPages;
+
+    const { t } = useTranslation();
 
     const loadMore = async (_: number) => {
       if (hasMore) {
@@ -52,7 +54,7 @@ export const withPage = <T extends object>(config: IPageConfig<T>) => (Component
       <Component
         route={config.route}
         list={list}
-        title={config.title}
+        title={`X-island. ${t('articles')}`}
         error={error}
         hasMore={hasMore}
         loadMore={loadMore}

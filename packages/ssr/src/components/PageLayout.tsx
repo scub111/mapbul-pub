@@ -34,11 +34,11 @@ const sections: Array<IPageUrl> = [
   },
   {
     page: 'articles',
-    url: `${Routes.articles}`,
+    url: `/${Routes.articles}`,
   },
   {
     page: 'events',
-    url: `${Routes.events}`,
+    url: `/${Routes.events}`,
   },
 ];
 
