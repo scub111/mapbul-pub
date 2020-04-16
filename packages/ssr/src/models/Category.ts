@@ -1,4 +1,5 @@
 import { ICategoryDTO } from '@mapbul-pub/types';
+import { GlobalVar } from '../config';
 
 export class Category implements ICategoryDTO {
   public static async New(init: ICategoryDTO) {
@@ -8,6 +9,7 @@ export class Category implements ICategoryDTO {
   id: number;
   name: string;
   enName: string | null;
+  nameLang: string | null;
   parentId: number | null;
   addedDate: Date;
   icon: string;
@@ -19,6 +21,7 @@ export class Category implements ICategoryDTO {
     this.id = init.id;
     this.name = init.name || '';
     this.enName = init.enName;
+    this.nameLang = GlobalVar.isRus ? init.name : init.enName;
     this.parentId = init.parentId;
     this.addedDate = init.addedDate;
     this.icon = init.icon;

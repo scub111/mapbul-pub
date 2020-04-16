@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
-import { useTypeRoute } from 'utils';
+import { useTranslation } from '../hooks';
 
 const useStyles = makeStyles(() => ({
   typography: {
@@ -39,26 +39,29 @@ const useStyles = makeStyles(() => ({
 
 export const ListItem: React.FC<{ item: Article; route: string }> = ({ item, route }) => {
   const classes = useStyles();
-  const typeRoute = useTypeRoute();
+  const { locale, isRus } = useTranslation();
+  const titleLang = isRus ? item.title : item.titleEn || '';
+  const descriptionLang = isRus ? item.description : item.descriptionEn || '';
+  const publishedDate = route === 'articles' ? item.publishedDate : item.startDate;
   return (
     <Grid item key={item.title} xs={12} md={6}>
       <CardActionArea>
-        <Link href={`/${route}/[id]`} as={`/${route}/${item.id}`}>
+        <Link href={`/[lang]/${route}/[id]`} as={`/${locale}/${route}/${item.id}`}>
           <Card className={classes.card}>
             <div className={classes.cardDetails}>
               <CardContent>
-                <Typography variant="h5">{item.title}</Typography>
-                {item.publishedDate && (
+                <Typography variant="h5">{titleLang}</Typography>
+                {true && (
                   <Typography variant="subtitle1" color="textSecondary">
-                    {formatDateToString(typeRoute === 'articles' ? item.publishedDate : item.startDate)}
+                    {formatDateToString(publishedDate)}
                   </Typography>
                 )}
                 <Typography variant="subtitle1" paragraph>
-                  {item.description}
+                  {descriptionLang}
                 </Typography>
               </CardContent>
             </div>
-            {item.titlePhoto && <CardMedia className={classes.cardMedia} image={item.titlePhoto} title={item.title} />}
+            {item.titlePhoto && <CardMedia className={classes.cardMedia} image={item.titlePhoto} title={titleLang} />}
           </Card>
         </Link>
       </CardActionArea>

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { withRedux, useEvents } from 'stores';
-import { withPage, IPageProps, IPageConfig } from 'hocs';
+import { withPage, IPageProps, IPageConfig, withLocale } from 'hocs';
 import { Routes } from 'constants/routes';
 import { ListPage, ITEMS_PER_PAGE } from 'components';
 import { Article } from 'models';
@@ -11,10 +11,9 @@ const View: React.FC<IPageProps<Article>> = ({ route, list, title, error, hasMor
 };
 
 const config: IPageConfig<Article> = {
-  route: Routes.events,
-  title: 'X-island. События',
-  loadData: loadEventsData(ITEMS_PER_PAGE),
-  useList: useEvents,
+    route: Routes.events,
+    loadData: loadEventsData(ITEMS_PER_PAGE),
+    useList: useEvents,
 };
 
-export default withRedux(withPage<Article>(config)(View));
+export default withLocale(withRedux(withPage<Article>(config)(View)));
