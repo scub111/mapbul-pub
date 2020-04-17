@@ -3,7 +3,6 @@ import { clearUrl } from 'utils';
 import { IMAGE_URL } from 'common/constants';
 import { Category } from '.';
 import { UserDescription } from 'interfaces';
-import { GlobalVar } from '../config';
 
 export class Article implements IArticleDTO {
   public static async New(init: IArticleDTO, category?: Category, userDescription?: UserDescription) {
@@ -40,26 +39,6 @@ export class Article implements IArticleDTO {
 
   category: Category | undefined;
   userDescription: UserDescription | undefined;
-
-  public get titleLang() {
-    return GlobalVar.isRus ? this.title : this.titleEn;
-  }
-
-  public get sourceUrlLang() {
-    return GlobalVar.isRus ? this.sourceUrl : this.sourceUrlEn;
-  }
-
-  public get sourcePhotoLang() {
-    return GlobalVar.isRus ? this.sourcePhoto : this.sourcePhotoEn;
-  }
-
-  public get descriptionLang() {
-    return GlobalVar.isRus ? this.description : this.descriptionEn;
-  }
-
-  public get textLang() {
-    return GlobalVar.isRus ? this.text : this.textEn;;
-  }
 
   public constructor(init: IArticleDTO) {
     this.id = init.id;
