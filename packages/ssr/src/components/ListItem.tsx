@@ -49,7 +49,7 @@ export const ListItem: React.FC<{ item: Article; route: string }> = ({ item, rou
     <Grid item key={item.title} xs={12} md={6}>
       <CardActionArea>
         <Link href={`/[lang]/${route}/[id]`} as={href}>
-          <MuiLink href={href}>
+          <MuiLink color="inherit" noWrap variant="h6" href={href}>
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
                 <CardContent>

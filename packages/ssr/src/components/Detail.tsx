@@ -3,6 +3,7 @@ import { makeStyles, Typography, Box, Link } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
 import { useTypeRoute } from 'utils';
+import { useTranslation } from '../hooks';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,15 +25,19 @@ const useStyles = makeStyles(theme => ({
 const PreText: React.FC<{ text: string | null }> = ({ text }) => {
   return (
     <>
-      {text && text.split('\r\n').map((item, index) => (
-        <Typography key={index} variant="subtitle1" dangerouslySetInnerHTML={{ __html: `${item} <br />`  }} />
-      ))}
+      {text &&
+        text
+          .split('\r\n')
+          .map((item, index) => (
+            <Typography key={index} variant="subtitle1" dangerouslySetInnerHTML={{ __html: `${item} <br />` }} />
+          ))}
     </>
   );
 };
 
 export const Detail: React.FC<{ item: Article }> = ({ item }) => {
   const classes = useStyles();
+  const { isRus } = useTranslation();
   const typeRoute = useTypeRoute();
   const isActicle = typeRoute === 'articles';
 
@@ -52,10 +57,10 @@ export const Detail: React.FC<{ item: Article }> = ({ item }) => {
             </Link>
           )}
           <Typography variant="h5" style={{ fontWeight: 600 }}>
-            {item.titleLang}
+            {isRus ? item.title : item.titleEn}
           </Typography>
           <Typography variant="subtitle1" paragraph>
-            {item.descriptionLang}
+            {isRus ? item.description : item.descriptionEn}
           </Typography>
         </Box>
         {item.publishedDate && (
@@ -68,20 +73,20 @@ export const Detail: React.FC<{ item: Article }> = ({ item }) => {
       </Box>
       {item.titlePhoto && (
         <Box className={classes.imgCenter}>
-          <img style={{ maxWidth: '100%' }} src={item.titlePhoto} title={item.title} alt=''/>
+          <img style={{ maxWidth: '100%' }} src={item.titlePhoto} title={item.title} alt="" />
         </Box>
       )}
       <Box className={classes.imgCenter}>
         <Box style={{ display: 'flex', flexDirection: 'row', fontStyle: 'italic' }}>
           {item.sourcePhoto && (
             <Link display="block" variant="body1" href={item.sourcePhoto} key={item.sourcePhoto}>
-              {item.sourcePhotoLang}
+              {isRus ? item.sourcePhoto : item.sourcePhotoEn}
             </Link>
           )}
         </Box>
       </Box>
       <Typography component="div" variant="subtitle1" paragraph>
-        <PreText text={item.textLang} />
+        <PreText text={isRus ? item.text : item.textEn} />
         {!isActicle && item.userDescription && !item.sourceUrl && (
           <Typography variant="h6" color="textSecondary" className={classes.eventUserDescription}>
             {item.userDescription ? item.userDescription.description : ''}
@@ -93,7 +98,7 @@ export const Detail: React.FC<{ item: Article }> = ({ item }) => {
           {/* <Typography variant="subtitle1" paragraph>
             Фото
           </Typography> */}
-          <img style={{ maxWidth: '100%' }} src={item.photo} title={item.title} alt=''/>
+          <img style={{ maxWidth: '100%' }} src={item.photo} title={item.title} alt="" />
         </Box>
       )}
     </Box>
