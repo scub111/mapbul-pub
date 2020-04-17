@@ -5,6 +5,7 @@ import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea } from '
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
 import { useTranslation } from '../hooks';
+import { Link as MuiLink } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
   typography: {
@@ -43,26 +44,29 @@ export const ListItem: React.FC<{ item: Article; route: string }> = ({ item, rou
   const titleLang = isRus ? item.title : item.titleEn || '';
   const descriptionLang = isRus ? item.description : item.descriptionEn || '';
   const publishedDate = route === 'articles' ? item.publishedDate : item.startDate;
+  const href = `/${locale}/${route}/${item.id}`;
   return (
     <Grid item key={item.title} xs={12} md={6}>
       <CardActionArea>
-        <Link href={`/[lang]/${route}/[id]`} as={`/${locale}/${route}/${item.id}`}>
-          <Card className={classes.card}>
-            <div className={classes.cardDetails}>
-              <CardContent>
-                <Typography variant="h5">{titleLang}</Typography>
-                {true && (
-                  <Typography variant="subtitle1" color="textSecondary">
-                    {formatDateToString(publishedDate)}
+        <Link href={`/[lang]/${route}/[id]`} as={href}>
+          <MuiLink href={href}>
+            <Card className={classes.card}>
+              <div className={classes.cardDetails}>
+                <CardContent>
+                  <Typography variant="h5">{titleLang}</Typography>
+                  {true && (
+                    <Typography variant="subtitle1" color="textSecondary">
+                      {formatDateToString(publishedDate)}
+                    </Typography>
+                  )}
+                  <Typography variant="subtitle1" paragraph>
+                    {descriptionLang}
                   </Typography>
-                )}
-                <Typography variant="subtitle1" paragraph>
-                  {descriptionLang}
-                </Typography>
-              </CardContent>
-            </div>
-            {item.titlePhoto && <CardMedia className={classes.cardMedia} image={item.titlePhoto} title={titleLang} />}
-          </Card>
+                </CardContent>
+              </div>
+              {item.titlePhoto && <CardMedia className={classes.cardMedia} image={item.titlePhoto} title={titleLang} />}
+            </Card>
+          </MuiLink>
         </Link>
       </CardActionArea>
       {/* <Button
