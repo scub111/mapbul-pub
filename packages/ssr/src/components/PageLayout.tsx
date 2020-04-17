@@ -1,14 +1,13 @@
 import * as React from 'react';
 import Head from 'next/head';
-// import SearchIcon from '@material-ui/icons/Search';
 import { CssBaseline, ThemeProvider } from '@material-ui/core';
-// import { Container, Toolbar, Button, Typography, IconButton, makeStyles } from '@material-ui/core';
 import { Container, Toolbar, Typography, makeStyles } from '@material-ui/core';
 import { theme } from 'themes';
 import { Routes } from '../constants';
 import { IPageUrl, ActiveLink } from './ActiveLink';
 import { useTranslation } from 'hooks';
 import { LocaleSwitcher } from '.';
+import { Footer } from './Footer';
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -20,10 +19,6 @@ const useStyles = makeStyles(theme => ({
   toolbarSecondary: {
     justifyContent: 'space-between',
     overflowX: 'auto',
-  },
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6, 0),
   },
 }));
 
@@ -41,18 +36,6 @@ const sections: Array<IPageUrl> = [
     url: `/${Routes.events}`,
   },
 ];
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      {/* <Link href="http://scub111.com:9090/">
-        Mapbul Website
-      </Link>{' '} */}
-      {new Date().getFullYear()}
-    </Typography>
-  );
-}
 
 export const PageLayout: React.FC<{ title?: string }> = ({ children, title = 'This is the default title' }) => {
   const classes = useStyles();
@@ -94,13 +77,8 @@ export const PageLayout: React.FC<{ title?: string }> = ({ children, title = 'Th
           </Toolbar>
         </header>
         <main>{children}</main>
-        <footer className={classes.footer}>
-          <Container maxWidth="lg">
-            <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-              Все права защищены
-            </Typography>
-            <Copyright />
-          </Container>
+        <footer>
+          <Footer style={{ padding: theme.spacing(6, 0) }} />
         </footer>
       </Container>
     </ThemeProvider>
