@@ -8,6 +8,7 @@ const strings: Strings = {
     events: 'Events',
     topArticles: '6 last articles',
     topEvents: '6 last events',
+    allRightsReserved: 'All rights reserved',
   },
   ru: {
     title: 'X-island. Детали',
@@ -16,6 +17,7 @@ const strings: Strings = {
     events: 'События',
     topArticles: '6 последних статей',
     topEvents: '6 ближайших событий',
+    allRightsReserved: 'Все права защищены',
   },
 };
 
