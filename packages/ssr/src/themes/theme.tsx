@@ -10,9 +10,9 @@ const innerTheme = createMuiTheme({
     fontSize: 12, //14 - default
   },
   palette: {
-    primary: {
-      main: '#ffffff',
-    },
+    // primary: {
+    //   main: '#ffffff',
+    // },
     // secondary: {
     //   main: '#ffffff',
     // },

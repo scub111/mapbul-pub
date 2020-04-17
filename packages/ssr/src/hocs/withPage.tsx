@@ -54,7 +54,7 @@ export const withPage = <T extends object>(config: IPageConfig<T>) => (Component
       <Component
         route={config.route}
         list={list}
-        title={`X-island. ${t('articles')}`}
+        title={`X-island. ${t(config.route)}`}
         error={error}
         hasMore={hasMore}
         loadMore={loadMore}
