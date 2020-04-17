@@ -29,9 +29,10 @@ export const ActiveLink: React.FC<IPageUrl> = ({ page, url }) => {
   const router = useRouter();
   const classes = useStyles({ isActive: getActive(`/[lang]${url}`, router.pathname) });
   const { locale } = useTranslation();
+  const href = `/${locale}${url}`;
   return (
-    <Link key={page} href={`/[lang]${url}`} as={`/${locale}${url}`} scroll={false}>
-      <MuiLink color="inherit" noWrap variant="h6" href={url} className={classes.root}>
+    <Link key={page} href={`/[lang]${url}`} as={href} scroll={false}>
+      <MuiLink color="inherit" noWrap variant="h6" href={href} className={classes.root}>
         {page}
       </MuiLink>
     </Link>
