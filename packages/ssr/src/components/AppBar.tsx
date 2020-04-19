@@ -6,7 +6,7 @@ import {
   useTheme,
   useScrollTrigger,
   Container,
-  Slide,
+  // Slide,
 } from '@material-ui/core';
 import { useTranslation } from 'hooks';
 import { IStyleProps } from 'interfaces';
@@ -39,12 +39,14 @@ export const AppBar: React.FC<{ window?: any } & IStyleProps> = ({ window }) => 
     target: window ? window() : undefined,
   });
 
-  const sliceTrigger = useScrollTrigger({
-    target: window ? window() : undefined,
-  });
+  // const sliceTrigger = useScrollTrigger({
+  //   target: window ? window() : undefined,
+  // });
+
+  // console.log(111, sliceTrigger);
 
   return (
-    <Slide direction="down" in={!sliceTrigger}>
+    // <Slide direction="down" in={true} mountOnEnter={false}>
       <MuiAppBar component="nav" elevation={notZeroTrigger ? 10 : 0}>
         <Container maxWidth="lg">
           {!notZeroTrigger && (
@@ -63,6 +65,6 @@ export const AppBar: React.FC<{ window?: any } & IStyleProps> = ({ window }) => 
           </Toolbar>
         </Container>
       </MuiAppBar>
-    </Slide>
+    // </Slide>
   );
 };
