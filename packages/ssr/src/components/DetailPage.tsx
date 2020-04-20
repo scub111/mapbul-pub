@@ -7,9 +7,10 @@ export const DetailPage: React.FC<{
   item?: Article;
   error?: string;
 }> = ({ item, error }) => {
-  const { t } = useTranslation();
+  const { isRus } = useTranslation();
   return (
-    <PageLayout title={t('title')}>
+    // <PageLayout title={t('title')}>
+    <PageLayout title={isRus ? item?.description : item?.descriptionEn}>
       {error && <ErrorText error={error} />}
       {item && <Detail item={item} />}
     </PageLayout>

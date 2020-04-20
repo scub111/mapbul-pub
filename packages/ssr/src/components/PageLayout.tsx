@@ -5,7 +5,7 @@ import { Container } from '@material-ui/core';
 import { theme } from 'themes';
 import { AppBar, Footer } from '.';
 
-export const PageLayout: React.FC<{ title?: string }> = ({ children, title = 'This is the default title' }) => {
+export const PageLayout: React.FC<{ title?: string | null }> = ({ children, title = 'This is the default title' }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
