@@ -7,7 +7,12 @@ import { AppBar, Footer } from '.';
 
 type TNullString = string | undefined;
 
-export const PageLayout: React.FC<{ title?: TNullString, description?: TNullString, imageUrl?: TNullString }> = ({ children, title = 'This is the default title', description, imageUrl }) => {
+export const PageLayout: React.FC<{ title: TNullString; description?: TNullString; imageUrl?: TNullString }> = ({
+  children,
+  title,
+  description,
+  imageUrl,
+}) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -17,8 +22,8 @@ export const PageLayout: React.FC<{ title?: TNullString, description?: TNullStri
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta property="og:title" content={title} />
         <meta property="og:type" content="website" />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={imageUrl}/>
+        {description && <meta property="og:description" content={description} />}
+        {imageUrl && <meta property="og:image" content={imageUrl} />}
       </Head>
       <header style={{ marginBottom: 110 }}>
         <AppBar />
