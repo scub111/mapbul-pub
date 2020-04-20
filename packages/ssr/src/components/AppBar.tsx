@@ -51,7 +51,7 @@ export const AppBar: React.FC<{ window?: any } & IStyleProps> = ({ window }) => 
         <Container maxWidth="lg">
           {!notZeroTrigger && (
             <Toolbar variant="dense" style={{ borderBottom: `1px solid ${theme.palette.divider}` }}>
-              <Typography component="h2" variant="h5" color="inherit" align="center" noWrap style={{ flex: 1 }}>
+              <Typography variant="h5" color="inherit" align="center" noWrap style={{ flex: 1 }}>
                 X-island
               </Typography>
               <LocaleSwitcher />
