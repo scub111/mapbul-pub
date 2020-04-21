@@ -9,9 +9,8 @@ export const DetailPage: React.FC<{
 }> = ({ item, error }) => {
   const { isRus } = useTranslation();
   return (
-    // <PageLayout title={t('title')}>
     <PageLayout
-      title={item?.title}
+      title={isRus ? item?.title : item?.titleEn?.toString()}
       description={isRus ? item?.description : item?.descriptionEn?.toString()}
       imageUrl={item?.titlePhoto?.toString()}
     >
