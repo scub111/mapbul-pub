@@ -26,16 +26,14 @@ const PreText: React.FC<{ text: string | null }> = ({ text }) => {
   return (
     <>
       {text &&
-        text
-          .split('\r\n')
-          .map((item, index) => (
-            <Typography
-              key={index}
-              // variant={index === 0 ? 'h3' : 'subtitle1'}
-              component={index === 0 ? 'h2' : item !== "" ? 'h3' : 'p'}
-              dangerouslySetInnerHTML={{ __html: `${item} <br />` }}
-            />
-          ))}
+        text.split('\r\n').map((item, index) => (
+          <Typography
+            key={index}
+            // variant={index === 0 ? 'h3' : 'subtitle1'}
+            component={index === 0 ? 'h2' : item !== '' ? 'h3' : 'p'}
+            dangerouslySetInnerHTML={{ __html: `${item} <br />` }}
+          />
+        ))}
     </>
   );
 };
@@ -61,10 +59,10 @@ export const Detail: React.FC<{ item: Article }> = ({ item }) => {
               {item.sourceUrl}
             </Link>
           )}
-          <Typography variant="h5" style={{ fontWeight: 600 }} component="h1">
+          <Typography variant="h5" style={{ fontWeight: 600 }}>
             {isRus ? item.title : item.titleEn}
           </Typography>
-          <Typography variant="subtitle1" paragraph>
+          <Typography variant="subtitle1" paragraph component="h1">
             {isRus ? item.description : item.descriptionEn}
           </Typography>
         </Box>

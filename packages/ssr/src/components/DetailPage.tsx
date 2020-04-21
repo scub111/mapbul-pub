@@ -11,8 +11,8 @@ export const DetailPage: React.FC<{
   return (
     // <PageLayout title={t('title')}>
     <PageLayout
-      title={isRus ? item?.description : item?.descriptionEn?.toString()}
-      description={item?.title}
+      title={item?.title}
+      description={isRus ? item?.description : item?.descriptionEn?.toString()}
       imageUrl={item?.titlePhoto?.toString()}
     >
       {error && <ErrorText error={error} />}
