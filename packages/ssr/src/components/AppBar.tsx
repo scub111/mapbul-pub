@@ -6,19 +6,16 @@ import {
   useTheme,
   useScrollTrigger,
   Container,
-  Zoom,
   Fab,
-  makeStyles,
-  Theme,
-  createStyles,
   // Slide,
 } from '@material-ui/core';
 import { useTranslation } from 'hooks';
-import { IStyleProps } from 'interfaces';
 import { LocaleSwitcher } from '.';
 import { ActiveLink, IPageUrl } from './ActiveLink';
 import { Routes } from '../constants';
+import { ScrollTop } from 'ui';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { WindowProps } from 'interfaces';
 
 const sections: Array<IPageUrl> = [
   {
@@ -35,56 +32,7 @@ const sections: Array<IPageUrl> = [
   },
 ];
 
-interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window;
-  children: React.ReactElement;
-}
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      position: 'fixed',
-      bottom: theme.spacing(2),
-      right: theme.spacing(2),
-    },
-  }),
-);
-
-function ScrollTop(props: Props) {
-  const { children, window } = props;
-  const classes = useStyles();
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
-  const trigger = useScrollTrigger({
-    target: window ? window() : undefined,
-    disableHysteresis: true,
-    threshold: 100,
-  });
-
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    const anchor = ((event.target as HTMLDivElement).ownerDocument || document).querySelector('#top');
-    console.log(anchor);
-    if (anchor) {
-      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  };
-
-  return (
-    <Zoom in={trigger}>
-      <div onClick={handleClick} role="presentation" className={classes.root}>
-        {children}
-      </div>
-    </Zoom>
-  );
-}
-
-export const AppBar: React.FC<{ window?: () => Window } & IStyleProps> = props => {
-  const { window } = props;
+export const AppBar: React.FC<WindowProps> = ({ window }) => {
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -119,7 +67,7 @@ export const AppBar: React.FC<{ window?: () => Window } & IStyleProps> = props =
           {notZeroTrigger && <LocaleSwitcher />}
         </Toolbar>
       </Container>
-      <ScrollTop {...props}>
+      <ScrollTop window={window}>
         <Fab color="primary" size="small" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />
         </Fab>
