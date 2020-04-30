@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   topList: {
     padding: theme.spacing(2, 0),
     marginBottom: theme.spacing(2),
-    backgroundColor: theme.palette.grey[200],
+    // backgroundColor: theme.palette.grey[200],
   },
   head: {
     textAlign: 'center',

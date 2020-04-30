@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Container, Typography, useTheme } from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import { useTranslation } from 'hooks';
 import { IStyleProps } from 'interfaces';
 
@@ -13,11 +13,10 @@ const Copyright:React.FC = () => {
 }
 
 export const Footer: React.FC<IStyleProps> = ({ style }) => {
-  const theme = useTheme();
   const { t } = useTranslation();
   return (
     <p>
-      <Container maxWidth="lg" style={{ backgroundColor: theme.palette.background.paper, ...style }}>
+      <Container maxWidth="lg" style={{ ...style }}>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
           {t('allRightsReserved')}
         </Typography>
