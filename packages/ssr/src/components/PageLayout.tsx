@@ -29,6 +29,7 @@ export const PageLayout: React.FC<{ title: TNullString; description?: TNullStrin
         <AppBar />
       </header>
       <main>
+        <div id="top" />
         <Container maxWidth="lg">{children}</Container>
       </main>
       <footer>
