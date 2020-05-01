@@ -2,7 +2,7 @@ import * as React from 'react';
 import { makeStyles, Typography, Box, Link } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
-import { useTypeRoute } from 'utils';
+import { useTypeRoute } from 'hooks';
 import { useTranslation } from '../hooks';
 
 const useStyles = makeStyles(theme => ({

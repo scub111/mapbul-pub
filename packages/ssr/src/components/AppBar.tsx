@@ -1,5 +1,4 @@
 import * as React from 'react';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import {
   Typography,
   Toolbar,
@@ -7,11 +6,9 @@ import {
   useTheme,
   useScrollTrigger,
   Container,
-  Fab,
 } from '@material-ui/core';
 import { LocaleSwitcher, TabLinks } from '.';
 import { Routes } from '../constants';
-import { ScrollTop } from 'ui';
 import { WindowProps, IPageUrl } from 'interfaces';
 
 const sections: Array<IPageUrl> = [
@@ -53,11 +50,6 @@ export const AppBar: React.FC<WindowProps> = ({ window }) => {
           {notZeroTrigger && <LocaleSwitcher />}
         </Toolbar>
       </Container>
-      <ScrollTop window={window}>
-        <Fab color="primary" size="small" aria-label="scroll back to top">
-          <KeyboardArrowUpIcon />
-        </Fab>
-      </ScrollTop>
     </MuiAppBar>
   );
 };

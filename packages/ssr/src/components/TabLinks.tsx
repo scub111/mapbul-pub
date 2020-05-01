@@ -11,7 +11,7 @@ const useStyles = makeStyles((_: Theme) =>
   createStyles({
     tabRoot: {},
     tabIndicator: {
-      opacity: 0.9,
+      // opacity: 0.5,
       height: 4,
     },
   }),
