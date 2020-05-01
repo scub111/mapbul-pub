@@ -6,13 +6,10 @@ import {
   useTheme,
   useScrollTrigger,
   Container,
-  // Slide,
 } from '@material-ui/core';
-import { useTranslation } from 'hooks';
-import { IStyleProps } from 'interfaces';
-import { LocaleSwitcher } from '.';
-import { ActiveLink, IPageUrl } from './ActiveLink';
+import { LocaleSwitcher, TabLinks } from '.';
 import { Routes } from '../constants';
+import { WindowProps, IPageUrl } from 'interfaces';
 
 const sections: Array<IPageUrl> = [
   {
@@ -29,42 +26,30 @@ const sections: Array<IPageUrl> = [
   },
 ];
 
-export const AppBar: React.FC<{ window?: any } & IStyleProps> = ({ window }) => {
+export const AppBar: React.FC<WindowProps> = ({ window }) => {
   const theme = useTheme();
-  const { t } = useTranslation();
-
   const notZeroTrigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
     target: window ? window() : undefined,
   });
 
-  // const sliceTrigger = useScrollTrigger({
-  //   target: window ? window() : undefined,
-  // });
-
-  // console.log(111, sliceTrigger);
-
   return (
-    // <Slide direction="down" in={true} mountOnEnter={false}>
-      <MuiAppBar component="nav" elevation={notZeroTrigger ? 10 : 0}>
-        <Container maxWidth="lg">
-          {!notZeroTrigger && (
-            <Toolbar variant="dense" style={{ borderBottom: `1px solid ${theme.palette.divider}` }}>
-              <Typography variant="h5" color="inherit" align="center" noWrap style={{ flex: 1 }}>
-                X-island
-              </Typography>
-              <LocaleSwitcher />
-            </Toolbar>
-          )}
-          <Toolbar variant="dense" style={{ justifyContent: 'space-between' }}>
-            {sections.map(section => (
-              <ActiveLink key={section.page} page={t(section.page)} url={section.url} />
-            ))}
-            {notZeroTrigger && <LocaleSwitcher />}
+    <MuiAppBar component="nav" elevation={notZeroTrigger ? 10 : 0}>
+      <Container maxWidth="lg">
+        {!notZeroTrigger && (
+          <Toolbar variant="dense" style={{ borderBottom: `1px solid ${theme.palette.divider}` }}>
+            <Typography variant="h5" color="inherit" align="center" noWrap style={{ flex: 1 }}>
+              X-island
+            </Typography>
+            <LocaleSwitcher />
           </Toolbar>
-        </Container>
-      </MuiAppBar>
-    // </Slide>
+        )}
+        <Toolbar variant="dense">
+          <TabLinks sections={sections} />
+          {notZeroTrigger && <LocaleSwitcher />}
+        </Toolbar>
+      </Container>
+    </MuiAppBar>
   );
 };

@@ -8,3 +8,12 @@ export interface IThemeProps {
 export type IStyleProps = {
   style?: CSSProperties;
 };
+
+export interface WindowProps {
+  window?: () => Window;
+};
+
+export interface IPageUrl {
+  page: string;
+  url: string;
+}

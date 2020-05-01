@@ -3,19 +3,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Link as MuiLink, useTheme } from '@material-ui/core';
 import { useTranslation } from 'hooks';
-
-export interface IPageUrl {
-  page: string;
-  url: string;
-}
-
-const getActive = (url: string, pathname: string): boolean => {
-  if (url === '/[lang]') {
-    return url === pathname;
-  } else {
-    return pathname.includes(url);
-  }
-};
+import { IPageUrl } from 'interfaces';
+import { getActive } from 'utils';
 
 export const ActiveLink: React.FC<IPageUrl> = ({ page, url }) => {
   const router = useRouter();

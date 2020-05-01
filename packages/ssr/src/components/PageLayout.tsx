@@ -4,15 +4,18 @@ import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 import { theme } from 'themes';
 import { AppBar, Footer } from '.';
+import { useScrollPercentage } from 'hooks';
+import { ScrollFab } from 'ui';
+import { WindowProps } from 'interfaces';
 
 type TNullString = string | undefined;
 
-export const PageLayout: React.FC<{ title: TNullString; description?: TNullString; imageUrl?: TNullString }> = ({
-  children,
-  title,
-  description,
-  imageUrl,
-}) => {
+export const PageLayout: React.FC<{
+  title: TNullString;
+  description?: TNullString;
+  imageUrl?: TNullString;
+} & WindowProps> = ({ children, title, description, imageUrl, window }) => {
+  const [percent] = useScrollPercentage();
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -29,9 +32,11 @@ export const PageLayout: React.FC<{ title: TNullString; description?: TNullStrin
         <AppBar />
       </header>
       <main>
+        <div id="top" />
         <Container maxWidth="lg">{children}</Container>
       </main>
       <footer>
+        <ScrollFab window={window} percent={percent}/>
         <Footer style={{ padding: theme.spacing(6, 0) }} />
       </footer>
     </ThemeProvider>
