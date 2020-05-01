@@ -25,7 +25,7 @@ const TabEx: React.FC<IPageUrl> = ({ page, url, ...props }) => {
       <Tab
         label={t(page)}
         id={page}
-        style={{ textTransform: 'none', fontSize: theme.typography.h5.fontSize }}
+        style={{ textTransform: 'none', fontSize: theme.typography.h6.fontSize }}
         component={'a'}
         href={href}
         {...props}
