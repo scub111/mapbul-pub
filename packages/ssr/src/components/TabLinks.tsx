@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Tabs, Tab, makeStyles, Theme, createStyles } from '@material-ui/core';
 import { theme } from 'themes';
@@ -11,7 +11,6 @@ const useStyles = makeStyles((_: Theme) =>
   createStyles({
     tabRoot: {},
     tabIndicator: {
-      // opacity: 0.5,
       height: 4,
     },
   }),
@@ -35,17 +34,13 @@ const TabEx: React.FC<IPageUrl> = ({ page, url, ...props }) => {
 };
 
 export const TabLinks: React.FC<{ sections: Array<IPageUrl> }> = ({ sections }) => {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(1);
+  const classes = useStyles();  
   const router = useRouter();
-
-  useEffect(() => {
-    setValue(sections.findIndex(item => getActive(`/[lang]${item.url}`, router.pathname)));
-  }, []);
+  const findIndex = () => sections.findIndex(item => getActive(`/[lang]${item.url}`, router.pathname));
 
   return (
     <Tabs
-      value={value}
+      value={findIndex()}
       style={{ width: '100%' }}
       variant="fullWidth"
       classes={{ root: classes.tabRoot, indicator: classes.tabIndicator }}

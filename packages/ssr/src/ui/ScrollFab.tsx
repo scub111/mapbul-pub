@@ -16,9 +16,9 @@ export const ScrollFab: React.FC<{ percent: number } & WindowProps> = ({ percent
           <circle
             style={{ transform: 'rotate(-90deg)', transformOrigin: '50% 50%' }}
             stroke="red"
-            stroke-width="4"
-            stroke-dashoffset={offset}
-            stroke-dasharray={`${circumference}, ${circumference}`}
+            strokeWidth="4"
+            strokeDashoffset={offset.toString()}
+            strokeDasharray={`${circumference}, ${circumference}`}
             fill="transparent"
             r={radius}
             cx="20"
