@@ -1,4 +1,5 @@
 import * as React from 'react';
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import {
   Typography,
   Toolbar,
@@ -7,15 +8,11 @@ import {
   useScrollTrigger,
   Container,
   Fab,
-  // Slide,
 } from '@material-ui/core';
-import { useTranslation } from 'hooks';
-import { LocaleSwitcher } from '.';
-import { ActiveLink, IPageUrl } from './ActiveLink';
+import { LocaleSwitcher, TabLinks } from '.';
 import { Routes } from '../constants';
 import { ScrollTop } from 'ui';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import { WindowProps } from 'interfaces';
+import { WindowProps, IPageUrl } from 'interfaces';
 
 const sections: Array<IPageUrl> = [
   {
@@ -34,22 +31,13 @@ const sections: Array<IPageUrl> = [
 
 export const AppBar: React.FC<WindowProps> = ({ window }) => {
   const theme = useTheme();
-  const { t } = useTranslation();
-
   const notZeroTrigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
     target: window ? window() : undefined,
   });
 
-  // const sliceTrigger = useScrollTrigger({
-  //   target: window ? window() : undefined,
-  // });
-
-  // console.log(111, sliceTrigger);
-
   return (
-    // <Slide direction="down" in={true} mountOnEnter={false}>
     <MuiAppBar component="nav" elevation={notZeroTrigger ? 10 : 0}>
       <Container maxWidth="lg">
         {!notZeroTrigger && (
@@ -60,10 +48,8 @@ export const AppBar: React.FC<WindowProps> = ({ window }) => {
             <LocaleSwitcher />
           </Toolbar>
         )}
-        <Toolbar variant="dense" style={{ justifyContent: 'space-between' }}>
-          {sections.map(section => (
-            <ActiveLink key={section.page} page={t(section.page)} url={section.url} />
-          ))}
+        <Toolbar variant="dense">
+          <TabLinks sections={sections} />
           {notZeroTrigger && <LocaleSwitcher />}
         </Toolbar>
       </Container>
@@ -73,6 +59,5 @@ export const AppBar: React.FC<WindowProps> = ({ window }) => {
         </Fab>
       </ScrollTop>
     </MuiAppBar>
-    // </Slide>
   );
 };

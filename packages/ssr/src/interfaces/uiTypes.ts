@@ -17,3 +17,8 @@ export interface WindowProps {
   window?: () => Window;
   children?: ReactElement;
 };
+
+export interface IPageUrl {
+  page: string;
+  url: string;
+}

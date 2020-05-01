@@ -10,3 +10,4 @@ export * from './PageLayout';
 export * from './List';
 export * from './ListItem';
 export * from './ListPage';
+export * from './TabLinks';
