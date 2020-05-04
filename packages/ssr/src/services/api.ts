@@ -19,7 +19,7 @@ async function fetchWrapper(endpoint: string, init?: RequestInit) {
       }
       unlock();
     } else {
-      data = await fetch(endpoint, init).then(res => res.json());
+      data = await fetch(endpoint.replace('https://', 'http://'), init).then(res => res.json());
     }
     return data;
   } catch (err) {
