@@ -20,7 +20,7 @@ const TabEx: React.FC<IPageUrl> = ({ page, url, ...props }) => {
   const { t, locale } = useTranslation();
   const href = `/${locale}${url}`;
   return (
-    <Link key={page} href={`/[lang]${url}`} as={href} scroll={false}>
+    <Link key={page} href={`/[lang]${url}`} as={href}>
       <Tab
         label={t(page)}
         id={page}
@@ -34,7 +34,7 @@ const TabEx: React.FC<IPageUrl> = ({ page, url, ...props }) => {
 };
 
 export const TabLinks: React.FC<{ sections: Array<IPageUrl> }> = ({ sections }) => {
-  const classes = useStyles();  
+  const classes = useStyles();
   const router = useRouter();
   const findIndex = () => sections.findIndex(item => getActive(`/[lang]${item.url}`, router.pathname));
 

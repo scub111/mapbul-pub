@@ -13,7 +13,7 @@ export const ActiveLink: React.FC<IPageUrl> = ({ page, url }) => {
   const href = `/${locale}${url}`;
   const isActive = getActive(`/[lang]${url}`, router.pathname);
   return (
-    <Link key={page} href={`/[lang]${url}`} as={href} scroll={false}>
+    <Link key={page} href={`/[lang]${url}`} as={href}>
       <MuiLink
         color="inherit"
         noWrap
