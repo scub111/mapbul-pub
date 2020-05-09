@@ -10,7 +10,8 @@ export type IStyleProps = {
 };
 
 export interface WindowProps {
-  window?: () => Window;
+  // window?: () => Window;
+  window?: Window;
 };
 
 export interface IPageUrl {

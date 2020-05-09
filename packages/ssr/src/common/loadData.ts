@@ -1,7 +1,7 @@
-import { ListPageProps } from "hocs";
-import { Article } from "models";
-import { PageContent } from "@mapbul-pub/types";
-import { articlesService } from "services";
+import { ListPageProps } from 'hocs';
+import { Article } from 'models';
+import { PageContent } from '@mapbul-pub/types';
+import { articlesService } from 'services';
 
 export const loadArticlesData = (size: number) => async (page: number): Promise<ListPageProps<Article>> => {
   try {
@@ -16,7 +16,6 @@ export const loadArticlesData = (size: number) => async (page: number): Promise<
     return { error: err.message };
   }
 };
-
 
 export const loadEventsData = (size: number) => async (page: number): Promise<ListPageProps<Article>> => {
   try {

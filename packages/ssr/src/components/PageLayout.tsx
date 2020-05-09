@@ -6,7 +6,6 @@ import { theme } from 'themes';
 import { AppBar, Footer } from '.';
 import { useScrollPercentage } from 'hooks';
 import { ScrollFab } from 'ui';
-import { WindowProps } from 'interfaces';
 
 type TNullString = string | undefined;
 
@@ -14,7 +13,7 @@ export const PageLayout: React.FC<{
   title: TNullString;
   description?: TNullString;
   imageUrl?: TNullString;
-} & WindowProps> = ({ children, title, description, imageUrl, window }) => {
+}> = ({ children, title, description, imageUrl }) => {
   const [percent] = useScrollPercentage();
   return (
     <ThemeProvider theme={theme}>
@@ -36,7 +35,7 @@ export const PageLayout: React.FC<{
         <Container maxWidth="lg">{children}</Container>
       </main>
       <footer>
-        <ScrollFab window={window} percent={percent}/>
+        <ScrollFab percent={percent}/>
         <Footer style={{ padding: theme.spacing(6, 0) }} />
       </footer>
     </ThemeProvider>

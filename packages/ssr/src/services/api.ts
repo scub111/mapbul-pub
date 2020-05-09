@@ -1,9 +1,9 @@
 import fetch from 'isomorphic-unfetch';
-import { Mutex } from 'utils';
+import { Mutex, isClientEnviroment } from 'utils';
 
 const cache = new Map();
 const isCachingOnClient = true;
-const isClientEnviroment = typeof window !== 'undefined';
+// const isClientEnviroment = typeof window !== 'undefined';
 const mutex = new Mutex();
 
 async function fetchWrapper(endpoint: string, init?: RequestInit) {

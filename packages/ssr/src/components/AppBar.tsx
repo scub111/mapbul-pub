@@ -1,15 +1,9 @@
 import * as React from 'react';
-import {
-  Typography,
-  Toolbar,
-  AppBar as MuiAppBar,
-  useTheme,
-  useScrollTrigger,
-  Container,
-} from '@material-ui/core';
+import { Typography, Toolbar, AppBar as MuiAppBar, useTheme, useScrollTrigger, Container } from '@material-ui/core';
 import { LocaleSwitcher, TabLinks } from '.';
 import { Routes } from '../constants';
-import { WindowProps, IPageUrl } from 'interfaces';
+import { IPageUrl } from 'interfaces';
+import { isClientEnviroment } from 'utils';
 
 const sections: Array<IPageUrl> = [
   {
@@ -26,12 +20,12 @@ const sections: Array<IPageUrl> = [
   },
 ];
 
-export const AppBar: React.FC<WindowProps> = ({ window }) => {
+export const AppBar: React.FC = () => {
   const theme = useTheme();
   const notZeroTrigger = useScrollTrigger({
+    target: isClientEnviroment ? window : undefined,
     disableHysteresis: true,
     threshold: 0,
-    target: window ? window() : undefined,
   });
 
   return (

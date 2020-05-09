@@ -2,14 +2,13 @@ import * as React from 'react';
 // import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { ScrollTop } from '.';
 import { Fab } from '@material-ui/core';
-import { WindowProps } from 'interfaces';
 
-export const ScrollFab: React.FC<{ percent: number } & WindowProps> = ({ percent, window }) => {
+export const ScrollFab: React.FC<{ percent: number }> = ({ percent }) => {
   const radius = 18;
   const circumference = radius * 2 * Math.PI;
   const offset = circumference - percent / 100 * circumference;
   return (
-    <ScrollTop window={window}>
+    <ScrollTop>
       <Fab color="primary" size="small" aria-label="scroll back to top">
         {/* <KeyboardArrowUpIcon /> */}
         <svg width="40" height="40">
