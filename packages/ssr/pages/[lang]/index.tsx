@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PageLayout, List } from 'components';
+import { PageLayout, ArticleList } from 'components';
 import { NextPage, NextPageContext } from 'next';
 import { Typography, Divider, makeStyles } from '@material-ui/core';
 import { Store } from 'redux';
@@ -44,7 +44,7 @@ const TopList = ({
       <Typography variant="h6" gutterBottom className={classes.head}>
         {title}
       </Typography>
-      <List items={list} route={route} className={classes.list} />
+      <ArticleList items={list} route={route} className={classes.list} />
       <Divider />
       {/* </Paper> */}
     </div>

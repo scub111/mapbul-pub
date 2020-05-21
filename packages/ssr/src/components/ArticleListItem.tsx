@@ -1,45 +1,13 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, CardMedia, CardActionArea } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
 import { useTranslation } from '../hooks';
 import { Link as MuiLink } from '@material-ui/core';
+import { ListItemProps } from 'interfaces';
 
-const useStyles = makeStyles(() => ({
-  typography: {
-    // fontFamily: 'Raleway, Arial',
-    fontSize: 6, //14 - default
-  },
-  card: {
-    display: 'flex',
-    // backgroundColor: 'red',
-    // [theme.breakpoints.up("xs")]: {
-    //   backgroundColor: theme.palette.primary.main
-    // },
-    // [theme.breakpoints.up("sm")]: {
-    //   backgroundColor: "red"
-    // },
-    // [theme.breakpoints.up("md")]: {
-    //   backgroundColor: "blue"
-    // },
-    // [theme.breakpoints.up("lg")]: {
-    //   backgroundColor: green[500]
-    // }
-  },
-  cardDetails: {
-    // fontSize: 6,
-    flex: 1,
-    minWidth: '200px',
-  },
-  cardMedia: {
-    width: '150px',
-  },
-}));
-
-export const ListItem: React.FC<{ item: Article; route: string }> = ({ item, route }) => {
-  const classes = useStyles();
+export const ArticleListItem: React.FC<ListItemProps<Article>> = ({ item, route }) => {
   const { locale, isRus } = useTranslation();
   const titleLang = isRus ? item.title : item.titleEn || '';
   const descriptionLang = isRus ? item.description : item.descriptionEn || '';
@@ -50,8 +18,8 @@ export const ListItem: React.FC<{ item: Article; route: string }> = ({ item, rou
       <CardActionArea>
         <Link href={`/[lang]/${route}/[id]`} as={href}>
           <MuiLink color="inherit" href={href}>
-            <Card className={classes.card}>
-              <div className={classes.cardDetails}>
+            <Card style={{ display: 'flex' }}>
+              <div style={{ flex: 1, minWidth: '200px' }}>
                 <CardContent>
                   <Typography variant="h5">{titleLang}</Typography>
                   {true && (
@@ -64,19 +32,13 @@ export const ListItem: React.FC<{ item: Article; route: string }> = ({ item, rou
                   </Typography>
                 </CardContent>
               </div>
-              {item.titlePhoto && <CardMedia className={classes.cardMedia} image={item.titlePhoto} title={titleLang} />}
+              {item.titlePhoto && (
+                <CardMedia image={item.titlePhoto} title={titleLang} style={{ width: '30%', minWidth: 150 }} />
+              )}
             </Card>
           </MuiLink>
         </Link>
       </CardActionArea>
-      {/* <Button
-          fullWidth
-          variant="contained"
-          color="secondary"
-          onClick={() => console.log('click')}
-        >
-          Submit
-        </Button> */}
     </Grid>
   );
 };

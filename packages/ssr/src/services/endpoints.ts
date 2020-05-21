@@ -49,6 +49,7 @@ const getEndpointFn = (endpoint: string): IEndpointFn => {
 export const ENDPOINTS: Record<string, IEndpointFn> = {
   admins: getEndpointFn(Routes.admins),
   articles: getEndpointFn(Routes.articles),
+  markers: getEndpointFn(Routes.markers),
   categories: getEndpointFn(Routes.categories),
   editors: getEndpointFn(Routes.editors),
   guides: getEndpointFn(Routes.guides),
