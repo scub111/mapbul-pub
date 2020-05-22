@@ -1,10 +1,16 @@
 import * as React from 'react';
 import { NextPageContext, NextPage } from 'next';
 import { GlobalVar } from '../config';
+import { IPageBaseProps } from 'interfaces';
 
-export interface IDetailPageProps<T> {
+export interface IDetailItemProps<T> {
+  item: T;
+}
+
+export interface IDetailPageProps<T> extends IPageBaseProps {
   item?: T;
   error?: string;
+  component?: React.FC<IDetailItemProps<T>>;
 }
 
 export interface IDetailPageConfig<T> {
@@ -13,7 +19,6 @@ export interface IDetailPageConfig<T> {
 
 export const withDetailPage = <T extends object>(config: IDetailPageConfig<T>) => (Component: React.FC<IDetailPageProps<T>>) => {
   const ArticleDetailPage: NextPage<IDetailPageProps<T>> = ({ item, error }) => {
-    // return <DetailPage item={item as Article} error={error} />;
     return <Component item={item} error={error} />;
   };
 
@@ -21,7 +26,6 @@ export const withDetailPage = <T extends object>(config: IDetailPageConfig<T>) =
     try {
       const { lang, id } = query;
       GlobalVar.setLang(lang);
-      // const item = await articlesService.get(Array.isArray(id) ? id[0] : id);
       const item = await config.loadData(Array.isArray(id) ? id[0] : id);
       return { item };
     } catch (err) {

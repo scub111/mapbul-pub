@@ -7,9 +7,9 @@ import { IPageUrl } from 'interfaces';
 import { getActive } from 'utils';
 
 export const ActiveLink: React.FC<IPageUrl> = ({ page, url }) => {
+  const theme = useTheme();
   const router = useRouter();
   const { locale } = useTranslation();
-  const theme = useTheme();
   const href = `/${locale}${url}`;
   const isActive = getActive(`/[lang]${url}`, router.pathname);
   return (

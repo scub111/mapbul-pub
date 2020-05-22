@@ -21,7 +21,7 @@ const View: React.FC<IPageProps<Marker>> = ({ route, list, title, error, hasMore
 };
 
 const config: IPageConfig<Marker> = {
-  route: Routes.events,
+  route: Routes.places,
   loadData: loadMarkersData(ITEMS_PER_PAGE),
   useList: useMarkers,
 };
