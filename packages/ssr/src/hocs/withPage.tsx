@@ -12,6 +12,11 @@ export interface ListPageProps<T> {
   error?: string;
 }
 
+export interface ListItemProps<T> {
+  item: T;
+  route: string;
+}
+
 export interface IPageProps<T> {
   route: string;
   list: Array<T>;
@@ -20,6 +25,7 @@ export interface IPageProps<T> {
   hasMore?: boolean;
   loadMore?: (page: number) => Promise<void>;
   loading?: boolean;
+  component?: React.FC<ListItemProps<T>>;
 }
 
 export interface IPageConfig<T> {

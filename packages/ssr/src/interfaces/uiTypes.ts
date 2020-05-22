@@ -18,9 +18,3 @@ export interface IPageUrl {
   page: string;
   url: string;
 }
-
-export interface ListItemProps<T> {
-  item: T;
-  route: string;
-}
-

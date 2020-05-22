@@ -4,7 +4,7 @@ import { PageLayout, ErrorText, ListBase } from 'components';
 // import { Button } from '@material-ui/core';
 import { IPageProps } from 'hocs';
 import { CircularProgress, Grid, makeStyles } from '@material-ui/core';
-import { ListItemProps } from 'interfaces';
+import { ListItemProps } from 'hocs';
 
 export const ITEMS_PER_PAGE = 10;
 

@@ -5,7 +5,7 @@ import { formatDateToString } from '@mapbul-pub/utils';
 import { Marker } from 'models';
 import { useTranslation } from '../hooks';
 import { Link as MuiLink } from '@material-ui/core';
-import { ListItemProps } from 'interfaces';
+import { ListItemProps } from 'hocs';
 
 export const MarkerListItem: React.FC<ListItemProps<Marker>> = ({ item, route }) => {
   const { locale, isRus } = useTranslation();
