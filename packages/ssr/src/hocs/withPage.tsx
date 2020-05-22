@@ -6,6 +6,7 @@ import { PageContent } from '@mapbul-pub/types';
 import { IActionSet } from 'actions';
 import { GlobalVar } from '../config';
 import { useTranslation } from 'hooks';
+import { IPageBaseProps } from 'interfaces';
 
 export interface ListPageProps<T> {
   pagination?: PageContent<T>;
@@ -17,10 +18,9 @@ export interface ListItemProps<T> {
   route: string;
 }
 
-export interface IPageProps<T> {
+export interface IPageProps<T> extends IPageBaseProps {
   route: string;
   list: Array<T>;
-  title: string;
   error?: string;
   hasMore?: boolean;
   loadMore?: (page: number) => Promise<void>;
