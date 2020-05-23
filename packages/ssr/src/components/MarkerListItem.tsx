@@ -10,7 +10,7 @@ import { ListItemProps } from 'hocs';
 export const MarkerListItem: React.FC<ListItemProps<Marker>> = ({ item, route }) => {
   const { locale, isRus } = useTranslation();
   const nameLang = isRus ? item.name : item.nameEn || '';
-  const descriptionLang = isRus ? item.description : item.descriptionEn || '';
+  const introductionLang = isRus ? item.introduction : item.introductionEn || '';
   const href = `/${locale}/${route}/${item.id}`;
   return (
     <Grid item xs={12} md={6}>
@@ -25,7 +25,7 @@ export const MarkerListItem: React.FC<ListItemProps<Marker>> = ({ item, route })
                     {formatDateToString(item.publishedDate)}
                   </Typography>
                   <Typography variant="subtitle1" paragraph>
-                    {descriptionLang}
+                    {introductionLang}
                   </Typography>
                 </CardContent>
               </div>

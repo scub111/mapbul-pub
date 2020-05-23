@@ -9,6 +9,7 @@ export * from './Footer';
 export * from './LocaleSwitcher';
 export * from './MarkerDetail';
 export * from './MarkerListItem';
+export * from './MarkerMap';
 export * from './PageLayout';
 export * from './List';
 export * from './ListPage';

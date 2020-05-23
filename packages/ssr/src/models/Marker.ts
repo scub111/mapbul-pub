@@ -2,12 +2,14 @@ import getConfig from 'next/config';
 import { IMarkerDTO } from '@mapbul-pub/types';
 import { clearUrl } from 'utils';
 import { UserDescription } from 'interfaces';
+import { Category } from '.';
 
 const { publicRuntimeConfig } = getConfig();
 
 export class Marker implements IMarkerDTO {
-  public static async New(init: IMarkerDTO, userDescription?: UserDescription) {
+  public static async New(init: IMarkerDTO, category?: Category, userDescription?: UserDescription) {
     const newMarker = new Marker(init);
+    newMarker.category = category;
     newMarker.userDescription = userDescription;
     return newMarker;
   }
@@ -41,6 +43,7 @@ export class Marker implements IMarkerDTO {
   wifi: boolean;
   personal: boolean;
 
+  category: Category | undefined;
   userDescription: UserDescription | undefined;
   
   public constructor(init: IMarkerDTO) {
