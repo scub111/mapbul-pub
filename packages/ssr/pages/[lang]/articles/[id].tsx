@@ -7,10 +7,12 @@ import { DetailPage, ArticleDetail } from 'components';
 
 const View: React.FC<IDetailPageProps<Article>> = ({ item, error }) => {
   const { isRus } = useTranslation();
+  const titleLang = isRus ? item?.title : item?.titleEn || '';
+  const descriptionLang = isRus ? item?.description : item?.descriptionEn || '';
   return (
     <DetailPage
-      title={isRus ? item?.title : item?.titleEn?.toString()}
-      description={isRus ? item?.description : item?.descriptionEn?.toString()}
+      title={titleLang}
+      description={descriptionLang}
       imageUrl={item?.titlePhoto?.toString()}
       item={item}
       error={error}
