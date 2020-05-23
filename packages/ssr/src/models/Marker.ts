@@ -1,16 +1,14 @@
-// import getConfig from 'next/config';
+import getConfig from 'next/config';
 import { IMarkerDTO } from '@mapbul-pub/types';
-// import { clearUrl } from 'utils';
+import { clearUrl } from 'utils';
+import { UserDescription } from 'interfaces';
 
-// import { UserDescription } from 'interfaces';
-
-// const { publicRuntimeConfig } = getConfig();
+const { publicRuntimeConfig } = getConfig();
 
 export class Marker implements IMarkerDTO {
-  public static async New(init: IMarkerDTO) {
+  public static async New(init: IMarkerDTO, userDescription?: UserDescription) {
     const newMarker = new Marker(init);
-    // newMarker.category = category;
-    //newMarker.userDescription = userDescription;
+    newMarker.userDescription = userDescription;
     return newMarker;
   }
 
@@ -43,6 +41,8 @@ export class Marker implements IMarkerDTO {
   wifi: boolean;
   personal: boolean;
 
+  userDescription: UserDescription | undefined;
+  
   public constructor(init: IMarkerDTO) {
     this.id = init.id;
     this.name = init.name;
@@ -63,7 +63,7 @@ export class Marker implements IMarkerDTO {
     this.floor = init.floor;
     this.site = init.site;
     this.email = init.email;
-    this.photo = init.photo;
+    this.photo = init.photo ? clearUrl(`${publicRuntimeConfig.IMAGE_URL}/${init.photo}`) : null;
     this.userId = init.userId;
     this.addedDate = init.addedDate;
     this.publishedDate = init.publishedDate;

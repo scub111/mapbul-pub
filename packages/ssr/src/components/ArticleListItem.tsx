@@ -22,11 +22,9 @@ export const ArticleListItem: React.FC<ListItemProps<Article>> = ({ item, route 
               <div style={{ flex: 1, minWidth: '200px' }}>
                 <CardContent>
                   <Typography variant="h5">{titleLang}</Typography>
-                  {true && (
-                    <Typography variant="subtitle1" color="textSecondary">
-                      {formatDateToString(publishedDate)}
-                    </Typography>
-                  )}
+                  <Typography variant="subtitle1" color="textSecondary">
+                    {formatDateToString(publishedDate)}
+                  </Typography>
                   <Typography variant="subtitle1" paragraph>
                     {descriptionLang}
                   </Typography>

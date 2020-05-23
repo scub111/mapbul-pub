@@ -2,18 +2,8 @@ import { BaseService } from './BaseService';
 import { Marker } from 'models';
 import { ENDPOINTS } from './endpoints';
 import { IMarkerDTO } from '@mapbul-pub/types';
-// import {
-//   categoriesService,
-//   usersService,
-//   userTypesService,
-//   editorsService,
-//   journalistsService,
-//   guidesService,
-//   tenantsService,
-// } from '.';
-// import { UserDescription } from 'interfaces';
-// import { GlobalVar } from '../config';
-
+import { usersService } from '.';
+import { getUserDescription } from './utils';
 
 class MarkersService extends BaseService<IMarkerDTO, Marker> {
   constructor() {
@@ -21,6 +11,10 @@ class MarkersService extends BaseService<IMarkerDTO, Marker> {
       ENDPOINTS.markers,
       async marker => {
         return Marker.New(marker);
+      },
+      async marker => {
+        const [user] = await Promise.all([usersService.get(marker.userId)]);
+        return Marker.New(marker, await getUserDescription(user));
       },
     );
   }
