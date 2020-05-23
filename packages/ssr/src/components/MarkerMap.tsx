@@ -20,6 +20,7 @@ const StyledMarker = styled.div`
   width: 32px;
   height: 32px;
   margin-top: -32px;
+  margin-left: -16px;
   z-index: 1;
   transform: translateY(0px);
   transition: all 0.3s cubic-bezier($expoout);
