@@ -1,56 +1,24 @@
 import * as React from 'react';
-import { makeStyles, Typography, Box, Link } from '@material-ui/core';
+import { Typography, Box, Link, useTheme } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
-import { useTypeRoute } from 'hooks';
-import { useTranslation } from '../hooks';
+import { useTypeRoute, useTranslation } from 'hooks';
+import { IDetailItemProps } from 'hocs';
+import { PreText } from 'ui';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    padding: theme.spacing(0, 1),
-  },
-  articleUserDescription: {
-    paddingBottom: theme.spacing(2),
-  },
-  eventUserDescription: {
-    paddingBottom: theme.spacing(2),
-  },
-  imgCenter: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-}));
-
-const PreText: React.FC<{ text: string | null }> = ({ text }) => {
-  return (
-    <>
-      {text &&
-        text.split('\r\n').map((item, index) => (
-          <Typography
-            key={index}
-            // variant={index === 0 ? 'h3' : 'subtitle1'}
-            component={index === 0 ? 'h2' : item !== '' ? 'h3' : 'p'}
-            dangerouslySetInnerHTML={{ __html: `${item} <br />` }}
-          />
-        ))}
-    </>
-  );
-};
-
-export const Detail: React.FC<{ item: Article }> = ({ item }) => {
-  const classes = useStyles();
+export const ArticleDetail: React.FC<IDetailItemProps<Article>> = ({ item }) => {
+  const theme = useTheme();
   const { isRus } = useTranslation();
   const typeRoute = useTypeRoute();
   const isActicle = typeRoute === 'articles';
 
   return (
-    <Box className={classes.root}>
+    <Box style={{ padding: theme.spacing(0, 1) }}>
       <Box style={{ display: 'flex' }}>
         <Box style={{ flex: 1 }}>
           <Typography variant="h6">{item.category ? item.category.nameLang : ''}</Typography>
           {isActicle && item.userDescription && !item.sourceUrl && (
-            <Typography variant="h6" color="textSecondary" className={classes.articleUserDescription}>
+            <Typography variant="h6" color="textSecondary" style={{ paddingBottom: theme.spacing(2) }}>
               {item.userDescription ? item.userDescription.description : ''}
             </Typography>
           )}
@@ -75,11 +43,11 @@ export const Detail: React.FC<{ item: Article }> = ({ item }) => {
         )}
       </Box>
       {item.titlePhoto && (
-        <Box className={classes.imgCenter}>
+        <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <img style={{ maxWidth: '100%' }} src={item.titlePhoto} title={item.title} alt="" />
         </Box>
       )}
-      <Box className={classes.imgCenter}>
+      <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Box style={{ display: 'flex', flexDirection: 'row', fontStyle: 'italic' }}>
           {item.sourcePhoto && (
             <Link display="block" variant="body1" href={item.sourcePhoto} key={item.sourcePhoto}>
@@ -91,13 +59,13 @@ export const Detail: React.FC<{ item: Article }> = ({ item }) => {
       <Typography component="div" variant="subtitle1" paragraph>
         <PreText text={isRus ? item.text : item.textEn} />
         {!isActicle && item.userDescription && !item.sourceUrl && (
-          <Typography variant="h6" color="textSecondary" className={classes.eventUserDescription}>
+          <Typography variant="h6" color="textSecondary" style={{ paddingBottom: theme.spacing(2) }}>
             {item.userDescription ? item.userDescription.description : ''}
           </Typography>
         )}
       </Typography>
       {item.photo && (
-        <Box className={classes.imgCenter}>
+        <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           {/* <Typography variant="subtitle1" paragraph>
             Фото
           </Typography> */}

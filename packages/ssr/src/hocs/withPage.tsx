@@ -6,20 +6,26 @@ import { PageContent } from '@mapbul-pub/types';
 import { IActionSet } from 'actions';
 import { GlobalVar } from '../config';
 import { useTranslation } from 'hooks';
+import { IPageBaseProps } from 'interfaces';
 
 export interface ListPageProps<T> {
   pagination?: PageContent<T>;
   error?: string;
 }
 
-export interface IPageProps<T> {
+export interface ListItemProps<T> {
+  item: T;
+  route: string;
+}
+
+export interface IPageProps<T> extends IPageBaseProps {
   route: string;
   list: Array<T>;
-  title: string;
   error?: string;
   hasMore?: boolean;
   loadMore?: (page: number) => Promise<void>;
   loading?: boolean;
+  component?: React.FC<ListItemProps<T>>;
 }
 
 export interface IPageConfig<T> {

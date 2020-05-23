@@ -3,6 +3,7 @@ export * from './Article';
 export * from './Category';
 export * from './Editor';
 export * from './Guide';
+export * from './Marker';
 export * from './Tenant';
 export * from './Journalist';
 export * from './User';

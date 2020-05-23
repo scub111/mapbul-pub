@@ -2,7 +2,7 @@ import * as React from 'react';
 import { withRedux, useArticles } from 'stores';
 import { withPage, IPageProps, IPageConfig, withLocale } from 'hocs';
 import { Routes } from 'constants/routes';
-import { ListPage, ITEMS_PER_PAGE } from 'components';
+import { ListPage, ITEMS_PER_PAGE, ArticleListItem } from 'components';
 import { Article } from 'models';
 import { loadArticlesData } from 'common';
 
@@ -16,6 +16,7 @@ const View: React.FC<IPageProps<Article>> = ({ route, list, title, error, hasMor
       hasMore={hasMore}
       loadMore={loadMore}
       loading={loading}
+      component={ArticleListItem}
     />
   );
 };

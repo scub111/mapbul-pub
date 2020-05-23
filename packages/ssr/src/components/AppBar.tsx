@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 import { Typography, Toolbar, AppBar as MuiAppBar, useTheme, useScrollTrigger, Container } from '@material-ui/core';
 import { LocaleSwitcher, TabLinks } from '.';
 import { Routes } from '../constants';
@@ -18,7 +19,17 @@ const sections: Array<IPageUrl> = [
     page: 'events',
     url: `/${Routes.events}`,
   },
+  {
+    page: 'places',
+    url: `/${Routes.places}`,
+  },
 ];
+
+const StyledContainer = styled(Container)`
+  @media (max-width: 400px) {
+    padding: 0 5px;
+  }
+`;
 
 export const AppBar: React.FC = () => {
   const theme = useTheme();
@@ -29,8 +40,8 @@ export const AppBar: React.FC = () => {
   });
 
   return (
-    <MuiAppBar component="nav" elevation={notZeroTrigger ? 10 : 0}>
-      <Container maxWidth="lg">
+    <MuiAppBar component="nav" elevation={notZeroTrigger ? 10 : 0} style={{ padding: 0 }}>
+      <StyledContainer maxWidth="lg">
         {!notZeroTrigger && (
           <Toolbar variant="dense" style={{ borderBottom: `1px solid ${theme.palette.divider}` }}>
             <Typography variant="h5" color="inherit" align="center" noWrap style={{ flex: 1 }}>
@@ -39,11 +50,11 @@ export const AppBar: React.FC = () => {
             <LocaleSwitcher />
           </Toolbar>
         )}
-        <Toolbar variant="dense">
+        <Toolbar variant="dense" style={{ padding: 0 }}>
           <TabLinks sections={sections} />
           {notZeroTrigger && <LocaleSwitcher />}
         </Toolbar>
-      </Container>
+      </StyledContainer>
     </MuiAppBar>
   );
 };

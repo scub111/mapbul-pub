@@ -5,6 +5,7 @@ export * from './categoriesService';
 export * from './editorsService';
 export * from './guidesService';
 export * from './journalistsService';
+export * from './markersService';
 export * from './tenantsService';
 export * from './endpoints';
 export * from './usersService';

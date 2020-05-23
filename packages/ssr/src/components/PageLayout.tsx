@@ -6,14 +6,9 @@ import { theme } from 'themes';
 import { AppBar, Footer } from '.';
 import { useScrollPercentage } from 'hooks';
 import { ScrollFab } from 'ui';
+import { IPageBaseProps } from 'interfaces';
 
-type TNullString = string | undefined;
-
-export const PageLayout: React.FC<{
-  title: TNullString;
-  description?: TNullString;
-  imageUrl?: TNullString;
-}> = ({ children, title, description, imageUrl }) => {
+export const PageLayout: React.FC<IPageBaseProps> = ({ children, title, description, imageUrl }) => {
   const [percent] = useScrollPercentage();
   return (
     <ThemeProvider theme={theme}>

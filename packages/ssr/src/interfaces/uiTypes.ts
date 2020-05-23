@@ -18,3 +18,11 @@ export interface IPageUrl {
   page: string;
   url: string;
 }
+
+export type TNullString = string | undefined;
+
+export interface IPageBaseProps {
+  title?: TNullString;
+  description?: TNullString;
+  imageUrl?: TNullString;
+}

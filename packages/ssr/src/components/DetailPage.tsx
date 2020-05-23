@@ -1,21 +1,30 @@
 import * as React from 'react';
-import { Article } from 'models';
-import { PageLayout, ErrorText, Detail } from 'components';
-import { useTranslation } from 'hooks';
+import { PageLayout, ErrorText } from 'components';
 
-export const DetailPage: React.FC<{
-  item?: Article;
-  error?: string;
-}> = ({ item, error }) => {
-  const { isRus } = useTranslation();
+import { IDetailPageProps } from 'hocs';
+
+export const DetailPage = <T extends object>({
+  title,
+  description,
+  imageUrl,
+  item,
+  error,
+  component: Component,
+}: IDetailPageProps<T>) => {
+  // const { isRus } = useTranslation();
   return (
+    // <PageLayout
+    //   title={isRus ? item?.title : item?.titleEn?.toString()}
+    //   description={isRus ? item?.description : item?.descriptionEn?.toString()}
+    //   imageUrl={item?.titlePhoto?.toString()}
+    // >
     <PageLayout
-      title={isRus ? item?.title : item?.titleEn?.toString()}
-      description={isRus ? item?.description : item?.descriptionEn?.toString()}
-      imageUrl={item?.titlePhoto?.toString()}
+      title={title}
+      description={description}
+      imageUrl={imageUrl}
     >
       {error && <ErrorText error={error} />}
-      {item && <Detail item={item} />}
+      {item && Component && <Component item={item} />}
     </PageLayout>
   );
 };

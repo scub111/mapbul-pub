@@ -1,11 +1,10 @@
 import * as React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
-import { PageLayout, ErrorText } from 'components';
-import { List } from 'components';
+import { PageLayout, ErrorText, ListBase } from 'components';
 // import { Button } from '@material-ui/core';
-import { Article } from 'models';
 import { IPageProps } from 'hocs';
 import { CircularProgress, Grid, makeStyles } from '@material-ui/core';
+import { ListItemProps } from 'hocs';
 
 export const ITEMS_PER_PAGE = 10;
 
@@ -17,14 +16,23 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const ListPage: React.FC<IPageProps<Article>> = ({ route, list, title, error, hasMore, loadMore, loading }) => {
+export const ListPage = <T extends object>({
+  route,
+  list,
+  title,
+  error,
+  hasMore,
+  loadMore,
+  loading,
+  component,
+}: IPageProps<T> & { component: React.FC<ListItemProps<T>> }) => {
   const classes = useStyles();
   return (
     <PageLayout title={title}>
       {error && <ErrorText error={error} />}
       {list && (
         <InfiniteScroll hasMore={hasMore} loadMore={async page => loadMore && (await loadMore(page))}>
-          <List items={list} route={route} />
+          <ListBase component={component} items={list} route={route} />
           {loading && (
             <Grid className={classes.loader}>
               <CircularProgress />
