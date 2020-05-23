@@ -8,11 +8,11 @@ import { DetailPage, MarkerDetail } from 'components';
 const View: React.FC<IDetailPageProps<Marker>> = ({ item, error }) => {
   const { isRus } = useTranslation();
   const nameLang = isRus ? item?.name : item?.nameEn || '';
-  const descriptionLang = isRus ? item?.description : item?.descriptionEn || '';
+  const introductionLang = isRus ? item?.introduction : item?.introductionEn || '';
   return (
     <DetailPage
       title={nameLang}
-      description={descriptionLang}
+      description={introductionLang}
       imageUrl={item?.photo?.toString()}
       item={item}
       error={error}
