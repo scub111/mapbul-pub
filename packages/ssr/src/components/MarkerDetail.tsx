@@ -5,6 +5,7 @@ import { Marker } from 'models';
 import { useTranslation } from 'hooks';
 import { IDetailItemProps } from 'hocs';
 import { MarkerMap } from '.';
+import { PreText } from 'ui';
 
 export const MarkerDetail: React.FC<IDetailItemProps<Marker>> = ({ item }) => {
   const theme = useTheme();
@@ -25,9 +26,7 @@ export const MarkerDetail: React.FC<IDetailItemProps<Marker>> = ({ item }) => {
           <Typography variant="h5" style={{ fontWeight: 600 }}>
             {nameLang}
           </Typography>
-          <Typography variant="subtitle1" paragraph component="h1">
-            {descriptionLang}
-          </Typography>
+          <PreText text={descriptionLang} />
         </Box>
         {item.publishedDate && (
           <Box>
