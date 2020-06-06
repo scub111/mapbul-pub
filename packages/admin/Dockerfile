@@ -29,7 +29,7 @@ COPY scripts scripts
 COPY public public
 
 ARG OUTLINE
-RUN npm run build-standalone
+RUN npm run build
 
 FROM nginx:alpine AS production
 

@@ -58,6 +58,24 @@ pipeline {
       }
     }
 
+    stage('Admin image'){
+      steps {
+        timeout(time: 5, unit: 'MINUTES') {
+          sh 'docker build -t mapbul-pub-admin -f Dockerfile.admin .'
+        }
+      }
+    }
+
+    stage('Admin container'){
+      steps {
+        timeout(time: 1, unit: 'MINUTES') {
+          sh 'docker stop mapbul-pub-admin'
+          sh 'docker rm mapbul-pub-admin'
+          sh 'docker run -d --name mapbul-pub-admin --restart always -p 3500:8888 mapbul-pub-admin'
+        }
+      }
+    }
+
     stage('Docker prune'){
       steps {
         timeout(time: 3, unit: 'MINUTES') {
