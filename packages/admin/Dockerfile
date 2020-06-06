@@ -29,5 +29,12 @@ COPY scripts scripts
 COPY public public
 
 ARG OUTLINE
-RUN npm run build
-RUN npm publish
+RUN npm run build-standalone
+
+FROM nginx:alpine AS production
+
+WORKDIR /app
+COPY --from=build /app/nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 8888

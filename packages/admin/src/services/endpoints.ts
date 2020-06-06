@@ -2,9 +2,10 @@ import { TProcessType, IRequestFormData } from 'interfaces';
 import { createQS } from 'we-oauth2/lib/auth/api-utils';
 import { api } from './api';
 
-const nodeEnv = process.env.NODE_ENV;
-const baseUrl =
-  nodeEnv === 'production' ? window.location.origin : process.env.BASE_URL;
+// const nodeEnv = process.env.NODE_ENV;
+// const baseUrl =
+//   nodeEnv === 'production' ? window.location.origin : process.env.BASE_URL;
+const baseUrl = process.env.BASE_URL;
 
 let apiPrefix = ''
 
