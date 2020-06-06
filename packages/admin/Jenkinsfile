@@ -1,0 +1,81 @@
+@Library('jenkins-shared-lib') _
+import devops.waves.*
+ut = new utils()
+def repoUrlAdmin = 'gitlab.wvservices.com/it/devops/k8s-apps-configs/integrator/zpreg.git'
+def pipelineTriggerToken = 'zpRegGitLabToken'
+
+properties([
+
+        ut.buildDiscarderPropertyObject('14', '30'),
+
+        // this is a trigger to run a build when hooks from GitLab received
+        pipelineTriggers([
+                [$class: 'GenericTrigger',
+                 genericVariables: [
+                         [ key: 'event', value: '$.object_kind', regexpFilter: '', defaultValue: '' ]],
+                 causeString: "Triggered by GitLab Webhook",
+                 printContributedVariables: true,
+                 printPostContent: true,
+                 token: pipelineTriggerToken ]
+        ])
+])
+
+pipeline {
+    agent {
+        label 'vostok'
+    }
+
+    tools {
+        jdk 'jdk8u202'
+    }
+
+    environment {
+        GIT_COMMIT_SHORT = sh(
+                script: "printf \$(git rev-parse --short ${GIT_COMMIT})",
+                returnStdout: true
+        )
+    }
+
+    options {
+        gitLabConnection('DCP Gitlab')
+    }
+
+    stages {
+        stage('Merge branches') {
+            when {
+                expression { env.event == "merge_request" }
+            }
+            steps {
+                updateGitlabCommitStatus name: 'Merge branches', state: 'running'
+                checkout changelog: true, poll: true,
+                        scm: [
+                                $class                           : 'GitSCM',
+                                branches                         : [[name: "origin/${env.gitlabSourceBranch}"]],
+                                doGenerateSubmoduleConfigurations: false,
+                                extensions                       : [[$class: 'PreBuildMerge', options: [fastForwardMode: 'FF', mergeRemote: 'origin', mergeStrategy: 'DEFAULT', mergeTarget: "${env.gitlabTargetBranch}"]]],
+                                submoduleCfg                     : []
+                        ]
+            }
+            post {
+                success {
+                    updateGitlabCommitStatus name: 'Merge branches', state: 'success'
+                }
+                failure {
+                    updateGitlabCommitStatus name: 'Merge branches', state: 'failed'
+                }
+            }
+        }
+        stage('Build and publish') {
+            steps {
+                updateGitlabCommitStatus(name: 'Docker', state: 'running')
+                withCredentials([string(
+                        credentialsId: '8368ad15-d89c-4975-bccb-ada672545591',
+                        variable: 'NPM_TOKEN'
+                )]) {
+                    sh 'docker build --build-arg npm_token=$NPM_TOKEN -t registry.vostokservices.com/zpreg/zpreg-ui:$GIT_COMMIT_SHORT .'
+                }
+            }
+        }
+    }
+}
+
