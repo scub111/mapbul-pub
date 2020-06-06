@@ -69,8 +69,6 @@ pipeline {
     stage('Admin container'){
       steps {
         timeout(time: 1, unit: 'MINUTES') {
-          sh 'docker stop mapbul-pub-admin'
-          sh 'docker rm mapbul-pub-admin'
           sh 'docker run -d --name mapbul-pub-admin --restart always -p 3500:8888 mapbul-pub-admin'
         }
       }
