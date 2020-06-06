@@ -1,0 +1,10 @@
+config/
+public/
+scripts/
+src/
+
+*.json
+*.log
+Dockerfile*
+Jenkinsfile
+nginx.conf
