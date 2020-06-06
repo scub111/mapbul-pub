@@ -1,5 +1,5 @@
 {
-  "name": "@zpreg/slk",
+  "name": "@mapbul-pub/admin",
   "version": "0.0.18",
   "main": "build/main.js",
   "types": "build/types/index.d.ts",
