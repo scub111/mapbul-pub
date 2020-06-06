@@ -14,7 +14,6 @@ packages/server/tsconfig.json
 /publish
 *.xml
 *.rar
-*.html
 *.tsbuildinfo
 api.txt
 .env
