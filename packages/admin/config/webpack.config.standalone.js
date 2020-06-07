@@ -5,7 +5,7 @@ const getClientEnvironment = require('./env');
 
 // variables
 const srcDir = 'src';
-const buildDir = 'build';
+const buildDir = 'build/admin';
 const isProduction = process.env.NODE_ENV === 'production';
 const sourcePath = path.join(__dirname, '..', `./${srcDir}`);
 const outPath = path.join(__dirname, '..', `./${buildDir}`);
@@ -69,7 +69,7 @@ module.exports = {
   output: {
     filename: config.appFilename,
     path: outPath,
-    publicPath: '/',
+    publicPath: '/admin/',
   },
   devtool: config.devtool,
   resolve: {

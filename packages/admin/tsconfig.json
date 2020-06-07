@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
-    "outDir": "build/types",
+    "outDir": "build/dist",
     "module": "commonjs",
     "target": "es6",
     "lib": [
@@ -10,7 +10,6 @@
     ],
     "sourceMap": true,
     "allowJs": false,
-    "declaration": true,
     "jsx": "react",
     "moduleResolution": "node",
     "rootDir": "src",
