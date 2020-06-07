@@ -11,7 +11,7 @@ const sourcePath = path.join(__dirname, '..', `./${srcDir}`);
 const outPath = path.join(__dirname, '..', `./${buildDir}`);
 const publicUrl = '';
 const env = getClientEnvironment(publicUrl);
-const TerserPlugin = require('terser-webpack-plugin');
+//const TerserPlugin = require('terser-webpack-plugin');
 
 // plugins
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -114,14 +114,14 @@ module.exports = {
   optimization: {
     minimizer: [
       new OptimizeCSSAssetsPlugin({}),
-      new TerserPlugin({
-        sourceMap: true, // Must be set to true if using source-maps in production
-        terserOptions: {
-          compress: {
-            drop_console: true,
-          },
-        },
-      }),
+      // new TerserPlugin({
+      //   sourceMap: true, // Must be set to true if using source-maps in production
+      //   terserOptions: {
+      //     compress: {
+      //       drop_console: true,
+      //     },
+      //   },
+      // }),
     ],
     splitChunks: {
       cacheGroups: {
