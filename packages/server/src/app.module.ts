@@ -57,6 +57,7 @@ import { WorkTimesService } from 'serverSrc/api/workTimes/workTimes.service';
 import { WorkTimesController } from 'serverSrc/api/workTimes/workTimes.controller';
 
 import { ApiController } from 'serverSrc/api.controller';
+import { DbController } from 'serverSrc/api/db/db.controller';
 
 @Module({
   imports: [],
@@ -92,6 +93,7 @@ import { ApiController } from 'serverSrc/api.controller';
   ],
   controllers: [
     AppController,
+    DbController,
     AdminsController,
     ArticlesController,
     ArticleSubcategoriesController,
