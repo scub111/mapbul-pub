@@ -11,6 +11,7 @@ export const buildServer = () => {
   console.log('Files are copying...');
   copyFileSync(`${srcDir}/.env`, `${distDir}/.env`);
   copyFileSync(`${srcDir}/views/api.hbs`, `${distDir}/views/api.hbs`);
+  copyFileSync(`${srcDir}/views/db.hbs`, `${distDir}/views/db.hbs`);
   copyFileSync(`${srcDir}/views/401.hbs`, `${distDir}/views/401.hbs`);
   copyFileSync(`${srcDir}/views/403.hbs`, `${distDir}/views/403.hbs`);
   copyFileSync(`${srcDir}/views/404.hbs`, `${distDir}/views/404.hbs`);
