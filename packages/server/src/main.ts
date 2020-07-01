@@ -4,6 +4,8 @@ import { AppModule } from 'serverSrc/app.module';
 import { ValidationPipe } from '@nestjs/common';
 
 import { GlobalVar } from '@mapbul-pub/common';
+import { AllExceptionsFilter } from './all-exceptions.filter';
+
 GlobalVar.setup(`${__dirname}/.env`);
 console.log(GlobalVar.env);
 
@@ -15,6 +17,10 @@ async function bootstrap() {
     }),
   );
   app.enableCors();
+
+  // const { httpAdapter } = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new AllExceptionsFilter());
+  
   const port = process.env.PORT || 3100;
   app.setBaseViewsDir(`${__dirname}/views`);
   app.setViewEngine('hbs');
