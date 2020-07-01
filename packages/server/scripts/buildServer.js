@@ -17,6 +17,7 @@ exports.buildServer = () => {
   console.log('Files are copying...');
   scub111_common_1.copyFileSync(`${srcDir}/.env`, `${distDir}/.env`);
   scub111_common_1.copyFileSync(`${srcDir}/views/api.hbs`, `${distDir}/views/api.hbs`);
+  scub111_common_1.copyFileSync(`${srcDir}/views/db.hbs`, `${distDir}/views/db.hbs`);
   scub111_common_1.copyFileSync(`${srcDir}/views/401.hbs`, `${distDir}/views/401.hbs`);
   scub111_common_1.copyFileSync(`${srcDir}/views/403.hbs`, `${distDir}/views/403.hbs`);
   scub111_common_1.copyFileSync(`${srcDir}/views/404.hbs`, `${distDir}/views/404.hbs`);
