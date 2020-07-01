@@ -1,12 +1,15 @@
 import getConfig from 'next/config';
 import { Routes } from 'constants/routes';
 import { IGetAllQuery } from '@mapbul-pub/types';
+import { isClientEnviroment } from 'utils';
 
 const { publicRuntimeConfig } = getConfig();
 
 //To verify BASE_URL for reloading specific page
-console.log(`BASE_URL = ${publicRuntimeConfig.BASE_URL}`);
-const getApiUrl = () => `${publicRuntimeConfig.BASE_URL}`;
+console.log(`BASE_URL_FRONT = ${publicRuntimeConfig.BASE_URL_FRONT}`);
+console.log(`BASE_URL_SERVER = ${publicRuntimeConfig.BASE_URL_SERVER}`);
+const getApiUrl = () =>
+  isClientEnviroment ? `${publicRuntimeConfig.BASE_URL_FRONT}` : `${publicRuntimeConfig.BASE_URL_SERVER}`;
 
 interface PathConfig {
   endpoint: string;

@@ -6,7 +6,8 @@ module.exports = (phase, { defaultConfig }) => {
     serverRuntimeConfig: {},
     // Will be available on both server and client
     publicRuntimeConfig: {
-      BASE_URL: process.env.BASE_URL,
+      BASE_URL_FRONT: process.env.BASE_URL_FRONT,
+      BASE_URL_SERVER: process.env.BASE_URL_SERVER,
       IMAGE_URL: process.env.IMAGE_URL,
     },
     webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
