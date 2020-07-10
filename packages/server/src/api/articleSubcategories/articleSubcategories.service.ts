@@ -15,7 +15,7 @@ export class ArticleSubcategoriesService implements BaseService<IArticleSubcateg
     if (query.filter) {
       filter += `WHERE ${query.filter}`;
     }
-    let sort = '';
+    let sort = ''; 
     if (query.sort) {
       sort += `ORDER BY ${query.sort}`;
     }

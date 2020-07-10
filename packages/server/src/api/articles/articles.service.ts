@@ -15,7 +15,7 @@ export class ArticlesService implements BaseService<IArticleDTO> {
     if (query.filter) {
       filter += `WHERE ${query.filter}`;
     }
-    let sort = '';
+    let sort = ''; 
     if (query.sort) {
       sort += `ORDER BY ${query.sort}`;
     }
@@ -50,7 +50,8 @@ export class ArticlesService implements BaseService<IArticleDTO> {
         \`statusId\`,
         \`baseCategoryId\`,
         \`endDate\`,
-        \`cityId\`
+        \`cityId\`,
+        \`titlePhotoPreview\`
       FROM article ${additional}`);
 
     return {
@@ -98,7 +99,8 @@ export class ArticlesService implements BaseService<IArticleDTO> {
         \`statusId\`,
         \`baseCategoryId\`,
         \`endDate\`,
-        \`cityId\`
+        \`cityId\`,
+        \`titlePhotoPreview\`
       FROM article
       WHERE id = ${id}`)
     )[0];
