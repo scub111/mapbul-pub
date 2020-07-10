@@ -50,7 +50,8 @@ export class ArticlesService implements BaseService<IArticleDTO> {
         \`statusId\`,
         \`baseCategoryId\`,
         \`endDate\`,
-        \`cityId\`
+        \`cityId\`,
+        \`titlePhotoPreview\`
       FROM article ${additional}`);
 
     return {
@@ -98,7 +99,8 @@ export class ArticlesService implements BaseService<IArticleDTO> {
         \`statusId\`,
         \`baseCategoryId\`,
         \`endDate\`,
-        \`cityId\`
+        \`cityId\`,
+        \`titlePhotoPreview\`
       FROM article
       WHERE id = ${id}`)
     )[0];
