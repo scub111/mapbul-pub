@@ -13,7 +13,7 @@ interface AppProps {
 
 const store = configureStore();
 
-export default class App extends React.Component<AppProps> {
+export default class App2 extends React.Component<AppProps> {
    render() {
       const { message } = this.props;
       return (

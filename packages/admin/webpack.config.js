@@ -35,7 +35,7 @@ const configProd = {
       loader: 'less-loader',
     },
   ],
-  maxAssetSize: 2 * 1048576
+  maxAssetSize: 3 * 1048576
 }
 
 const configDev = {
@@ -61,7 +61,7 @@ const configDev = {
       options: { sourceMap: true }
     },
   ],
-  maxAssetSize: 10 * 1048576
+  maxAssetSize: 20 * 1048576
 }
 
 module.exports = (env, argv) => {
