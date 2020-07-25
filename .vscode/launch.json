@@ -70,5 +70,12 @@
          "outputCapture": "std",
          "console": "integratedTerminal"
       },
+      {
+         "type": "chrome",
+         "request": "launch",
+         "name": "Chrome",
+         "url": "http://localhost:3200",
+         "webRoot": "${workspaceFolder}/packages/admin"
+      }, 
    ]
 }

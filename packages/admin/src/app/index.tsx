@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render } from 'react-dom';
-import App2 from 'app/containers/App';
+// import App2 from 'app/containers/App';
 import { sum } from 'app/foo';
 import App from './App';
 

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --content-base src",
+    "start": "webpack-dev-server --mode development --content-base src --port 3200",
     "analyze": "webpack --mode none --content-base src",
     "test": "jest",
     "test-coverage": "jest --coverage",
@@ -13,6 +13,7 @@
     "tslint-check": "tslint-config-prettier-check ./tslint.json"
   },
   "keywords": [],
+  
   "author": "",
   "license": "ISC",
   "devDependencies": {
