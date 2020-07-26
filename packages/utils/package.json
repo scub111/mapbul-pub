@@ -6,7 +6,7 @@
     "clean": "rimraf lib",
     "clean:node_modules": "rimraf node_modules",
     "build": "npm run clean && webpack",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "keywords": [
     "tourism",

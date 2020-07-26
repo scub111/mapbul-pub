@@ -70,8 +70,6 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
       body: "sunt dolores aut doloribus\ndolore doloribus voluptates tempora et\ndoloremque et quo\ncum asperiores sit consectetur dolorem"
     }));
 
-    console.log(111, data);
-
     return Promise.resolve({
       // data: responseData(),
       data,

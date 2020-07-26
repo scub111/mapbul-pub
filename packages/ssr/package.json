@@ -2,9 +2,8 @@
   "name": "@mapbul-pub/ssr",
   "version": "1.0.0",
   "scripts": {
-    "dev": "ncp .env.dev .env && next -p 3300",
     "build": "ncp .env.prod .env && next build",
-    "start": "next start -p 3300",
+    "start": "ncp .env.dev .env && next -p 3300",
     "start:port": "next start -p",
     "type-check": "tsc",
     "test": "jest",

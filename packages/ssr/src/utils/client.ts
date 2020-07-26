@@ -1,1 +1,1 @@
-export const isClientEnviroment = typeof window !== 'undefined';
+export const isClient = typeof window !== 'undefined';
