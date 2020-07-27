@@ -7,7 +7,7 @@
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development --content-base src --port 3200",
     "analyze": "webpack --mode none --content-base src",
-    "test": "jest",
+    "test-": "jest",
     "test-coverage": "jest --coverage",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "tslint-check": "tslint-config-prettier-check ./tslint.json"

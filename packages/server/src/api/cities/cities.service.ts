@@ -35,7 +35,7 @@ export class CitiesService implements BaseService<ICityDTO> {
         \`placeId\`
       FROM city ${additional}`);
 
-    const totalElements = Number(records[1][0]['count(*)']);
+    const totalElements = isPagination ? Number(records[1][0]['count(*)']) : records.length;
 
     return {
       content: isPagination ? records[0] : records,

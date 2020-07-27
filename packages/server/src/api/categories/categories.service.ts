@@ -38,7 +38,7 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
         \`forArticle\`
       FROM category ${additional}`);
 
-    const totalElements = Number(records[1][0]['count(*)']);
+    const totalElements = isPagination ? Number(records[1][0]['count(*)']) : records.length;
 
     return {
       content: isPagination ? records[0] : records,

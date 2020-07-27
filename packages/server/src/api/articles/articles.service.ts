@@ -56,7 +56,7 @@ export class ArticlesService implements BaseService<IArticleDTO> {
         \`photoOriginal\`
       FROM article ${additional}`);
 
-    const totalElements = Number(records[1][0]['count(*)']);
+    const totalElements = isPagination ? Number(records[1][0]['count(*)']) : records.length;
 
     return {
       content: isPagination ? records[0] : records,

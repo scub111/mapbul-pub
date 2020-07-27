@@ -32,7 +32,7 @@ export class MarkerRequestSessionsService implements BaseService<IMarkerRequestS
         \`markerId\`
       FROM marker_request_session ${additional}`);
 
-    const totalElements = Number(records[1][0]['count(*)']);
+    const totalElements = isPagination ? Number(records[1][0]['count(*)']) : records.length;
 
     return {
       content: isPagination ? records[0] : records,
