@@ -13,13 +13,14 @@ import authProvider from './authProvider';
 const App = () => (
   <Admin
     dataProvider={jsonServerProvider(
-      'https://jsonplaceholder.typicode.com'
+      // 'https://jsonplaceholder.typicode.com'
+      'http://localhost:3100/api'
     )}
     authProvider={authProvider}
     dashboard={Dashboard}
   >
     <Resource
-      name="posts"
+      name="articles"
       icon={PostIcon}
       list={PostList}
       edit={PostEdit}
