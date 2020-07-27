@@ -1,7 +1,7 @@
 import { stringify } from 'query-string';
 import { fetchUtils, DataProvider } from 'ra-core';
-// import { responseData } from './data';
 import { createPath } from '@mapbul-pub/utils';
+import { PageContent } from '@mapbul-pub/types';
 
 /**
  * Maps react-admin queries to a json-server powered REST API
@@ -35,55 +35,29 @@ import { createPath } from '@mapbul-pub/utils';
  *
  * export default App;
  */
+
+interface IResponse<T> {
+  status: number;
+  headers: Headers;
+  body: string;
+  json: T;
+}
+
 export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider => ({
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
-    const { field, order } = params.sort;
-    const query = {
-      ...fetchUtils.flattenObject(params.filter),
-      _sort: field,
-      _order: order,
-      _start: (page - 1) * perPage,
-      _end: page * perPage,
-    };
-
-    // const url = `${apiUrl}/${resource}?${stringify(query)}`;
+    // const { field, order } = params.sort;
 
     const url = createPath({
       endpoint: `${apiUrl}/${resource}`,
       queryParams: { page, size: perPage },
     });
 
-    return httpClient(url).then(({ headers, json }) => {
-      // if (!headers.has('x-total-count')) {
-      //   throw new Error(
-      //     'The X-Total-Count header is missing in the HTTP Response. The jsonServer Data Provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare X-Total-Count in the Access-Control-Expose-Headers header?'
-      //   );
-      // }
-      // return {
-      //   data: json,
-      //   total: parseInt(
-      //     (headers?.get('x-total-count')?.split('/').pop()) || "0",
-      //     10
-      //   ),
-      // };
+    return httpClient(url).then(({ json }: IResponse<PageContent<any>>) => {
       return {
         data: json.content,
-        total: Number(json.totalPages * perPage),
+        total: json.totalElements,
       };
-    });
-
-    const data = Array(perPage).fill(1).map((item, index) => ({
-      userId: 6,
-      id: 51 + index + page * perPage,
-      title: `title ${index + page * perPage}`,
-      body: "sunt dolores aut doloribus\ndolore doloribus voluptates tempora et\ndoloremque et quo\ncum asperiores sit consectetur dolorem"
-    }));
-
-    return Promise.resolve({
-      // data: responseData(),
-      data,
-      total: 1000,
     });
   },
 

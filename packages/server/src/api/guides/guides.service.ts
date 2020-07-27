@@ -39,9 +39,12 @@ export class GuidesService implements BaseService<IGuideDTO> {
         \`address\`
       FROM guide ${additional}`);
 
+    const totalElements = Number(records[1][0]['count(*)']);
+
     return {
       content: isPagination ? records[0] : records,
-      totalPages: isPagination ? Number(Math.ceil(records[1][0]['count(*)'] / (query?.size || 1))) : 1,
+      totalElements,
+      totalPages: isPagination ? Number(Math.ceil(totalElements / (query?.size || 1))) : 1,
     };
   }
 

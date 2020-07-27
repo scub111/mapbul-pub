@@ -18,6 +18,7 @@
   "license": "ISC",
   "devDependencies": {
     "@mapbul-pub/utils": "^1.0.0",
+    "@mapbul-pub/types": "^1.0.0",
     "@types/app-root-path": "^1.2.4",
     "@types/enzyme": "^3.9.1",
     "@types/enzyme-adapter-react-16": "^1.0.5",

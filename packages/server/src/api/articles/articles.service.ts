@@ -51,12 +51,17 @@ export class ArticlesService implements BaseService<IArticleDTO> {
         \`baseCategoryId\`,
         \`endDate\`,
         \`cityId\`,
-        \`titlePhotoPreview\`
+        \`titlePhotoPreview\`,
+        \`titlePhotoOriginal\`,
+        \`photoOriginal\`
       FROM article ${additional}`);
+
+    const totalElements = Number(records[1][0]['count(*)']);
 
     return {
       content: isPagination ? records[0] : records,
-      totalPages: isPagination ? Number(Math.ceil(records[1][0]['count(*)'] / (query?.size || 1))) : 1,
+      totalElements,
+      totalPages: isPagination ? Number(Math.ceil(totalElements / (query?.size || 1))) : 1,
     };
   }
 
@@ -100,7 +105,9 @@ export class ArticlesService implements BaseService<IArticleDTO> {
         \`baseCategoryId\`,
         \`endDate\`,
         \`cityId\`,
-        \`titlePhotoPreview\`
+        \`titlePhotoPreview\`,
+        \`titlePhotoOriginal\`,
+        \`photoOriginal\`
       FROM article
       WHERE id = ${id}`)
     )[0];
