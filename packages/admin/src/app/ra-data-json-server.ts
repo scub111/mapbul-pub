@@ -47,7 +47,31 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
-    console.log(111, field, order);
+
+    // const query = {
+    //   ...fetchUtils.flattenObject(params.filter),
+    //   _sort: field,
+    //   _order: order,
+    //   _start: (page - 1) * perPage,
+    //   _end: page * perPage,
+    // };
+
+    // const url = `${apiUrl}/${resource}?${stringify(query)}`;
+
+    // return httpClient(url).then(({ headers, json }) => {
+    //   if (!headers.has('x-total-count')) {
+    //     throw new Error(
+    //       'The X-Total-Count header is missing in the HTTP Response. The jsonServer Data Provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare X-Total-Count in the Access-Control-Expose-Headers header?'
+    //     );
+    //   }
+    //   return {
+    //     data: json,
+    //     total: parseInt(
+    //       (headers?.get('x-total-count')?.split('/').pop()) || "0",
+    //       10
+    //     ),
+    //   };
+    // });
 
     const url = createPath({
       endpoint: `${apiUrl}/${resource}`,
@@ -68,12 +92,17 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
     })),
 
   getMany: (resource, params) => {
+    console.log(111, resource, params)
     const query = {
       id: params.ids,
     };
+    const tempId = params.ids[0];
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
-    return httpClient(url).then(({ json }) => ({ data: [{id: 4, name: 'temp'}] }));
-    return httpClient(url).then(({ json }: IResponse<PageContent<any>>) => { console.log(111, json.content.filter(i => i.id === 5)); return { data: json.content.filter(i => i.id === 5) } });
+    // return Promise.resolve({
+    //   data:  [{id: tempId, name: `temp${tempId}`}],
+    // });
+    // return httpClient(url).then(({ json }) => ({ data: [{id: tempId, name: `temp${tempId}`}] }));
+    return httpClient(url).then(({ json }: IResponse<PageContent<any>>) => { return { data: json.content } });
   },
 
   getManyReference: (resource, params) => {

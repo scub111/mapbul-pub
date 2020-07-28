@@ -24,14 +24,14 @@ import {
 const PostFilter = (props: any) => (
   <Filter {...props}>
     <TextInput label="Search" source="q" alwaysOn />
-    <ReferenceInput
+    {/* <ReferenceInput
       label="User"
       source="userId"
       reference="users"
       allowEmpty
     >
       <SelectInput optionText="name" />
-    </ReferenceInput>
+    </ReferenceInput> */}
   </Filter>
 );
 
@@ -39,9 +39,6 @@ export const PostList = (props: any) => (
   <List {...props} filters={<PostFilter />}>
     <Datagrid>
       <TextField source={P<IArticleDTO>(p => p.id)} label="№" />
-      <ReferenceField label="User" source="baseCategoryId" reference="categories">
-        <TextField source="name" />
-      </ReferenceField>
       <ReferenceField label="Категория" source="baseCategoryId" reference="categories">
         <TextField source="name" />
       </ReferenceField>

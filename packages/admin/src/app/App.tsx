@@ -21,13 +21,14 @@ const App = () => (
   >
     <Resource
       name="articles"
+      // name="posts"
       icon={PostIcon}
       list={PostList}
       edit={PostEdit}
       create={PostCreate}
       show={PostShow}
     />
-    <Resource name="users" icon={UserIcon} list={UserList} />
+    <Resource name="categories" icon={UserIcon} list={UserList} />
     <Resource name="comments" list={ListGuesser} />
   </Admin>
 );
