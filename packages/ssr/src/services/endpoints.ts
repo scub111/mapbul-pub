@@ -1,5 +1,5 @@
 import getConfig from 'next/config';
-import { Routes } from 'constants/routes';
+import { Routes } from '@mapbul-pub/ui';
 import { IGetAllQuery } from '@mapbul-pub/types';
 import { isClient } from 'utils';
 import { createPath } from '@mapbul-pub/utils';

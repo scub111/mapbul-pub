@@ -24,6 +24,7 @@
     "@mapbul-pub/codegen": "^1.0.0",
     "@mapbul-pub/common": "^1.0.0",
     "@mapbul-pub/types": "^1.0.0",
+    "@mapbul-pub/ui": "^1.0.0",
     "@nestjs/common": "^6.10.11",
     "@nestjs/core": "^6.10.11",
     "@nestjs/platform-express": "^6.10.11",
