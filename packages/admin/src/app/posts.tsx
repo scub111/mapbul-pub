@@ -39,12 +39,16 @@ export const PostList = (props: any) => (
   <List {...props} filters={<PostFilter />}>
     <Datagrid>
       <TextField source={P<IArticleDTO>(p => p.id)} label="№" />
-      <TextField source={P<IArticleDTO>(p => p.title)} label="Название" />
-      <TextField source={P<IArticleDTO>(p => p.description)} label="Описание" />
-      <ReferenceField label="Категория" source={P<IArticleDTO>(p => p.baseCategoryId)} reference="users">
+      <ReferenceField label="User" source="baseCategoryId" reference="categories">
         <TextField source="name" />
       </ReferenceField>
-      <TextField source={P<IArticleDTO>(p => p.text)} label="Текст" />
+      <ReferenceField label="Категория" source="baseCategoryId" reference="categories">
+        <TextField source="name" />
+      </ReferenceField>
+      <TextField source={P<IArticleDTO>(p => p.title)} label="Название" />
+      <TextField source={P<IArticleDTO>(p => p.description)} label="Описание" />
+
+      {/* <TextField source={P<IArticleDTO>(p => p.text)} label="Текст" /> */}
       {/* <TextField source="title" />
             <TextField source="title" />
             <TextField source="title" /> */}

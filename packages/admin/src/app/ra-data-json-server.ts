@@ -46,11 +46,12 @@ interface IResponse<T> {
 export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider => ({
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
-    // const { field, order } = params.sort;
+    const { field, order } = params.sort;
+    console.log(111, field, order);
 
     const url = createPath({
       endpoint: `${apiUrl}/${resource}`,
-      queryParams: { page, size: perPage },
+      queryParams: { page, size: perPage, sort: `${field} ${order}` },
     });
 
     return httpClient(url).then(({ json }: IResponse<PageContent<any>>) => {
@@ -71,7 +72,8 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
       id: params.ids,
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
-    return httpClient(url).then(({ json }) => ({ data: json }));
+    return httpClient(url).then(({ json }) => ({ data: [{id: 4, name: 'temp'}] }));
+    return httpClient(url).then(({ json }: IResponse<PageContent<any>>) => { console.log(111, json.content.filter(i => i.id === 5)); return { data: json.content.filter(i => i.id === 5) } });
   },
 
   getManyReference: (resource, params) => {
