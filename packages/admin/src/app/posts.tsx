@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { P } from '@mapbul-pub/utils';
+import { Routes } from '@mapbul-pub/ui';
 import { IArticleDTO, ICategoryDTO } from '@mapbul-pub/types';
 import {
    Show,
@@ -42,7 +43,7 @@ export const PostList = (props: any) => (
          <ReferenceField
             label="Категория"
             source={P<IArticleDTO>((p) => p.baseCategoryId)}
-            reference="categories"
+            reference={Routes.categories}
          >
             <TextField source={P<ICategoryDTO>((p) => p.name)} />
          </ReferenceField>

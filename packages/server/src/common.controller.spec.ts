@@ -66,5 +66,30 @@ describe('AdminsController', () => {
       expect(result.content[0].name).toBe('экология');
       expect(result.totalPages).toBeGreaterThanOrEqual(49);
     });
+
+    it('should return filtered page by one id', async () => {
+      const result = await controller.getAll({ id: '107' });
+      expect(result.content.length).toBe(1);
+      expect(result.content.length).toBe(result.totalElements);
+      expect(result.content[0].name).toBe('извержение');
+      expect(result.totalPages).toBe(1);
+    });
+
+    it('should return filtered page by one id as array', async () => {
+      const result = await controller.getAll({ id: ['107'] });
+      expect(result.content.length).toBe(1);
+      expect(result.content.length).toBe(result.totalElements);
+      expect(result.content[0].name).toBe('извержение');
+      expect(result.totalPages).toBe(1);
+    });
+
+    it('should return filtered page by several ids as array', async () => {
+      const result = await controller.getAll({ id: ['107', '108'] });
+      expect(result.content.length).toBe(2);
+      expect(result.content.length).toBe(result.totalElements);
+      expect(result.content[0].name).toBe('извержение');
+      expect(result.content[1].name).toBe('катаклизмы');
+      expect(result.totalPages).toBe(1);
+    });
   });
 });

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Routes } from '@mapbul-pub/ui';
 import PostIcon from '@material-ui/icons/Book';
 import UserIcon from '@material-ui/icons/Group';
 import { Admin, Resource, ListGuesser } from 'react-admin';
@@ -20,7 +21,7 @@ const App = () => (
     dashboard={Dashboard}
   >
     <Resource
-      name="articles"
+      name={Routes.articles}
       // name="posts"
       icon={PostIcon}
       list={PostList}
@@ -28,7 +29,7 @@ const App = () => (
       create={PostCreate}
       show={PostShow}
     />
-    <Resource name="categories" icon={UserIcon} list={UserList} />
+    <Resource name={Routes.categories} icon={UserIcon} list={UserList} />
     <Resource name="comments" list={ListGuesser} />
   </Admin>
 );

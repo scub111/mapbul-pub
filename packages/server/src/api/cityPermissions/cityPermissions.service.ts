@@ -15,6 +15,10 @@ export class CityPermissionsService implements BaseService<ICityPermissionDTO> {
     if (query.filter) {
       filter += `WHERE ${query.filter}`;
     }
+    if (query.id) {
+      if (!Array.isArray(query.id)) filter += `WHERE id in (${query.id})`;
+      else filter += `WHERE id in (${query.id.join(',')})`;
+    }
     let sort = '';
     if (query.sort) {
       sort += `ORDER BY ${query.sort}`;
