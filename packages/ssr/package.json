@@ -2,18 +2,17 @@
   "name": "@mapbul-pub/ssr",
   "version": "1.0.0",
   "scripts": {
-    "dev": "ncp .env.dev .env && next -p 3300",
     "build": "ncp .env.prod .env && next build",
-    "start": "next start -p 3300",
+    "start": "ncp .env.dev .env && next -p 3300",
     "start:port": "next start -p",
     "type-check": "tsc",
     "test": "jest",
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@mapbul-pub/common": "^1.0.0",
     "@mapbul-pub/types": "^1.0.0",
     "@mapbul-pub/utils": "^1.0.0",
+    "@mapbul-pub/ui": "^1.0.0",
     "@material-ui/core": "^4.8.3",
     "@material-ui/icons": "^4.5.1",
     "@types/markdown-to-jsx": "^6.9.1",

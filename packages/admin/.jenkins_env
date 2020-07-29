@@ -1,4 +1,0 @@
-env.ARGOCD_APP_YAML="overlays/dev/zpreg-ui.yaml"
-env.ARGOCD_REPO="gitlab.wvservices.com/it/devops/k8s-apps-configs/integrator/zpreg.git"
-env.REGISTRY_PATH="registry.vostokservices.com/zpreg/zpreg-ui"
-env.APP_NAME="zpreg-ui"

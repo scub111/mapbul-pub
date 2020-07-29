@@ -24,4 +24,6 @@ export interface IArticleDTO {
   endDate: Date | null;
   cityId: number | null;
   titlePhotoPreview: string | null;
+  titlePhotoOriginal: string | null;
+  photoOriginal: string | null;
 }
