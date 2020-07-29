@@ -6,8 +6,8 @@ import { Admin, Resource, ListGuesser } from 'react-admin';
 // import jsonServerProvider from 'ra-data-json-server';
 import jsonServerProvider from './ra-data-json-server';
 
-import { PostList, PostEdit, PostCreate, PostShow } from './posts';
-import { UserList } from './users';
+import { ArticleList, ArticleEdit, ArticleCreate, ArticleShow } from './articles';
+import { CategoryList } from './users';
 import Dashboard from './Dashboard';
 import authProvider from './authProvider';
 
@@ -22,14 +22,13 @@ const App = () => (
   >
     <Resource
       name={Routes.articles}
-      // name="posts"
       icon={PostIcon}
-      list={PostList}
-      edit={PostEdit}
-      create={PostCreate}
-      show={PostShow}
+      list={ArticleList}
+      edit={ArticleEdit}
+      create={ArticleCreate}
+      show={ArticleShow}
     />
-    <Resource name={Routes.categories} icon={UserIcon} list={UserList} />
+    <Resource name={Routes.categories} icon={UserIcon} list={CategoryList} />
     <Resource name="comments" list={ListGuesser} />
   </Admin>
 );

@@ -2,13 +2,13 @@ import * as React from 'react';
 import { useMediaQuery, Theme } from '@material-ui/core';
 import { SimpleList, List, Datagrid, EmailField, TextField } from 'react-admin';
 
-export const UserList = (props: any) => {
+export const CategoryList = (props: any) => {
   const isSmall = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down('md')
   );
 
   return (
-    <List title="All users" {...props}>
+    <List title="All categories" {...props}>
       {isSmall ? (
         <SimpleList
           primaryText={(record: any) => record.name}

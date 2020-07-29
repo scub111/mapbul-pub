@@ -22,7 +22,7 @@ import {
    Filter
 } from 'react-admin';
 
-const PostFilter = (props: any) => (
+const ArticleFilter = (props: any) => (
    <Filter {...props}>
       <TextInput label="Search" source="q" alwaysOn />
       {/* <ReferenceInput
@@ -36,8 +36,8 @@ const PostFilter = (props: any) => (
    </Filter>
 );
 
-export const PostList = (props: any) => (
-   <List {...props} filters={<PostFilter />}>
+export const ArticleList = (props: any) => (
+   <List {...props} filters={<ArticleFilter />}>
       <Datagrid>
          <TextField source={P<IArticleDTO>((p) => p.id)} label="№" />
          <ReferenceField
@@ -60,12 +60,12 @@ export const PostList = (props: any) => (
    </List>
 );
 
-const PostTitle = ({ record }: any) => {
-   return <span>Post {record ? `"${record.title}"` : ''}</span>;
+const ArticleTitle = ({ record }: any) => {
+   return <span>Article {record ? `"${record.title}"` : ''}</span>;
 };
 
-export const PostEdit = (props: any) => (
-   <Edit title={<PostTitle />} {...props}>
+export const ArticleEdit = (props: any) => (
+   <Edit title={<ArticleTitle />} {...props}>
       <SimpleForm>
          <TextInput disabled source="id" />
          <ReferenceInput label="User" source="userId" reference="users">
@@ -77,7 +77,7 @@ export const PostEdit = (props: any) => (
    </Edit>
 );
 
-export const PostCreate = (props: any) => (
+export const ArticleCreate = (props: any) => (
    <Create {...props}>
       <SimpleForm>
          <ReferenceInput label="User" source="userId" reference="users">
@@ -89,7 +89,7 @@ export const PostCreate = (props: any) => (
    </Create>
 );
 
-export const PostShow = (props: any) => (
+export const ArticleShow = (props: any) => (
    <Show {...props}>
       <SimpleShowLayout>
          <TextField source="title" />
