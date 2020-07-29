@@ -23,4 +23,7 @@ export interface IArticleDTO {
   baseCategoryId: number;
   endDate: Date | null;
   cityId: number | null;
+  titlePhotoPreview: string | null;
+  titlePhotoOriginal: string | null;
+  photoOriginal: string | null;
 }

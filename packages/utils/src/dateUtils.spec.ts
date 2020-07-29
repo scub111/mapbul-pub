@@ -2,6 +2,11 @@ import { formatDateToString } from './dateUtils';
 
 describe('dateUtils', () => {
   describe('root', () => {
+    it('formatDateToString method with null', () => {
+      const result = formatDateToString(null);
+      expect(result).toBe('');
+    });
+
     it('formatDateToString method with undefined', () => {
       const result = formatDateToString(undefined);
       expect(result).toBe('');

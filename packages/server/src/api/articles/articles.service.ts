@@ -15,6 +15,10 @@ export class ArticlesService implements BaseService<IArticleDTO> {
     if (query.filter) {
       filter += `WHERE ${query.filter}`;
     }
+    if (query.id) {
+      if (!Array.isArray(query.id)) filter += `WHERE id in (${query.id})`;
+      else filter += `WHERE id in (${query.id.join(',')})`;
+    }
     let sort = '';
     if (query.sort) {
       sort += `ORDER BY ${query.sort}`;
@@ -50,12 +54,18 @@ export class ArticlesService implements BaseService<IArticleDTO> {
         \`statusId\`,
         \`baseCategoryId\`,
         \`endDate\`,
-        \`cityId\`
+        \`cityId\`,
+        \`titlePhotoPreview\`,
+        \`titlePhotoOriginal\`,
+        \`photoOriginal\`
       FROM article ${additional}`);
+
+    const totalElements = isPagination ? Number(records[1][0]['count(*)']) : records.length;
 
     return {
       content: isPagination ? records[0] : records,
-      totalPages: isPagination ? Number(Math.ceil(records[1][0]['count(*)'] / (query?.size || 1))) : 1,
+      totalElements,
+      totalPages: isPagination ? Number(Math.ceil(totalElements / (query?.size || 1))) : 1,
     };
   }
 
@@ -98,7 +108,10 @@ export class ArticlesService implements BaseService<IArticleDTO> {
         \`statusId\`,
         \`baseCategoryId\`,
         \`endDate\`,
-        \`cityId\`
+        \`cityId\`,
+        \`titlePhotoPreview\`,
+        \`titlePhotoOriginal\`,
+        \`photoOriginal\`
       FROM article
       WHERE id = ${id}`)
     )[0];

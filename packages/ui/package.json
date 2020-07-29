@@ -1,0 +1,65 @@
+{
+  "name": "@mapbul-pub/ui",
+  "version": "1.0.0",
+  "description": "UI components",
+  "scripts": {
+    "clean": "rimraf lib",
+    "clean:node_modules": "rimraf node_modules",
+    "build": "npm run clean && webpack",
+    "test": "jest --watch"
+  },
+  "keywords": [
+    "tourism",
+    "bali"
+  ],
+  "author": "Biskub Konstantin <scub111@mail.ru>",
+  "homepage": "https://scub111.com",
+  "license": "LGPL-3.0",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "files": [
+    "lib",
+    "src",
+    "test"
+  ],
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "cross-env": "^6.0.3",
+    "jest": "^24.9.0",
+    "path": "^0.12.7",
+    "ts-jest": "^24.2.0",
+    "ts-loader": "^6.2.1",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.7.3",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "@mapbul-pub/types": "^1.0.0",
+    "app-root-path": "^3.0.0",
+    "dayjs": "^1.8.30",
+    "dotenv": "^8.2.0"
+  },
+  "gitHead": "165f7993c2acc907c653c02847fb02721052c6e7",
+  "jest": {
+    "rootDir": ".",
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "server/(.*)": "<rootDir>/src/$1"
+    }
+  }
+}

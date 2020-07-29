@@ -6,13 +6,13 @@
       {
         "label": "Server",
         "type": "shell",
-        "command": "cd packages/server; npm run dev",
+        "command": "cd packages/server; npm start",
         "problemMatcher": []
       },
       {
         "label": "Ssr",
         "type": "shell",
-        "command": "cd packages/ssr; npm run dev",
+        "command": "cd packages/ssr; npm start",
         "problemMatcher": []
       },
       {

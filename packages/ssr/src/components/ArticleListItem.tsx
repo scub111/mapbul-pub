@@ -13,6 +13,7 @@ export const ArticleListItem: React.FC<ListItemProps<Article>> = ({ item, route 
   const descriptionLang = isRus ? item.description : item.descriptionEn || '';
   const publishedDate = route === 'articles' ? item.publishedDate : item.startDate;
   const href = `/${locale}/${route}/${item.id}`;
+  const titlePhoto = String(item.titlePhotoPreview ? item.titlePhotoPreview : item.titlePhoto);
   return (
     <Grid item key={item.title} xs={12} md={6}>
       <CardActionArea>
@@ -31,7 +32,7 @@ export const ArticleListItem: React.FC<ListItemProps<Article>> = ({ item, route 
                 </CardContent>
               </div>
               {item.titlePhoto && (
-                <CardMedia image={item.titlePhoto} title={titleLang} style={{ width: '30%', minWidth: 150 }} />
+                <CardMedia image={titlePhoto} title={titleLang} style={{ width: '30%', minWidth: 150 }} />
               )}
             </Card>
           </MuiLink>
