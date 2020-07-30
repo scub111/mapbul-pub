@@ -15,6 +15,7 @@ import authProvider from './authProvider';
 
 const App = () => (
   <Admin
+    title="Admin panel"
     dataProvider={jsonServerProvider(
       // 'https://jsonplaceholder.typicode.com'
       'http://localhost:3100/api'

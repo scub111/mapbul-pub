@@ -4,6 +4,17 @@ import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 
+interface IOkPacket {
+  fieldCount: number;
+  affectedRows: number;
+  insertId: number;
+  serverStatus: number;
+  warningCount: number;
+  message: string;
+  protocol41: boolean;
+  changedRows: number;
+}
+
 export class CategoriesService implements BaseService<ICategoryDTO> {
   constructor() {
     this.connection = dbConnectionSingleton.getInstance();
@@ -52,9 +63,35 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
     };
   }
 
-  //postItem(item: ICategoryDTO): Promise<ICategoryDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: ICategoryDTO): Promise<ICategoryDTO> {
+    const response: IOkPacket = await this.connection.query(`
+      INSERT INTO category
+      (
+        \`Name\`,
+        \`EnName\`,
+        \`ParentId\`,
+        \`AddedDate\`,
+        \`Icon\`,
+        \`Color\`,
+        \`Pin\`,
+        \`ForArticle\`
+      ) 
+      Values 
+      (
+        '${body.name}',
+        '${body.enName}',
+        ${body.parentId},
+        '${dateTimeFormat(body.addedDate)}',
+        "${body.icon}",
+        '${body.color}',
+        '${body.pin}',
+        ${body.forArticle}
+      )`.replace(/\\/g, '\\\\'));
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: ICategoryDTO): ICategoryDTO {
   //  throw new Error('Method not implemented.');
@@ -65,7 +102,6 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
   //}
 
   async getItem(id: TID): Promise<ICategoryDTO> {
-    console.log(222, id);
     return (
       await this.connection.query(`
       SELECT
@@ -95,7 +131,7 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
         \`color\`='${body.color}',
         \`pin\`='${body.pin}',
         \`forArticle\`=${body.forArticle}
-      WHERE id = ${id}`);
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'));
     return body;
   }
 

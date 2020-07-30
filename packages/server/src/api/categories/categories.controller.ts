@@ -1,4 +1,4 @@
-import { Controller, Get, Param, UseInterceptors, Query, Put, Body } from '@nestjs/common';
+import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post } from '@nestjs/common';
 import { IGetParams } from 'serverSrc/common/interfaces';
 import { IController } from 'serverSrc/common/IController';
 import { PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
@@ -20,6 +20,12 @@ export class CategoriesController implements IController<ICategoryDTO> {
   //  throw new Error('Method not implemented.');
   //}
 
+  @Post()
+  @UseInterceptors(NotFoundInterceptor)
+  async postItem(@Body() body: ICategoryDTO): Promise<ICategoryDTO> {
+    return await this.service.postItem(body);
+  }
+
   //@Put()
   //putAll(item: ICategoryDTO): ICategoryDTO {
   //  throw new Error('Method not implemented.');
@@ -39,7 +45,6 @@ export class CategoriesController implements IController<ICategoryDTO> {
   @Put(':id')
   @UseInterceptors(NotFoundInterceptor)
   async putItem(@Param('id') id: string, @Body() body: ICategoryDTO): Promise<ICategoryDTO> {
-    console.log(111, id, body);
     return await this.service.putItem(id, body);
   }
 
