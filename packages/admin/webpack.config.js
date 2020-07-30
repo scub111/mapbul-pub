@@ -18,7 +18,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 const configProd = {
   app: [
-    `${sourcePath}/app/index.tsx`
+    `${sourcePath}/index.tsx`
   ],
   appFilename: 'app-[contenthash].js',
   vendorFilename: 'vendor-[contenthash].js',
@@ -41,7 +41,7 @@ const configProd = {
 const configDev = {
   app: [
     'react-dev-utils/webpackHotDevClient',
-    `${sourcePath}/app/index.tsx`
+    `${sourcePath}/index.tsx`
   ],
   appFilename: 'app-debug.js',
   vendorFilename: 'vendor-debug.js',
@@ -85,7 +85,19 @@ module.exports = (env, argv) => {
       mainFields: ['module', 'browser', 'main'],
       alias: {
         src: `${sourcePath}/`,
-        app: `${sourcePath}/app/`,
+        actions: `${sourcePath}/actions`,
+        components: `${sourcePath}/components`,
+        containers: `${sourcePath}/containers`,
+        hooks: `${sourcePath}/hooks`,
+        middleware: `${sourcePath}/middleware`,
+        models: `${sourcePath}/models`,
+        pages: `${sourcePath}/pages`,
+        reducers: `${sourcePath}/reducers`,
+        sagas: `${sourcePath}/sagas`,
+        services: `${sourcePath}/services`,
+        store: `${sourcePath}/store`,
+        types: `${sourcePath}/types`,
+        utils: `${sourcePath}/utils`,
       }
     },
     module: {

@@ -1,6 +1,7 @@
 import { BaseService } from 'serverSrc/common/BaseService';
 import { TID } from 'serverSrc/common/types';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
+import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 
 export class CategoriesService implements BaseService<ICategoryDTO> {
@@ -64,6 +65,7 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
   //}
 
   async getItem(id: TID): Promise<ICategoryDTO> {
+    console.log(222, id);
     return (
       await this.connection.query(`
       SELECT
@@ -81,9 +83,21 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
     )[0];
   }
 
-  //putItem(id: TID): ICategoryDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: ICategoryDTO): Promise<ICategoryDTO> {
+    await this.connection.query(`
+      UPDATE category
+      SET
+        \`name\`='${body.name}',
+        \`enName\`='${body.enName}',
+        \`parentId\`=${body.parentId},
+        \`addedDate\`='${dateTimeFormat(body.addedDate)}',
+        \`icon\`='${body.icon}',
+        \`color\`='${body.color}',
+        \`pin\`='${body.pin}',
+        \`forArticle\`=${body.forArticle}
+      WHERE id = ${id}`);
+    return body;
+  }
 
   //deleteItem(id: TID): ICategoryDTO {
   //  throw new Error('Method not implemented.');
