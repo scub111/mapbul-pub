@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useMediaQuery, Theme } from '@material-ui/core';
+import { useMediaQuery, Theme, Box, CardContent, Card } from '@material-ui/core';
 import {
    SimpleList,
    List,
@@ -17,7 +17,9 @@ import {
    TextInput,
    DateInput,
    ReferenceInput,
-   SelectInput
+   SelectInput,
+   BooleanInput,
+   AutocompleteInput
 } from 'react-admin';
 import { P } from '@mapbul-pub/utils';
 import { ICategoryDTO } from '@mapbul-pub/types';
@@ -35,11 +37,11 @@ export const CategoryList: React.FC = (props: any) => {
                tertiaryText={(record: ICategoryDTO) => record.parentId}
             />
          ) : (
-            <Datagrid>
+            <Datagrid rowClick="edit">
                <TextField source={P<ICategoryDTO>((p) => p.id)} />
                <TextField source={P<ICategoryDTO>((p) => p.name)} />
-               <EditButton />
-               <ShowButton />
+               {/* <EditButton />
+               <ShowButton /> */}
             </Datagrid>
          )}
       </List>
@@ -58,20 +60,46 @@ export const CategoryShow: React.FC = (props: any) => (
    </Show>
 );
 
+const RowLayout: React.FC = ({ children }) => (
+   <Box display={{ xs: 'block', sm: 'flex' }} style={{ width: '100%' }}>
+      {React.Children.toArray(children).map((child, i, array) => {
+         return (
+            <Box flex={1} mr={{ xs: 0, sm: i !== array.length - 1 ? '0.5em' : 0 }}>
+               {child}
+            </Box>
+         );
+      })}
+   </Box>
+);
+
 export const CategoryeEdit: React.FC = (props: any) => (
    <Edit title={''} {...props}>
       <SimpleForm>
-         <TextInput disabled source={P<ICategoryDTO>((p) => p.id)} />
-         <ReferenceInput source={P<ICategoryDTO>((p) => p.parentId)} reference={Routes.categories}>
-            <SelectInput optionText={P<ICategoryDTO>((p) => p.name)} />
-         </ReferenceInput>
-         <TextInput source={P<ICategoryDTO>((p) => p.name)} />
-         <TextInput source={P<ICategoryDTO>((p) => p.enName)} />
-         <DateInput source={P<ICategoryDTO>((p) => p.addedDate)} />
-         <TextInput source={P<ICategoryDTO>((p) => p.icon)} multiline />
-         <TextInput source={P<ICategoryDTO>((p) => p.pin)} multiline />
-         <TextInput source={P<ICategoryDTO>((p) => p.color)} />
-         {/* <TextInput multiline source="body" /> */}
+         <RowLayout>
+            <TextInput disabled source={P<ICategoryDTO>((p) => p.id)} fullWidth />
+            <ReferenceInput
+               source={P<ICategoryDTO>((p) => p.parentId)}
+               reference={Routes.categories}
+               perPage={1000}
+               fullWidth
+            >
+               {/* <SelectInput optionText={P<ICategoryDTO>((p) => p.name)} /> */}
+               <AutocompleteInput optionText={P<ICategoryDTO>((p) => p.name)} />
+            </ReferenceInput>
+         </RowLayout>
+         <RowLayout>
+            <TextInput source={P<ICategoryDTO>((p) => p.name)} fullWidth flex={1} />
+            <TextInput source={P<ICategoryDTO>((p) => p.enName)} fullWidth />
+         </RowLayout>
+         <RowLayout>
+            <TextInput source={P<ICategoryDTO>((p) => p.icon)} multiline fullWidth />
+            <TextInput source={P<ICategoryDTO>((p) => p.pin)} multiline fullWidth />
+         </RowLayout>
+         <RowLayout>
+            <DateInput source={P<ICategoryDTO>((p) => p.addedDate)} fullWidth />
+            <TextInput source={P<ICategoryDTO>((p) => p.color)} fullWidth />
+         </RowLayout>
+         <BooleanInput source={P<ICategoryDTO>((p) => p.forArticle)} fullWidth />
       </SimpleForm>
    </Edit>
 );

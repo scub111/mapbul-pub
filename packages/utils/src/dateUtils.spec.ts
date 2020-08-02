@@ -44,9 +44,14 @@ describe('dateUtils', () => {
       expect(result).toBe('');
     });
 
+    it('dateTimeFormat method with z-time', () => {
+      const result = dateTimeFormat('2017-12-25T21:00:00.000Z');
+      expect(result).toBe('2017-12-26 00:00:00');
+    });
+
     it('dateTimeFormat method with null', () => {
-      const result = dateTimeFormat('2017-12-31T21:00:00.000Z');
-      expect(result).toBe('2018-01-01 00:00:00');
+      const result = dateTimeFormat('2017-12-31');
+      expect(result).toBe('2017-12-31 00:00:00');
     });
   });
 });

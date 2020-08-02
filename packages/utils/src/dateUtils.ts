@@ -11,5 +11,5 @@ export function dateTimeFormat(date: number | Date | string | null | undefined):
   if (!date) {
     return '';
   }
-  return dayjs(date).format('YYYY-DD-MM HH:mm:ss');
+  return dayjs(date).format('YYYY-MM-DD HH:mm:ss');
 }
