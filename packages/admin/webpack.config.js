@@ -16,6 +16,9 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TimingCompilationPlugin = require('./TimingCompilationPlugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+// functions
+const getClientEnvironment = require('./env');
+
 const configProd = {
   app: [
     `${sourcePath}/index.tsx`
@@ -88,6 +91,7 @@ module.exports = (env, argv) => {
         actions: `${sourcePath}/actions`,
         components: `${sourcePath}/components`,
         constants: `${sourcePath}/constants`,
+        hocs: `${sourcePath}/hocs`,
         containers: `${sourcePath}/containers`,
         hooks: `${sourcePath}/hooks`,
         middleware: `${sourcePath}/middleware`,
@@ -153,6 +157,7 @@ module.exports = (env, argv) => {
           Promise: 'es6-promise' //add Promises for IE !!! 
         }),
         new TimingCompilationPlugin(),
+        new webpack.DefinePlugin(getClientEnvironment(isProduction)),
       );
       if (isProduction) {
         //add some plugins that are only for production here

@@ -13,17 +13,12 @@ import {
 } from 'pages';
 
 import authProvider from './authProvider';
-import { GlobalVar } from './constants';
-
-console.log(111, GlobalVar.env.baseUrl, process.env.baseUrl);
+import { GlobalVar } from 'src/constants';
 
 const App = () => (
   <Admin
     title="Admin panel"
-    dataProvider={jsonServerProvider(
-      // 'https://jsonplaceholder.typicode.com'
-      `http://localhost:3100/api`
-    )}
+    dataProvider={jsonServerProvider(GlobalVar.env.baseUrl)}
     authProvider={authProvider}
     dashboard={Dashboard}
   >

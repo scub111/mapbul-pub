@@ -7,12 +7,13 @@ import { ReactChildren } from "react";
 export declare type Identifier = string | number;
 
 export interface FieldProps<T> {
-  record?: T;
-  resource?: string;
   basePath?: string;
+  history?: any;
   id?: Identifier;
-  variant?: any;
-  className?: string;
+  location?: any;
+  match?: any;
+  record?: T;
+  resource?: string;  
 }
 
 export interface ReferenceFieldProps<T>
