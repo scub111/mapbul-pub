@@ -8,7 +8,7 @@ import jsonServerProvider from './ra-data-json-server';
 import {
   Dashboard,
   ArticleList, ArticleEdit, ArticleCreate, ArticleShow,
-  CategoryList, CategoryShow, CategoryeEdit
+  CategoryList, CategoryShow, CategoryeEdit, CategoryCreate
 } from 'pages';
 
 import authProvider from './authProvider';
@@ -36,7 +36,9 @@ const App = () => (
       icon={UserIcon}
       list={CategoryList}
       edit={CategoryeEdit}
+      create={CategoryCreate}
       show={CategoryShow}
+      undoable={false}
     />
     <Resource name="comments" list={ListGuesser} />
   </Admin>

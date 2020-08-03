@@ -92,16 +92,10 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
     })),
 
   getMany: (resource, params) => {
-    console.log(111, resource, params)
     const query = {
       id: params.ids,
     };
-    const tempId = params.ids[0];
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
-    // return Promise.resolve({
-    //   data:  [{id: tempId, name: `temp${tempId}`}],
-    // });
-    // return httpClient(url).then(({ json }) => ({ data: [{id: tempId, name: `temp${tempId}`}] }));
     return httpClient(url).then(({ json }: IResponse<PageContent<any>>) => { return { data: json.content } });
   },
 

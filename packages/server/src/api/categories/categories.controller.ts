@@ -1,9 +1,9 @@
-import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post } from '@nestjs/common';
-import { IGetParams } from 'serverSrc/common/interfaces';
+import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete } from '@nestjs/common';
 import { IController } from 'serverSrc/common/IController';
 import { PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { CategoriesService } from 'serverSrc/api/categories/categories.service';
 import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
+import { IRemoveResult } from 'serverSrc/common/interfaces';
 
 @Controller('api/categories')
 export class CategoriesController implements IController<ICategoryDTO> {
@@ -33,8 +33,8 @@ export class CategoriesController implements IController<ICategoryDTO> {
 
   @Get(':id')
   @UseInterceptors(NotFoundInterceptor)
-  async getItem(@Param() params: IGetParams): Promise<any> {
-    return await this.service.getItem(params.id);
+  async getItem(@Param('id') id: string): Promise<any> {
+    return await this.service.getItem(id);
   }
 
   //@Delete()
@@ -48,7 +48,9 @@ export class CategoriesController implements IController<ICategoryDTO> {
     return await this.service.putItem(id, body);
   }
 
-  //deleteItem(id: TID): ICategoryDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Delete(':id')
+  @UseInterceptors(NotFoundInterceptor)
+  async deleteItem(@Param('id') id: string): Promise<IRemoveResult> {
+    return await this.service.deleteItem(id);
+  }
 }
