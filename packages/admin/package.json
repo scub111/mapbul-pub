@@ -13,13 +13,12 @@
     "tslint-check": "tslint-config-prettier-check ./tslint.json"
   },
   "keywords": [],
-  
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@mapbul-pub/utils": "^1.0.0",
     "@mapbul-pub/types": "^1.0.0",
     "@mapbul-pub/ui": "^1.0.0",
+    "@mapbul-pub/utils": "^1.0.0",
     "@types/app-root-path": "^1.2.4",
     "@types/enzyme": "^3.9.1",
     "@types/enzyme-adapter-react-16": "^1.0.5",
@@ -39,8 +38,11 @@
     "chromedriver": "^2.46.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^2.1.1",
+    "dotenv": "^8.2.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
+    "fs": "0.0.1-security",
+    "fs-extra": "^9.0.1",
     "geckodriver": "^1.16.2",
     "html-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",

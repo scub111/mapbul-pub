@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { FieldProps } from 'types';
 import { ICategoryDTO } from '@mapbul-pub/types';
+import { clearUrl } from '@mapbul-pub/utils';
 
 const Poster: FC<FieldProps<ICategoryDTO>> = ({ record }) => {
   console.log(222, record)
@@ -13,7 +14,14 @@ const Poster: FC<FieldProps<ICategoryDTO>> = ({ record }) => {
   return (
     <Card style={{ display: 'inline-block', marginTop: '1em', zIndex: 2 }}>
       <CardContent style={{ padding: 0 }}>
-        <img src={`http://192.168.0.22:8081/${record.icon}`} alt=""
+        <img src={clearUrl(`http://192.168.0.22:8081/${record.icon}`)} alt=""
+          style={{
+            width: 'initial',
+            minWidth: 'initial',
+            maxWidth: '42em',
+            maxHeight: '15em',
+          }} />
+        <img src={clearUrl(`http://x-island.com/${record.icon}`)} alt=""
           style={{
             width: 'initial',
             minWidth: 'initial',

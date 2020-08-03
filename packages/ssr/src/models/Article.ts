@@ -1,6 +1,6 @@
 import getConfig from 'next/config';
 import { IArticleDTO } from '@mapbul-pub/types';
-import { clearUrl } from 'utils';
+import { clearUrl } from '@mapbul-pub/utils';
 import { Category } from '.';
 import { UserDescription } from 'interfaces';
 

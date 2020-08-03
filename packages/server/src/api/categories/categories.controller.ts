@@ -3,7 +3,7 @@ import { IController } from 'serverSrc/common/IController';
 import { PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { CategoriesService } from 'serverSrc/api/categories/categories.service';
 import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
-import { IRemoveResult } from 'serverSrc/common/interfaces';
+import { IRemoveResult, IGetParams } from 'serverSrc/common/interfaces';
 
 @Controller('api/categories')
 export class CategoriesController implements IController<ICategoryDTO> {
@@ -33,8 +33,8 @@ export class CategoriesController implements IController<ICategoryDTO> {
 
   @Get(':id')
   @UseInterceptors(NotFoundInterceptor)
-  async getItem(@Param('id') id: string): Promise<any> {
-    return await this.service.getItem(id);
+  async getItem(@Param () params: IGetParams): Promise<ICategoryDTO> {
+    return await this.service.getItem(params.id);
   }
 
   //@Delete()

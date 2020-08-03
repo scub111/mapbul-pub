@@ -87,6 +87,7 @@ module.exports = (env, argv) => {
         src: `${sourcePath}/`,
         actions: `${sourcePath}/actions`,
         components: `${sourcePath}/components`,
+        constants: `${sourcePath}/constants`,
         containers: `${sourcePath}/containers`,
         hooks: `${sourcePath}/hooks`,
         middleware: `${sourcePath}/middleware`,

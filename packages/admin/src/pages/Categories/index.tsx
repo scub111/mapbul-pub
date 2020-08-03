@@ -34,7 +34,7 @@ export const CategoryList: React.FC = (props: any) => {
   const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 
   return (
-    <List title="All categories" undoable={false} {...props}>
+    <List title="All categories" {...props}>
       {isSmall ? (
         <SimpleList
           primaryText={(record: ICategoryDTO) => record.name}
@@ -42,7 +42,7 @@ export const CategoryList: React.FC = (props: any) => {
           tertiaryText={(record: ICategoryDTO) => record.parentId}
         />
       ) : (
-          <Datagrid rowClick="edit" undoable={false}>
+          <Datagrid rowClick="edit">
             <TextField source={P<ICategoryDTO>((p) => p.id)} />
             <TextField source={P<ICategoryDTO>((p) => p.name)} />
             <TextField source={P<ICategoryDTO>((p) => p.enName)} />

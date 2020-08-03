@@ -1,6 +1,6 @@
 import getConfig from 'next/config';
 import { IMarkerDTO } from '@mapbul-pub/types';
-import { clearUrl } from 'utils';
+import { clearUrl } from '@mapbul-pub/utils';
 import { UserDescription } from 'interfaces';
 import { Category } from '.';
 

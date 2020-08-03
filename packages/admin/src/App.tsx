@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { Routes } from '@mapbul-pub/ui';
 import PostIcon from '@material-ui/icons/Book';
 import UserIcon from '@material-ui/icons/Group';
@@ -12,13 +13,16 @@ import {
 } from 'pages';
 
 import authProvider from './authProvider';
+import { GlobalVar } from './constants';
+
+console.log(111, GlobalVar.env.baseUrl, process.env.baseUrl);
 
 const App = () => (
   <Admin
     title="Admin panel"
     dataProvider={jsonServerProvider(
       // 'https://jsonplaceholder.typicode.com'
-      'http://localhost:3100/api'
+      `http://localhost:3100/api`
     )}
     authProvider={authProvider}
     dashboard={Dashboard}
@@ -38,7 +42,6 @@ const App = () => (
       edit={CategoryeEdit}
       create={CategoryCreate}
       show={CategoryShow}
-      undoable={false}
     />
     <Resource name="comments" list={ListGuesser} />
   </Admin>
