@@ -3,8 +3,8 @@ import { useMediaQuery, Theme, Box, CardContent, Card, Typography } from '@mater
 import {
   SimpleList, List, Datagrid, EmailField, TextField,
   EditButton, ShowButton, Show, SimpleShowLayout, RichTextField,
-  DateField, Edit, Create, SimpleForm, TextInput, DateInput, ReferenceInput,
-  SelectInput, BooleanInput, AutocompleteInput, BooleanField, required, useEditController
+  DateField, Edit, Create, SimpleForm, TextInput, DateInput, ReferenceInput, ImageInput,
+  SelectInput, BooleanInput, AutocompleteInput, BooleanField, required, ImageField,
 } from 'react-admin';
 import { P, clearUrl } from '@mapbul-pub/utils';
 import { ICategoryDTO } from '@mapbul-pub/types';
@@ -80,6 +80,9 @@ export const CategoryCreate: React.FC = withCreatePage((props) => {
       </RowLayout>
       <BooleanInput source={P<ICategoryDTO>(p => p.forArticle)} fullWidth defaultValue={false} />
       <SectionTitle label="Photos" />
+      <ImageInput source="pictures" label="icon" accept="image/*" placeholder={<p>Drop your file here</p>}>
+        <ImageField source="src" title="title" />
+      </ImageInput>
       <RowLayout>
         <TextInput source={P<ICategoryDTO>(p => p.icon)} multiline fullWidth validate={required()} />
         <TextInput source={P<ICategoryDTO>(p => p.pin)} multiline fullWidth validate={required()} />
@@ -114,10 +117,9 @@ export const CategoryeEdit = withEditPage<ICategoryDTO>((props) => {
     </RowLayout>
     <BooleanInput source={P<ICategoryDTO>(p => p.forArticle)} fullWidth />
     <SectionTitle label="Photos" />
-    <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.icon}`)} />
-    <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.pin}`)} />
-    <RowLayout>
-      <TextInput source={P<ICategoryDTO>(p => p.pin)} multiline fullWidth validate={required()} />
+    <RowLayout style={{display: 'flex', alignItems: 'flex-end'}}>
+      <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.icon}`)} />
+      <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.pin}`)} />
     </RowLayout>
     <RowLayout>
       <TextInput source={P<ICategoryDTO>(p => p.icon)} multiline fullWidth />

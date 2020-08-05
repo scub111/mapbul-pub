@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { FC } from 'react';
+import { CSSProperties } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-const Poster: FC<{src: string}> = ({ src }) => {
+const Poster: React.FC<{src: string, style?: CSSProperties}> = ({ src, style }) => {
   return (
-    <Card style={{ display: 'inline-block', marginTop: '1em', zIndex: 2 }}>
+    <Card style={{ display: 'inline-block', marginTop: '1em', zIndex: 2, ...style }}>
       <CardContent style={{ padding: 0 }}>
         <img src={src} alt=""
           style={{
