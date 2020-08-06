@@ -61,7 +61,7 @@ const SectionTitle = ({ label }: { label: string }) => {
 
 const ImageFile: React.FC<{label: string; source: string}> = ({label, source}) => {
   return (
-    <ImageInput source={source} label={label} accept="image/*" placeholder={<p>Переместите сюда файл</p>}>
+    <ImageInput source={source} label={label} accept="image/*" placeholder={<p>Drop your file here</p>}>
       <ImageField source={source} title="title" />
     </ImageInput>
   );
