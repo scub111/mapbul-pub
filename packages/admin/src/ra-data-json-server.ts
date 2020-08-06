@@ -142,11 +142,21 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
     if (resource === Routes.categories) {
       if ('icon' in params.data) {
         const iconFile = params.data.icon;
-        const iconBase64 = await convertFileToBase64(iconFile);
-        console.log(222, iconFile, iconBase64);
+        // const iconBase64 = await convertFileToBase64(iconFile);
+        console.log(222, iconFile);
+
+        const formData = new FormData();
+        formData.append('file', iconFile.rawFile);
+        formData.append('meta', 'test');
+
+        const fileResponse = await httpClient(`${apiUrl}/upload`, {
+          method: 'POST',
+          body: formData,
+        });
+        console.log(333, fileResponse.json)
       }
     }
-    
+
     return httpClient(`${apiUrl}/${resource}`, {
       method: 'POST',
       body: JSON.stringify(params.data),

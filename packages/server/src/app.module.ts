@@ -55,6 +55,7 @@ import { WeekDaysService } from 'serverSrc/api/weekDays/weekDays.service';
 import { WeekDaysController } from 'serverSrc/api/weekDays/weekDays.controller';
 import { WorkTimesService } from 'serverSrc/api/workTimes/workTimes.service';
 import { WorkTimesController } from 'serverSrc/api/workTimes/workTimes.controller';
+import { UploadController } from 'serverSrc/api/upload/upload.controller';
 
 import { ApiController } from 'serverSrc/api.controller';
 import { DbController } from 'serverSrc/api/db/db.controller';
@@ -121,7 +122,7 @@ import { DbController } from 'serverSrc/api/db/db.controller';
     UserTypesController,
     WeekDaysController,
     WorkTimesController,
-
+    UploadController,
     ApiController,
   ],
 })
