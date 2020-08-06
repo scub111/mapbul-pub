@@ -1,5 +1,6 @@
 import { stringify } from 'query-string';
 import { fetchUtils, DataProvider } from 'ra-core';
+import { Routes } from '@mapbul-pub/ui';
 import { createPath } from '@mapbul-pub/utils';
 import { PageContent } from '@mapbul-pub/types';
 
@@ -43,35 +44,19 @@ interface IResponse<T> {
   json: T;
 }
 
+const convertFileToBase64 = (file: {rawFile: File}) =>
+    new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+
+        reader.readAsDataURL(file.rawFile);
+    })
+
 export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider => ({
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
-
-    // const query = {
-    //   ...fetchUtils.flattenObject(params.filter),
-    //   _sort: field,
-    //   _order: order,
-    //   _start: (page - 1) * perPage,
-    //   _end: page * perPage,
-    // };
-
-    // const url = `${apiUrl}/${resource}?${stringify(query)}`;
-
-    // return httpClient(url).then(({ headers, json }) => {
-    //   if (!headers.has('x-total-count')) {
-    //     throw new Error(
-    //       'The X-Total-Count header is missing in the HTTP Response. The jsonServer Data Provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare X-Total-Count in the Access-Control-Expose-Headers header?'
-    //     );
-    //   }
-    //   return {
-    //     data: json,
-    //     total: parseInt(
-    //       (headers?.get('x-total-count')?.split('/').pop()) || "0",
-    //       10
-    //     ),
-    //   };
-    // });
 
     const url = createPath({
       endpoint: `${apiUrl}/${resource}`,
@@ -142,13 +127,33 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
       )
     ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
 
-  create: (resource, params) =>
-    httpClient(`${apiUrl}/${resource}`, {
+  create: async (resource, params) => {
+    console.log(111, params.data);
+    // const newPictures = params.data.pictures.filter(
+    //   (p: any) => p.rawFile instanceof File
+    // );
+
+    // const formerPictures = params.data.pictures.filter(
+    //     (p: any) => !(p.rawFile instanceof File)
+    // );
+
+    // console.log(222, newPictures, formerPictures);
+
+    if (resource === Routes.categories) {
+      if ('icon' in params.data) {
+        const iconFile = params.data.icon;
+        const iconBase64 = await convertFileToBase64(iconFile);
+        console.log(222, iconFile, iconBase64);
+      }
+    }
+    
+    return httpClient(`${apiUrl}/${resource}`, {
       method: 'POST',
       body: JSON.stringify(params.data),
     }).then(({ json }) => ({
       data: { ...params.data, id: json.id },
-    })),
+    }))
+  },
 
   delete: (resource, params) =>
     httpClient(`${apiUrl}/${resource}/${params.id}`, {

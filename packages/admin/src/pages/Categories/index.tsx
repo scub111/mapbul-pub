@@ -59,6 +59,14 @@ const SectionTitle = ({ label }: { label: string }) => {
   );
 };
 
+const ImageFile: React.FC<{label: string; source: string}> = ({label, source}) => {
+  return (
+    <ImageInput source={source} label={label} accept="image/*" placeholder={<p>Переместите сюда файл</p>}>
+      <ImageField source={source} title="title" />
+    </ImageInput>
+  );
+};
+
 export const CategoryCreate: React.FC = withCreatePage((props) => {
   return (
     <SimpleForm {...props}>
@@ -79,13 +87,12 @@ export const CategoryCreate: React.FC = withCreatePage((props) => {
         <TextInput source={P<ICategoryDTO>(p => p.enName)} fullWidth defaultValue="" />
       </RowLayout>
       <BooleanInput source={P<ICategoryDTO>(p => p.forArticle)} fullWidth defaultValue={false} />
-      <SectionTitle label="Photos" />
-      <ImageInput source="pictures" label="icon" accept="image/*" placeholder={<p>Drop your file here</p>}>
-        <ImageField source="src" title="title" />
-      </ImageInput>
+      <SectionTitle label="Photos"/> 
       <RowLayout>
-        <TextInput source={P<ICategoryDTO>(p => p.icon)} multiline fullWidth validate={required()} />
-        <TextInput source={P<ICategoryDTO>(p => p.pin)} multiline fullWidth validate={required()} />
+        {/* <TextInput source={P<ICategoryDTO>(p => p.icon)} multiline fullWidth validate={required()} /> */}
+        <ImageFile label="icon" source={P<ICategoryDTO>(p => p.icon)}/>
+        {/* <TextInput source={P<ICategoryDTO>(p => p.pin)} multiline fullWidth validate={required()} /> */}
+        <ImageFile label="pin" source={P<ICategoryDTO>(p => p.pin)}/>
       </RowLayout>
       <RowLayout>
         <DateInput source={P<ICategoryDTO>(p => p.addedDate)} fullWidth defaultValue={new Date()} />
