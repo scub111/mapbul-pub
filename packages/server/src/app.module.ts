@@ -60,6 +60,7 @@ import { UploadController } from 'serverSrc/api/upload/upload.controller';
 import { ApiController } from 'serverSrc/api.controller';
 import { DbController } from 'serverSrc/api/db/db.controller';
 import { UploadFileService } from './api/upload/upload.fileService';
+import { UploadFtpService } from './api/upload/upload.ftpService';
 
 @Module({
   imports: [],
@@ -93,6 +94,7 @@ import { UploadFileService } from './api/upload/upload.fileService';
     WeekDaysService,
     WorkTimesService,
     UploadFileService,
+    UploadFtpService,
   ],
   controllers: [
     AppController,

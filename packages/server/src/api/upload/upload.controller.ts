@@ -1,6 +1,7 @@
 import { Controller, Post, UseInterceptors, UploadedFile, Body } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { UploadFileService } from './upload.fileService';
+// import { UploadFileService } from './upload.fileService';
+import { UploadFtpService } from './upload.ftpService';
 
 interface IFile {
   fieldname: string;
@@ -18,7 +19,7 @@ interface IFileResponse {
 
 @Controller('api/upload')
 export class UploadController {
-  constructor(private readonly service: UploadFileService) {}
+  constructor(private readonly service: UploadFtpService) {}
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))

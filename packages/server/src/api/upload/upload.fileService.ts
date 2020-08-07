@@ -3,6 +3,7 @@ import { promises as fs } from 'fs';
 
 export class UploadFileService implements IUploadService {
   write(fileName: string, data: string | Buffer): Promise<void> {
-    return fs.writeFile(fileName, data, "binary");
+    const folder = `D:\\Temp`;
+    return fs.writeFile(`${folder}\\${fileName}`, data, "binary");
   }
 }

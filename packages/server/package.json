@@ -30,6 +30,7 @@
     "@nestjs/core": "^6.10.11",
     "@nestjs/platform-express": "^6.10.11",
     "app-root-path": "^3.0.0",
+    "basic-ftp": "^4.6.2",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.11.0",
     "fs": "0.0.1-security",
