@@ -1,6 +1,6 @@
 import { Controller, Post, UseInterceptors, UploadedFile, Body } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { promises as fs } from 'fs';
+import { UploadFileService } from './upload.fileService';
 
 interface IFile {
   fieldname: string;
@@ -18,11 +18,13 @@ interface IFileResponse {
 
 @Controller('api/upload')
 export class UploadController {
+  constructor(private readonly service: UploadFileService) {}
+
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: IFile, @Body() body: any): Promise<IFileResponse> {
     console.log(111, body.meta);
-    const response = await fs.writeFile(file.originalname, file.buffer, "binary");
+    const response = await this.service.write(file.originalname, file.buffer);
     console.log(response);
     return {
       fileName: file.originalname,
