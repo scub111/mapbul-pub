@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { withRedux, useMarkers } from 'stores';
 import { withPage, IPageProps, IPageConfig, withLocale } from 'hocs';
-import { Routes } from 'constants/routes';
+import { Routes } from '@mapbul-pub/ui';
 import { ListPage, ITEMS_PER_PAGE, MarkerListItem } from 'components';
 import { Marker } from 'models';
 import { loadMarkersData } from 'common';

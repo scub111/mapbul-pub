@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Routes, TypeRoute } from '../constants';
+import { Routes, TypeRoute } from '@mapbul-pub/ui';
 import { TLangs } from 'config';
 
 let cacheMatch: TypeRoute = 'unknown';

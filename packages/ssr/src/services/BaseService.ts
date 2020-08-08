@@ -15,9 +15,9 @@ export class BaseService<TDto, TModel> {
   list(query: IGetAllQuery): Promise<PageContent<TModel>> {
     return api.get(this.endpointFn.list(query)).then(async (data: PageContent<TDto>) => {
       // await sleep(0);
-      const content = await Promise.all(data.content.map(this.listFn));
       return {
-        content,
+        content: await Promise.all(data.content.map(this.listFn)),
+        totalElements: data.totalElements,
         totalPages: data.totalPages,
       };
     });

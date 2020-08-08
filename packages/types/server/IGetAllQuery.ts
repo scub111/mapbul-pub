@@ -3,4 +3,5 @@ export interface IGetAllQuery {
   size?: number;
   filter?: string;
   sort?: string;
+  id?: string | Array<string>;
 }

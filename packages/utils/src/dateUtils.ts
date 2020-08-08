@@ -1,8 +1,15 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 
-export const formatDateToString = (date: Date | null): string => {
+export const formatDateToString = (date: Date | string | null | undefined): string => {
   if (!date) {
     return '';
   }
-  return moment(date).format('DD/MM/YYYY');
+  return dayjs(date).format('DD/MM/YYYY');
 };
+
+export function dateTimeFormat(date: number | Date | string | null | undefined): string {
+  if (!date) {
+    return '';
+  }
+  return dayjs(date).format('YYYY-MM-DD HH:mm:ss');
+}
