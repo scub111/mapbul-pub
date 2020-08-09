@@ -1,6 +1,6 @@
 import getConfig from 'next/config';
 import { IArticleDTO } from '@mapbul-pub/types';
-import { clearUrl } from 'utils';
+import { clearUrl } from '@mapbul-pub/utils';
 import { Category } from '.';
 import { UserDescription } from 'interfaces';
 
@@ -39,6 +39,8 @@ export class Article implements IArticleDTO {
   endDate: Date | null;
   cityId: number | null;
   titlePhotoPreview: string | null;
+  titlePhotoOriginal: string | null;
+  photoOriginal: string | null;
 
   category: Category | undefined;
   userDescription: UserDescription | undefined;
@@ -69,5 +71,7 @@ export class Article implements IArticleDTO {
     this.endDate = init.endDate;
     this.cityId = init.cityId;
     this.titlePhotoPreview = init.titlePhotoPreview ? clearUrl(`${publicRuntimeConfig.IMAGE_URL}/${init.titlePhotoPreview}`) : null;
+    this.titlePhotoOriginal = init.titlePhotoOriginal;
+    this.photoOriginal = init.photoOriginal;
   }  
 }

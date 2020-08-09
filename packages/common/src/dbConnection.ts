@@ -1,8 +1,10 @@
 import * as mysql from 'mysql';
 import * as util from 'util';
-import { Connection } from 'mysql';
+import { Connection, GeometryType } from 'mysql';
 import { IDbConnection, queryFn } from '@mapbul-pub/types';
 import { GlobalVar } from '.';
+
+type FieldInfoEx = { type: string, length: number, string(): string, buffer(): Buffer, geometry(): null | GeometryType };
 
 class DbConnection implements IDbConnection {
   private nativeConnection: Connection;
@@ -13,10 +15,19 @@ class DbConnection implements IDbConnection {
     this.nativeConnection = mysql.createConnection({
       ...GlobalVar.env.dbConnection,
       multipleStatements: true,
+      typeCast: function castField(field: FieldInfoEx, useDefaultTypeCasting) {
+        if ((field.type === "BIT") && (field.length === 1)) {
+
+          var bytes = field.buffer();
+          return (bytes[0] === 1);
+        }
+
+        return (useDefaultTypeCasting());
+      }
     });
     this.nativeQuery = util.promisify(this.nativeConnection.query).bind(this.nativeConnection);
     function handleDisconnect(cnx: Connection) {
-      cnx.on('error', function() {
+      cnx.on('error', function () {
         this.isConnected = false;
       });
     }

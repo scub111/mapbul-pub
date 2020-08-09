@@ -9,7 +9,7 @@
     "start:prod": "node lib/index.js",
     "dev": "ncp tsconfig.dev.json tsconfig.json && cross-env NODE_ENV=development ts-node-dev --project tsconfig.dev.json -r tsconfig-paths/register  --inspect=6591 --respawn src/dev.ts",
     "start": "node scripts/start",
-    "test": "jest"
+    "test-": "jest"
   },
   "keywords": [
     "tourism",

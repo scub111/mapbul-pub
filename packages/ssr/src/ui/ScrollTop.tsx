@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useScrollTrigger, Zoom, useTheme } from '@material-ui/core';
-import { isClientEnviroment } from 'utils';
+import { isClient } from 'utils';
 
 export const ScrollTop: React.FC = ({ children }) => {
   const theme = useTheme();
@@ -8,7 +8,7 @@ export const ScrollTop: React.FC = ({ children }) => {
   // will default to window.
   // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({
-    target: isClientEnviroment ? window : undefined,
+    target: isClient ? window : undefined,
     disableHysteresis: true,
     threshold: 100,
   });

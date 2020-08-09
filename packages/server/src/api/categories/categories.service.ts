@@ -1,7 +1,20 @@
 import { BaseService } from 'serverSrc/common/BaseService';
 import { TID } from 'serverSrc/common/types';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
+import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
+import { IRemoveResult } from 'serverSrc/common/interfaces';
+
+interface IOkPacket {
+  fieldCount: number;
+  affectedRows: number;
+  insertId: number;
+  serverStatus: number;
+  warningCount: number;
+  message: string;
+  protocol41: boolean;
+  changedRows: number;
+}
 
 export class CategoriesService implements BaseService<ICategoryDTO> {
   constructor() {
@@ -14,6 +27,10 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
     let filter = '';
     if (query.filter) {
       filter += `WHERE ${query.filter}`;
+    }
+    if (query.id) {
+      if (!Array.isArray(query.id)) filter += `WHERE id in (${query.id})`;
+      else filter += `WHERE id in (${query.id.join(',')})`;
     }
     let sort = '';
     if (query.sort) {
@@ -38,15 +55,44 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
         \`forArticle\`
       FROM category ${additional}`);
 
+    const totalElements = isPagination ? Number(records[1][0]['count(*)']) : records.length;
+
     return {
       content: isPagination ? records[0] : records,
-      totalPages: isPagination ? Number(Math.ceil(records[1][0]['count(*)'] / (query?.size || 1))) : 1,
+      totalElements,
+      totalPages: isPagination ? Number(Math.ceil(totalElements / (query?.size || 1))) : 1,
     };
   }
 
-  //postItem(item: ICategoryDTO): Promise<ICategoryDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: ICategoryDTO): Promise<ICategoryDTO> {
+    const response: IOkPacket = await this.connection.query(`
+      INSERT INTO category
+      (
+        \`Name\`,
+        \`EnName\`,
+        \`ParentId\`,
+        \`AddedDate\`,
+        \`Icon\`,
+        \`Color\`,
+        \`Pin\`,
+        \`ForArticle\`
+      ) 
+      Values 
+      (
+        '${body.name}',
+        '${body.enName}',
+        ${body.parentId},
+        '${dateTimeFormat(body.addedDate)}',
+        "${body.icon}",
+        '${body.color}',
+        '${body.pin}',
+        ${body.forArticle}
+      )`.replace(/\\/g, '\\\\'));
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: ICategoryDTO): ICategoryDTO {
   //  throw new Error('Method not implemented.');
@@ -74,11 +120,26 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
     )[0];
   }
 
-  //putItem(id: TID): ICategoryDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: ICategoryDTO): Promise<ICategoryDTO> {
+    await this.connection.query(`
+      UPDATE category
+      SET
+        \`name\`='${body.name}',
+        \`enName\`='${body.enName}',
+        \`parentId\`=${body.parentId},
+        \`addedDate\`='${dateTimeFormat(body.addedDate)}',
+        \`icon\`='${body.icon}',
+        \`color\`='${body.color}',
+        \`pin\`='${body.pin}',
+        \`forArticle\`=${body.forArticle}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'));
+    return body;
+  }
 
-  //deleteItem(id: TID): ICategoryDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IRemoveResult> {
+    await this.connection.query(`
+      DELETE FROM category
+      WHERE id = ${id}`);
+    return { id }
+  }
 }
