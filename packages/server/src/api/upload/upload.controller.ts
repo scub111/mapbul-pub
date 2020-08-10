@@ -1,7 +1,10 @@
 import { Controller, Post, UseInterceptors, UploadedFile, Body } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 // import { UploadFileService } from './upload.fileService';
+import { v4 as uuidv4 } from 'uuid';
 import { UploadFtpService } from './upload.ftpService';
+import path from 'path';
+import { IImageMeta, IImageResponse } from '@mapbul-pub/types';
 
 interface IFile {
   fieldname: string;
@@ -19,17 +22,17 @@ interface IFileResponse {
 
 @Controller('api/upload')
 export class UploadController {
-  constructor(private readonly service: UploadFtpService) {}
+  constructor(private readonly service: UploadFtpService) { }
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file: IFile, @Body() body: any): Promise<IFileResponse> {
-    console.log(111, body.meta);
-    const response = await this.service.write(file.originalname, file.buffer);
-    console.log(response);
+    const meta: IImageMeta = JSON.parse(body.meta);
+    const fileName = `${meta.dir}/${uuidv4()}${path.extname(file.originalname)}`;
+    await this.service.write(fileName, file.buffer);
     return {
-      fileName: file.originalname,
+      fileName,
       size: file.size
-    }
+    } as IImageResponse;
   }
 }

@@ -1,8 +1,8 @@
 import { stringify } from 'query-string';
 import { fetchUtils, DataProvider } from 'ra-core';
-import { Routes } from '@mapbul-pub/ui';
-import { createPath } from '@mapbul-pub/utils';
-import { PageContent } from '@mapbul-pub/types';
+import { Routes, ImageDirs, ImageDirsType } from '@mapbul-pub/ui';
+import { createPath, P } from '@mapbul-pub/utils';
+import { PageContent, IImageFormData, IImageMeta, IImageResponse, ICategoryDTO } from '@mapbul-pub/types';
 
 /**
  * Maps react-admin queries to a json-server powered REST API
@@ -42,16 +42,25 @@ interface IResponse<T> {
   headers: Headers;
   body: string;
   json: T;
-}
+};
 
-const convertFileToBase64 = (file: {rawFile: File}) =>
-    new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
+const uploadEndpoint = 'upload';
 
-        reader.readAsDataURL(file.rawFile);
-    })
+export const uploadImage = async (apiUrl: string, file: any, httpClient = fetchUtils.fetchJson): Promise<IImageResponse> => {
+  const meta: IImageMeta = {
+    dir: ImageDirs.CategoryIcons,
+  };
+
+  const formData = new FormData();
+  formData.append(P<IImageFormData>(p => p.file), file.rawFile);
+  formData.append(P<IImageFormData>(p => p.meta), JSON.stringify(meta));
+
+  const fileResponse = await httpClient(`${apiUrl}/${uploadEndpoint}`, {
+    method: 'POST',
+    body: formData,
+  });
+  return fileResponse.json;
+};
 
 export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider => ({
   getList: (resource, params) => {
@@ -129,39 +138,28 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
 
   create: async (resource, params) => {
     console.log(111, params.data);
-    // const newPictures = params.data.pictures.filter(
-    //   (p: any) => p.rawFile instanceof File
-    // );
-
-    // const formerPictures = params.data.pictures.filter(
-    //     (p: any) => !(p.rawFile instanceof File)
-    // );
-
-    // console.log(222, newPictures, formerPictures);
+    let data = params.data;
 
     if (resource === Routes.categories) {
-      if ('icon' in params.data) {
-        const iconFile = params.data.icon;
-        // const iconBase64 = await convertFileToBase64(iconFile);
-        console.log(222, iconFile);
-
-        const formData = new FormData();
-        formData.append('file', iconFile.rawFile);
-        formData.append('meta', 'test');
-
-        const fileResponse = await httpClient(`${apiUrl}/upload`, {
-          method: 'POST',
-          body: formData,
-        });
-        console.log(333, fileResponse.json)
+      if (P<ICategoryDTO>(p => p.icon) in data) {
+        data = { 
+          ...data, 
+          icon: (await uploadImage(apiUrl, data.icon)).fileName 
+        };
+      }
+      if (P<ICategoryDTO>(p => p.pin) in data) {
+        data = { 
+          ...data, 
+          pin: (await uploadImage(apiUrl, data.pin)).fileName 
+        };
       }
     }
 
     return httpClient(`${apiUrl}/${resource}`, {
       method: 'POST',
-      body: JSON.stringify(params.data),
+      body: JSON.stringify(data),
     }).then(({ json }) => ({
-      data: { ...params.data, id: json.id },
+      data: { ...data, id: json.id },
     }))
   },
 

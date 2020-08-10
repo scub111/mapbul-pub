@@ -27,7 +27,7 @@ export type TypeRoute =
   | 'markers'
   | 'unknown';
 
-export const Routes: { [key: string]: TypeRoute } = {
+export const Routes: { [key in TypeRoute]: TypeRoute } = {
   articles: 'articles',
   admins: 'admins',
   categories: 'categories',
@@ -37,7 +37,7 @@ export const Routes: { [key: string]: TypeRoute } = {
   journalists: 'journalists',
   tenants: 'tenants',
   users: 'users',
-  userTypes: 'usertypes',
+  usertypes: 'usertypes',
   places: 'places',
   markers: 'markers',
   unknown: 'unknown',
