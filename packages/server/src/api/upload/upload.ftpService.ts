@@ -16,7 +16,8 @@ export class UploadFtpService implements IUploadService {
     // client.ftp.verbose = true;
 
     await client.access({
-      host: "192.168.0.22",
+      // host: "192.168.0.22",
+      host: "scub111.com",
       user: "FtpUser",
       password: "qwe+ASDFG",
       // secure: true
