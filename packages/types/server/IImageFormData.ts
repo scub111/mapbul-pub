@@ -7,7 +7,10 @@ export interface IImageFormData {
   meta?: IImageMeta;
 }
 
-export interface IImageResponse {
+export interface IFileResponse {
   fileName: string;
+};
+
+export interface IFileCreateResponse extends IFileResponse {
   size: number;
-}
+};

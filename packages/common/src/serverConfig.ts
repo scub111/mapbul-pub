@@ -6,6 +6,7 @@ export interface IServerConfig {
     password: string;
     database: string;
   };
+  fileStorage: string;
 }
 
 class GlobalVarClass {
@@ -15,14 +16,16 @@ class GlobalVarClass {
     require('dotenv').config({ path });
     // const result = require('dotenv').config({ path });
     // console.log(result);
+    const { NODE_ENV, DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, FILE_STORAGE } = process.env;
     this.env = {
-      isProduction: process.env.NODE_ENV !== 'development',
+      isProduction: NODE_ENV !== 'development',
       dbConnection: {
-        host: process.env.DB_HOST || '',
-        user: process.env.DB_USER || '',
-        password: process.env.DB_PASSWORD || '',
-        database: process.env.DB_DATABASE || '',
+        host: DB_HOST || '',
+        user: DB_USER || '',
+        password: DB_PASSWORD || '',
+        database: DB_DATABASE || '',
       },
+      fileStorage: FILE_STORAGE || '',
     };
     return this.env;
   };

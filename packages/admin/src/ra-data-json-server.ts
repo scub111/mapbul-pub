@@ -2,7 +2,7 @@ import { stringify } from 'query-string';
 import { fetchUtils, DataProvider } from 'ra-core';
 import { Routes, ImageDirs, ImageDirsType } from '@mapbul-pub/ui';
 import { createPath, P } from '@mapbul-pub/utils';
-import { PageContent, IImageFormData, IImageMeta, IImageResponse, ICategoryDTO } from '@mapbul-pub/types';
+import { PageContent, IImageFormData, IImageMeta, ICategoryDTO, IFileCreateResponse } from '@mapbul-pub/types';
 
 /**
  * Maps react-admin queries to a json-server powered REST API
@@ -46,7 +46,7 @@ interface IResponse<T> {
 
 const uploadEndpoint = 'upload';
 
-export const uploadImage = async (apiUrl: string, file: any, httpClient = fetchUtils.fetchJson): Promise<IImageResponse> => {
+export const uploadImage = async (apiUrl: string, file: any, httpClient = fetchUtils.fetchJson): Promise<IFileCreateResponse> => {
   const meta: IImageMeta = {
     dir: ImageDirs.CategoryIcons,
   };
@@ -60,6 +60,16 @@ export const uploadImage = async (apiUrl: string, file: any, httpClient = fetchU
     body: formData,
   });
   return fileResponse.json;
+};
+
+export const uploadImageEx = async (apiUrl: string, data: any, field: string): Promise<any> => {
+  if (field in data) {
+    return {
+      ...data,
+      [field]: (await uploadImage(apiUrl, data[field])).fileName
+    };
+  }
+  return data;
 };
 
 export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider => ({
@@ -137,22 +147,11 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
     ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
 
   create: async (resource, params) => {
-    console.log(111, params.data);
     let data = params.data;
 
     if (resource === Routes.categories) {
-      if (P<ICategoryDTO>(p => p.icon) in data) {
-        data = { 
-          ...data, 
-          icon: (await uploadImage(apiUrl, data.icon)).fileName 
-        };
-      }
-      if (P<ICategoryDTO>(p => p.pin) in data) {
-        data = { 
-          ...data, 
-          pin: (await uploadImage(apiUrl, data.pin)).fileName 
-        };
-      }
+      data = await uploadImageEx(apiUrl, data, P<ICategoryDTO>(p => p.icon));
+      data = await uploadImageEx(apiUrl, data, P<ICategoryDTO>(p => p.pin));
     }
 
     return httpClient(`${apiUrl}/${resource}`, {
@@ -163,10 +162,16 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
     }))
   },
 
-  delete: (resource, params) =>
-    httpClient(`${apiUrl}/${resource}/${params.id}`, {
+  delete: async (resource, params) => {
+    if (resource === Routes.categories) {
+      // await uploadImageEx(apiUrl, data, P<ICategoryDTO>(p => p.icon));
+      // await uploadImageEx(apiUrl, data, P<ICategoryDTO>(p => p.pin));
+    }
+
+    return httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: 'DELETE',
-    }).then(({ json }) => ({ data: json })),
+    }).then(({ json }) => ({ data: json }))
+  },
 
   // json-server doesn't handle filters on DELETE route, so we fallback to calling DELETE n times instead
   deleteMany: (resource, params) =>

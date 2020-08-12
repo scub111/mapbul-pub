@@ -59,9 +59,9 @@ const SectionTitle = ({ label }: { label: string }) => {
   );
 };
 
-const ImageFile: React.FC<{label: string; source: string}> = ({label, source}) => {
+const ImageFile: React.FC<{ label: string; source: string }> = ({ label, source }) => {
   return (
-    <ImageInput source={source} label={label} accept="image/*" placeholder={<p>Drop your file here</p>}>
+    <ImageInput source={source} label={label} accept="image/*" placeholder={<p>Drop your file here</p>} validate={required()}>
       <ImageField source={source} title="title" />
     </ImageInput>
   );
@@ -87,12 +87,10 @@ export const CategoryCreate: React.FC = withCreatePage((props) => {
         <TextInput source={P<ICategoryDTO>(p => p.enName)} fullWidth defaultValue="" />
       </RowLayout>
       <BooleanInput source={P<ICategoryDTO>(p => p.forArticle)} fullWidth defaultValue={false} />
-      <SectionTitle label="Photos"/> 
+      <SectionTitle label="Photos" />
       <RowLayout>
-        {/* <TextInput source={P<ICategoryDTO>(p => p.icon)} multiline fullWidth validate={required()} /> */}
-        <ImageFile label="icon" source={P<ICategoryDTO>(p => p.icon)}/>
-        {/* <TextInput source={P<ICategoryDTO>(p => p.pin)} multiline fullWidth validate={required()} /> */}
-        <ImageFile label="pin" source={P<ICategoryDTO>(p => p.pin)}/>
+        <ImageFile label="icon" source={P<ICategoryDTO>(p => p.icon)} />
+        <ImageFile label="pin" source={P<ICategoryDTO>(p => p.pin)} />
       </RowLayout>
       <RowLayout>
         <DateInput source={P<ICategoryDTO>(p => p.addedDate)} fullWidth defaultValue={new Date()} />
@@ -124,7 +122,7 @@ export const CategoryeEdit = withEditPage<ICategoryDTO>((props) => {
     </RowLayout>
     <BooleanInput source={P<ICategoryDTO>(p => p.forArticle)} fullWidth />
     <SectionTitle label="Photos" />
-    <RowLayout style={{display: 'flex', alignItems: 'flex-end'}}>
+    <RowLayout style={{ display: 'flex', alignItems: 'flex-end' }}>
       <Box>
         <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.icon}`)} />
         <TextInput source={P<ICategoryDTO>(p => p.icon)} multiline fullWidth />
