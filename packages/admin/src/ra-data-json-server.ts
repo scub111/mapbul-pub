@@ -3,6 +3,7 @@ import { fetchUtils, DataProvider } from 'ra-core';
 import { Routes, ImageDirs, ImageDirsType } from '@mapbul-pub/ui';
 import { createPath, P } from '@mapbul-pub/utils';
 import { PageContent, IImageFormData, IImageMeta, ICategoryDTO, IFileCreateResponse } from '@mapbul-pub/types';
+import { uploadFile } from 'utils';
 
 /**
  * Maps react-admin queries to a json-server powered REST API
@@ -42,34 +43,6 @@ interface IResponse<T> {
   headers: Headers;
   body: string;
   json: T;
-};
-
-const uploadEndpoint = 'upload';
-
-export const uploadImage = async (apiUrl: string, file: any, httpClient = fetchUtils.fetchJson): Promise<IFileCreateResponse> => {
-  const meta: IImageMeta = {
-    dir: ImageDirs.CategoryIcons,
-  };
-
-  const formData = new FormData();
-  formData.append(P<IImageFormData>(p => p.file), file.rawFile);
-  formData.append(P<IImageFormData>(p => p.meta), JSON.stringify(meta));
-
-  const fileResponse = await httpClient(`${apiUrl}/${uploadEndpoint}`, {
-    method: 'POST',
-    body: formData,
-  });
-  return fileResponse.json;
-};
-
-export const uploadImageEx = async (apiUrl: string, data: any, field: string): Promise<any> => {
-  if (field in data) {
-    return {
-      ...data,
-      [field]: (await uploadImage(apiUrl, data[field])).fileName
-    };
-  }
-  return data;
 };
 
 export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider => ({
@@ -150,8 +123,8 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
     let data = params.data;
 
     if (resource === Routes.categories) {
-      data = await uploadImageEx(apiUrl, data, P<ICategoryDTO>(p => p.icon));
-      data = await uploadImageEx(apiUrl, data, P<ICategoryDTO>(p => p.pin));
+      data = await uploadFile(apiUrl, data, P<ICategoryDTO>(p => p.icon));
+      data = await uploadFile(apiUrl, data, P<ICategoryDTO>(p => p.pin));
     }
 
     return httpClient(`${apiUrl}/${resource}`, {
@@ -164,7 +137,9 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
 
   delete: async (resource, params) => {
     if (resource === Routes.categories) {
-      // await uploadImageEx(apiUrl, data, P<ICategoryDTO>(p => p.icon));
+      console.log(111, params);
+      // let data = params.id;
+      // await deleteFile(apiUrl, p.icon));
       // await uploadImageEx(apiUrl, data, P<ICategoryDTO>(p => p.pin));
     }
 
