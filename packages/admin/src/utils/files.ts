@@ -21,11 +21,11 @@ const uploadFileInternal = async (apiUrl: string, file: any, httpClient = fetchU
   return fileResponse.json;
 };
 
-export const uploadFile = async (apiUrl: string, data: any, field: string): Promise<any> => {
-  if (field in data) {
+export const uploadFile = async (apiUrl: string, data: any, fileField: string, entityField: string): Promise<any> => {
+  if (fileField in data) {
     return {
       ...data,
-      [field]: (await uploadFileInternal(apiUrl, data[field])).fileName
+      [entityField]: (await uploadFileInternal(apiUrl, data[fileField])).fileName
     };
   }
   return data;

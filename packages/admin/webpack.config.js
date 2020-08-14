@@ -94,6 +94,7 @@ module.exports = (env, argv) => {
         hocs: `${sourcePath}/hocs`,
         containers: `${sourcePath}/containers`,
         hooks: `${sourcePath}/hooks`,
+        interfaces: `${sourcePath}/interfaces`,
         middleware: `${sourcePath}/middleware`,
         models: `${sourcePath}/models`,
         pages: `${sourcePath}/pages`,

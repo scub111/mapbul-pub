@@ -2,8 +2,9 @@ import { stringify } from 'query-string';
 import { fetchUtils, DataProvider } from 'ra-core';
 import { Routes, ImageDirs, ImageDirsType } from '@mapbul-pub/ui';
 import { createPath, P } from '@mapbul-pub/utils';
-import { PageContent, IImageFormData, IImageMeta, ICategoryDTO, IFileCreateResponse } from '@mapbul-pub/types';
+import { PageContent, IImageFormData, IImageMeta, IFileCreateResponse } from '@mapbul-pub/types';
 import { uploadFile, deleteFile } from 'utils';
+import { ICategoryDTOEx } from 'interfaces';
 
 /**
  * Maps react-admin queries to a json-server powered REST API
@@ -123,8 +124,8 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
     let data = params.data;
 
     if (resource === Routes.categories) {
-      data = await uploadFile(apiUrl, data, P<ICategoryDTO>(p => p.icon));
-      data = await uploadFile(apiUrl, data, P<ICategoryDTO>(p => p.pin));
+      data = await uploadFile(apiUrl, data, P<ICategoryDTOEx>(p => p.iconFile), P<ICategoryDTOEx>(p => p.icon));
+      data = await uploadFile(apiUrl, data, P<ICategoryDTOEx>(p => p.pinFile), P<ICategoryDTOEx>(p => p.pin));
     }
 
     return httpClient(`${apiUrl}/${resource}`, {
@@ -137,7 +138,7 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
 
   delete: async (resource, params) => {
     if (resource === Routes.categories) {
-      let data = params.previousData as ICategoryDTO;
+      let data = params.previousData as ICategoryDTOEx;
       await deleteFile(apiUrl, data.icon);
       await deleteFile(apiUrl, data.pin);
     }
