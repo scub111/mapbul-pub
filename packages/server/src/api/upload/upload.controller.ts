@@ -17,7 +17,9 @@ export class UploadController {
   async uploadFile(@UploadedFile() file: IFile, @Body() body: any): Promise<IFileCreateResponse> {
     const meta: IImageMeta = JSON.parse(body.meta);
     const fileName = `${meta.dir}/${uuidv4()}${path.extname(file.originalname)}`;
-    return await this.service.write(fileName, file);    
+    if (meta.fileName)
+      await this.service.delete(meta.fileName);
+    return await this.service.write(fileName, file);
   }
 
   @Delete()

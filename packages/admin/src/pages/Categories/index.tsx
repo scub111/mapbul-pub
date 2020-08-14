@@ -59,9 +59,9 @@ const SectionTitle = ({ label }: { label: string }) => {
   );
 };
 
-const ImageFile: React.FC<{ label: string; source: string }> = ({ label, source }) => {
+const ImageFile: React.FC<{ label: string; source: string, [key: string]: any }> = ({ label, source, ...props }) => {
   return (
-    <ImageInput source={source} label={label} accept="image/*" placeholder={<p>Drop your file here</p>} validate={required()}>
+    <ImageInput source={source} label={label} accept="image/*" placeholder={<p>Drop your file here</p>} {...props}>
       <ImageField source={source} title="title" />
     </ImageInput>
   );
@@ -89,8 +89,8 @@ export const CategoryCreate: React.FC = withCreatePage((props) => {
       <BooleanInput source={P<ICategoryDTOEx>(p => p.forArticle)} fullWidth defaultValue={false} />
       <SectionTitle label="Photos" />
       <RowLayout>
-        <ImageFile label="icon" source={P<ICategoryDTOEx>(p => p.iconFile)} />
-        <ImageFile label="pin" source={P<ICategoryDTOEx>(p => p.pinFile)} />
+        <ImageFile label="icon" source={P<ICategoryDTOEx>(p => p.iconFile)} validate={required()}/>
+        <ImageFile label="pin" source={P<ICategoryDTOEx>(p => p.pinFile)} validate={required()}/>
       </RowLayout>
       <RowLayout>
         <DateInput source={P<ICategoryDTOEx>(p => p.addedDate)} fullWidth defaultValue={new Date()} />
@@ -124,12 +124,14 @@ export const CategoryeEdit = withEditPage<ICategoryDTOEx>((props) => {
     <SectionTitle label="Photos" />
     <RowLayout style={{ display: 'flex', alignItems: 'flex-end' }}>
       <Box>
-        <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.icon}`)} />
         <TextInput source={P<ICategoryDTOEx>(p => p.icon)} multiline fullWidth />
+        <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.icon}`)} />
+        <ImageFile label="icon" source={P<ICategoryDTOEx>(p => p.iconFile)} />        
       </Box>
       <Box>
-        <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.pin}`)} />
         <TextInput source={P<ICategoryDTOEx>(p => p.pin)} multiline fullWidth />
+        <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.pin}`)} />
+        <ImageFile label="pin" source={P<ICategoryDTOEx>(p => p.pinFile)} />
       </Box>
     </RowLayout>
     <RowLayout>

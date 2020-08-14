@@ -1,8 +1,8 @@
 import { stringify } from 'query-string';
 import { fetchUtils, DataProvider } from 'ra-core';
-import { Routes, ImageDirs, ImageDirsType } from '@mapbul-pub/ui';
+import { Routes } from '@mapbul-pub/ui';
 import { createPath, P } from '@mapbul-pub/utils';
-import { PageContent, IImageFormData, IImageMeta, IFileCreateResponse } from '@mapbul-pub/types';
+import { PageContent } from '@mapbul-pub/types';
 import { uploadFile, deleteFile } from 'utils';
 import { ICategoryDTOEx } from 'interfaces';
 
@@ -103,11 +103,19 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
     });
   },
 
-  update: (resource, params) =>
-    httpClient(`${apiUrl}/${resource}/${params.id}`, {
+  update: async (resource, params) => {
+    let data = params.data;
+
+    if (resource === Routes.categories) {
+      data = await uploadFile(apiUrl, data, P<ICategoryDTOEx>(p => p.iconFile), P<ICategoryDTOEx>(p => p.icon), true);
+      data = await uploadFile(apiUrl, data, P<ICategoryDTOEx>(p => p.pinFile), P<ICategoryDTOEx>(p => p.pin), true);
+    }
+
+    return httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: 'PUT',
-      body: JSON.stringify(params.data),
-    }).then(({ json }) => ({ data: json })),
+      body: JSON.stringify(data),
+    }).then(({ json }) => ({ data: json }))
+  },
 
   // json-server doesn't handle filters on UPDATE route, so we fallback to calling UPDATE n times instead
   updateMany: (resource, params) =>
