@@ -12,7 +12,7 @@ const Poster: React.FC<{src: string, style?: CSSProperties}> = ({ src, style }) 
             width: 'initial',
             minWidth: 'initial',
             maxWidth: '100%',
-            maxHeight: '100%',
+            maxHeight: '30em',
           }} />
       </CardContent>
     </Card>
