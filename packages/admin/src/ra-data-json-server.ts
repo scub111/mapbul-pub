@@ -3,7 +3,7 @@ import { fetchUtils, DataProvider } from 'ra-core';
 import { Routes, ImageDirs, ImageDirsType } from '@mapbul-pub/ui';
 import { createPath, P } from '@mapbul-pub/utils';
 import { PageContent, IImageFormData, IImageMeta, ICategoryDTO, IFileCreateResponse } from '@mapbul-pub/types';
-import { uploadFile } from 'utils';
+import { uploadFile, deleteFile } from 'utils';
 
 /**
  * Maps react-admin queries to a json-server powered REST API
@@ -137,10 +137,9 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
 
   delete: async (resource, params) => {
     if (resource === Routes.categories) {
-      console.log(111, params);
-      // let data = params.id;
-      // await deleteFile(apiUrl, p.icon));
-      // await uploadImageEx(apiUrl, data, P<ICategoryDTO>(p => p.pin));
+      let data = params.previousData as ICategoryDTO;
+      await deleteFile(apiUrl, data.icon);
+      await deleteFile(apiUrl, data.pin);
     }
 
     return httpClient(`${apiUrl}/${resource}/${params.id}`, {

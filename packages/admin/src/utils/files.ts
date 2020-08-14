@@ -33,8 +33,12 @@ export const uploadFile = async (apiUrl: string, data: any, field: string): Prom
 
 
 export const deleteFile = async (apiUrl: string, fileName: string, httpClient = fetchUtils.fetchJson): Promise<IFileCreateResponse> => {
-  const fileResponse = await httpClient(`${apiUrl}/${uploadEndpoint}/${fileName}`, {
+  const meta: IImageMeta = {
+    fileName
+  };
+  const fileResponse = await httpClient(`${apiUrl}/${uploadEndpoint}`, {
     method: 'DELETE',
+    body: JSON.stringify(meta),
   });
   return fileResponse.json;
 };

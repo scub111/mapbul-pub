@@ -1,4 +1,4 @@
-import { Controller, Post, UseInterceptors, UploadedFile, Body, Delete, Param } from '@nestjs/common';
+import { Controller, Post, UseInterceptors, UploadedFile, Body, Delete } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 // import { UploadFileService } from './upload.fileService';
 import { v4 as uuidv4 } from 'uuid';
@@ -20,9 +20,10 @@ export class UploadController {
     return await this.service.write(fileName, file);    
   }
 
-  @Delete(':fileName')
+  @Delete()
   @UseInterceptors(NotFoundInterceptor)
-  async deleteItem(@Param('fileName') fileName: string): Promise<IFileResponse> {
-    return await this.service.delete(fileName);
+  async deleteItem(@Body() body: any): Promise<IFileResponse> {
+    const meta: IImageMeta = body;
+    return await this.service.delete(meta.fileName);
   }
 }

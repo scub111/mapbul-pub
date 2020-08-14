@@ -3,6 +3,6 @@ import { IFile } from ".";
 
 export interface IUploadService {
   write(fileName: string, file: IFile): Promise<IFileCreateResponse>;
-  delete(fileName: string): Promise<IFileResponse>;
+  delete(fileName: string | undefined): Promise<IFileResponse>;
 };
 

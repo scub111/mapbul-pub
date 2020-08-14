@@ -1,5 +1,6 @@
 export interface IImageMeta {
   dir?: string;
+  fileName?: string;
 }
 
 export interface IImageFormData {

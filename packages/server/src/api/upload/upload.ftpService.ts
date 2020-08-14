@@ -37,10 +37,25 @@ export class UploadFtpService implements IUploadService {
     };
   };
 
-  async delete(fileName: string): Promise<IFileResponse> {
-    const client = new ftp.Client();
-    await client.remove(`${this.dir}/${fileName}`);
-    client.close();
-    return { fileName };
+  async delete(fileName: string | undefined): Promise<IFileResponse> {
+    if (fileName) { 
+      const client = new ftp.Client();
+      await client.access({
+        host: GlobalVar.env.fileStorage,
+        user: "FtpUser",
+        password: "qwe+ASDFG",
+        // secure: true
+      });
+      try {
+        await client.remove(`${this.dir}/${fileName}`);
+        client.close();
+        return { fileName };
+      } catch (err) {
+        return { fileName: '' };
+      }
+    } 
+    else {
+      return { fileName: '' };
+    }
   };
 }
