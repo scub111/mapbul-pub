@@ -1,43 +1,10 @@
 import * as React from 'react';
-import mobxStores, { StoresProvider, IStores } from 'stores';
-import { App } from './App';
-import { Provider as MobxProvider } from 'mobx-react';
-import { AppBaseNameProvider } from 'utils/app-basename';
-import { api, setApiUrlPrefix } from 'services';
-import { useEffect } from 'react';
+import { render } from 'react-dom';
+// import App2 from 'containers/App';
+import App from './App';
+import { sum } from './foo';
 
-interface AppProps {
-  basename?: string;
-  stores?: Partial<IStores>;
-  apiPrefix?: string;
-}
+// render(<App2 message="Hello World 1++++" />, document.getElementById('root'));
+render(<App />, document.getElementById('root'));
 
-export const Base: React.FC<AppProps> = ({ basename, stores, apiPrefix }) => {
-  if (apiPrefix) {
-    setApiUrlPrefix(apiPrefix)
-  }
-
-  useEffect(() => api.clearAuthToken(), []);
-
-  if (stores) {
-    replaceStores(stores);
-  }
-
-  return (
-    <StoresProvider stores={mobxStores}>
-      <MobxProvider {...mobxStores}>
-        <AppBaseNameProvider value={basename}>
-          <App />
-        </AppBaseNameProvider>
-      </MobxProvider>
-    </StoresProvider>
-  );
-};
-
-function replaceStores(storesToReplace: Partial<IStores>) {
-  for (const [storeName, store] of Object.entries(storesToReplace)) {
-    mobxStores[storeName] = store;
-  }
-}
-
-export default Base;
+console.log(sum(2, 6).toString());

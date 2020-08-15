@@ -1,37 +1,15 @@
 import getConfig from 'next/config';
-import { Routes } from 'constants/routes';
+import { Routes } from '@mapbul-pub/ui';
 import { IGetAllQuery } from '@mapbul-pub/types';
-import { isClientEnviroment } from 'utils';
+import { isClient } from 'utils';
+import { createPath } from '@mapbul-pub/utils';
 
 const { publicRuntimeConfig } = getConfig();
 
 //To verify BASE_URL for reloading specific page
 console.log(`BASE_URL_FRONT = ${publicRuntimeConfig.BASE_URL_FRONT}`);
 console.log(`BASE_URL_SERVER = ${publicRuntimeConfig.BASE_URL_SERVER}`);
-const getApiUrl = () =>
-  isClientEnviroment ? `${publicRuntimeConfig.BASE_URL_FRONT}` : `${publicRuntimeConfig.BASE_URL_SERVER}`;
-
-interface PathConfig {
-  endpoint: string;
-  queryParams?: { [key: string]: string | number | undefined };
-}
-
-export const createPath = ({ endpoint, queryParams }: PathConfig) => {
-  let searchString = null;
-  if (queryParams) {
-    const params = new URLSearchParams();
-    Object.keys(queryParams).forEach(paramName => {
-      if (queryParams[paramName] != null) {
-        params.append(paramName, String(queryParams[paramName]));
-      }
-    });
-    searchString = params.toString();
-  }
-  if (searchString) {
-    return `${endpoint}?${searchString}`;
-  }
-  return endpoint;
-};
+const getApiUrl = () => (isClient ? `${publicRuntimeConfig.BASE_URL_FRONT}` : `${publicRuntimeConfig.BASE_URL_SERVER}`);
 
 export interface IEndpointFn {
   list: (query: IGetAllQuery) => string;
@@ -59,5 +37,5 @@ export const ENDPOINTS: Record<string, IEndpointFn> = {
   journalists: getEndpointFn(Routes.journalists),
   tenants: getEndpointFn(Routes.tenants),
   users: getEndpointFn(Routes.users),
-  userTypes: getEndpointFn(Routes.userTypes),
+  userTypes: getEndpointFn(Routes.usertypes),
 };

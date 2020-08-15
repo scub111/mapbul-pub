@@ -4,7 +4,7 @@ import { NextPage, NextPageContext } from 'next';
 import { Typography, Divider, makeStyles } from '@material-ui/core';
 import { Store } from 'redux';
 import { withRedux, useTopArticles, useTopEvents } from 'stores';
-import { Routes } from 'constants/routes';
+import { Routes } from '@mapbul-pub/ui';
 import { loadArticlesData, loadEventsData } from 'common';
 import { IUseList, ListPageProps, withLocale } from 'hocs';
 import { Article } from 'models';

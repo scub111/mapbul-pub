@@ -2,9 +2,9 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Typography, Toolbar, AppBar as MuiAppBar, useTheme, useScrollTrigger, Container } from '@material-ui/core';
 import { LocaleSwitcher, TabLinks } from '.';
-import { Routes } from '../constants';
+import { Routes } from '@mapbul-pub/ui';
 import { IPageUrl } from 'interfaces';
-import { isClientEnviroment } from 'utils';
+import { isClient } from 'utils';
 
 const sections: Array<IPageUrl> = [
   {
@@ -34,7 +34,7 @@ const StyledContainer = styled(Container)`
 export const AppBar: React.FC = () => {
   const theme = useTheme();
   const notZeroTrigger = useScrollTrigger({
-    target: isClientEnviroment ? window : undefined,
+    target: isClient ? window : undefined,
     disableHysteresis: true,
     threshold: 0,
   });

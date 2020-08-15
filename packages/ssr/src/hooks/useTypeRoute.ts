@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Routes, TypeRoute } from '../constants';
+import { Routes, TypeRoute } from '@mapbul-pub/ui';
 import { TLangs } from 'config';
 
 let cacheMatch: TypeRoute = 'unknown';
@@ -12,7 +12,7 @@ export const useTypeRoute = (): TypeRoute => {
     return cacheMatch;
   }
   const match = keys.find(key => router.pathname.includes(key));
-  cacheMatch = match ? Routes[match] : 'unknown';
+  cacheMatch = match ? (Routes as any)[match] : 'unknown';
   return cacheMatch;
 };
 
