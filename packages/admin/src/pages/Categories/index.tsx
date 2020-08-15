@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { useMediaQuery, Theme, Box, CardContent, Card, Typography } from '@material-ui/core';
+import { useMediaQuery, Theme, Box, Typography } from '@material-ui/core';
 import {
-  SimpleList, List, Datagrid, EmailField, TextField,
-  EditButton, ShowButton, Show, SimpleShowLayout, RichTextField,
-  DateField, Edit, Create, SimpleForm, TextInput, DateInput, ReferenceInput, ImageInput,
-  SelectInput, BooleanInput, AutocompleteInput, BooleanField, required, ImageField,
+  SimpleList, List, Datagrid, TextField,
+  Show, SimpleShowLayout, DateField, SimpleForm, TextInput, DateInput, ReferenceInput, ImageInput,
+  BooleanInput, AutocompleteInput, BooleanField, required, ImageField,
 } from 'react-admin';
 import { P, clearUrl } from '@mapbul-pub/utils';
 import { Routes } from '@mapbul-pub/ui';
@@ -69,7 +68,7 @@ const ImageFile: React.FC<{ label: string; source: string, [key: string]: any }>
 
 export const CategoryCreate: React.FC = withCreatePage((props) => {
   return (
-    <SimpleForm {...props}>
+    <SimpleForm {...props} redirect="list" >
       <SectionTitle label="Main" />
       <RowLayout>
         <TextInput disabled source={P<ICategoryDTOEx>(p => p.id)} fullWidth />

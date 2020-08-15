@@ -2,8 +2,7 @@ import * as React from 'react';
 
 import { Routes } from '@mapbul-pub/ui';
 import PostIcon from '@material-ui/icons/Book';
-import UserIcon from '@material-ui/icons/Group';
-import { Admin, Resource, ListGuesser } from 'react-admin';
+import { Admin, Resource } from 'react-admin';
 import jsonServerProvider from './ra-data-json-server';
 
 import {
@@ -32,13 +31,12 @@ const App = () => (
     />
     <Resource
       name={Routes.categories}
-      icon={UserIcon}
+      //icon={UserIcon}
       list={CategoryList}
       edit={CategoryeEdit}
       create={CategoryCreate}
       show={CategoryShow}
     />
-    <Resource name="comments" list={ListGuesser} />
   </Admin>
 );
 export default App;
