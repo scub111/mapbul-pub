@@ -1,6 +1,14 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Typography, Toolbar, AppBar as MuiAppBar, useTheme, useScrollTrigger, Container } from '@material-ui/core';
+import {
+  Typography,
+  Toolbar,
+  AppBar as MuiAppBar,
+  useTheme,
+  useScrollTrigger,
+  Container,
+  Button,
+} from '@material-ui/core';
 import { LocaleSwitcher, TabLinks } from '.';
 import { Routes } from '@mapbul-pub/ui';
 import { IPageUrl } from 'interfaces';
@@ -47,6 +55,9 @@ export const AppBar: React.FC = () => {
             <Typography variant="h5" color="inherit" align="center" noWrap style={{ flex: 1 }}>
               X-island
             </Typography>
+            <Button variant="outlined" size="small" style={{ marginRight: 10 }}>
+              Войти
+            </Button>
             <LocaleSwitcher />
           </Toolbar>
         )}
