@@ -4,6 +4,14 @@ pipeline {
     HOME = '.'
   }
   stages {
+    stage('Docker prune'){
+      steps {
+        timeout(time: 3, unit: 'MINUTES') {
+          sh 'docker system prune -a -f'
+        }
+      }
+    }
+
     stage('Bootstrap'){
       steps {
         timeout(time: 2, unit: 'MINUTES') {
@@ -72,14 +80,6 @@ pipeline {
           sh 'docker stop mapbul-pub-admin'
           sh 'docker rm mapbul-pub-admin'
           sh 'docker run -d --name mapbul-pub-admin --restart always -p 3500:8888 mapbul-pub-admin'
-        }
-      }
-    }
-
-    stage('Docker prune'){
-      steps {
-        timeout(time: 3, unit: 'MINUTES') {
-          sh 'docker system prune -a -f'
         }
       }
     }
