@@ -2,10 +2,11 @@
   "name": "@mapbul-pub/ssr",
   "version": "1.0.0",
   "scripts": {
+    "clean": "rimraf .next",
     "clean:node_modules": "rimraf node_modules",
     "build": "ncp .env.prod .env && next build",
     "start": "ncp .env.dev .env && next -p 3300",
-    "start:port": "next start -p",
+    "start:prod": "next start -p 3300",
     "type-check": "tsc",
     "test": "jest",
     "test:watch": "jest --watch"
