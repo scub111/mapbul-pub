@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf build",
+    "clean:node_modules": "rimraf node_modules",
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development --content-base src --port 3200",
     "analyze": "webpack --mode none --content-base src",

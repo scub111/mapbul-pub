@@ -2,6 +2,7 @@
   "name": "@mapbul-pub/ssr",
   "version": "1.0.0",
   "scripts": {
+    "clean:node_modules": "rimraf node_modules",
     "build": "ncp .env.prod .env && next build",
     "start": "ncp .env.dev .env && next -p 3300",
     "start:port": "next start -p",
