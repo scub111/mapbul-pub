@@ -7,8 +7,9 @@ COPY lerna.json .
 COPY packages/common packages/common
 COPY packages/types packages/types
 COPY packages/utils packages/utils
+COPY packages/ui packages/ui
 COPY packages/ssr packages/ssr
 
 RUN npm run bootstrap
 EXPOSE 3300
-CMD cd packages/ssr && npm start
+CMD cd packages/ssr && npm run start:prod

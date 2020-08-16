@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
     "build:init": "ncp tsconfig.build.json tsconfig.json && webpack",
     "build": "node scripts/buildServer",
     "build:tsc": "rimraf dist && tsc -p tsconfig.build.json",
