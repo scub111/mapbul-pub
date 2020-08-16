@@ -8,6 +8,7 @@ COPY packages/common packages/common
 COPY packages/codegen packages/codegen
 COPY packages/types packages/types
 COPY packages/server packages/server
+COPY packages/utils packages/utils
 
 RUN npm run bootstrap
 EXPOSE 3100
