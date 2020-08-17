@@ -148,7 +148,7 @@ module.exports = (env, argv) => {
       }
     },
     devServer: {
-      historyApiFallback: true,
+      // historyApiFallback: true,
     },
     plugins: (function () {
       const plugins = [];
