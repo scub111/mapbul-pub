@@ -3,7 +3,8 @@ const path = require('path');
 
 // variables
 const srcDir = 'src';
-const buildDir = 'build/12';
+// const buildDir = 'build/12';
+const buildDir = 'build';
 // const isProduction = process.argv.mode === 'production' || process.env.NODE_ENV === 'production';
 const sourcePath = path.join(__dirname, `./${srcDir}`);
 const outPath = path.join(__dirname, `./${buildDir}`);
@@ -79,7 +80,8 @@ module.exports = (env, argv) => {
     output: {
       filename: config.appFilename,
       path: outPath,
-      publicPath: '/12/',
+      // publicPath: '/12/',
+      publicPath: '/',
     },
     devtool: config.devtool,
     resolve: {
