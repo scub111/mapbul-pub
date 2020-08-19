@@ -3,6 +3,7 @@ const path = require('path');
 
 // variables
 const srcDir = 'src';
+// const buildDir = 'build/12';
 const buildDir = 'build';
 // const isProduction = process.argv.mode === 'production' || process.env.NODE_ENV === 'production';
 const sourcePath = path.join(__dirname, `./${srcDir}`);
@@ -79,6 +80,8 @@ module.exports = (env, argv) => {
     output: {
       filename: config.appFilename,
       path: outPath,
+      // publicPath: '/12/',
+      publicPath: '/',
     },
     devtool: config.devtool,
     resolve: {
@@ -145,6 +148,9 @@ module.exports = (env, argv) => {
         // Function predicate that provides asset filenames
         return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
       }
+    },
+    devServer: {
+      // historyApiFallback: true,
     },
     plugins: (function () {
       const plugins = [];

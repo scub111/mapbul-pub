@@ -14,12 +14,16 @@ import {
 import authProvider from './authProvider';
 import { GlobalVar } from 'src/constants';
 
+import { createBrowserHistory } from 'history';
+const history = createBrowserHistory({ basename: '/12' });
+
 const App = () => (
   <Admin
     title="Admin panel"
     dataProvider={jsonServerProvider(GlobalVar.env.baseUrl)}
     authProvider={authProvider}
     dashboard={Dashboard}
+    // history={history}
   >
     <Resource
       name={Routes.articles}
