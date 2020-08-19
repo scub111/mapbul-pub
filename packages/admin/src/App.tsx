@@ -23,7 +23,7 @@ const App = () => (
     dataProvider={jsonServerProvider(GlobalVar.env.baseUrl)}
     authProvider={authProvider}
     dashboard={Dashboard}
-    history={history}
+    // history={history}
   >
     <Resource
       name={Routes.articles}
