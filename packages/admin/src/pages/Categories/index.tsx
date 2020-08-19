@@ -122,14 +122,14 @@ export const CategoryeEdit = withEditPage<ICategoryDTOEx>((props) => {
     <BooleanInput source={P<ICategoryDTOEx>(p => p.forArticle)} fullWidth />
     <SectionTitle label="Photos" />
     <RowLayout style={{ display: 'flex', alignItems: 'flex-end' }}>
-      <Box>
-        <TextInput source={P<ICategoryDTOEx>(p => p.icon)} multiline fullWidth />
+      <Box>        
         <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.icon}`)} />
+        <TextInput source={P<ICategoryDTOEx>(p => p.icon)} multiline fullWidth />
         <ImageFile label="icon" source={P<ICategoryDTOEx>(p => p.iconFile)} />        
       </Box>
-      <Box>
-        <TextInput source={P<ICategoryDTOEx>(p => p.pin)} multiline fullWidth />
+      <Box>        
         <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.pin}`)} />
+        <TextInput source={P<ICategoryDTOEx>(p => p.pin)} multiline fullWidth />
         <ImageFile label="pin" source={P<ICategoryDTOEx>(p => p.pinFile)} />
       </Box>
     </RowLayout>

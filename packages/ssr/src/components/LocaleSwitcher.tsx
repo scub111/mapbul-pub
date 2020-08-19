@@ -5,6 +5,7 @@ import { LocaleContext } from 'context/LocaleContext';
 import { RussiaIcon, EnglishIcon } from 'ui';
 import { Locale } from '../translations/types';
 import { useCallback } from 'react';
+import { Box } from '@material-ui/core';
 
 export const LocaleSwitcher: React.FC = () => {
   const router = useRouter();
@@ -16,9 +17,9 @@ export const LocaleSwitcher: React.FC = () => {
   }, [locale]);
 
   return (
-    <div onClick={onClick}>
-      {locale === 'en' && <EnglishIcon style={{ width: 48, height: 25, border: '1px solid black' }} hover/>}
-      {locale === 'ru' && <RussiaIcon style={{ width: 48, height: 25, border: '1px solid black' }} hover/>}
-    </div>
+    <Box onClick={onClick} style={{ display: 'flex' }}>
+      {locale === 'en' && <EnglishIcon style={{ width: 48, height: 25, border: '1px solid black' }} hover />}
+      {locale === 'ru' && <RussiaIcon style={{ width: 48, height: 25, border: '1px solid black' }} hover />}
+    </Box>
   );
 };
