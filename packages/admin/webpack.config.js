@@ -151,6 +151,7 @@ module.exports = (env, argv) => {
     },
     devServer: {
       // historyApiFallback: true,
+      host: '0.0.0.0'
     },
     plugins: (function () {
       const plugins = [];
@@ -158,6 +159,7 @@ module.exports = (env, argv) => {
         new HtmlWebpackPlugin({
           template: `./${srcDir}/index.html`,
           filename: 'index.html',
+          // meta: {viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'},
         }),
         new webpack.ProvidePlugin({
           React: 'react',
