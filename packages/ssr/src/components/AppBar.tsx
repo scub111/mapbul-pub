@@ -55,7 +55,14 @@ export const AppBar: React.FC = () => {
             <Typography variant="h5" color="inherit" align="center" noWrap style={{ flex: 1 }}>
               X-island
             </Typography>
-            <Button variant="outlined" size="small" style={{ marginRight: 10 }}>
+            <Button variant="outlined" color="default" size="small"
+              style={{
+                marginRight: 10,
+                color: "white",
+                borderColor: 'white'
+              }}
+              href={"http://admin.mapbul.scub111.com"}
+            >
               Войти
             </Button>
             <LocaleSwitcher />
