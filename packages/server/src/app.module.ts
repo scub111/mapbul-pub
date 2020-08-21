@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { PassportModule } from '@nestjs/passport';
+
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { AdminsService } from 'serverSrc/api/admins/admins.service';
@@ -59,11 +61,14 @@ import { UploadController } from 'serverSrc/api/upload/upload.controller';
 
 import { ApiController } from 'serverSrc/api.controller';
 import { DbController } from 'serverSrc/api/db/db.controller';
-import { UploadFileService } from './api/upload/upload.fileService';
-import { UploadFtpService } from './api/upload/upload.ftpService';
+import { UploadFileService } from 'serverSrc/api/upload/upload.fileService';
+import { UploadFtpService } from 'serverSrc/api/upload/upload.ftpService';
+import { AuthController } from 'serverSrc/api/auth/auth.controller';
+import { AuthService } from 'serverSrc/api/auth/auth.service';
+import { LocalStrategy } from 'serverSrc/api/auth/local.strategy';
 
 @Module({
-  imports: [],
+  imports: [PassportModule],
   providers: [
     AppService,
     AdminsService,
@@ -95,6 +100,8 @@ import { UploadFtpService } from './api/upload/upload.ftpService';
     WorkTimesService,
     UploadFileService,
     UploadFtpService,
+    AuthService, 
+    LocalStrategy
   ],
   controllers: [
     AppController,
@@ -128,6 +135,7 @@ import { UploadFtpService } from './api/upload/upload.ftpService';
     WorkTimesController,
     UploadController,
     ApiController,
+    AuthController,
   ],
 })
 export class AppModule {}

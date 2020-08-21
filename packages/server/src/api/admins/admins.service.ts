@@ -34,7 +34,7 @@ export class AdminsService implements BaseService<IAdminDTO> {
         \`id\`,
         \`userId\`,
         \`superuser\`
-      FROM admin ${additional}`);
+      FROM admin '${additional}'`);
 
     const totalElements = isPagination ? Number(records[1][0]['count(*)']) : records.length;
 
