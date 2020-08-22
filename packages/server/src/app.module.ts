@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
+//import { JwtModule } from '@nestjs/jwt';
 
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
@@ -66,9 +67,16 @@ import { UploadFtpService } from 'serverSrc/api/upload/upload.ftpService';
 import { AuthController } from 'serverSrc/api/auth/auth.controller';
 import { AuthService } from 'serverSrc/api/auth/auth.service';
 import { LocalStrategy } from 'serverSrc/api/auth/local.strategy';
+import { JwtStrategy } from './api/auth/jwt.strategy';
 
 @Module({
-  imports: [PassportModule],
+  imports: [
+    PassportModule,
+    // JwtModule.register({
+    //   secret: jwtConstants.secret,
+    //   signOptions: { expiresIn: '60s' },
+    // }),
+  ],
   providers: [
     AppService,
     AdminsService,
@@ -101,7 +109,8 @@ import { LocalStrategy } from 'serverSrc/api/auth/local.strategy';
     UploadFileService,
     UploadFtpService,
     AuthService, 
-    LocalStrategy
+    LocalStrategy,
+    JwtStrategy,
   ],
   controllers: [
     AppController,

@@ -10,11 +10,10 @@ export function useImageInfo(url: string) {
     const img = document.createElement('img');
     img.addEventListener('load', (e) => {
       const target = e.target as any;
-      const { naturalHeight, naturalWidth, byteLength } = target;
+      const { naturalHeight, naturalWidth } = target;
       setSize([naturalWidth, naturalHeight ]);
     });
     img.src = url;
-    console.log(333, img);
   }, [url]);
 
   return size;
