@@ -10,7 +10,7 @@ export class AuthService {
     this.connection = dbConnectionSingleton.getInstance();
     this.jwtService = new JwtService({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '12h' },
     });
   }
 
