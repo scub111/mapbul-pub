@@ -1,5 +1,5 @@
 import { dbConnectionSingleton } from '@mapbul-pub/common';
-import { IDbConnection } from '@mapbul-pub/types';
+import { IDbConnection, IAuthLogin } from '@mapbul-pub/types';
 import { getPasswordHash } from 'serverSrc/utils/passwordHash';
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
@@ -29,7 +29,7 @@ export class AuthService {
     return records.length > 0 ? records[0] : null;
   }
 
-  async login(user: Partial<IUserDTO>) {
+  async login(user: Partial<IUserDTO>): Promise<IAuthLogin> {
     const payload: Partial<IUserDTO> = { 
       guid: user.guid, 
       email: user.email, 

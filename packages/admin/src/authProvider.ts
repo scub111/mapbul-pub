@@ -1,18 +1,37 @@
 import { AuthProvider } from 'ra-core';
+import { IAuthLogin } from '@mapbul-pub/types';
+import { P } from '@mapbul-pub/utils';
+import { GlobalVar } from './constants';
 
 const authProvider: AuthProvider = {
-    login: ({ username }) => {
-        localStorage.setItem('username', username);
-        // accept all username/password combinations
-        return Promise.resolve();
+    login: ({ username, password}) => {
+        // localStorage.setItem('username', username);
+        // // accept all username/password combinations
+        // return Promise.resolve();
+
+        const request = new Request(`${GlobalVar.env.baseUrl}/auth/token`, {
+            method: 'POST',
+            body: JSON.stringify({ username, password }),
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+        });
+        return fetch(request)
+            .then(response => {
+                if (response.status < 200 || response.status >= 300) {
+                    throw new Error(response.statusText);
+                }
+                return response.json();
+            })
+            .then(({ access_token }: IAuthLogin) => {
+                localStorage.setItem(P<IAuthLogin>(p => p.access_token), access_token);
+            });
     },
     logout: () => {
-        localStorage.removeItem('username');
+        localStorage.removeItem(P<IAuthLogin>(p => p.access_token));
         return Promise.resolve();
     },
     checkError: () => Promise.resolve(),
     checkAuth: () =>
-        localStorage.getItem('username') ? Promise.resolve() : Promise.reject(),
+        localStorage.getItem(P<IAuthLogin>(p => p.access_token)) ? Promise.resolve() : Promise.reject(),
     getPermissions: () => Promise.reject('Unknown method'),
 };
 

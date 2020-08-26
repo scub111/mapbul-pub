@@ -1,9 +1,10 @@
-import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete } from '@nestjs/common';
+import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
 import { IController } from 'serverSrc/common/IController';
 import { PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { CategoriesService } from 'serverSrc/api/categories/categories.service';
 import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
 import { IRemoveResult, IGetParams } from 'serverSrc/common/interfaces';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('api/categories')
 export class CategoriesController implements IController<ICategoryDTO> {
@@ -21,6 +22,7 @@ export class CategoriesController implements IController<ICategoryDTO> {
   //}
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
   async postItem(@Body() body: ICategoryDTO): Promise<ICategoryDTO> {
     return await this.service.postItem(body);
@@ -43,12 +45,14 @@ export class CategoriesController implements IController<ICategoryDTO> {
   //}
 
   @Put(':id')
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
   async putItem(@Param('id') id: string, @Body() body: ICategoryDTO): Promise<ICategoryDTO> {
     return await this.service.putItem(id, body);
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
   async deleteItem(@Param('id') id: string): Promise<IRemoveResult> {
     return await this.service.deleteItem(id);
