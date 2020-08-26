@@ -37,7 +37,7 @@ export class AuthService {
       deleted: user.deleted,
     };
     return {
-      access_token: this.jwtService.sign(payload),
+      token: this.jwtService.sign(payload),
     };
   }
 }

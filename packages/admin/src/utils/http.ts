@@ -8,8 +8,8 @@ export const httpClient = fetchUtils.fetchJson;
 export const httpClientToken = (url: string, options: Options = {}) => {
   if (!options.headers) {
       const headers = new Headers({ Accept: 'application/json' });
-      const accessToken = localStorage.getItem(P<IAuthLogin>(p => p.access_token));
-      headers.append('Authorization', `Bearer ${accessToken}`);
+      const token = localStorage.getItem(P<IAuthLogin>(p => p.token));
+      headers.append('Authorization', `Bearer ${token}`);
       console.log(111, 'headers');
       options.headers = headers;
   }
