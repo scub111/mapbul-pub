@@ -3,7 +3,7 @@ import { fetchUtils, DataProvider } from 'ra-core';
 import { Routes } from '@mapbul-pub/ui';
 import { createPath, P } from '@mapbul-pub/utils';
 import { PageContent } from '@mapbul-pub/types';
-import { uploadFile, deleteFile } from 'utils';
+import { uploadFile, deleteFile, httpClient, httpClientToken } from 'utils';
 import { ICategoryDTOEx } from 'interfaces';
 
 /**
@@ -46,7 +46,7 @@ interface IResponse<T> {
   json: T;
 };
 
-export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider => ({
+export default (apiUrl: string): DataProvider => ({
   getList: (resource, params) => {
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
@@ -111,7 +111,7 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
       data = await uploadFile(apiUrl, data, P<ICategoryDTOEx>(p => p.pinFile), P<ICategoryDTOEx>(p => p.pin), true);
     }
 
-    return httpClient(`${apiUrl}/${resource}/${params.id}`, {
+    return httpClientToken(`${apiUrl}/${resource}/${params.id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     }).then(({ json }) => ({ data: json }))
@@ -121,7 +121,7 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
   updateMany: (resource, params) =>
     Promise.all(
       params.ids.map(id =>
-        httpClient(`${apiUrl}/${resource}/${id}`, {
+        httpClientToken(`${apiUrl}/${resource}/${id}`, {
           method: 'PUT',
           body: JSON.stringify(params.data),
         })
@@ -136,7 +136,7 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
       data = await uploadFile(apiUrl, data, P<ICategoryDTOEx>(p => p.pinFile), P<ICategoryDTOEx>(p => p.pin));
     }
 
-    return httpClient(`${apiUrl}/${resource}`, {
+    return httpClientToken(`${apiUrl}/${resource}`, {
       method: 'POST',
       body: JSON.stringify(data),
     }).then(({ json }) => ({
@@ -151,7 +151,7 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
       await deleteFile(apiUrl, data.pin);
     }
 
-    return httpClient(`${apiUrl}/${resource}/${params.id}`, {
+    return httpClientToken(`${apiUrl}/${resource}/${params.id}`, {
       method: 'DELETE',
     }).then(({ json }) => ({ data: json }))
   },
@@ -160,7 +160,7 @@ export default (apiUrl: string, httpClient = fetchUtils.fetchJson): DataProvider
   deleteMany: (resource, params) =>
     Promise.all(
       params.ids.map(id =>
-        httpClient(`${apiUrl}/${resource}/${id}`, {
+        httpClientToken(`${apiUrl}/${resource}/${id}`, {
           method: 'DELETE',
         })
       )
