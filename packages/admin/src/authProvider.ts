@@ -21,17 +21,17 @@ const authProvider: AuthProvider = {
                 }
                 return response.json();
             })
-            .then(({ access_token }: IAuthLogin) => {
-                localStorage.setItem(P<IAuthLogin>(p => p.access_token), access_token);
+            .then(({ token: access_token }: IAuthLogin) => {
+                localStorage.setItem(P<IAuthLogin>(p => p.token), access_token);
             });
     },
     logout: () => {
-        localStorage.removeItem(P<IAuthLogin>(p => p.access_token));
+        localStorage.removeItem(P<IAuthLogin>(p => p.token));
         return Promise.resolve();
     },
     checkError: () => Promise.resolve(),
     checkAuth: () =>
-        localStorage.getItem(P<IAuthLogin>(p => p.access_token)) ? Promise.resolve() : Promise.reject(),
+        localStorage.getItem(P<IAuthLogin>(p => p.token)) ? Promise.resolve() : Promise.reject(),
     getPermissions: () => Promise.reject('Unknown method'),
 };
 
