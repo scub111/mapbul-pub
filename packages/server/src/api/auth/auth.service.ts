@@ -1,9 +1,8 @@
 import { dbConnectionSingleton } from '@mapbul-pub/common';
-import { IDbConnection, IAuthLogin } from '@mapbul-pub/types';
+import { IDbConnection, IAuthLogin, IUserDTO } from '@mapbul-pub/types';
 import { getPasswordHash } from 'serverSrc/utils/passwordHash';
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
-import { IUserDTO } from 'packages/types';
 
 export class AuthService {
   constructor(private jwtService: JwtService) {
