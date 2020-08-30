@@ -1,5 +1,5 @@
 export class Mutex {
-  private mutex = Promise.resolve();
+  mutex = Promise.resolve();
 
   lock(): PromiseLike<() => void> {
     let begin: (unlock: () => void) => void = _ => {};

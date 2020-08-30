@@ -1,4 +1,5 @@
 require('dotenv').config();
+// const withTypescript = require('@zeit/next-typescript')
 
 module.exports = (phase, { defaultConfig }) => {
   return {
@@ -10,7 +11,7 @@ module.exports = (phase, { defaultConfig }) => {
       BASE_URL_SERVER: process.env.BASE_URL_SERVER,
       IMAGE_URL: process.env.IMAGE_URL,
     },
-    webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
+    webpack: (config, { buildId, dev, isServer, defaultLoaders, dir }) => {
       let alias = config.resolve.alias;
       alias['ssr'] = `${__dirname}`;
       alias['ssrSrc'] = `${__dirname}/src`;
@@ -32,6 +33,16 @@ module.exports = (phase, { defaultConfig }) => {
       alias['ui'] = `${__dirname}/src/ui`;
       alias['utils'] = `${__dirname}/src/utils`;
       //console.log(alias);
+
+      config.module.rules.push(        
+        // .ts, .tsx
+        {
+          test: /\.(ts|tsx)$/,
+          loader: 'awesome-typescript-loader',
+          // loader: 'ts-loader',
+        }
+      );
+
       return config;
     },
   };

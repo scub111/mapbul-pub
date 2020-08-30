@@ -1,6 +1,5 @@
 import { PageContent, IGetAllQuery } from '@mapbul-pub/types';
-import { api } from '.';
-import { IEndpointFn } from '.';
+import { IEndpointFn, get } from '.';
 // import { sleep } from 'scub111-common';
 
 type TMapFn<TDto, TData> = (dto: TDto) => Promise<TData>;
@@ -13,7 +12,7 @@ export class BaseService<TDto, TModel> {
   ) {}
 
   list(query: IGetAllQuery): Promise<PageContent<TModel>> {
-    return api.get(this.endpointFn.list(query)).then(async (data: PageContent<TDto>) => {
+    return get(this.endpointFn.list(query)).then(async (data: PageContent<TDto>) => {
       // await sleep(0);
       return {
         content: await Promise.all(data.content.map(this.listFn)),
@@ -24,6 +23,6 @@ export class BaseService<TDto, TModel> {
   }
 
   get(id: string | number): Promise<TModel> {
-    return api.get(this.endpointFn.get(id)).then(this.getFn || this.listFn);
+    return get(this.endpointFn.get(id)).then(this.getFn || this.listFn);
   }
 }

@@ -1,7 +1,7 @@
 import { stringify } from 'query-string';
 import { fetchUtils, DataProvider } from 'ra-core';
 import { Routes } from '@mapbul-pub/ui';
-import { createPath, P } from '@mapbul-pub/utils';
+import { createPath, P, Mutex } from '@mapbul-pub/utils';
 import { PageContent } from '@mapbul-pub/types';
 import { uploadFile, deleteFile, httpClient, httpClientToken } from 'utils';
 import { ICategoryDTOEx } from 'interfaces';
@@ -46,8 +46,25 @@ interface IResponse<T> {
   json: T;
 };
 
+const deleteRecord = async (apiUrl: string, resource: string, id: string | number) => {
+  const response = await httpClientToken(`${apiUrl}/${resource}/${id}`, {
+    method: 'DELETE',
+  });
+  if (resource === Routes.categories) {
+    // const data = params.previousData as ICategoryDTOEx;
+    const data = response.json as ICategoryDTOEx;
+    await deleteFile(apiUrl, data.icon);
+    await deleteFile(apiUrl, data.pin);
+  }
+  return response;
+}
+
+const mutex = new Mutex();
+
 export default (apiUrl: string): DataProvider => ({
-  getList: (resource, params) => {
+  getList: async (resource, params) => {
+    const unloack = await mutex.lock();
+
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
 
@@ -55,6 +72,8 @@ export default (apiUrl: string): DataProvider => ({
       endpoint: `${apiUrl}/${resource}`,
       queryParams: { page, size: perPage, sort: `${field} ${order}` },
     });
+
+    unloack();
 
     return httpClient(url).then(({ json }: IResponse<PageContent<any>>) => {
       return {
@@ -144,25 +163,22 @@ export default (apiUrl: string): DataProvider => ({
     }))
   },
 
-  delete: async (resource, params) => {
-    if (resource === Routes.categories) {
-      let data = params.previousData as ICategoryDTOEx;
-      await deleteFile(apiUrl, data.icon);
-      await deleteFile(apiUrl, data.pin);
-    }
-
-    return httpClientToken(`${apiUrl}/${resource}/${params.id}`, {
-      method: 'DELETE',
-    }).then(({ json }) => ({ data: json }))
+  delete: (resource, params) => {
+    return deleteRecord(apiUrl, resource, params.id)
+      .then(({ json }) => ({ data: json }));
   },
 
   // json-server doesn't handle filters on DELETE route, so we fallback to calling DELETE n times instead
-  deleteMany: (resource, params) =>
-    Promise.all(
+  deleteMany: async (resource, params) => {
+    return Promise.all(
       params.ids.map(id =>
-        httpClientToken(`${apiUrl}/${resource}/${id}`, {
-          method: 'DELETE',
-        })
+        deleteRecord(apiUrl, resource, id)
       )
-    ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
+    )
+    .then(responses => ({ data: responses.map(({ json }) => json.id) }))
+    // for (const id of params.ids) {
+    //   await deleteRecord(apiUrl, resource, id);
+    // }
+    // return Promise.resolve({ data: params.ids });
+  },
 });

@@ -13,27 +13,23 @@ import { GlobalVar } from 'src/constants';
 import { withCreatePage, withEditPage } from 'hocs';
 import { ICategoryDTOEx } from 'interfaces';
 
+  // <SimpleList
+  //   primaryText={(record: ICategoryDTOEx) => record.name}
+  //   secondaryText={(record: ICategoryDTOEx) => record.id}
+  //   tertiaryText={(record: ICategoryDTOEx) => record.parentId}
+  // /></List>
+
 export const CategoryList: React.FC = (props: any) => {
   const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 
   return (
     <List title="All categories" {...props}>
-      {isSmall ? (
-        <SimpleList
-          primaryText={(record: ICategoryDTOEx) => record.name}
-          secondaryText={(record: ICategoryDTOEx) => record.id}
-          tertiaryText={(record: ICategoryDTOEx) => record.parentId}
-        />
-      ) : (
-          <Datagrid rowClick="edit">
-            <TextField source={P<ICategoryDTOEx>(p => p.id)} />
-            <TextField source={P<ICategoryDTOEx>(p => p.name)} />
-            <TextField source={P<ICategoryDTOEx>(p => p.enName)} />
-            <BooleanField source={P<ICategoryDTOEx>(p => p.forArticle)} />
-            {/* <EditButton />
-               <ShowButton /> */}
-          </Datagrid>
-        )}
+      <Datagrid rowClick="edit">
+        <TextField source={P<ICategoryDTOEx>(p => p.id)} />
+        <TextField source={P<ICategoryDTOEx>(p => p.name)} />
+        <TextField source={P<ICategoryDTOEx>(p => p.enName)} />
+        {!isSmall && <BooleanField source={P<ICategoryDTOEx>(p => p.forArticle)} />}
+      </Datagrid>
     </List>
   );
 };
