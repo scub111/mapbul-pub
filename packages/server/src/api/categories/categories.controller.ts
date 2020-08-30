@@ -3,7 +3,7 @@ import { IController } from 'serverSrc/common/IController';
 import { PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { CategoriesService } from 'serverSrc/api/categories/categories.service';
 import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
-import { IRemoveResult, IGetParams } from 'serverSrc/common/interfaces';
+import { IGetParams } from 'serverSrc/common/interfaces';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('api/categories')
@@ -54,7 +54,7 @@ export class CategoriesController implements IController<ICategoryDTO> {
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async deleteItem(@Param('id') id: string): Promise<IRemoveResult> {
+  async deleteItem(@Param('id') id: string): Promise<ICategoryDTO> {
     return await this.service.deleteItem(id);
   }
 }

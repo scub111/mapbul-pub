@@ -3,7 +3,6 @@ import { TID } from 'serverSrc/common/types';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
-import { IRemoveResult } from 'serverSrc/common/interfaces';
 
 interface IOkPacket {
   fieldCount: number;
@@ -136,10 +135,12 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
     return body;
   }
 
-  async deleteItem(id: TID): Promise<IRemoveResult> {
+  // async deleteItem(id: TID): Promise<IRemoveResult> {
+  async deleteItem(id: TID): Promise<ICategoryDTO> {
+    const record = await this.getItem(id);
     await this.connection.query(`
       DELETE FROM category
       WHERE id = ${id}`);
-    return { id }
+    return record
   }
 }

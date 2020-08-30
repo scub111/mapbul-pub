@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-unfetch';
-import { Mutex, isClient } from 'utils';
+import { isClient } from 'utils';
+//import { Mutex } from '@mapbul-pub/utils';
+import { Mutex } from '@mapbul-pub/utils';
 
 const cache = new Map();
 const isCachingOnClient = true;
@@ -26,8 +28,6 @@ async function fetchWrapper(endpoint: string, init?: RequestInit) {
   }
 }
 
-export namespace api {
-  export async function get(endpoint: string) {
-    return fetchWrapper(endpoint);
-  }
+export async function get(endpoint: string) {
+  return fetchWrapper(endpoint);
 }
