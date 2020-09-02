@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useMediaQuery, Theme, Box, Typography } from '@material-ui/core';
 import {
-  SimpleList, List, Datagrid, TextField,
+  SimpleList, List, Datagrid, TextField, useListSortContext,
   Show, SimpleShowLayout, DateField, SimpleForm, TextInput, DateInput, ReferenceInput, ImageInput,
   BooleanInput, AutocompleteInput, BooleanField, required, ImageField,
 } from 'react-admin';
@@ -12,6 +12,7 @@ import Poster from './Poster';
 import { GlobalVar } from 'src/constants';
 import { withCreatePage, withEditPage } from 'hocs';
 import { ICategoryDTOEx } from 'interfaces';
+import { useEffect } from 'react';
 
   // <SimpleList
   //   primaryText={(record: ICategoryDTOEx) => record.name}
@@ -19,17 +20,44 @@ import { ICategoryDTOEx } from 'interfaces';
   //   tertiaryText={(record: ICategoryDTOEx) => record.parentId}
   // /></List>
 
-export const CategoryList: React.FC = (props: any) => {
+const CategoriesGrid: React.FC = (props: any) => {
   const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+  const { currentSort, setSort } = useListSortContext();
+
+  useEffect(() => {
+    if (currentSort.field === P<ICategoryDTOEx>(p => p.id) && currentSort.order === 'ASC') {
+      setSort(P<ICategoryDTOEx>(p => p.id), 'DESC');
+    }
+  }, []);
+
+  return (<Datagrid rowClick="edit" {...props}>
+    <TextField source={P<ICategoryDTOEx>(p => p.id)} />
+    <TextField source={P<ICategoryDTOEx>(p => p.name)} />
+    <TextField source={P<ICategoryDTOEx>(p => p.enName)} />
+    {!isSmall && <BooleanField source={P<ICategoryDTOEx>(p => p.forArticle)} />} 
+  </Datagrid>
+  )
+}
+
+export const CategoryList: React.FC = (props: any) => {
+  // const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+  // const { currentSort, setSort } = useListSortContext();
+
+  // useEffect(() => {
+  //   if (currentSort?.order === 'ASC') {
+  //     setSort(P<ICategoryDTOEx>(p => p.id), 'DESC');
+  //   }
+  // }, []);
 
   return (
     <List title="All categories" {...props}>
-      <Datagrid rowClick="edit">
+      {/* <Datagrid rowClick="edit">
         <TextField source={P<ICategoryDTOEx>(p => p.id)} />
         <TextField source={P<ICategoryDTOEx>(p => p.name)} />
         <TextField source={P<ICategoryDTOEx>(p => p.enName)} />
-        {!isSmall && <BooleanField source={P<ICategoryDTOEx>(p => p.forArticle)} />}
-      </Datagrid>
+        {!isSmall && <BooleanField source={P<ICategoryDTOEx>(p => p.forArticle)} />} 
+      </Datagrid> */}
+      <CategoriesGrid {...props}/>
     </List>
   );
 };
