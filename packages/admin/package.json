@@ -1,5 +1,5 @@
 {
-  "name": "webpack-typescript-react",
+  "name": "@mapbul-pub/admin",
   "version": "1.0.1",
   "description": "",
   "main": "index.js",
@@ -12,7 +12,9 @@
     "test-": "jest",
     "test-coverage": "jest --coverage",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\"",
-    "tslint-check": "tslint-config-prettier-check ./tslint.json"
+    "tslint-check": "tslint-config-prettier-check ./tslint.json",
+    "set:local": "ncp .env.dev.local .env.dev",
+    "set:www": "ncp .env.dev.www .env.dev"
   },
   "keywords": [],
   "author": "",

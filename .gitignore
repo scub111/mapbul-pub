@@ -18,6 +18,6 @@ packages/server/tsconfig.json
 *.rar
 *.tsbuildinfo
 api.txt
-.env
+*.env*
 .next
 db-connection.json

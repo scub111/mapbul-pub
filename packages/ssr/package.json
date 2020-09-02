@@ -9,7 +9,9 @@
     "start:prod": "next start -p 3300",
     "type-check": "tsc",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "set:local": "ncp .env.dev.local .env.dev",
+    "set:www": "ncp .env.dev.www .env.dev"
   },
   "dependencies": {
     "@mapbul-pub/types": "^1.0.0",
