@@ -13,14 +13,14 @@ const enum MethodType {
 const callApi = async (
    endpoint: string = '',
    method: MethodType = MethodType.GET,
-   data: any = null/* , schema, request */
+   data: any = null /* , schema, request */
 ) => {
    return await axios({
       url: API_ROOT + endpoint,
       method,
       data
    });
-}
+};
 
 export default {
    async getData() {
@@ -30,5 +30,5 @@ export default {
    async postData(data: PostModel): Promise<any> {
       const response = await callApi('/posts', MethodType.POST, data);
       return response.data;
-   },
-}
+   }
+};

@@ -10,13 +10,13 @@ export class UploadFtpService implements IUploadService {
   async write(fileName: string, file: IFile): Promise<IFileCreateResponse> {
     const connection = ftpConnectionSingleton.getInstance();
 
-    await connection.uploadFrom(file.buffer, `${this.dir}/${fileName}`)
+    await connection.uploadFrom(file.buffer, `${this.dir}/${fileName}`);
 
     return {
       fileName,
-      size: file.size
+      size: file.size,
     };
-  };
+  }
 
   async delete(fileName: string | undefined): Promise<IFileResponse> {
     const unlock = await this.mutex.lock();
@@ -30,10 +30,9 @@ export class UploadFtpService implements IUploadService {
         unlock();
         return { fileName: '' };
       }
-    }
-    else {
+    } else {
       unlock();
       return { fileName: '' };
     }
-  };
+  }
 }

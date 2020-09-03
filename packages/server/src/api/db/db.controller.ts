@@ -1,4 +1,4 @@
-import { Controller, Get, Render} from '@nestjs/common';
+import { Controller, Get, Render } from '@nestjs/common';
 import { GlobalVar } from '@mapbul-pub/common';
 
 @Controller('api/db')
@@ -9,6 +9,6 @@ export class DbController {
     // throw "some trouble123";
     // throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
     return { dbConnection: GlobalVar.env.dbConnection.host };
-    return { dbConnection: "test" };
+    return { dbConnection: 'test' };
   }
 }

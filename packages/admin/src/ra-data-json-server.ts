@@ -40,145 +40,171 @@ import { ICategoryDTOEx } from 'interfaces';
  */
 
 interface IResponse<T> {
-  status: number;
-  headers: Headers;
-  body: string;
-  json: T;
-};
+   status: number;
+   headers: Headers;
+   body: string;
+   json: T;
+}
 
 const deleteRecord = async (apiUrl: string, resource: string, id: string | number) => {
-  const response = await httpClientToken(`${apiUrl}/${resource}/${id}`, {
-    method: 'DELETE',
-  });
-  if (resource === Routes.categories) {
-    // const data = params.previousData as ICategoryDTOEx;
-    const data = response.json as ICategoryDTOEx;
-    await deleteFile(apiUrl, data.icon);
-    await deleteFile(apiUrl, data.pin);
-  }
-  return response;
-}
+   const response = await httpClientToken(`${apiUrl}/${resource}/${id}`, {
+      method: 'DELETE'
+   });
+   if (resource === Routes.categories) {
+      // const data = params.previousData as ICategoryDTOEx;
+      const data = response.json as ICategoryDTOEx;
+      await deleteFile(apiUrl, data.icon);
+      await deleteFile(apiUrl, data.pin);
+   }
+   return response;
+};
 
 const mutex = new Mutex();
 
 export default (apiUrl: string): DataProvider => ({
-  getList: async (resource, params) => {
-    const unloack = await mutex.lock();
+   getList: async (resource, params) => {
+      const unloack = await mutex.lock();
 
-    const { page, perPage } = params.pagination;
-    const { field, order } = params.sort;
+      const { page, perPage } = params.pagination;
+      const { field, order } = params.sort;
 
-    const url = createPath({
-      endpoint: `${apiUrl}/${resource}`,
-      queryParams: { page, size: perPage, sort: `${field} ${order}` },
-    });
+      const url = createPath({
+         endpoint: `${apiUrl}/${resource}`,
+         queryParams: { page, size: perPage, sort: `${field} ${order}` }
+      });
 
-    unloack();
+      unloack();
 
-    return httpClient(url).then(({ json }: IResponse<PageContent<any>>) => {
-      return {
-        data: json.content,
-        total: json.totalElements,
+      return httpClient(url).then(({ json }: IResponse<PageContent<any>>) => {
+         return {
+            data: json.content,
+            total: json.totalElements
+         };
+      });
+   },
+
+   getOne: (resource, params) =>
+      httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
+         data: json
+      })),
+
+   getMany: (resource, params) => {
+      const query = {
+         id: params.ids
       };
-    });
-  },
+      const url = `${apiUrl}/${resource}?${stringify(query)}`;
+      return httpClient(url).then(({ json }: IResponse<PageContent<any>>) => {
+         return { data: json.content };
+      });
+   },
 
-  getOne: (resource, params) =>
-    httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
-      data: json,
-    })),
+   getManyReference: (resource, params) => {
+      const { page, perPage } = params.pagination;
+      const { field, order } = params.sort;
+      const query = {
+         ...fetchUtils.flattenObject(params.filter),
+         [params.target]: params.id,
+         _sort: field,
+         _order: order,
+         _start: (page - 1) * perPage,
+         _end: page * perPage
+      };
+      const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-  getMany: (resource, params) => {
-    const query = {
-      id: params.ids,
-    };
-    const url = `${apiUrl}/${resource}?${stringify(query)}`;
-    return httpClient(url).then(({ json }: IResponse<PageContent<any>>) => { return { data: json.content } });
-  },
+      return httpClient(url).then(({ headers, json }) => {
+         if (!headers.has('x-total-count')) {
+            throw new Error(
+               'The X-Total-Count header is missing in the HTTP Response. The jsonServer Data Provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare X-Total-Count in the Access-Control-Expose-Headers header?'
+            );
+         }
+         return {
+            data: json,
+            total: parseInt(
+               headers
+                  ?.get('x-total-count')
+                  ?.split('/')
+                  .pop() || '0',
+               10
+            )
+         };
+      });
+   },
 
-  getManyReference: (resource, params) => {
-    const { page, perPage } = params.pagination;
-    const { field, order } = params.sort;
-    const query = {
-      ...fetchUtils.flattenObject(params.filter),
-      [params.target]: params.id,
-      _sort: field,
-      _order: order,
-      _start: (page - 1) * perPage,
-      _end: page * perPage,
-    };
-    const url = `${apiUrl}/${resource}?${stringify(query)}`;
+   update: async (resource, params) => {
+      let data = params.data;
 
-    return httpClient(url).then(({ headers, json }) => {
-      if (!headers.has('x-total-count')) {
-        throw new Error(
-          'The X-Total-Count header is missing in the HTTP Response. The jsonServer Data Provider expects responses for lists of resources to contain this header with the total number of results to build the pagination. If you are using CORS, did you declare X-Total-Count in the Access-Control-Expose-Headers header?'
-        );
+      if (resource === Routes.categories) {
+         data = await uploadFile(
+            apiUrl,
+            data,
+            P<ICategoryDTOEx>((p) => p.iconFile),
+            P<ICategoryDTOEx>((p) => p.icon),
+            true
+         );
+         data = await uploadFile(
+            apiUrl,
+            data,
+            P<ICategoryDTOEx>((p) => p.pinFile),
+            P<ICategoryDTOEx>((p) => p.pin),
+            true
+         );
       }
-      return {
-        data: json,
-        total: parseInt((headers?.get('x-total-count')?.split('/').pop()) || "0", 10),
-      };
-    });
-  },
 
-  update: async (resource, params) => {
-    let data = params.data;
+      return httpClientToken(`${apiUrl}/${resource}/${params.id}`, {
+         method: 'PUT',
+         body: JSON.stringify(data)
+      }).then(({ json }) => ({ data: json }));
+   },
 
-    if (resource === Routes.categories) {
-      data = await uploadFile(apiUrl, data, P<ICategoryDTOEx>(p => p.iconFile), P<ICategoryDTOEx>(p => p.icon), true);
-      data = await uploadFile(apiUrl, data, P<ICategoryDTOEx>(p => p.pinFile), P<ICategoryDTOEx>(p => p.pin), true);
-    }
+   // json-server doesn't handle filters on UPDATE route, so we fallback to calling UPDATE n times instead
+   updateMany: (resource, params) =>
+      Promise.all(
+         params.ids.map((id) =>
+            httpClientToken(`${apiUrl}/${resource}/${id}`, {
+               method: 'PUT',
+               body: JSON.stringify(params.data)
+            })
+         )
+      ).then((responses) => ({ data: responses.map(({ json }) => json.id) })),
 
-    return httpClientToken(`${apiUrl}/${resource}/${params.id}`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-    }).then(({ json }) => ({ data: json }))
-  },
+   create: async (resource, params) => {
+      let data = params.data;
 
-  // json-server doesn't handle filters on UPDATE route, so we fallback to calling UPDATE n times instead
-  updateMany: (resource, params) =>
-    Promise.all(
-      params.ids.map(id =>
-        httpClientToken(`${apiUrl}/${resource}/${id}`, {
-          method: 'PUT',
-          body: JSON.stringify(params.data),
-        })
-      )
-    ).then(responses => ({ data: responses.map(({ json }) => json.id) })),
+      if (resource === Routes.categories) {
+         data = await uploadFile(
+            apiUrl,
+            data,
+            P<ICategoryDTOEx>((p) => p.iconFile),
+            P<ICategoryDTOEx>((p) => p.icon)
+         );
+         data = await uploadFile(
+            apiUrl,
+            data,
+            P<ICategoryDTOEx>((p) => p.pinFile),
+            P<ICategoryDTOEx>((p) => p.pin)
+         );
+      }
 
-  create: async (resource, params) => {
-    let data = params.data;
+      return httpClientToken(`${apiUrl}/${resource}`, {
+         method: 'POST',
+         body: JSON.stringify(data)
+      }).then(({ json }) => ({
+         data: { ...data, id: json.id }
+      }));
+   },
 
-    if (resource === Routes.categories) {
-      data = await uploadFile(apiUrl, data, P<ICategoryDTOEx>(p => p.iconFile), P<ICategoryDTOEx>(p => p.icon));
-      data = await uploadFile(apiUrl, data, P<ICategoryDTOEx>(p => p.pinFile), P<ICategoryDTOEx>(p => p.pin));
-    }
+   delete: (resource, params) => {
+      return deleteRecord(apiUrl, resource, params.id).then(({ json }) => ({ data: json }));
+   },
 
-    return httpClientToken(`${apiUrl}/${resource}`, {
-      method: 'POST',
-      body: JSON.stringify(data),
-    }).then(({ json }) => ({
-      data: { ...data, id: json.id },
-    }))
-  },
-
-  delete: (resource, params) => {
-    return deleteRecord(apiUrl, resource, params.id)
-      .then(({ json }) => ({ data: json }));
-  },
-
-  // json-server doesn't handle filters on DELETE route, so we fallback to calling DELETE n times instead
-  deleteMany: async (resource, params) => {
-    return Promise.all(
-      params.ids.map(id =>
-        deleteRecord(apiUrl, resource, id)
-      )
-    )
-    .then(responses => ({ data: responses.map(({ json }) => json.id) }))
-    // for (const id of params.ids) {
-    //   await deleteRecord(apiUrl, resource, id);
-    // }
-    // return Promise.resolve({ data: params.ids });
-  },
+   // json-server doesn't handle filters on DELETE route, so we fallback to calling DELETE n times instead
+   deleteMany: async (resource, params) => {
+      return Promise.all(
+         params.ids.map((id) => deleteRecord(apiUrl, resource, id))
+      ).then((responses) => ({ data: responses.map(({ json }) => json.id) }));
+      // for (const id of params.ids) {
+      //   await deleteRecord(apiUrl, resource, id);
+      // }
+      // return Promise.resolve({ data: params.ids });
+   }
 });

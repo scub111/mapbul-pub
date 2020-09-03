@@ -1,6 +1,5 @@
 import fetch from 'isomorphic-unfetch';
 import { isClient } from 'utils';
-//import { Mutex } from '@mapbul-pub/utils';
 import { Mutex } from '@mapbul-pub/utils';
 
 const cache = new Map();

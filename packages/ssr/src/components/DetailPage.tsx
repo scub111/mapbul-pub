@@ -18,11 +18,7 @@ export const DetailPage = <T extends object>({
     //   description={isRus ? item?.description : item?.descriptionEn?.toString()}
     //   imageUrl={item?.titlePhoto?.toString()}
     // >
-    <PageLayout
-      title={title}
-      description={description}
-      imageUrl={imageUrl}
-    >
+    <PageLayout title={title} description={description} imageUrl={imageUrl}>
       {error && <ErrorText error={error} />}
       {item && Component && <Component item={item} />}
     </PageLayout>

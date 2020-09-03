@@ -108,7 +108,7 @@ import { JwtStrategy } from './api/auth/jwt.strategy';
     WorkTimesService,
     UploadFileService,
     UploadFtpService,
-    AuthService, 
+    AuthService,
     LocalStrategy,
     JwtStrategy,
   ],

@@ -6,7 +6,7 @@ import { Fab } from '@material-ui/core';
 export const ScrollFab: React.FC<{ percent: number }> = ({ percent }) => {
   const radius = 18;
   const circumference = radius * 2 * Math.PI;
-  const offset = circumference - percent / 100 * circumference;
+  const offset = circumference - (percent / 100) * circumference;
   return (
     <ScrollTop>
       <Fab color="primary" size="small" aria-label="scroll back to top">

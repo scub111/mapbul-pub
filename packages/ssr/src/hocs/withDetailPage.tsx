@@ -17,7 +17,9 @@ export interface IDetailPageConfig<T> {
   loadData: (id: string) => Promise<T>;
 }
 
-export const withDetailPage = <T extends object>(config: IDetailPageConfig<T>) => (Component: React.FC<IDetailPageProps<T>>) => {
+export const withDetailPage = <T extends object>(config: IDetailPageConfig<T>) => (
+  Component: React.FC<IDetailPageProps<T>>,
+) => {
   const ArticleDetailPage: NextPage<IDetailPageProps<T>> = ({ item, error }) => {
     return <Component item={item} error={error} />;
   };

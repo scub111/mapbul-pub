@@ -10,8 +10,8 @@ export interface IImageFormData {
 
 export interface IFileResponse {
   fileName: string;
-};
+}
 
 export interface IFileCreateResponse extends IFileResponse {
   size: number;
-};
+}

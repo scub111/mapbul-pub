@@ -8,7 +8,6 @@ export const useTypeRoute = (): TypeRoute => {
   const router = useRouter();
   const keys = Object.keys(Routes);
   if (cacheMatch !== 'unknown' && router.pathname.includes(cacheMatch)) {
-
     return cacheMatch;
   }
   const match = keys.find(key => router.pathname.includes(key));

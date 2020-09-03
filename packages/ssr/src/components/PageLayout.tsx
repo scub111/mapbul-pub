@@ -30,7 +30,7 @@ export const PageLayout: React.FC<IPageBaseProps> = ({ children, title, descript
         <Container maxWidth="lg">{children}</Container>
       </main>
       <footer>
-        <ScrollFab percent={percent}/>
+        <ScrollFab percent={percent} />
         <Footer style={{ padding: theme.spacing(6, 0) }} />
       </footer>
     </ThemeProvider>

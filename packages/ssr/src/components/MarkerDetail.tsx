@@ -37,7 +37,9 @@ export const MarkerDetail: React.FC<IDetailItemProps<Marker>> = ({ item }) => {
         )}
       </Box>
       {item.photo && (
-        <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingBottom: theme.spacing(3) }}>
+        <Box
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingBottom: theme.spacing(3) }}
+        >
           <img style={{ maxWidth: '100%' }} src={item.photo} alt="" />
         </Box>
       )}

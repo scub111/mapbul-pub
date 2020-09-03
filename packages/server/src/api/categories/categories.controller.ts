@@ -8,7 +8,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('api/categories')
 export class CategoriesController implements IController<ICategoryDTO> {
-  constructor(private readonly service: CategoriesService) { }
+  constructor(private readonly service: CategoriesService) {}
 
   @Get()
   @UseInterceptors(NotFoundInterceptor)
@@ -35,7 +35,7 @@ export class CategoriesController implements IController<ICategoryDTO> {
 
   @Get(':id')
   @UseInterceptors(NotFoundInterceptor)
-  async getItem(@Param () params: IGetParams): Promise<ICategoryDTO> {
+  async getItem(@Param() params: IGetParams): Promise<ICategoryDTO> {
     return await this.service.getItem(params.id);
   }
 

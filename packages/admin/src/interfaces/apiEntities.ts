@@ -1,6 +1,6 @@
-import { ICategoryDTO } from "@mapbul-pub/types";
+import { ICategoryDTO } from '@mapbul-pub/types';
 
 export interface ICategoryDTOEx extends ICategoryDTO {
-  iconFile: any;
-  pinFile: any;  
+   iconFile: any;
+   pinFile: any;
 }

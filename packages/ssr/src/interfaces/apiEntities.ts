@@ -7,4 +7,3 @@ export interface UserDescription {
   type: string;
   description: string;
 }
-

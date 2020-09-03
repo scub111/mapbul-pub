@@ -70,8 +70,10 @@ export class Article implements IArticleDTO {
     this.baseCategoryId = init.baseCategoryId;
     this.endDate = init.endDate;
     this.cityId = init.cityId;
-    this.titlePhotoPreview = init.titlePhotoPreview ? clearUrl(`${publicRuntimeConfig.IMAGE_URL}/${init.titlePhotoPreview}`) : null;
+    this.titlePhotoPreview = init.titlePhotoPreview
+      ? clearUrl(`${publicRuntimeConfig.IMAGE_URL}/${init.titlePhotoPreview}`)
+      : null;
     this.titlePhotoOriginal = init.titlePhotoOriginal;
     this.photoOriginal = init.photoOriginal;
-  }  
+  }
 }

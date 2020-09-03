@@ -17,7 +17,7 @@ describe('AdminsController', () => {
     controller = app.get<CategoriesController>(CategoriesController);
   });
 
-  afterAll (async () => {
+  afterAll(async () => {
     const connection = dbConnectionSingleton.getInstance();
     connection.disconnect();
   });

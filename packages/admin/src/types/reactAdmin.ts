@@ -1,4 +1,4 @@
-import { ReactChildren } from "react";
+import { ReactChildren } from 'react';
 
 /**
  * Types to eventually add in react-admin
@@ -7,19 +7,18 @@ import { ReactChildren } from "react";
 export declare type Identifier = string | number;
 
 export interface FieldProps<T> {
-  basePath?: string;
-  history?: any;
-  id?: Identifier;
-  location?: any;
-  match?: any;
-  record?: T;
-  resource?: string;  
+   basePath?: string;
+   history?: any;
+   id?: Identifier;
+   location?: any;
+   match?: any;
+   record?: T;
+   resource?: string;
 }
 
-export interface ReferenceFieldProps<T>
-  extends FieldProps<T> {
-  reference: string;
-  children: ReactChildren;
-  link?: string | false;
-  sortBy?: string;
+export interface ReferenceFieldProps<T> extends FieldProps<T> {
+   reference: string;
+   children: ReactChildren;
+   link?: string | false;
+   sortBy?: string;
 }

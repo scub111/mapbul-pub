@@ -11,7 +11,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('api/upload')
 export class UploadController {
-  constructor(private readonly service: UploadFtpService) { }
+  constructor(private readonly service: UploadFtpService) {}
 
   @Post()
   @UseGuards(JwtAuthGuard)
@@ -19,8 +19,7 @@ export class UploadController {
   async uploadFile(@UploadedFile() file: IFile, @Body() body: any): Promise<IFileCreateResponse> {
     const meta: IImageMeta = JSON.parse(body.meta);
     const fileName = `${meta.dir}/${uuidv4()}${path.extname(file.originalname)}`;
-    if (meta.fileName)
-      await this.service.delete(meta.fileName);
+    if (meta.fileName) await this.service.delete(meta.fileName);
     return await this.service.write(fileName, file);
   }
 

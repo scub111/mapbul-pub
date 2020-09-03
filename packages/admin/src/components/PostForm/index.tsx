@@ -101,7 +101,4 @@ const mapDispatchToProps = (dispatch: any) => ({
    createPostRequest: (post: PostModel) => dispatch(PostActions.createActivity.request(post))
 });
 
-export default connect(
-   mapStateToProps,
-   mapDispatchToProps
-)(PostForm);
+export default connect(mapStateToProps, mapDispatchToProps)(PostForm);

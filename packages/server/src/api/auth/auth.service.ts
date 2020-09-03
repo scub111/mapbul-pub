@@ -29,9 +29,9 @@ export class AuthService {
   }
 
   async login(user: Partial<IUserDTO>): Promise<IAuthLogin> {
-    const payload: Partial<IUserDTO> = { 
-      guid: user.guid, 
-      email: user.email, 
+    const payload: Partial<IUserDTO> = {
+      guid: user.guid,
+      email: user.email,
       userTypeId: user.userTypeId,
       registrationDate: user.registrationDate,
       deleted: user.deleted,

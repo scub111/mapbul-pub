@@ -64,7 +64,8 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
   }
 
   async postItem(body: ICategoryDTO): Promise<ICategoryDTO> {
-    const response: IOkPacket = await this.connection.query(`
+    const response: IOkPacket = await this.connection.query(
+      `
       INSERT INTO category
       (
         \`Name\`,
@@ -86,7 +87,8 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
         '${body.color}',
         '${body.pin}',
         ${body.forArticle}
-      )`.replace(/\\/g, '\\\\'));
+      )`.replace(/\\/g, '\\\\'),
+    );
     return {
       id: response.insertId,
       ...body,
@@ -120,7 +122,8 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
   }
 
   async putItem(id: TID, body: ICategoryDTO): Promise<ICategoryDTO> {
-    await this.connection.query(`
+    await this.connection.query(
+      `
       UPDATE category
       SET
         \`name\`='${body.name}',
@@ -131,7 +134,8 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
         \`color\`='${body.color}',
         \`pin\`='${body.pin}',
         \`forArticle\`=${body.forArticle}
-      WHERE id = ${id}`.replace(/\\/g, '\\\\'));
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
     return body;
   }
 
@@ -141,6 +145,6 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
     await this.connection.query(`
       DELETE FROM category
       WHERE id = ${id}`);
-    return record
+    return record;
   }
 }

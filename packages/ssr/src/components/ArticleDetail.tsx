@@ -43,21 +43,31 @@ export const ArticleDetail: React.FC<IDetailItemProps<Article>> = ({ item }) => 
         )}
       </Box>
       <Typography component="div" variant="subtitle1" paragraph>
-        <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', float: 'left', padding: '0 20px 20px 0' }}>
+        <Box
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            float: 'left',
+            padding: '0 20px 20px 0',
+          }}
+        >
           {item.titlePhoto && (
             <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <img style={{ maxWidth: '100%' }} src={item.titlePhoto} title={item.title} alt="" />
             </Box>
           )}
-          {(isRus && item.sourcePhoto || !isRus && item.sourcePhotoEn) && (<Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Box style={{ display: 'flex', flexDirection: 'row', fontStyle: 'italic' }}>
-              {item.sourcePhoto && (
-                <Link display="block" variant="body1" href={item.sourcePhoto} key={item.sourcePhoto}>
-                  {isRus ? item.sourcePhoto : item.sourcePhotoEn}
-                </Link>
-              )}
+          {((isRus && item.sourcePhoto) || (!isRus && item.sourcePhotoEn)) && (
+            <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Box style={{ display: 'flex', flexDirection: 'row', fontStyle: 'italic' }}>
+                {item.sourcePhoto && (
+                  <Link display="block" variant="body1" href={item.sourcePhoto} key={item.sourcePhoto}>
+                    {isRus ? item.sourcePhoto : item.sourcePhotoEn}
+                  </Link>
+                )}
+              </Box>
             </Box>
-          </Box>)}
+          )}
         </Box>
         <PreText text={isRus ? item.text : item.textEn} />
         {item.photo && (
@@ -70,7 +80,6 @@ export const ArticleDetail: React.FC<IDetailItemProps<Article>> = ({ item }) => 
             {item.userDescription ? item.userDescription.description : ''}
           </Typography>
         )}
-
       </Typography>
     </Box>
   );

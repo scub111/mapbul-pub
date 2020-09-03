@@ -22,9 +22,9 @@
 // }
 
 export const createActions = (actions: Function[]) => {
-  return {
-    request: actions[0],
-    success: actions[1],
-    failure: actions[2],
-  };
-}
+   return {
+      request: actions[0],
+      success: actions[1],
+      failure: actions[2]
+   };
+};

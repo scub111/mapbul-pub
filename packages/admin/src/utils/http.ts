@@ -6,12 +6,12 @@ import { IAuthLogin } from '@mapbul-pub/types';
 export const httpClient = fetchUtils.fetchJson;
 
 export const httpClientToken = (url: string, options: Options = {}) => {
-  if (!options.headers) {
+   if (!options.headers) {
       const headers = new Headers({ Accept: 'application/json' });
-      const token = localStorage.getItem(P<IAuthLogin>(p => p.token));
+      const token = localStorage.getItem(P<IAuthLogin>((p) => p.token));
       headers.append('Authorization', `Bearer ${token}`);
       console.log(111, 'headers');
       options.headers = headers;
-  }
-  return fetchUtils.fetchJson(url, options);
+   }
+   return fetchUtils.fetchJson(url, options);
 };

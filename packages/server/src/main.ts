@@ -20,7 +20,7 @@ async function bootstrap() {
 
   // const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new AllExceptionsFilter());
-  
+
   const port = process.env.PORT || 3100;
   app.setBaseViewsDir(`${__dirname}/views`);
   app.setViewEngine('hbs');

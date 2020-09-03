@@ -29,9 +29,7 @@ export const MarkerListItem: React.FC<ListItemProps<Marker>> = ({ item, route })
                   </Typography>
                 </CardContent>
               </div>
-              {item.photo && (
-                <CardMedia image={item.photo} title={nameLang} style={{ width: '30%', minWidth: 150 }} />
-              )}
+              {item.photo && <CardMedia image={item.photo} title={nameLang} style={{ width: '30%', minWidth: 150 }} />}
             </Card>
           </MuiLink>
         </Link>

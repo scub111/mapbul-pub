@@ -8,7 +8,7 @@ const initialState: RootState.PostsState = {
    item: {},
    isFetching: false,
    error: ''
-}
+};
 
 /* export const postReducer = (state = initialState, action: any) => {
    switch (action.type) {
@@ -33,21 +33,21 @@ export const postReducer = handleActions<RootState.PostsState, PostModel[] & Pos
          return {
             ...state,
             isFetching: true
-         }
+         };
       },
       [PostActions.Type.FETCH_POSTS_SUCCESS]: (state, action) => {
          return {
             ...state,
             items: action.payload,
             isFetching: false
-         }
+         };
       },
       [PostActions.Type.FETCH_POSTS_FAILURE]: (state, action) => {
          return {
             ...state,
             error: action.payload,
             isFetching: false
-         }
+         };
       },
 
       [PostActions.Type.CREATE_POST_REQUEST]: (state, action) => {
@@ -55,21 +55,21 @@ export const postReducer = handleActions<RootState.PostsState, PostModel[] & Pos
             ...state,
             item: action.payload,
             isFetching: true
-         }
+         };
       },
       [PostActions.Type.CREATE_POST_SUCCESS]: (state, action) => {
          return {
             ...state,
             isFetching: false
-         }
+         };
       },
       [PostActions.Type.FETCH_POSTS_FAILURE]: (state, action) => {
          return {
             ...state,
             error: action.payload,
             isFetching: false
-         }
-      },
+         };
+      }
    },
    initialState
 );

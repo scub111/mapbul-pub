@@ -4,9 +4,9 @@ export interface PostReducerModel {
    items: PostModel[];
    item: PostModel;
    isFetching: boolean;
-   error: any
+   error: any;
 }
 
 export namespace RootState {
-  export type PostsState = PostReducerModel;
+   export type PostsState = PostReducerModel;
 }

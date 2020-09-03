@@ -1,6 +1,6 @@
 import * as ftp from 'basic-ftp';
-import { GlobalVar } from "@mapbul-pub/common";
-import { Readable } from "stream";
+import { GlobalVar } from '@mapbul-pub/common';
+import { Readable } from 'stream';
 
 class FtpConnection {
   client: ftp.Client;
@@ -11,8 +11,8 @@ class FtpConnection {
 
     await this.client.access({
       host: GlobalVar.env.fileStorage,
-      user: "FtpUser",
-      password: "qwe+ASDFG",
+      user: 'FtpUser',
+      password: 'qwe+ASDFG',
       // secure: true
     });
   }

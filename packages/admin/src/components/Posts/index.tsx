@@ -58,7 +58,4 @@ const mapDispatchToProps = (dispatch: any) => ({
    fetchPostsRequest: () => dispatch(PostActions.fetchActivity.request())
 });
 
-export default connect(
-   mapStateToProps,
-   mapDispatchToProps
-)(Posts);
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);

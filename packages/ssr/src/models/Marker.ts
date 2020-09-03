@@ -45,7 +45,7 @@ export class Marker implements IMarkerDTO {
 
   category: Category | undefined;
   userDescription: UserDescription | undefined;
-  
+
   public constructor(init: IMarkerDTO) {
     this.id = init.id;
     this.name = init.name;

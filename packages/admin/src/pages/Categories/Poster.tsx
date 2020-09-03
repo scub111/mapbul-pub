@@ -23,7 +23,12 @@ const Poster: React.FC<{ src: string; style?: CSSProperties }> = ({ src, style }
                />
             </CardContent>
          </Card>
-         <Typography variant="subtitle1" paragraph component="h6" style={{ marginBottom: 0, fontSize: 12 }}>
+         <Typography
+            variant="subtitle1"
+            paragraph
+            component="h6"
+            style={{ marginBottom: 0, fontSize: 12 }}
+         >
             {`${width}x${height}`}
          </Typography>
       </Box>
