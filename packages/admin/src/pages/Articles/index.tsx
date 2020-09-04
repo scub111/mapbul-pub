@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { P } from '@mapbul-pub/utils';
 import { Routes } from '@mapbul-pub/ui';
-import { IArticleDTO, ICategoryDTO } from '@mapbul-pub/types';
+import { IArticleDTO, ICategoryDTO, IStatusDTO } from '@mapbul-pub/types';
 import {
    Show,
    ShowButton,
@@ -19,8 +19,14 @@ import {
    SelectInput,
    SimpleForm,
    TextInput,
-   Filter
+   Filter,
+   DateInput,
+   DateTimeInput,
+   AutocompleteInput
 } from 'react-admin';
+import { IArticleDTOEx } from 'interfaces';
+import { RowLayout, SectionTitle } from 'components';
+import { withEditPage } from 'hocs';
 
 const ArticleFilter: React.FC = (props: any) => (
    <Filter {...props}>
@@ -48,7 +54,7 @@ const PostPanel = ({
 
 export const ArticleList: React.FC = (props: any) => (
    <List {...props} filters={<ArticleFilter />}>
-      <Datagrid expand={<PostPanel />}>
+      <Datagrid rowClick="edit" expand={<PostPanel />}>
          <TextField source={P<IArticleDTO>((p) => p.id)} label="№" />
          <ReferenceField
             label="Категория"
@@ -70,22 +76,55 @@ export const ArticleList: React.FC = (props: any) => (
    </List>
 );
 
-const ArticleTitle: React.FC = ({ record }: any) => {
-   return <span>Article {record ? `"${record.title}"` : ''}</span>;
-};
-
-export const ArticleEdit: React.FC = (props: any) => (
-   <Edit title={<ArticleTitle />} {...props}>
-      <SimpleForm>
-         <TextInput disabled source="id" />
-         <ReferenceInput label="User" source="userId" reference="users">
+export const ArticleEdit: React.FC = withEditPage<IArticleDTOEx>((props) => {
+   return (
+      <SimpleForm {...props}>
+         <SectionTitle label="Main" />
+         {/* <TextInput disabled source={P<IArticleDTOEx>((p) => p.id)} /> */}
+         {/* <ReferenceInput label="User" source="userId" reference="users">
             <SelectInput optionText="name" />
-         </ReferenceInput>
-         <TextInput source="title" />
-         <TextInput multiline source="body" />
+         </ReferenceInput> */}
+         <RowLayout>
+            <TextInput source={P<IArticleDTOEx>((p) => p.title)} fullWidth/>
+            <TextInput source={P<IArticleDTOEx>((p) => p.titleEn)} fullWidth/>
+         </RowLayout>
+         <RowLayout>
+            <TextInput source={P<IArticleDTOEx>((p) => p.description)} fullWidth/>
+            <TextInput source={P<IArticleDTOEx>((p) => p.descriptionEn)} fullWidth/>
+         </RowLayout>
+         <RowLayout>
+            <TextInput multiline source={P<IArticleDTOEx>((p) => p.text)} fullWidth/>
+            <TextInput multiline source={P<IArticleDTOEx>((p) => p.textEn)} fullWidth/>
+         </RowLayout>
+         <RowLayout>
+            <TextInput source={P<IArticleDTOEx>((p) => p.sourceUrl)} fullWidth/>
+            <TextInput source={P<IArticleDTOEx>((p) => p.sourceUrlEn)} fullWidth/>
+         </RowLayout>
+         <SectionTitle label="Misc" />
+         <RowLayout>
+            <DateTimeInput source={P<IArticleDTOEx>((p) => p.startDate)} fullWidth/>
+            <DateTimeInput source={P<IArticleDTOEx>((p) => p.endDate)} fullWidth/>
+         </RowLayout>
+         <RowLayout>
+            <DateTimeInput source={P<IArticleDTOEx>((p) => p.startDate)} fullWidth/>
+            <ReferenceInput
+               source={P<IArticleDTOEx>((p) => p.statusId)}
+               reference={Routes.statuses}
+               perPage={1000}
+               fullWidth
+            >
+               {/* <SelectInput optionText={P<ICategoryDTOEx>(p => p.name)} /> */}
+               <AutocompleteInput optionText={P<IStatusDTO>((p) => p.description)} />
+            </ReferenceInput>
+         </RowLayout>
+         <RowLayout>
+            <DateTimeInput source={P<IArticleDTOEx>((p) => p.addedDate)} fullWidth/>
+            <DateTimeInput source={P<IArticleDTOEx>((p) => p.publishedDate)} fullWidth/>
+         </RowLayout>
+
       </SimpleForm>
-   </Edit>
-);
+   );
+});
 
 export const ArticleCreate: React.FC = (props: any) => (
    <Create {...props}>

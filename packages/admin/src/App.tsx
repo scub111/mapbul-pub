@@ -38,7 +38,7 @@ const App = () => (
          list={ArticleList}
          edit={ArticleEdit}
          create={ArticleCreate}
-         show={ArticleShow}
+         //show={ArticleShow}
       />
       <Resource
          name={Routes.categories}
@@ -46,7 +46,15 @@ const App = () => (
          list={CategoryList}
          edit={CategoryeEdit}
          create={CategoryCreate}
-         show={CategoryShow}
+         //show={CategoryShow}
+      />
+      <Resource
+         name={Routes.statuses}
+         //icon={UserIcon}
+         list={CategoryList}
+         edit={CategoryeEdit}
+         create={CategoryCreate}
+         //show={CategoryShow}
       />
    </Admin>
 );

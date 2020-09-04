@@ -22,12 +22,11 @@ import {
 } from 'react-admin';
 import { P, clearUrl } from '@mapbul-pub/utils';
 import { Routes } from '@mapbul-pub/ui';
-import { RowLayout } from 'components';
+import { RowLayout, SectionTitle, SortedGrid } from 'components';
 import Poster from './Poster';
 import { GlobalVar } from 'src/constants';
 import { withCreatePage, withEditPage } from 'hocs';
 import { ICategoryDTOEx } from 'interfaces';
-import { useEffect } from 'react';
 
 // <SimpleList
 //   primaryText={(record: ICategoryDTOEx) => record.name}
@@ -35,48 +34,18 @@ import { useEffect } from 'react';
 //   tertiaryText={(record: ICategoryDTOEx) => record.parentId}
 // /></List>
 
-const CategoriesGrid: React.FC = (props: any) => {
-   const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
-   const { currentSort, setSort } = useListSortContext();
 
-   useEffect(() => {
-      if (currentSort.field === P<ICategoryDTOEx>((p) => p.id) && currentSort.order === 'ASC') {
-         setSort(
-            P<ICategoryDTOEx>((p) => p.id),
-            'DESC'
-         );
-      }
-   }, []);
-
-   return (
-      <Datagrid rowClick="edit" {...props}>
-         <TextField source={P<ICategoryDTOEx>((p) => p.id)} />
-         <TextField source={P<ICategoryDTOEx>((p) => p.name)} />
-         <TextField source={P<ICategoryDTOEx>((p) => p.enName)} />
-         {!isSmall && <BooleanField source={P<ICategoryDTOEx>((p) => p.forArticle)} />}
-      </Datagrid>
-   );
-};
 
 export const CategoryList: React.FC = (props: any) => {
-   // const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
-   // const { currentSort, setSort } = useListSortContext();
-
-   // useEffect(() => {
-   //   if (currentSort?.order === 'ASC') {
-   //     setSort(P<ICategoryDTOEx>(p => p.id), 'DESC');
-   //   }
-   // }, []);
-
+  const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
    return (
       <List title="All categories" {...props}>
-         {/* <Datagrid rowClick="edit">
-        <TextField source={P<ICategoryDTOEx>(p => p.id)} />
-        <TextField source={P<ICategoryDTOEx>(p => p.name)} />
-        <TextField source={P<ICategoryDTOEx>(p => p.enName)} />
-        {!isSmall && <BooleanField source={P<ICategoryDTOEx>(p => p.forArticle)} />} 
-      </Datagrid> */}
-         <CategoriesGrid {...props} />
+         <SortedGrid {...props}>
+          <TextField source={P<ICategoryDTOEx>((p) => p.id)} />
+          <TextField source={P<ICategoryDTOEx>((p) => p.name)} />
+          <TextField source={P<ICategoryDTOEx>((p) => p.enName)} />
+          {!isSmall && <BooleanField source={P<ICategoryDTOEx>((p) => p.forArticle)} />}
+         </SortedGrid>
       </List>
    );
 };
@@ -92,14 +61,6 @@ export const CategoryShow: React.FC = (props: any) => (
       </SimpleShowLayout>
    </Show>
 );
-
-const SectionTitle = ({ label }: { label: string }) => {
-   return (
-      <Typography variant="h6" gutterBottom>
-         {label}
-      </Typography>
-   );
-};
 
 const ImageFile: React.FC<{ label: string; source: string; [key: string]: any }> = ({
    label,
@@ -190,7 +151,7 @@ export const CategoryeEdit = withEditPage<ICategoryDTOEx>((props) => {
             <TextInput source={P<ICategoryDTOEx>((p) => p.enName)} fullWidth />
          </RowLayout>
          <BooleanInput source={P<ICategoryDTOEx>((p) => p.forArticle)} fullWidth />
-         <SectionTitle label="Photos" />
+         <SectionTitle label="Misc" />
          <RowLayout style={{ display: 'flex', alignItems: 'flex-end' }}>
             <Box>
                <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.icon}`)} />
