@@ -4,23 +4,18 @@ import { Routes } from '@mapbul-pub/ui';
 import { IArticleDTO, ICategoryDTO, IStatusDTO } from '@mapbul-pub/types';
 import {
    Show,
-   ShowButton,
    SimpleShowLayout,
    RichTextField,
    DateField,
    List,
-   Edit,
    Create,
    Datagrid,
    ReferenceField,
    TextField,
-   EditButton,
    ReferenceInput,
-   SelectInput,
    SimpleForm,
    TextInput,
    Filter,
-   DateInput,
    DateTimeInput,
    AutocompleteInput
 } from 'react-admin';
@@ -43,10 +38,7 @@ const ArticleFilter: React.FC = (props: any) => (
 );
 
 const PostPanel = ({
-   id,
-   record,
-   resource
-}: {
+   record}: {
    id?: string;
    record?: IArticleDTO;
    resource?: string;

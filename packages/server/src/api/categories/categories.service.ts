@@ -122,8 +122,7 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
   }
 
   async putItem(id: TID, body: ICategoryDTO): Promise<ICategoryDTO> {
-    await this.connection.query(
-      `
+    await this.connection.query(`
       UPDATE category
       SET
         \`name\`='${body.name}',
@@ -139,7 +138,6 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
     return body;
   }
 
-  // async deleteItem(id: TID): Promise<IRemoveResult> {
   async deleteItem(id: TID): Promise<ICategoryDTO> {
     const record = await this.getItem(id);
     await this.connection.query(`

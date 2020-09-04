@@ -29,8 +29,8 @@ export const StatusCreate: React.FC = withCreatePage((props) => {
          <RowLayout>
             <TextInput disabled source={P<IStatusDTO>((p) => p.id)} fullWidth />
             <TextInput source={P<IStatusDTO>((p) => p.tag)} fullWidth validate={required()} />
-            <TextInput source={P<IStatusDTO>((p) => p.description)} fullWidth defaultValue="" />
          </RowLayout>
+         <TextInput source={P<IStatusDTO>((p) => p.description)} fullWidth defaultValue="" />
       </SimpleForm>
    );
 });
@@ -41,8 +41,8 @@ export const StatusEdit = withEditPage<IStatusDTO>((props) => {
          <RowLayout>
             <TextInput disabled source={P<IStatusDTO>((p) => p.id)} fullWidth />
             <TextInput source={P<IStatusDTO>((p) => p.tag)} fullWidth />
-            <TextInput source={P<IStatusDTO>((p) => p.description)} fullWidth />
          </RowLayout>
+         <TextInput source={P<IStatusDTO>((p) => p.description)} fullWidth />
       </SimpleForm>
    );
 });
