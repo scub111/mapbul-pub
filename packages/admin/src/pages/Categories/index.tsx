@@ -22,8 +22,9 @@ import {
 } from 'react-admin';
 import { P, clearUrl } from '@mapbul-pub/utils';
 import { Routes } from '@mapbul-pub/ui';
-import { RowLayout, SectionTitle, SortedGrid } from 'components';
-import Poster from './Poster';
+import { SortedGrid } from 'components';
+import { RowLayout, SectionTitle } from 'ui';
+import { Poster } from './Poster';
 import { GlobalVar } from 'src/constants';
 import { withCreatePage, withEditPage } from 'hocs';
 import { ICategoryDTOEx } from 'interfaces';
@@ -33,8 +34,6 @@ import { ICategoryDTOEx } from 'interfaces';
 //   secondaryText={(record: ICategoryDTOEx) => record.id}
 //   tertiaryText={(record: ICategoryDTOEx) => record.parentId}
 // /></List>
-
-
 
 export const CategoryList: React.FC = (props: any) => {
   const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));

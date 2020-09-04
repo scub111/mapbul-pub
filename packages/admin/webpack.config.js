@@ -106,6 +106,7 @@ module.exports = (env, argv) => {
         services: `${sourcePath}/services`,
         store: `${sourcePath}/store`,
         types: `${sourcePath}/types`,
+        ui: `${sourcePath}/ui`,
         utils: `${sourcePath}/utils`,
       }
     },

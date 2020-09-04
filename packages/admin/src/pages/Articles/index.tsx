@@ -25,7 +25,7 @@ import {
    AutocompleteInput
 } from 'react-admin';
 import { IArticleDTOEx } from 'interfaces';
-import { RowLayout, SectionTitle } from 'components';
+import { RowLayout, SectionTitle } from 'ui';
 import { withEditPage } from 'hocs';
 
 const ArticleFilter: React.FC = (props: any) => (

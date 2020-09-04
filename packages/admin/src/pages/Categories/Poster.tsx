@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import { useImageInfo } from 'hooks';
 import { Typography, Box } from '@material-ui/core';
 
-const Poster: React.FC<{ src: string; style?: CSSProperties }> = ({ src, style }) => {
+export const Poster: React.FC<{ src: string; style?: CSSProperties }> = ({ src, style }) => {
    const [width, height] = useImageInfo(src);
    return (
       <Box>
@@ -34,5 +34,3 @@ const Poster: React.FC<{ src: string; style?: CSSProperties }> = ({ src, style }
       </Box>
    );
 };
-
-export default Poster;
