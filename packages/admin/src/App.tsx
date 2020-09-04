@@ -13,8 +13,11 @@ import {
    ArticleShow,
    CategoryList,
    CategoryShow,
-   CategoryeEdit,
-   CategoryCreate
+   CategoryEdit,
+   CategoryCreate,
+   StatusList,
+   StatusEdit,
+   StatusCreate
 } from 'pages';
 
 import authProvider from './authProvider';
@@ -44,17 +47,15 @@ const App = () => (
          name={Routes.categories}
          //icon={UserIcon}
          list={CategoryList}
-         edit={CategoryeEdit}
+         edit={CategoryEdit}
          create={CategoryCreate}
-         //show={CategoryShow}
       />
       <Resource
          name={Routes.statuses}
          //icon={UserIcon}
-         list={CategoryList}
-         edit={CategoryeEdit}
-         create={CategoryCreate}
-         //show={CategoryShow}
+         list={StatusList}
+         edit={StatusEdit}
+         create={StatusCreate}
       />
    </Admin>
 );

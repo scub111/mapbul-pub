@@ -1,11 +1,8 @@
 import * as React from 'react';
-import { useMediaQuery, Theme, Box, Typography } from '@material-ui/core';
+import { useMediaQuery, Theme, Box } from '@material-ui/core';
 import {
-   SimpleList,
    List,
-   Datagrid,
    TextField,
-   useListSortContext,
    Show,
    SimpleShowLayout,
    DateField,
@@ -23,8 +20,7 @@ import {
 import { P, clearUrl } from '@mapbul-pub/utils';
 import { Routes } from '@mapbul-pub/ui';
 import { SortedGrid } from 'components';
-import { RowLayout, SectionTitle } from 'ui';
-import { Poster } from './Poster';
+import { RowLayout, SectionTitle, Poster } from 'ui';
 import { GlobalVar } from 'src/constants';
 import { withCreatePage, withEditPage } from 'hocs';
 import { ICategoryDTOEx } from 'interfaces';
@@ -103,7 +99,7 @@ export const CategoryCreate: React.FC = withCreatePage((props) => {
             fullWidth
             defaultValue={false}
          />
-         <SectionTitle label="Photos" />
+         <SectionTitle label="Misc" />
          <RowLayout>
             <ImageFile
                label="icon"
@@ -128,7 +124,7 @@ export const CategoryCreate: React.FC = withCreatePage((props) => {
    );
 });
 
-export const CategoryeEdit = withEditPage<ICategoryDTOEx>((props) => {
+export const CategoryEdit = withEditPage<ICategoryDTOEx>((props) => {
    const { record } = props;
    return (
       <SimpleForm {...props}>
