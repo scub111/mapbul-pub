@@ -15,11 +15,6 @@ export class CategoriesController implements IController<ICategoryDTO> {
     return this.service.getAll(query);
   }
 
-  //@Post()
-  //postItem(item: ICategoryDTO): ICategoryDTO {
-  //  throw new Error('Method not implemented.');
-  //}
-
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
@@ -27,21 +22,11 @@ export class CategoriesController implements IController<ICategoryDTO> {
     return await this.service.postItem(body);
   }
 
-  //@Put()
-  //putAll(item: ICategoryDTO): ICategoryDTO {
-  //  throw new Error('Method not implemented.');
-  //}
-
   @Get(':id')
   @UseInterceptors(NotFoundInterceptor)
   async getItem(@Param() params: IGetParams): Promise<ICategoryDTO> {
     return await this.service.getItem(params.id);
   }
-
-  //@Delete()
-  //deleteAll(): void {
-  //  throw new Error('Method not implemented.');
-  //}
 
   @Put(':id')
   @UseGuards(JwtAuthGuard)

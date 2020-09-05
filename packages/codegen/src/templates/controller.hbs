@@ -1,9 +1,10 @@
-import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
-import { IGetParams } from 'serverSrc/common/interfaces';
-import { IController } from 'serverSrc/common/IController';
+import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
+import { IController, IGetParams } from 'common';
+import { PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { PageContent, {{interfaceName}}, IGetAllQuery } from '@mapbul-pub/types';
-import { {{serviceName}} } from 'serverSrc/{{routerPath}}/{{service}}.service';
-import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
+import { {{serviceName}} } from './{{service}}.service';
+import { NotFoundInterceptor } from 'interceptors';
+import { JwtAuthGuard } from '../auth';
 
 @Controller('{{router}}')
 export class {{controllerName}} implements IController<{{interfaceName}}> {
@@ -15,10 +16,10 @@ export class {{controllerName}} implements IController<{{interfaceName}}> {
     return this.service.getAll(query);
   }
 
-  //@Post()
-  //postItem(item: {{interfaceName}}): {{interfaceName}} {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Post()
+  postItem(item: {{interfaceName}}): {{interfaceName}} {
+    throw new Error('Method not implemented.');
+  }
 
   //@Put()
   //putAll(item: {{interfaceName}}): {{interfaceName}} {

@@ -48,7 +48,7 @@ export class {{serviceName}} implements BaseService<{{interfaceName}}> {
   async postItem(body: {{interfaceName}}): Promise<{{interfaceName}}> {
     const response: IOkPacket = await this.connection.query(
       `
-      INSERT INTO category
+      INSERT INTO {{tableName}}
       (
         {{#each fields}}
         {{#ifNotEquals field "id"}}
@@ -91,11 +91,26 @@ export class {{serviceName}} implements BaseService<{{interfaceName}}> {
     )[0];
   }
 
-  //putItem(id: TID): {{interfaceName}} {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: {{interfaceName}}): Promise<{{interfaceName}}> {
+    await this.connection.query(
+      `
+      UPDATE {{tableName}}
+      SET
+        {{#each fields}}
+        {{#ifNotEquals field "id"}}
+        \`{{field}}\`={{{value}}}{{separator}}
+        {{/ifNotEquals}}
+        {{/each}}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): {{interfaceName}} {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<{{interfaceName}}> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM {{tableName}}
+      WHERE id = ${id}`);
+    return record;
+  }
 }
