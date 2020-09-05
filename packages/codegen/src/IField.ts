@@ -4,4 +4,5 @@ export interface IField {
   type: string;
   nullable: boolean;
   separator: string;
+  value?: string;
 }

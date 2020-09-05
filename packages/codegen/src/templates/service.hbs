@@ -44,9 +44,32 @@ export class {{serviceName}} implements BaseService<{{interfaceName}}> {
     };
   }
 
-  //postItem(item: {{interfaceName}}): Promise<{{interfaceName}}> {
-  //  throw new Error('Method not implemented.');
-  //}
+  postItem(item: {{interfaceName}}): Promise<{{interfaceName}}> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO category
+      (
+        {{#each fields}}
+        \`{{field}}\`{{separator}}
+        {{/each}}
+      ) 
+      Values 
+      (
+        '${body.name}',
+        '${body.enName}',
+        ${body.parentId},
+        '${dateTimeFormat(body.addedDate)}',
+        '${body.icon}'',
+        '${body.color}',
+        '${body.pin}',
+        ${body.forArticle}
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: {{interfaceName}}): {{interfaceName}} {
   //  throw new Error('Method not implemented.');

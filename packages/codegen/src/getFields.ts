@@ -30,17 +30,22 @@ const traslateType = (type: string) => {
   return type;
 };
 
-export const getFields = async (connection: IDbConnection, tableName: string) => {
+export const getFields = async (connection: IDbConnection, tableName: string): Promise<Array<IField>> => {
   const result: any[] = await connection.query(`DESCRIBE ${tableName}`);
   // console.log(result);
-  return result.map(
-    (row: IDescribeRowData, index: number) =>
-      ({
-        fieldOrigin: row.Field,
-        field: traslateField(row.Field),
-        type: traslateType(row.Type),
-        nullable: traslateNull(row.Null),
-        separator: index !== result.length - 1 ? ',' : '',
-      } as IField),
-  );
+  return result.map((row: IDescribeRowData, index: number) => {
+    const field = {
+      fieldOrigin: row.Field,
+      field: traslateField(row.Field),
+      type: traslateType(row.Type),
+      nullable: traslateNull(row.Null),
+      separator: index !== result.length - 1 ? ',' : '',
+      //value: `\${body.${traslateField(row.Field)}}`,
+    };
+
+    return {
+      ...field,
+      value: `--${field.type}--`
+    };
+  });
 };
