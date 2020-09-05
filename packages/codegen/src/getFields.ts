@@ -17,7 +17,9 @@ const traslateNull = (nullable: string) => {
   return nullable === 'YES';
 };
 
-const traslateType = (type: string) => {
+type DbType = 'string' | 'number' | 'boolean' | 'Date' | 'unknown';
+
+const traslateType = (type: string): DbType => {
   if (type.includes('varchar') || type.includes('text') || type.includes('char')) {
     return 'string';
   } else if (type.includes('int') || type.includes('float') || type.includes('double')) {
@@ -27,7 +29,7 @@ const traslateType = (type: string) => {
   } else if (type.includes('data') || type.includes('time')) {
     return 'Date';
   }
-  return type;
+  return 'unknown';
 };
 
 export const getFields = async (connection: IDbConnection, tableName: string): Promise<Array<IField>> => {
@@ -40,12 +42,21 @@ export const getFields = async (connection: IDbConnection, tableName: string): P
       type: traslateType(row.Type),
       nullable: traslateNull(row.Null),
       separator: index !== result.length - 1 ? ',' : '',
-      //value: `\${body.${traslateField(row.Field)}}`,
     };
+
+    let value = '';
+
+    if (field.type === 'string') {
+      value = `'\${body.${field.field}}'`
+    } else if (field.type === 'Date') {
+      value = `'\${dateTimeFormat(body.${field.field})}'`
+    } else {
+      value = `\${body.${field.field}}`
+    }
 
     return {
       ...field,
-      value: `--${field.type}--`
+      value
     };
   });
 };

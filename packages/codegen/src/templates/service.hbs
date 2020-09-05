@@ -1,5 +1,6 @@
 import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
+import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, {{interfaceName}}, IGetAllQuery } from '@mapbul-pub/types';
 
 export class {{serviceName}} implements BaseService<{{interfaceName}}> {
@@ -44,25 +45,24 @@ export class {{serviceName}} implements BaseService<{{interfaceName}}> {
     };
   }
 
-  postItem(item: {{interfaceName}}): Promise<{{interfaceName}}> {
+  async postItem(body: {{interfaceName}}): Promise<{{interfaceName}}> {
     const response: IOkPacket = await this.connection.query(
       `
       INSERT INTO category
       (
         {{#each fields}}
+        {{#ifNotEquals field "id"}}
         \`{{field}}\`{{separator}}
+        {{/ifNotEquals}}
         {{/each}}
       ) 
       Values 
       (
-        '${body.name}',
-        '${body.enName}',
-        ${body.parentId},
-        '${dateTimeFormat(body.addedDate)}',
-        '${body.icon}'',
-        '${body.color}',
-        '${body.pin}',
-        ${body.forArticle}
+        {{#each fields}}
+        {{#ifNotEquals field "id"}}
+        {{{value}}}{{separator}}
+        {{/ifNotEquals}}
+        {{/each}}
       )`.replace(/\\/g, '\\\\'),
     );
     return {
