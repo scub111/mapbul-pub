@@ -28,6 +28,8 @@ export const generateController = async (
 
   const fields = await getFields(connection, tableName);
 
+  const hasDateField = fields.some(i => i.type === 'Date');
+
   // Create *.dto.ts
   createSorce({
     templatePath: `${templateRootPath}/dto.hbs`,
@@ -47,6 +49,7 @@ export const generateController = async (
       interfaceName,
       filePrefixDTO,
       fields,
+      hasDateField
     },
     sourcePath: `${serverRootPath}/${routerPath}/${filePrefix}.service.ts`,
   });

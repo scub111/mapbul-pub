@@ -1,6 +1,6 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
+import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, IUserDTO, IGetAllQuery } from '@mapbul-pub/types';
 
 export class UsersService implements BaseService<IUserDTO> {
@@ -49,9 +49,33 @@ export class UsersService implements BaseService<IUserDTO> {
     };
   }
 
-  //postItem(item: IUserDTO): Promise<IUserDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IUserDTO): Promise<IUserDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO user
+      (
+        \`email\`,
+        \`password\`,
+        \`guid\`,
+        \`userTypeId\`,
+        \`registrationDate\`,
+        \`deleted\`
+      ) 
+      Values 
+      (
+        '${body.email}',
+        '${body.password}',
+        '${body.guid}',
+        ${body.userTypeId},
+        '${dateTimeFormat(body.registrationDate)}',
+        ${body.deleted}
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IUserDTO): IUserDTO {
   //  throw new Error('Method not implemented.');
@@ -77,11 +101,27 @@ export class UsersService implements BaseService<IUserDTO> {
     )[0];
   }
 
-  //putItem(id: TID): IUserDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IUserDTO): Promise<IUserDTO> {
+    await this.connection.query(
+      `
+      UPDATE user
+      SET
+        \`email\`='${body.email}',
+        \`password\`='${body.password}',
+        \`guid\`='${body.guid}',
+        \`userTypeId\`=${body.userTypeId},
+        \`registrationDate\`='${dateTimeFormat(body.registrationDate)}',
+        \`deleted\`=${body.deleted}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IUserDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IUserDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM user
+      WHERE id = ${id}`);
+    return record;
+  }
 }

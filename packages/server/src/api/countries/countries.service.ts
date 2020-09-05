@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, ICountryDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -47,9 +46,29 @@ export class CountriesService implements BaseService<ICountryDTO> {
     };
   }
 
-  //postItem(item: ICountryDTO): Promise<ICountryDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: ICountryDTO): Promise<ICountryDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO country
+      (
+        \`name\`,
+        \`enName\`,
+        \`placeId\`,
+        \`code\`
+      ) 
+      Values 
+      (
+        '${body.name}',
+        '${body.enName}',
+        '${body.placeId}',
+        '${body.code}'
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: ICountryDTO): ICountryDTO {
   //  throw new Error('Method not implemented.');
@@ -73,11 +92,25 @@ export class CountriesService implements BaseService<ICountryDTO> {
     )[0];
   }
 
-  //putItem(id: TID): ICountryDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: ICountryDTO): Promise<ICountryDTO> {
+    await this.connection.query(
+      `
+      UPDATE country
+      SET
+        \`name\`='${body.name}',
+        \`enName\`='${body.enName}',
+        \`placeId\`='${body.placeId}',
+        \`code\`='${body.code}'
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): ICountryDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<ICountryDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM country
+      WHERE id = ${id}`);
+    return record;
+  }
 }

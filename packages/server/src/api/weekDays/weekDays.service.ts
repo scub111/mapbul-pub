@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IWeekDayDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -46,9 +45,27 @@ export class WeekDaysService implements BaseService<IWeekDayDTO> {
     };
   }
 
-  //postItem(item: IWeekDayDTO): Promise<IWeekDayDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IWeekDayDTO): Promise<IWeekDayDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO weekday
+      (
+        \`tag\`,
+        \`description\`,
+        \`descriptionEn\`
+      ) 
+      Values 
+      (
+        '${body.tag}',
+        '${body.description}',
+        '${body.descriptionEn}'
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IWeekDayDTO): IWeekDayDTO {
   //  throw new Error('Method not implemented.');
@@ -71,11 +88,24 @@ export class WeekDaysService implements BaseService<IWeekDayDTO> {
     )[0];
   }
 
-  //putItem(id: TID): IWeekDayDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IWeekDayDTO): Promise<IWeekDayDTO> {
+    await this.connection.query(
+      `
+      UPDATE weekday
+      SET
+        \`tag\`='${body.tag}',
+        \`description\`='${body.description}',
+        \`descriptionEn\`='${body.descriptionEn}'
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IWeekDayDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IWeekDayDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM weekday
+      WHERE id = ${id}`);
+    return record;
+  }
 }

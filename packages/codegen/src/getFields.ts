@@ -1,4 +1,4 @@
-import { IField } from 'codegenSrc/IField';
+import { DbType, IField } from 'codegenSrc/IField';
 import { IDbConnection } from '@mapbul-pub/types';
 
 interface IDescribeRowData {
@@ -16,8 +16,6 @@ const traslateField = (field: string) => {
 const traslateNull = (nullable: string) => {
   return nullable === 'YES';
 };
-
-type DbType = 'string' | 'number' | 'boolean' | 'Date' | 'unknown';
 
 const traslateType = (type: string): DbType => {
   if (type.includes('varchar') || type.includes('text') || type.includes('char')) {

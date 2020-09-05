@@ -1,6 +1,6 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
+import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, IMarkerDTO, IGetAllQuery } from '@mapbul-pub/types';
 
 export class MarkersService implements BaseService<IMarkerDTO> {
@@ -70,9 +70,75 @@ export class MarkersService implements BaseService<IMarkerDTO> {
     };
   }
 
-  //postItem(item: IMarkerDTO): Promise<IMarkerDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IMarkerDTO): Promise<IMarkerDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO marker
+      (
+        \`name\`,
+        \`nameEn\`,
+        \`introduction\`,
+        \`introductionEn\`,
+        \`description\`,
+        \`descriptionEn\`,
+        \`cityId\`,
+        \`baseCategoryId\`,
+        \`lat\`,
+        \`lng\`,
+        \`entryTicket\`,
+        \`discountId\`,
+        \`street\`,
+        \`house\`,
+        \`buliding\`,
+        \`floor\`,
+        \`site\`,
+        \`email\`,
+        \`photo\`,
+        \`userId\`,
+        \`addedDate\`,
+        \`publishedDate\`,
+        \`checkDate\`,
+        \`statusId\`,
+        \`logo\`,
+        \`wifi\`,
+        \`personal\`
+      ) 
+      Values 
+      (
+        '${body.name}',
+        '${body.nameEn}',
+        '${body.introduction}',
+        '${body.introductionEn}',
+        '${body.description}',
+        '${body.descriptionEn}',
+        ${body.cityId},
+        ${body.baseCategoryId},
+        ${body.lat},
+        ${body.lng},
+        '${body.entryTicket}',
+        ${body.discountId},
+        '${body.street}',
+        '${body.house}',
+        '${body.buliding}',
+        '${body.floor}',
+        '${body.site}',
+        '${body.email}',
+        '${body.photo}',
+        ${body.userId},
+        '${dateTimeFormat(body.addedDate)}',
+        '${dateTimeFormat(body.publishedDate)}',
+        '${dateTimeFormat(body.checkDate)}',
+        ${body.statusId},
+        '${body.logo}',
+        ${body.wifi},
+        ${body.personal}
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IMarkerDTO): IMarkerDTO {
   //  throw new Error('Method not implemented.');
@@ -119,11 +185,48 @@ export class MarkersService implements BaseService<IMarkerDTO> {
     )[0];
   }
 
-  //putItem(id: TID): IMarkerDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IMarkerDTO): Promise<IMarkerDTO> {
+    await this.connection.query(
+      `
+      UPDATE marker
+      SET
+        \`name\`='${body.name}',
+        \`nameEn\`='${body.nameEn}',
+        \`introduction\`='${body.introduction}',
+        \`introductionEn\`='${body.introductionEn}',
+        \`description\`='${body.description}',
+        \`descriptionEn\`='${body.descriptionEn}',
+        \`cityId\`=${body.cityId},
+        \`baseCategoryId\`=${body.baseCategoryId},
+        \`lat\`=${body.lat},
+        \`lng\`=${body.lng},
+        \`entryTicket\`='${body.entryTicket}',
+        \`discountId\`=${body.discountId},
+        \`street\`='${body.street}',
+        \`house\`='${body.house}',
+        \`buliding\`='${body.buliding}',
+        \`floor\`='${body.floor}',
+        \`site\`='${body.site}',
+        \`email\`='${body.email}',
+        \`photo\`='${body.photo}',
+        \`userId\`=${body.userId},
+        \`addedDate\`='${dateTimeFormat(body.addedDate)}',
+        \`publishedDate\`='${dateTimeFormat(body.publishedDate)}',
+        \`checkDate\`='${dateTimeFormat(body.checkDate)}',
+        \`statusId\`=${body.statusId},
+        \`logo\`='${body.logo}',
+        \`wifi\`=${body.wifi},
+        \`personal\`=${body.personal}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IMarkerDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IMarkerDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM marker
+      WHERE id = ${id}`);
+    return record;
+  }
 }

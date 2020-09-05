@@ -1,9 +1,9 @@
-import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
-import { IGetParams } from 'serverSrc/common/interfaces';
-import { IController } from 'serverSrc/common/IController';
+import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
+import { IController, IGetParams } from 'common';
 import { PageContent, IMarkerPhotosDTO, IGetAllQuery } from '@mapbul-pub/types';
-import { MarkerPhotosService } from 'serverSrc/api/markerPhotos/markerPhotos.service';
-import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
+import { MarkerPhotosService } from './markerPhotos.service';
+import { NotFoundInterceptor } from 'interceptors';
+import { JwtAuthGuard } from '../auth';
 
 @Controller('api/markerphotos')
 export class MarkerPhotosController implements IController<IMarkerPhotosDTO> {
@@ -15,15 +15,12 @@ export class MarkerPhotosController implements IController<IMarkerPhotosDTO> {
     return this.service.getAll(query);
   }
 
-  //@Post()
-  //postItem(item: IMarkerPhotosDTO): IMarkerPhotosDTO {
-  //  throw new Error('Method not implemented.');
-  //}
-
-  //@Put()
-  //putAll(item: IMarkerPhotosDTO): IMarkerPhotosDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Post()
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async postItem(@Body() body: IMarkerPhotosDTO): Promise<IMarkerPhotosDTO> {
+    return await this.service.postItem(body);
+  }
 
   @Get(':id')
   @UseInterceptors(NotFoundInterceptor)
@@ -31,17 +28,17 @@ export class MarkerPhotosController implements IController<IMarkerPhotosDTO> {
     return await this.service.getItem(params.id);
   }
 
-  //@Delete()
-  //deleteAll(): void {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Put(':id')
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async putItem(@Param('id') id: string, @Body() body: IMarkerPhotosDTO): Promise<IMarkerPhotosDTO> {
+    return await this.service.putItem(id, body);
+  }
 
-  //@Put(':id')
-  //putItem(id: TID, item: IMarkerPhotosDTO): IMarkerPhotosDTO {
-  //  throw new Error('Method not implemented.');
-  //}
-
-  //deleteItem(id: TID): IMarkerPhotosDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async deleteItem(@Param('id') id: string): Promise<IMarkerPhotosDTO> {
+    return await this.service.deleteItem(id);
+  }
 }

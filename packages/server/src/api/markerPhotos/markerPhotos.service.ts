@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IMarkerPhotosDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -46,9 +45,27 @@ export class MarkerPhotosService implements BaseService<IMarkerPhotosDTO> {
     };
   }
 
-  //postItem(item: IMarkerPhotosDTO): Promise<IMarkerPhotosDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IMarkerPhotosDTO): Promise<IMarkerPhotosDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO marker_photos
+      (
+        \`markerId\`,
+        \`photo\`,
+        \`photoMini\`
+      ) 
+      Values 
+      (
+        ${body.markerId},
+        '${body.photo}',
+        '${body.photoMini}'
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IMarkerPhotosDTO): IMarkerPhotosDTO {
   //  throw new Error('Method not implemented.');
@@ -71,11 +88,24 @@ export class MarkerPhotosService implements BaseService<IMarkerPhotosDTO> {
     )[0];
   }
 
-  //putItem(id: TID): IMarkerPhotosDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IMarkerPhotosDTO): Promise<IMarkerPhotosDTO> {
+    await this.connection.query(
+      `
+      UPDATE marker_photos
+      SET
+        \`markerId\`=${body.markerId},
+        \`photo\`='${body.photo}',
+        \`photoMini\`='${body.photoMini}'
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IMarkerPhotosDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IMarkerPhotosDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM marker_photos
+      WHERE id = ${id}`);
+    return record;
+  }
 }

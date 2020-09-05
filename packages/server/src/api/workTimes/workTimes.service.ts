@@ -1,6 +1,6 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
+import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, IWorkTimeDTO, IGetAllQuery } from '@mapbul-pub/types';
 
 export class WorkTimesService implements BaseService<IWorkTimeDTO> {
@@ -47,9 +47,29 @@ export class WorkTimesService implements BaseService<IWorkTimeDTO> {
     };
   }
 
-  //postItem(item: IWorkTimeDTO): Promise<IWorkTimeDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IWorkTimeDTO): Promise<IWorkTimeDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO worktime
+      (
+        \`openTime\`,
+        \`closeTime\`,
+        \`markerId\`,
+        \`weekDayId\`
+      ) 
+      Values 
+      (
+        '${dateTimeFormat(body.openTime)}',
+        '${dateTimeFormat(body.closeTime)}',
+        ${body.markerId},
+        ${body.weekDayId}
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IWorkTimeDTO): IWorkTimeDTO {
   //  throw new Error('Method not implemented.');
@@ -73,11 +93,25 @@ export class WorkTimesService implements BaseService<IWorkTimeDTO> {
     )[0];
   }
 
-  //putItem(id: TID): IWorkTimeDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IWorkTimeDTO): Promise<IWorkTimeDTO> {
+    await this.connection.query(
+      `
+      UPDATE worktime
+      SET
+        \`openTime\`='${dateTimeFormat(body.openTime)}',
+        \`closeTime\`='${dateTimeFormat(body.closeTime)}',
+        \`markerId\`=${body.markerId},
+        \`weekDayId\`=${body.weekDayId}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IWorkTimeDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IWorkTimeDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM worktime
+      WHERE id = ${id}`);
+    return record;
+  }
 }

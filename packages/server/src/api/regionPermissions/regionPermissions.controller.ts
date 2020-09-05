@@ -1,9 +1,9 @@
-import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
-import { IGetParams } from 'serverSrc/common/interfaces';
-import { IController } from 'serverSrc/common/IController';
+import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
+import { IController, IGetParams } from 'common';
 import { PageContent, IRegionPermissionDTO, IGetAllQuery } from '@mapbul-pub/types';
-import { RegionPermissionsService } from 'serverSrc/api/regionPermissions/regionPermissions.service';
-import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
+import { RegionPermissionsService } from './regionPermissions.service';
+import { NotFoundInterceptor } from 'interceptors';
+import { JwtAuthGuard } from '../auth';
 
 @Controller('api/regionpermissions')
 export class RegionPermissionsController implements IController<IRegionPermissionDTO> {
@@ -15,15 +15,12 @@ export class RegionPermissionsController implements IController<IRegionPermissio
     return this.service.getAll(query);
   }
 
-  //@Post()
-  //postItem(item: IRegionPermissionDTO): IRegionPermissionDTO {
-  //  throw new Error('Method not implemented.');
-  //}
-
-  //@Put()
-  //putAll(item: IRegionPermissionDTO): IRegionPermissionDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Post()
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async postItem(@Body() body: IRegionPermissionDTO): Promise<IRegionPermissionDTO> {
+    return await this.service.postItem(body);
+  }
 
   @Get(':id')
   @UseInterceptors(NotFoundInterceptor)
@@ -31,17 +28,17 @@ export class RegionPermissionsController implements IController<IRegionPermissio
     return await this.service.getItem(params.id);
   }
 
-  //@Delete()
-  //deleteAll(): void {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Put(':id')
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async putItem(@Param('id') id: string, @Body() body: IRegionPermissionDTO): Promise<IRegionPermissionDTO> {
+    return await this.service.putItem(id, body);
+  }
 
-  //@Put(':id')
-  //putItem(id: TID, item: IRegionPermissionDTO): IRegionPermissionDTO {
-  //  throw new Error('Method not implemented.');
-  //}
-
-  //deleteItem(id: TID): IRegionPermissionDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async deleteItem(@Param('id') id: string): Promise<IRegionPermissionDTO> {
+    return await this.service.deleteItem(id);
+  }
 }

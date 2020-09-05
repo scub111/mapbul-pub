@@ -1,6 +1,8 @@
 import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
+{{#if hasDateField}}
 import { dateTimeFormat } from '@mapbul-pub/utils';
+{{/if}}
 import { IDbConnection, PageContent, {{interfaceName}}, IGetAllQuery } from '@mapbul-pub/types';
 
 export class {{serviceName}} implements BaseService<{{interfaceName}}> {

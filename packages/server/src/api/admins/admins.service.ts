@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IAdminDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -45,9 +44,25 @@ export class AdminsService implements BaseService<IAdminDTO> {
     };
   }
 
-  //postItem(item: IAdminDTO): Promise<IAdminDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IAdminDTO): Promise<IAdminDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO admin
+      (
+        \`userId\`,
+        \`superuser\`
+      ) 
+      Values 
+      (
+        ${body.userId},
+        ${body.superuser}
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IAdminDTO): IAdminDTO {
   //  throw new Error('Method not implemented.');
@@ -69,11 +84,23 @@ export class AdminsService implements BaseService<IAdminDTO> {
     )[0];
   }
 
-  //putItem(id: TID): IAdminDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IAdminDTO): Promise<IAdminDTO> {
+    await this.connection.query(
+      `
+      UPDATE admin
+      SET
+        \`userId\`=${body.userId},
+        \`superuser\`=${body.superuser}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IAdminDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IAdminDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM admin
+      WHERE id = ${id}`);
+    return record;
+  }
 }

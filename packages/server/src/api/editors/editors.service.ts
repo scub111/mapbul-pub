@@ -1,6 +1,6 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
+import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, IEditorDTO, IGetAllQuery } from '@mapbul-pub/types';
 
 export class EditorsService implements BaseService<IEditorDTO> {
@@ -51,9 +51,37 @@ export class EditorsService implements BaseService<IEditorDTO> {
     };
   }
 
-  //postItem(item: IEditorDTO): Promise<IEditorDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IEditorDTO): Promise<IEditorDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO editor
+      (
+        \`userId\`,
+        \`firstName\`,
+        \`middleName\`,
+        \`lastName\`,
+        \`gender\`,
+        \`phone\`,
+        \`birthDate\`,
+        \`address\`
+      ) 
+      Values 
+      (
+        ${body.userId},
+        '${body.firstName}',
+        '${body.middleName}',
+        '${body.lastName}',
+        '${body.gender}',
+        '${body.phone}',
+        '${dateTimeFormat(body.birthDate)}',
+        '${body.address}'
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IEditorDTO): IEditorDTO {
   //  throw new Error('Method not implemented.');
@@ -81,11 +109,29 @@ export class EditorsService implements BaseService<IEditorDTO> {
     )[0];
   }
 
-  //putItem(id: TID): IEditorDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IEditorDTO): Promise<IEditorDTO> {
+    await this.connection.query(
+      `
+      UPDATE editor
+      SET
+        \`userId\`=${body.userId},
+        \`firstName\`='${body.firstName}',
+        \`middleName\`='${body.middleName}',
+        \`lastName\`='${body.lastName}',
+        \`gender\`='${body.gender}',
+        \`phone\`='${body.phone}',
+        \`birthDate\`='${dateTimeFormat(body.birthDate)}',
+        \`address\`='${body.address}'
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IEditorDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IEditorDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM editor
+      WHERE id = ${id}`);
+    return record;
+  }
 }

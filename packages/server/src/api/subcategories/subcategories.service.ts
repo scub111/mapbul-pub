@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, ISubcategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -45,9 +44,25 @@ export class SubcategoriesService implements BaseService<ISubcategoryDTO> {
     };
   }
 
-  //postItem(item: ISubcategoryDTO): Promise<ISubcategoryDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: ISubcategoryDTO): Promise<ISubcategoryDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO subcategory
+      (
+        \`markerId\`,
+        \`categoryId\`
+      ) 
+      Values 
+      (
+        ${body.markerId},
+        ${body.categoryId}
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: ISubcategoryDTO): ISubcategoryDTO {
   //  throw new Error('Method not implemented.');
@@ -69,11 +84,23 @@ export class SubcategoriesService implements BaseService<ISubcategoryDTO> {
     )[0];
   }
 
-  //putItem(id: TID): ISubcategoryDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: ISubcategoryDTO): Promise<ISubcategoryDTO> {
+    await this.connection.query(
+      `
+      UPDATE subcategory
+      SET
+        \`markerId\`=${body.markerId},
+        \`categoryId\`=${body.categoryId}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): ISubcategoryDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<ISubcategoryDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM subcategory
+      WHERE id = ${id}`);
+    return record;
+  }
 }

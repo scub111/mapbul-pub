@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, ICityPermissionDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -45,9 +44,25 @@ export class CityPermissionsService implements BaseService<ICityPermissionDTO> {
     };
   }
 
-  //postItem(item: ICityPermissionDTO): Promise<ICityPermissionDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: ICityPermissionDTO): Promise<ICityPermissionDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO city_permission
+      (
+        \`cityId\`,
+        \`userId\`
+      ) 
+      Values 
+      (
+        ${body.cityId},
+        ${body.userId}
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: ICityPermissionDTO): ICityPermissionDTO {
   //  throw new Error('Method not implemented.');
@@ -69,11 +84,23 @@ export class CityPermissionsService implements BaseService<ICityPermissionDTO> {
     )[0];
   }
 
-  //putItem(id: TID): ICityPermissionDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: ICityPermissionDTO): Promise<ICityPermissionDTO> {
+    await this.connection.query(
+      `
+      UPDATE city_permission
+      SET
+        \`cityId\`=${body.cityId},
+        \`userId\`=${body.userId}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): ICityPermissionDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<ICityPermissionDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM city_permission
+      WHERE id = ${id}`);
+    return record;
+  }
 }

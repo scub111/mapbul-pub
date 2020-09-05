@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IDiscountDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -44,9 +43,23 @@ export class DiscountsService implements BaseService<IDiscountDTO> {
     };
   }
 
-  //postItem(item: IDiscountDTO): Promise<IDiscountDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IDiscountDTO): Promise<IDiscountDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO discount
+      (
+        \`value\`
+      ) 
+      Values 
+      (
+        ${body.value}
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IDiscountDTO): IDiscountDTO {
   //  throw new Error('Method not implemented.');
@@ -67,11 +80,22 @@ export class DiscountsService implements BaseService<IDiscountDTO> {
     )[0];
   }
 
-  //putItem(id: TID): IDiscountDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IDiscountDTO): Promise<IDiscountDTO> {
+    await this.connection.query(
+      `
+      UPDATE discount
+      SET
+        \`value\`=${body.value}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IDiscountDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IDiscountDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM discount
+      WHERE id = ${id}`);
+    return record;
+  }
 }

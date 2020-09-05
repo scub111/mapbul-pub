@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IUserTypeDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -45,9 +44,25 @@ export class UserTypesService implements BaseService<IUserTypeDTO> {
     };
   }
 
-  //postItem(item: IUserTypeDTO): Promise<IUserTypeDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IUserTypeDTO): Promise<IUserTypeDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO usertype
+      (
+        \`tag\`,
+        \`description\`
+      ) 
+      Values 
+      (
+        '${body.tag}',
+        '${body.description}'
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IUserTypeDTO): IUserTypeDTO {
   //  throw new Error('Method not implemented.');
@@ -69,11 +84,23 @@ export class UserTypesService implements BaseService<IUserTypeDTO> {
     )[0];
   }
 
-  //putItem(id: TID): IUserTypeDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IUserTypeDTO): Promise<IUserTypeDTO> {
+    await this.connection.query(
+      `
+      UPDATE usertype
+      SET
+        \`tag\`='${body.tag}',
+        \`description\`='${body.description}'
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IUserTypeDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IUserTypeDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM usertype
+      WHERE id = ${id}`);
+    return record;
+  }
 }

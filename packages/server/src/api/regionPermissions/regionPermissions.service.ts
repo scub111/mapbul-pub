@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IRegionPermissionDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -45,9 +44,25 @@ export class RegionPermissionsService implements BaseService<IRegionPermissionDT
     };
   }
 
-  //postItem(item: IRegionPermissionDTO): Promise<IRegionPermissionDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IRegionPermissionDTO): Promise<IRegionPermissionDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO region_permission
+      (
+        \`regionId\`,
+        \`userId\`
+      ) 
+      Values 
+      (
+        ${body.regionId},
+        ${body.userId}
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IRegionPermissionDTO): IRegionPermissionDTO {
   //  throw new Error('Method not implemented.');
@@ -69,11 +84,23 @@ export class RegionPermissionsService implements BaseService<IRegionPermissionDT
     )[0];
   }
 
-  //putItem(id: TID): IRegionPermissionDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IRegionPermissionDTO): Promise<IRegionPermissionDTO> {
+    await this.connection.query(
+      `
+      UPDATE region_permission
+      SET
+        \`regionId\`=${body.regionId},
+        \`userId\`=${body.userId}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IRegionPermissionDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IRegionPermissionDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM region_permission
+      WHERE id = ${id}`);
+    return record;
+  }
 }

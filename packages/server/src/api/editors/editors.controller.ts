@@ -1,9 +1,9 @@
-import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
-import { IGetParams } from 'serverSrc/common/interfaces';
-import { IController } from 'serverSrc/common/IController';
+import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
+import { IController, IGetParams } from 'common';
 import { PageContent, IEditorDTO, IGetAllQuery } from '@mapbul-pub/types';
-import { EditorsService } from 'serverSrc/api/editors/editors.service';
-import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
+import { EditorsService } from './editors.service';
+import { NotFoundInterceptor } from 'interceptors';
+import { JwtAuthGuard } from '../auth';
 
 @Controller('api/editors')
 export class EditorsController implements IController<IEditorDTO> {
@@ -15,15 +15,12 @@ export class EditorsController implements IController<IEditorDTO> {
     return this.service.getAll(query);
   }
 
-  //@Post()
-  //postItem(item: IEditorDTO): IEditorDTO {
-  //  throw new Error('Method not implemented.');
-  //}
-
-  //@Put()
-  //putAll(item: IEditorDTO): IEditorDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Post()
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async postItem(@Body() body: IEditorDTO): Promise<IEditorDTO> {
+    return await this.service.postItem(body);
+  }
 
   @Get(':id')
   @UseInterceptors(NotFoundInterceptor)
@@ -31,17 +28,17 @@ export class EditorsController implements IController<IEditorDTO> {
     return await this.service.getItem(params.id);
   }
 
-  //@Delete()
-  //deleteAll(): void {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Put(':id')
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async putItem(@Param('id') id: string, @Body() body: IEditorDTO): Promise<IEditorDTO> {
+    return await this.service.putItem(id, body);
+  }
 
-  //@Put(':id')
-  //putItem(id: TID, item: IEditorDTO): IEditorDTO {
-  //  throw new Error('Method not implemented.');
-  //}
-
-  //deleteItem(id: TID): IEditorDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async deleteItem(@Param('id') id: string): Promise<IEditorDTO> {
+    return await this.service.deleteItem(id);
+  }
 }

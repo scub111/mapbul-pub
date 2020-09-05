@@ -56,14 +56,14 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
       `
       INSERT INTO category
       (
-        \`Name\`,
-        \`EnName\`,
-        \`ParentId\`,
-        \`AddedDate\`,
-        \`Icon\`,
-        \`Color\`,
-        \`Pin\`,
-        \`ForArticle\`
+        \`name\`,
+        \`enName\`,
+        \`parentId\`,
+        \`addedDate\`,
+        \`icon\`,
+        \`color\`,
+        \`pin\`,
+        \`forArticle\`
       ) 
       Values 
       (
@@ -71,7 +71,7 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
         '${body.enName}',
         ${body.parentId},
         '${dateTimeFormat(body.addedDate)}',
-        "${body.icon}",
+        '${body.icon}',
         '${body.color}',
         '${body.pin}',
         ${body.forArticle}

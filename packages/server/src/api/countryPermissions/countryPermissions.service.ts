@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, ICountryPermissionDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -45,9 +44,25 @@ export class CountryPermissionsService implements BaseService<ICountryPermission
     };
   }
 
-  //postItem(item: ICountryPermissionDTO): Promise<ICountryPermissionDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: ICountryPermissionDTO): Promise<ICountryPermissionDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO country_permission
+      (
+        \`countryId\`,
+        \`userId\`
+      ) 
+      Values 
+      (
+        ${body.countryId},
+        ${body.userId}
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: ICountryPermissionDTO): ICountryPermissionDTO {
   //  throw new Error('Method not implemented.');
@@ -69,11 +84,23 @@ export class CountryPermissionsService implements BaseService<ICountryPermission
     )[0];
   }
 
-  //putItem(id: TID): ICountryPermissionDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: ICountryPermissionDTO): Promise<ICountryPermissionDTO> {
+    await this.connection.query(
+      `
+      UPDATE country_permission
+      SET
+        \`countryId\`=${body.countryId},
+        \`userId\`=${body.userId}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): ICountryPermissionDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<ICountryPermissionDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM country_permission
+      WHERE id = ${id}`);
+    return record;
+  }
 }

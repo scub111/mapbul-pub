@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IPhoneDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -46,9 +45,27 @@ export class PhonesService implements BaseService<IPhoneDTO> {
     };
   }
 
-  //postItem(item: IPhoneDTO): Promise<IPhoneDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IPhoneDTO): Promise<IPhoneDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO phone
+      (
+        \`number\`,
+        \`markerId\`,
+        \`primary\`
+      ) 
+      Values 
+      (
+        '${body.number}',
+        ${body.markerId},
+        ${body.primary}
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IPhoneDTO): IPhoneDTO {
   //  throw new Error('Method not implemented.');
@@ -71,11 +88,24 @@ export class PhonesService implements BaseService<IPhoneDTO> {
     )[0];
   }
 
-  //putItem(id: TID): IPhoneDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IPhoneDTO): Promise<IPhoneDTO> {
+    await this.connection.query(
+      `
+      UPDATE phone
+      SET
+        \`number\`='${body.number}',
+        \`markerId\`=${body.markerId},
+        \`primary\`=${body.primary}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IPhoneDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IPhoneDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM phone
+      WHERE id = ${id}`);
+    return record;
+  }
 }

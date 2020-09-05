@@ -1,6 +1,6 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
+import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, IJournalistDTO, IGetAllQuery } from '@mapbul-pub/types';
 
 export class JournalistsService implements BaseService<IJournalistDTO> {
@@ -52,9 +52,39 @@ export class JournalistsService implements BaseService<IJournalistDTO> {
     };
   }
 
-  //postItem(item: IJournalistDTO): Promise<IJournalistDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IJournalistDTO): Promise<IJournalistDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO journalist
+      (
+        \`userId\`,
+        \`editorId\`,
+        \`firstName\`,
+        \`middleName\`,
+        \`lastName\`,
+        \`gender\`,
+        \`phone\`,
+        \`birthDate\`,
+        \`address\`
+      ) 
+      Values 
+      (
+        ${body.userId},
+        ${body.editorId},
+        '${body.firstName}',
+        '${body.middleName}',
+        '${body.lastName}',
+        '${body.gender}',
+        '${body.phone}',
+        '${dateTimeFormat(body.birthDate)}',
+        '${body.address}'
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IJournalistDTO): IJournalistDTO {
   //  throw new Error('Method not implemented.');
@@ -83,11 +113,30 @@ export class JournalistsService implements BaseService<IJournalistDTO> {
     )[0];
   }
 
-  //putItem(id: TID): IJournalistDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IJournalistDTO): Promise<IJournalistDTO> {
+    await this.connection.query(
+      `
+      UPDATE journalist
+      SET
+        \`userId\`=${body.userId},
+        \`editorId\`=${body.editorId},
+        \`firstName\`='${body.firstName}',
+        \`middleName\`='${body.middleName}',
+        \`lastName\`='${body.lastName}',
+        \`gender\`='${body.gender}',
+        \`phone\`='${body.phone}',
+        \`birthDate\`='${dateTimeFormat(body.birthDate)}',
+        \`address\`='${body.address}'
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IJournalistDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IJournalistDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM journalist
+      WHERE id = ${id}`);
+    return record;
+  }
 }

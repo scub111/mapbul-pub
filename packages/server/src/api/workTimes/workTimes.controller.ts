@@ -1,9 +1,9 @@
-import { Controller, Get, Param, UseInterceptors, Query } from '@nestjs/common';
-import { IGetParams } from 'serverSrc/common/interfaces';
-import { IController } from 'serverSrc/common/IController';
+import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
+import { IController, IGetParams } from 'common';
 import { PageContent, IWorkTimeDTO, IGetAllQuery } from '@mapbul-pub/types';
-import { WorkTimesService } from 'serverSrc/api/workTimes/workTimes.service';
-import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
+import { WorkTimesService } from './workTimes.service';
+import { NotFoundInterceptor } from 'interceptors';
+import { JwtAuthGuard } from '../auth';
 
 @Controller('api/worktimes')
 export class WorkTimesController implements IController<IWorkTimeDTO> {
@@ -15,15 +15,12 @@ export class WorkTimesController implements IController<IWorkTimeDTO> {
     return this.service.getAll(query);
   }
 
-  //@Post()
-  //postItem(item: IWorkTimeDTO): IWorkTimeDTO {
-  //  throw new Error('Method not implemented.');
-  //}
-
-  //@Put()
-  //putAll(item: IWorkTimeDTO): IWorkTimeDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Post()
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async postItem(@Body() body: IWorkTimeDTO): Promise<IWorkTimeDTO> {
+    return await this.service.postItem(body);
+  }
 
   @Get(':id')
   @UseInterceptors(NotFoundInterceptor)
@@ -31,17 +28,17 @@ export class WorkTimesController implements IController<IWorkTimeDTO> {
     return await this.service.getItem(params.id);
   }
 
-  //@Delete()
-  //deleteAll(): void {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Put(':id')
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async putItem(@Param('id') id: string, @Body() body: IWorkTimeDTO): Promise<IWorkTimeDTO> {
+    return await this.service.putItem(id, body);
+  }
 
-  //@Put(':id')
-  //putItem(id: TID, item: IWorkTimeDTO): IWorkTimeDTO {
-  //  throw new Error('Method not implemented.');
-  //}
-
-  //deleteItem(id: TID): IWorkTimeDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async deleteItem(@Param('id') id: string): Promise<IWorkTimeDTO> {
+    return await this.service.deleteItem(id);
+  }
 }

@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IFavoritesMarkerDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -45,9 +44,25 @@ export class FavoritesMarkersService implements BaseService<IFavoritesMarkerDTO>
     };
   }
 
-  //postItem(item: IFavoritesMarkerDTO): Promise<IFavoritesMarkerDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IFavoritesMarkerDTO): Promise<IFavoritesMarkerDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO favorites_marker
+      (
+        \`userId\`,
+        \`markerId\`
+      ) 
+      Values 
+      (
+        ${body.userId},
+        ${body.markerId}
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IFavoritesMarkerDTO): IFavoritesMarkerDTO {
   //  throw new Error('Method not implemented.');
@@ -69,11 +84,23 @@ export class FavoritesMarkersService implements BaseService<IFavoritesMarkerDTO>
     )[0];
   }
 
-  //putItem(id: TID): IFavoritesMarkerDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IFavoritesMarkerDTO): Promise<IFavoritesMarkerDTO> {
+    await this.connection.query(
+      `
+      UPDATE favorites_marker
+      SET
+        \`userId\`=${body.userId},
+        \`markerId\`=${body.markerId}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IFavoritesMarkerDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IFavoritesMarkerDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM favorites_marker
+      WHERE id = ${id}`);
+    return record;
+  }
 }

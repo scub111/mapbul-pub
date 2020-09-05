@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, ICityDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -48,9 +47,31 @@ export class CitiesService implements BaseService<ICityDTO> {
     };
   }
 
-  //postItem(item: ICityDTO): Promise<ICityDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: ICityDTO): Promise<ICityDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO city
+      (
+        \`name\`,
+        \`lng\`,
+        \`lat\`,
+        \`countryId\`,
+        \`placeId\`
+      ) 
+      Values 
+      (
+        '${body.name}',
+        ${body.lng},
+        ${body.lat},
+        ${body.countryId},
+        '${body.placeId}'
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: ICityDTO): ICityDTO {
   //  throw new Error('Method not implemented.');
@@ -75,11 +96,26 @@ export class CitiesService implements BaseService<ICityDTO> {
     )[0];
   }
 
-  //putItem(id: TID): ICityDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: ICityDTO): Promise<ICityDTO> {
+    await this.connection.query(
+      `
+      UPDATE city
+      SET
+        \`name\`='${body.name}',
+        \`lng\`=${body.lng},
+        \`lat\`=${body.lat},
+        \`countryId\`=${body.countryId},
+        \`placeId\`='${body.placeId}'
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): ICityDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<ICityDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM city
+      WHERE id = ${id}`);
+    return record;
+  }
 }

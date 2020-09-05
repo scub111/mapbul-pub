@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IArticleSubcategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -45,9 +44,25 @@ export class ArticleSubcategoriesService implements BaseService<IArticleSubcateg
     };
   }
 
-  //postItem(item: IArticleSubcategoryDTO): Promise<IArticleSubcategoryDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IArticleSubcategoryDTO): Promise<IArticleSubcategoryDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO articlesubcategory
+      (
+        \`articleId\`,
+        \`categoryId\`
+      ) 
+      Values 
+      (
+        ${body.articleId},
+        ${body.categoryId}
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IArticleSubcategoryDTO): IArticleSubcategoryDTO {
   //  throw new Error('Method not implemented.');
@@ -69,11 +84,23 @@ export class ArticleSubcategoriesService implements BaseService<IArticleSubcateg
     )[0];
   }
 
-  //putItem(id: TID): IArticleSubcategoryDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IArticleSubcategoryDTO): Promise<IArticleSubcategoryDTO> {
+    await this.connection.query(
+      `
+      UPDATE articlesubcategory
+      SET
+        \`articleId\`=${body.articleId},
+        \`categoryId\`=${body.categoryId}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IArticleSubcategoryDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IArticleSubcategoryDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM articlesubcategory
+      WHERE id = ${id}`);
+    return record;
+  }
 }

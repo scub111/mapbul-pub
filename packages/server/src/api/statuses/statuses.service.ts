@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IStatusDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -45,9 +44,25 @@ export class StatusesService implements BaseService<IStatusDTO> {
     };
   }
 
-  //postItem(item: IStatusDTO): Promise<IStatusDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IStatusDTO): Promise<IStatusDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO status
+      (
+        \`tag\`,
+        \`description\`
+      ) 
+      Values 
+      (
+        '${body.tag}',
+        '${body.description}'
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IStatusDTO): IStatusDTO {
   //  throw new Error('Method not implemented.');
@@ -69,11 +84,23 @@ export class StatusesService implements BaseService<IStatusDTO> {
     )[0];
   }
 
-  //putItem(id: TID): IStatusDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IStatusDTO): Promise<IStatusDTO> {
+    await this.connection.query(
+      `
+      UPDATE status
+      SET
+        \`tag\`='${body.tag}',
+        \`description\`='${body.description}'
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IStatusDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IStatusDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM status
+      WHERE id = ${id}`);
+    return record;
+  }
 }

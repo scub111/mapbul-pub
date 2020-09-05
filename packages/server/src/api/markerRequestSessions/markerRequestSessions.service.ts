@@ -1,5 +1,4 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IMarkerRequestSessionDTO, IGetAllQuery } from '@mapbul-pub/types';
 
@@ -45,9 +44,25 @@ export class MarkerRequestSessionsService implements BaseService<IMarkerRequestS
     };
   }
 
-  //postItem(item: IMarkerRequestSessionDTO): Promise<IMarkerRequestSessionDTO> {
-  //  throw new Error('Method not implemented.');
-  //}
+  async postItem(body: IMarkerRequestSessionDTO): Promise<IMarkerRequestSessionDTO> {
+    const response: IOkPacket = await this.connection.query(
+      `
+      INSERT INTO marker_request_session
+      (
+        \`sessionId\`,
+        \`markerId\`
+      ) 
+      Values 
+      (
+        '${body.sessionId}',
+        ${body.markerId}
+      )`.replace(/\\/g, '\\\\'),
+    );
+    return {
+      id: response.insertId,
+      ...body,
+    };
+  }
 
   //putAll(item: IMarkerRequestSessionDTO): IMarkerRequestSessionDTO {
   //  throw new Error('Method not implemented.');
@@ -69,11 +84,23 @@ export class MarkerRequestSessionsService implements BaseService<IMarkerRequestS
     )[0];
   }
 
-  //putItem(id: TID): IMarkerRequestSessionDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async putItem(id: TID, body: IMarkerRequestSessionDTO): Promise<IMarkerRequestSessionDTO> {
+    await this.connection.query(
+      `
+      UPDATE marker_request_session
+      SET
+        \`sessionId\`='${body.sessionId}',
+        \`markerId\`=${body.markerId}
+      WHERE id = ${id}`.replace(/\\/g, '\\\\'),
+    );
+    return body;
+  }
 
-  //deleteItem(id: TID): IMarkerRequestSessionDTO {
-  //  throw new Error('Method not implemented.');
-  //}
+  async deleteItem(id: TID): Promise<IMarkerRequestSessionDTO> {
+    const record = await this.getItem(id);
+    await this.connection.query(`
+      DELETE FROM marker_request_session
+      WHERE id = ${id}`);
+    return record;
+  }
 }

@@ -1,6 +1,5 @@
 import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
 import { IController, IGetParams } from 'common';
-import { PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { PageContent, {{interfaceName}}, IGetAllQuery } from '@mapbul-pub/types';
 import { {{serviceName}} } from './{{service}}.service';
 import { NotFoundInterceptor } from 'interceptors';
@@ -17,14 +16,11 @@ export class {{controllerName}} implements IController<{{interfaceName}}> {
   }
 
   @Post()
-  postItem(item: {{interfaceName}}): {{interfaceName}} {
-    throw new Error('Method not implemented.');
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async postItem(@Body() body: {{interfaceName}}): Promise<{{interfaceName}}> {
+    return await this.service.postItem(body);
   }
-
-  //@Put()
-  //putAll(item: {{interfaceName}}): {{interfaceName}} {
-  //  throw new Error('Method not implemented.');
-  //}
 
   @Get(':id')
   @UseInterceptors(NotFoundInterceptor)
@@ -32,17 +28,17 @@ export class {{controllerName}} implements IController<{{interfaceName}}> {
     return await this.service.getItem(params.id);
   }
 
-  //@Delete()
-  //deleteAll(): void {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Put(':id')
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async putItem(@Param('id') id: string, @Body() body: {{interfaceName}}): Promise<{{interfaceName}}> {
+    return await this.service.putItem(id, body);
+  }
 
-  //@Put(':id')
-  //putItem(id: TID, item: {{interfaceName}}): {{interfaceName}} {
-  //  throw new Error('Method not implemented.');
-  //}
-
-  //deleteItem(id: TID): {{interfaceName}} {
-  //  throw new Error('Method not implemented.');
-  //}
+  @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  @UseInterceptors(NotFoundInterceptor)
+  async deleteItem(@Param('id') id: string): Promise<{{interfaceName}}> {
+    return await this.service.deleteItem(id);
+  }
 }
