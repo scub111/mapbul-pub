@@ -37,12 +37,9 @@ const ArticleFilter: React.FC = (props: any) => (
    </Filter>
 );
 
-const PostPanel = ({
-   record}: {
-   id?: string;
-   record?: IArticleDTO;
-   resource?: string;
-}) => <div dangerouslySetInnerHTML={{ __html: record?.text || '' }} />;
+const PostPanel = ({ record }: { id?: string; record?: IArticleDTO; resource?: string }) => (
+   <div dangerouslySetInnerHTML={{ __html: record?.text || '' }} />
+);
 
 export const ArticleList: React.FC = (props: any) => (
    <List {...props} filters={<ArticleFilter />}>
@@ -77,28 +74,28 @@ export const ArticleEdit: React.FC = withEditPage<IArticleDTOEx>((props) => {
             <SelectInput optionText="name" />
          </ReferenceInput> */}
          <RowLayout>
-            <TextInput source={P<IArticleDTOEx>((p) => p.title)} fullWidth/>
-            <TextInput source={P<IArticleDTOEx>((p) => p.titleEn)} fullWidth/>
+            <TextInput source={P<IArticleDTOEx>((p) => p.title)} fullWidth />
+            <TextInput source={P<IArticleDTOEx>((p) => p.titleEn)} fullWidth />
          </RowLayout>
          <RowLayout>
-            <TextInput source={P<IArticleDTOEx>((p) => p.description)} fullWidth/>
-            <TextInput source={P<IArticleDTOEx>((p) => p.descriptionEn)} fullWidth/>
+            <TextInput source={P<IArticleDTOEx>((p) => p.description)} fullWidth />
+            <TextInput source={P<IArticleDTOEx>((p) => p.descriptionEn)} fullWidth />
          </RowLayout>
          <RowLayout>
-            <TextInput multiline source={P<IArticleDTOEx>((p) => p.text)} fullWidth/>
-            <TextInput multiline source={P<IArticleDTOEx>((p) => p.textEn)} fullWidth/>
+            <TextInput multiline source={P<IArticleDTOEx>((p) => p.text)} fullWidth />
+            <TextInput multiline source={P<IArticleDTOEx>((p) => p.textEn)} fullWidth />
          </RowLayout>
          <RowLayout>
-            <TextInput source={P<IArticleDTOEx>((p) => p.sourceUrl)} fullWidth/>
-            <TextInput source={P<IArticleDTOEx>((p) => p.sourceUrlEn)} fullWidth/>
+            <TextInput source={P<IArticleDTOEx>((p) => p.sourceUrl)} fullWidth />
+            <TextInput source={P<IArticleDTOEx>((p) => p.sourceUrlEn)} fullWidth />
          </RowLayout>
          <SectionTitle label="Misc" />
          <RowLayout>
-            <DateTimeInput source={P<IArticleDTOEx>((p) => p.startDate)} fullWidth/>
-            <DateTimeInput source={P<IArticleDTOEx>((p) => p.endDate)} fullWidth/>
+            <DateTimeInput source={P<IArticleDTOEx>((p) => p.startDate)} fullWidth />
+            <DateTimeInput source={P<IArticleDTOEx>((p) => p.endDate)} fullWidth />
          </RowLayout>
          <RowLayout>
-            <DateTimeInput source={P<IArticleDTOEx>((p) => p.startDate)} fullWidth/>
+            <DateTimeInput source={P<IArticleDTOEx>((p) => p.startDate)} fullWidth />
             <ReferenceInput
                source={P<IArticleDTOEx>((p) => p.statusId)}
                reference={Routes.statuses}
@@ -110,10 +107,9 @@ export const ArticleEdit: React.FC = withEditPage<IArticleDTOEx>((props) => {
             </ReferenceInput>
          </RowLayout>
          <RowLayout>
-            <DateTimeInput source={P<IArticleDTOEx>((p) => p.addedDate)} fullWidth/>
-            <DateTimeInput source={P<IArticleDTOEx>((p) => p.publishedDate)} fullWidth/>
+            <DateTimeInput source={P<IArticleDTOEx>((p) => p.addedDate)} fullWidth />
+            <DateTimeInput source={P<IArticleDTOEx>((p) => p.publishedDate)} fullWidth />
          </RowLayout>
-
       </SimpleForm>
    );
 });

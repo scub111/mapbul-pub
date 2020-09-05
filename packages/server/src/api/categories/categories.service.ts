@@ -110,7 +110,8 @@ export class CategoriesService implements BaseService<ICategoryDTO> {
   }
 
   async putItem(id: TID, body: ICategoryDTO): Promise<ICategoryDTO> {
-    await this.connection.query(`
+    await this.connection.query(
+      `
       UPDATE category
       SET
         \`name\`='${body.name}',

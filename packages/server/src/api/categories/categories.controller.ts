@@ -3,7 +3,7 @@ import { IController, IGetParams } from 'common';
 import { PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { CategoriesService } from './categories.service';
 import { NotFoundInterceptor } from 'interceptors';
-import { JwtAuthGuard } from '../auth'; 
+import { JwtAuthGuard } from '../auth';
 
 @Controller('api/categories')
 export class CategoriesController implements IController<ICategoryDTO> {

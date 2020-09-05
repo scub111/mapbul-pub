@@ -32,14 +32,14 @@ import { ICategoryDTOEx } from 'interfaces';
 // /></List>
 
 export const CategoryList: React.FC = (props: any) => {
-  const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+   const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
    return (
       <List title="All categories" {...props}>
          <SortedGrid {...props}>
-          <TextField source={P<ICategoryDTOEx>((p) => p.id)} />
-          <TextField source={P<ICategoryDTOEx>((p) => p.name)} />
-          <TextField source={P<ICategoryDTOEx>((p) => p.enName)} />
-          {!isSmall && <BooleanField source={P<ICategoryDTOEx>((p) => p.forArticle)} />}
+            <TextField source={P<ICategoryDTOEx>((p) => p.id)} />
+            <TextField source={P<ICategoryDTOEx>((p) => p.name)} />
+            <TextField source={P<ICategoryDTOEx>((p) => p.enName)} />
+            {!isSmall && <BooleanField source={P<ICategoryDTOEx>((p) => p.forArticle)} />}
          </SortedGrid>
       </List>
    );
