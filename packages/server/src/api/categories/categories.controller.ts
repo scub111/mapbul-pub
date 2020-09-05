@@ -1,10 +1,9 @@
 import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
-import { IController } from 'serverSrc/common/IController';
+import { IController, IGetParams } from 'common';
 import { PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
-import { CategoriesService } from 'serverSrc/api/categories/categories.service';
-import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
-import { IGetParams } from 'serverSrc/common/interfaces';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { CategoriesService } from './categories.service';
+import { NotFoundInterceptor } from 'interceptors';
+import { JwtAuthGuard } from '../auth'; 
 
 @Controller('api/categories')
 export class CategoriesController implements IController<ICategoryDTO> {

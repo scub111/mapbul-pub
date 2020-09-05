@@ -6,6 +6,14 @@
       "@mapbul-pub/codegen": ["./packages/codegen/src"],
       "serverSrc/*": ["./packages/server/src/*"],
       "codegenSrc/*": ["./packages/codegen/src/*"],
+      "api": ["./packages/server/src/api"],
+      "api/*": ["./packages/server/src/api/*"],
+      "common": ["./packages/server/src/common"],
+      "common/*": ["./packages/server/src/common/*"],
+      "interceptors": ["./packages/server/src/interceptors"],
+      "interceptors/*": ["./packages/server/src/interceptors/*"],
+      "interfaces": ["./packages/server/src/interfaces"],
+      "interfaces/*": ["./packages/server/src/interfaces/*"],
     }  
   },
 }

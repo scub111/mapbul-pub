@@ -1,19 +1,7 @@
-import { BaseService } from 'serverSrc/common/BaseService';
-import { TID } from 'serverSrc/common/types';
+import { BaseService, TID, IOkPacket } from 'common';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
-
-interface IOkPacket {
-  fieldCount: number;
-  affectedRows: number;
-  insertId: number;
-  serverStatus: number;
-  warningCount: number;
-  message: string;
-  protocol41: boolean;
-  changedRows: number;
-}
 
 export class CategoriesService implements BaseService<ICategoryDTO> {
   constructor() {

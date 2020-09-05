@@ -1,4 +1,4 @@
-import { TID } from 'src/common/types';
+import { TID } from '.types';
 import { GetAllQueryDTO } from './QueryDTO';
 import { PageContent } from '@mapbul-pub/types';
 

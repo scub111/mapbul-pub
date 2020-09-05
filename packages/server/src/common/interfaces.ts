@@ -1,4 +1,4 @@
-import { TID } from 'src/common/types';
+import { TID } from 'common';
 
 export interface IGetParams {
   id: TID;
@@ -15,4 +15,15 @@ export interface IFile {
   mimetype: string;
   buffer: Buffer;
   size: number;
+}
+
+export interface IOkPacket {
+  fieldCount: number;
+  affectedRows: number;
+  insertId: number;
+  serverStatus: number;
+  warningCount: number;
+  message: string;
+  protocol41: boolean;
+  changedRows: number;
 }
