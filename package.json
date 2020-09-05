@@ -25,7 +25,7 @@
     "clean:node_modules": "lerna run clean:node_modules && rimraf node_modules",
     "clean:package_lock": "lerna exec -- rimraf package-lock.json",
     "clean:all": "npm run clean && npm run clean:node_modules && npm run clean:package_lock && npm run clean:example",
-    "format": "prettier --write \"packages/**/*.{ts,tsx,css}\"",
+    "format": "prettier --write \"packages/**/*.{ts,tsx}\"",
     "zip": "node scripts/zip.js",
     "publish": "lerna publish",
     "bump-version": "lerna version",
