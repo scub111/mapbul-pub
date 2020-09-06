@@ -79,7 +79,7 @@ const ImageFile: React.FC<{ label: string; source: string; [key: string]: any }>
 const CommonForm: React.FC<FieldProps<ICategoryDTOEx>> = (props) => {
    const { isEdit, record } = props;
    return (
-      <SimpleForm {...props}>
+      <SimpleForm {...props} redirect="list">
          <SectionTitle label="Main" />
          <RowLayout>
             <TextInput disabled source={P<ICategoryDTOEx>((p) => p.id)} fullWidth />
