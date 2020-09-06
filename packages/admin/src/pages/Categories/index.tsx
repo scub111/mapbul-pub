@@ -24,6 +24,7 @@ import { RowLayout, SectionTitle, Poster } from 'ui';
 import { GlobalVar } from 'src/constants';
 import { withCreatePage, withEditPage } from 'hocs';
 import { ICategoryDTOEx } from 'interfaces';
+import { FieldProps } from 'src/types';
 
 // <SimpleList
 //   primaryText={(record: ICategoryDTOEx) => record.name}
@@ -75,9 +76,10 @@ const ImageFile: React.FC<{ label: string; source: string; [key: string]: any }>
    );
 };
 
-export const CategoryCreate: React.FC = withCreatePage((props) => {
+const CommonForm: React.FC<FieldProps<ICategoryDTOEx>> = (props) => {
+   const { isEdit, record } = props;
    return (
-      <SimpleForm {...props} redirect="list">
+      <SimpleForm {...props}>
          <SectionTitle label="Main" />
          <RowLayout>
             <TextInput disabled source={P<ICategoryDTOEx>((p) => p.id)} fullWidth />
@@ -91,78 +93,74 @@ export const CategoryCreate: React.FC = withCreatePage((props) => {
             </ReferenceInput>
          </RowLayout>
          <RowLayout>
-            <TextInput source={P<ICategoryDTOEx>((p) => p.name)} fullWidth validate={required()} />
-            <TextInput source={P<ICategoryDTOEx>((p) => p.enName)} fullWidth defaultValue="" />
+            <TextInput source={P<ICategoryDTOEx>((p) => p.name)} validate={required()} fullWidth />
+            <TextInput source={P<ICategoryDTOEx>((p) => p.enName)} defaultValue="" fullWidth />
          </RowLayout>
          <BooleanInput
             source={P<ICategoryDTOEx>((p) => p.forArticle)}
-            fullWidth
             defaultValue={false}
+            fullWidth
          />
          <SectionTitle label="Misc" />
-         <RowLayout>
-            <ImageFile
-               label="icon"
-               source={P<ICategoryDTOEx>((p) => p.iconFile)}
-               validate={required()}
-            />
-            <ImageFile
-               label="pin"
-               source={P<ICategoryDTOEx>((p) => p.pinFile)}
-               validate={required()}
-            />
+         <RowLayout style={{ display: 'flex', alignItems: 'flex-end' }}>
+            <Box style={{ width: '100%' }}>
+               {isEdit ? (
+                  <>
+                     <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.icon}`)} />
+                     <TextInput
+                        source={P<ICategoryDTOEx>((p) => p.icon)}
+                        multiline
+                        validate={required()}
+                        fullWidth
+                     />
+                     <ImageFile
+                        label="icon"
+                        source={P<ICategoryDTOEx>((p) => p.iconFile)}
+                        fullWidth
+                     />
+                  </>
+               ) : (
+                  <ImageFile
+                     label="icon"
+                     source={P<ICategoryDTOEx>((p) => p.iconFile)}
+                     validate={required()}
+                     fullWidth
+                  />
+               )}
+            </Box>
+            <Box style={{ width: '100%' }}>
+               {isEdit ? (
+                  <>
+                     <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.pin}`)} />
+                     <TextInput source={P<ICategoryDTOEx>((p) => p.pin)} multiline fullWidth />
+                     <ImageFile
+                        label="pin"
+                        source={P<ICategoryDTOEx>((p) => p.pinFile)}
+                        fullWidth
+                     />
+                  </>
+               ) : (
+                  <ImageFile
+                     label="pin"
+                     source={P<ICategoryDTOEx>((p) => p.pinFile)}
+                     validate={required()}
+                     fullWidth
+                  />
+               )}
+            </Box>
          </RowLayout>
          <RowLayout>
             <DateInput
                source={P<ICategoryDTOEx>((p) => p.addedDate)}
-               fullWidth
                defaultValue={new Date()}
-            />
-            <TextInput source={P<ICategoryDTOEx>((p) => p.color)} fullWidth validate={required()} />
-         </RowLayout>
-      </SimpleForm>
-   );
-});
-
-export const CategoryEdit = withEditPage<ICategoryDTOEx>((props) => {
-   const { record } = props;
-   return (
-      <SimpleForm {...props}>
-         <SectionTitle label="Main" />
-         <RowLayout>
-            <TextInput disabled source={P<ICategoryDTOEx>((p) => p.id)} fullWidth />
-            <ReferenceInput
-               source={P<ICategoryDTOEx>((p) => p.parentId)}
-               reference={Routes.categories}
-               perPage={1000}
                fullWidth
-            >
-               {/* <SelectInput optionText={P<ICategoryDTOEx>(p => p.name)} /> */}
-               <AutocompleteInput optionText={P<ICategoryDTOEx>((p) => p.name)} />
-            </ReferenceInput>
-         </RowLayout>
-         <RowLayout>
-            <TextInput source={P<ICategoryDTOEx>((p) => p.name)} fullWidth />
-            <TextInput source={P<ICategoryDTOEx>((p) => p.enName)} fullWidth />
-         </RowLayout>
-         <BooleanInput source={P<ICategoryDTOEx>((p) => p.forArticle)} fullWidth />
-         <SectionTitle label="Misc" />
-         <RowLayout style={{ display: 'flex', alignItems: 'flex-end' }}>
-            <Box>
-               <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.icon}`)} />
-               <TextInput source={P<ICategoryDTOEx>((p) => p.icon)} multiline fullWidth />
-               <ImageFile label="icon" source={P<ICategoryDTOEx>((p) => p.iconFile)} />
-            </Box>
-            <Box>
-               <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.pin}`)} />
-               <TextInput source={P<ICategoryDTOEx>((p) => p.pin)} multiline fullWidth />
-               <ImageFile label="pin" source={P<ICategoryDTOEx>((p) => p.pinFile)} />
-            </Box>
-         </RowLayout>
-         <RowLayout>
-            <DateInput source={P<ICategoryDTOEx>((p) => p.addedDate)} fullWidth />
+            />
             <TextInput source={P<ICategoryDTOEx>((p) => p.color)} fullWidth />
          </RowLayout>
       </SimpleForm>
    );
-});
+};
+
+export const CategoryCreate = withCreatePage(CommonForm);
+
+export const CategoryEdit = withEditPage<ICategoryDTOEx>(CommonForm);

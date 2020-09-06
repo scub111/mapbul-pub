@@ -7,8 +7,8 @@ export const withEditPage = <T extends object>(Component: React.FC<FieldProps<T>
       const { hasList, hasEdit, hasShow, hasCreate, ...rest } = props;
       return (
          // <Edit title={<div> Hello</div>} undoable={false} {...props}>
-         <Edit undoable={false} {...props}>
-            <Component {...rest} />
+         <Edit undoable={false} {...props} >
+            <Component {...rest} isEdit />
          </Edit>
       );
    };

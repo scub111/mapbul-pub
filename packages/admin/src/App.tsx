@@ -1,7 +1,13 @@
 import * as React from 'react';
 
-import { Routes } from '@mapbul-pub/ui';
 import PostIcon from '@material-ui/icons/Book';
+import CategoryIcon from '@material-ui/icons/Category';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import PublicIcon from '@material-ui/icons/Public';
+import LocationCityIcon from '@material-ui/icons/LocationCity';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
+
+import { Routes } from '@mapbul-pub/ui';
 import { Admin, Resource } from 'react-admin';
 import jsonServerProvider from './ra-data-json-server';
 
@@ -10,9 +16,7 @@ import {
    ArticleList,
    ArticleEdit,
    ArticleCreate,
-   ArticleShow,
    CategoryList,
-   CategoryShow,
    CategoryEdit,
    CategoryCreate,
    StatusList,
@@ -50,39 +54,38 @@ const App = () => (
          list={ArticleList}
          edit={ArticleEdit}
          create={ArticleCreate}
-         //show={ArticleShow}
       />
       <Resource
          name={Routes.categories}
-         //icon={UserIcon}
+         icon={CategoryIcon}
          list={CategoryList}
          edit={CategoryEdit}
          create={CategoryCreate}
       />
       <Resource
          name={Routes.statuses}
-         //icon={UserIcon}
+         icon={DoneAllIcon}
          list={StatusList}
          edit={StatusEdit}
          create={StatusCreate}
       />
       <Resource
          name={Routes.markers}
-         //icon={UserIcon}
+         icon={LocationOnIcon}
          list={MarkerList}
          edit={MarkerEdit}
-         create={MarkerCreate}ß
+         create={MarkerCreate}
       />
       <Resource
          name={Routes.cities}
-         //icon={UserIcon}
+         icon={LocationCityIcon}
          list={CityList}
          edit={CityEdit}
          create={CityCreate}
       />
       <Resource
          name={Routes.countries}
-         //icon={UserIcon}
+         icon={PublicIcon}
          list={CountryList}
          edit={CountryEdit}
          create={CountryCreate}

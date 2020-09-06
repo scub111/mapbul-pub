@@ -14,6 +14,7 @@ export interface FieldProps<T> {
    match?: any;
    record?: T;
    resource?: string;
+   isEdit?: boolean;
 }
 
 export interface ReferenceFieldProps<T> extends FieldProps<T> {

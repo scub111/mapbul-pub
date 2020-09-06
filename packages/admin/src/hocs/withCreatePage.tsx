@@ -7,7 +7,7 @@ export const withCreatePage = <T extends object>(Component: React.FC<FieldProps<
       const { hasList, hasEdit, hasShow, hasCreate, ...rest } = props;
       return (
          <Create title={''} {...props}>
-            <Component {...rest} />
+            <Component {...rest} isEdit={false}/>
          </Create>
       );
    };
