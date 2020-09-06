@@ -17,7 +17,16 @@ import {
    CategoryCreate,
    StatusList,
    StatusEdit,
-   StatusCreate
+   StatusCreate,
+   MarkerList,
+   MarkerEdit,
+   MarkerCreate,
+   CityList,
+   CityEdit,
+   CityCreate,
+   CountryList,
+   CountryEdit,
+   CountryCreate
 } from 'pages';
 
 import authProvider from './authProvider';
@@ -56,6 +65,27 @@ const App = () => (
          list={StatusList}
          edit={StatusEdit}
          create={StatusCreate}
+      />
+      <Resource
+         name={Routes.markers}
+         //icon={UserIcon}
+         list={MarkerList}
+         edit={MarkerEdit}
+         create={MarkerCreate}ß
+      />
+      <Resource
+         name={Routes.cities}
+         //icon={UserIcon}
+         list={CityList}
+         edit={CityEdit}
+         create={CityCreate}
+      />
+      <Resource
+         name={Routes.countries}
+         //icon={UserIcon}
+         list={CountryList}
+         edit={CountryEdit}
+         create={CountryCreate}
       />
    </Admin>
 );

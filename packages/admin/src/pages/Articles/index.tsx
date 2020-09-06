@@ -9,7 +9,6 @@ import {
    DateField,
    List,
    Create,
-   Datagrid,
    ReferenceField,
    TextField,
    ReferenceInput,
@@ -17,11 +16,13 @@ import {
    TextInput,
    Filter,
    DateTimeInput,
-   AutocompleteInput
+   AutocompleteInput,
+   SelectInput
 } from 'react-admin';
-import { IArticleDTOEx } from 'interfaces';
+import { IArticleDTOEx, ICategoryDTOEx } from 'interfaces';
 import { RowLayout, SectionTitle } from 'ui';
 import { withEditPage } from 'hocs';
+import { SortedGrid } from 'components';
 
 const ArticleFilter: React.FC = (props: any) => (
    <Filter {...props}>
@@ -43,25 +44,25 @@ const PostPanel = ({ record }: { id?: string; record?: IArticleDTO; resource?: s
 
 export const ArticleList: React.FC = (props: any) => (
    <List {...props} filters={<ArticleFilter />}>
-      <Datagrid rowClick="edit" expand={<PostPanel />}>
-         <TextField source={P<IArticleDTO>((p) => p.id)} label="№" />
+      <SortedGrid expand={<PostPanel />}>
+         <TextField source={P<IArticleDTO>((p) => p.id)} />
          <ReferenceField
-            label="Категория"
+            label="Category"
             source={P<IArticleDTO>((p) => p.baseCategoryId)}
             reference={Routes.categories}
          >
             <TextField source={P<ICategoryDTO>((p) => p.name)} />
          </ReferenceField>
-         <TextField source={P<IArticleDTO>((p) => p.title)} label="Название" />
-         <TextField source={P<IArticleDTO>((p) => p.description)} label="Описание" />
-
-         {/* <TextField source={P<IArticleDTO>(p => p.text)} label="Текст" /> */}
-         {/* <TextField source="title" />
-            <TextField source="title" />
-            <TextField source="title" /> */}
-         {/* <EditButton />
-            <ShowButton /> */}
-      </Datagrid>
+         <TextField source={P<IArticleDTO>((p) => p.title)} label="Title" />
+         <TextField source={P<IArticleDTO>((p) => p.description)} label="Description" />
+         <ReferenceField
+            label="Status"
+            source={P<IArticleDTO>((p) => p.statusId)}
+            reference={Routes.statuses}
+         >
+            <TextField source={P<IStatusDTO>(p => p.description)} />
+         </ReferenceField>
+      </SortedGrid>
    </List>
 );
 
@@ -95,15 +96,22 @@ export const ArticleEdit: React.FC = withEditPage<IArticleDTOEx>((props) => {
             <DateTimeInput source={P<IArticleDTOEx>((p) => p.endDate)} fullWidth />
          </RowLayout>
          <RowLayout>
-            <DateTimeInput source={P<IArticleDTOEx>((p) => p.startDate)} fullWidth />
+            <ReferenceInput
+               source={P<IArticleDTOEx>((p) => p.baseCategoryId)}
+               reference={Routes.categories}
+               perPage={1000}
+               fullWidth
+            >
+               {/* <SelectInput optionText={P<ICategoryDTOEx>(p => p.name)} /> */}
+               <AutocompleteInput optionText={P<ICategoryDTOEx>((p) => p.name)} />
+            </ReferenceInput>
             <ReferenceInput
                source={P<IArticleDTOEx>((p) => p.statusId)}
                reference={Routes.statuses}
                perPage={1000}
                fullWidth
             >
-               {/* <SelectInput optionText={P<ICategoryDTOEx>(p => p.name)} /> */}
-               <AutocompleteInput optionText={P<IStatusDTO>((p) => p.description)} />
+               <SelectInput optionText={P<IStatusDTO>(p => p.description)} />
             </ReferenceInput>
          </RowLayout>
          <RowLayout>

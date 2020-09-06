@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { ICategoryDTOEx } from 'interfaces';
 import { P } from '@mapbul-pub/utils';
 
-export const SortedGrid: React.FC = (props: any) => {
+export const SortedGrid: React.FC<any> = (props: any) => {
    const { children } = props;
    const { currentSort, setSort } = useListSortContext();
 
