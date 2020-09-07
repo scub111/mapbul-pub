@@ -20,7 +20,7 @@ import {
 import { P, clearUrl } from '@mapbul-pub/utils';
 import { Routes } from '@mapbul-pub/ui';
 import { SortedGrid } from 'components';
-import { RowLayout, SectionTitle, Poster } from 'ui';
+import { RowLayout, SectionTitle, Poster, ImageFile } from 'ui';
 import { GlobalVar } from 'src/constants';
 import { withCreatePage, withEditPage } from 'hocs';
 import { ICategoryDTOEx } from 'interfaces';
@@ -57,24 +57,6 @@ export const CategoryShow: React.FC = (props: any) => (
       </SimpleShowLayout>
    </Show>
 );
-
-const ImageFile: React.FC<{ label: string; source: string; [key: string]: any }> = ({
-   label,
-   source,
-   ...props
-}) => {
-   return (
-      <ImageInput
-         source={source}
-         label={label}
-         accept="image/*"
-         placeholder={<p>Drop your file here</p>}
-         {...props}
-      >
-         <ImageField source={source} title="title" />
-      </ImageInput>
-   );
-};
 
 const CommonForm: React.FC<FieldProps<ICategoryDTOEx>> = (props) => {
    const { isEdit, record } = props;

@@ -15,6 +15,7 @@ import { RowLayout } from 'ui';
 import { withCreatePage, withEditPage } from 'hocs';
 import { ICountryDTO, IMarkerDTO } from '@mapbul-pub/types';
 import { Routes } from '@mapbul-pub/ui';
+import { FieldProps } from 'types';
 
 export const CountryList: React.FC = (props: any) => {
    return (
@@ -35,9 +36,9 @@ export const CountryList: React.FC = (props: any) => {
    );
 };
 
-export const CountryCreate: React.FC = withCreatePage((props) => {
-   return (
-      <SimpleForm {...props} redirect="list">
+const CommonForm: React.FC<FieldProps<ICountryDTO>> = (props) => {
+  return (
+     <SimpleForm {...props} redirect="list">
          <RowLayout>
             <TextInput disabled source={P<ICountryDTO>((p) => p.id)} fullWidth />
          </RowLayout>
@@ -56,31 +57,10 @@ export const CountryCreate: React.FC = withCreatePage((props) => {
             </ReferenceInput>
             <TextInput source={P<ICountryDTO>((p) => p.code)} fullWidth validate={required()} />
          </RowLayout>
-      </SimpleForm>
-   );
-});
+     </SimpleForm>
+  );
+};
 
-export const CountryEdit = withEditPage<ICountryDTO>((props) => {
-   return (
-      <SimpleForm {...props}>
-         <RowLayout>
-            <TextInput disabled source={P<ICountryDTO>((p) => p.id)} fullWidth />
-         </RowLayout>
-         <RowLayout>
-            <TextInput source={P<ICountryDTO>((p) => p.name)} fullWidth />
-            <TextInput source={P<ICountryDTO>((p) => p.enName)} fullWidth validate={required()} />
-         </RowLayout>
-         <RowLayout>
-            <ReferenceInput
-               source={P<ICountryDTO>((p) => p.placeId)}
-               reference={Routes.markers}
-               perPage={1000}
-               fullWidth
-            >
-               <AutocompleteInput optionText={P<IMarkerDTO>((p) => p.name)} />
-            </ReferenceInput>
-            <TextInput source={P<ICountryDTO>((p) => p.code)} fullWidth validate={required()} />
-         </RowLayout>
-      </SimpleForm>
-   );
-});
+export const CountryCreate: React.FC = withCreatePage(CommonForm);
+
+export const CountryEdit = withEditPage<ICountryDTO>(CommonForm);
