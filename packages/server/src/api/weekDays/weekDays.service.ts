@@ -1,8 +1,8 @@
-import { BaseService, TID, IOkPacket } from 'common';
+import { IBaseService, TID, IOkPacket } from 'interfaces';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IWeekDayDTO, IGetAllQuery } from '@mapbul-pub/types';
 
-export class WeekDaysService implements BaseService<IWeekDayDTO> {
+export class WeekDaysService implements IBaseService<IWeekDayDTO> {
   constructor() {
     this.connection = dbConnectionSingleton.getInstance();
   }

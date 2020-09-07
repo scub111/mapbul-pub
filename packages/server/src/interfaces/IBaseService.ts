@@ -1,8 +1,8 @@
 import { TID } from './types';
-import { GetAllQueryDTO } from './QueryDTO';
+import { GetAllQueryDTO } from 'common';
 import { PageContent } from '@mapbul-pub/types';
 
-export interface BaseService<T> {
+export interface IBaseService<T> {
   getAll(query: GetAllQueryDTO): Promise<PageContent<T>> | PageContent<T>;
 
   // public postItem(item: T): Promise<T> | T {

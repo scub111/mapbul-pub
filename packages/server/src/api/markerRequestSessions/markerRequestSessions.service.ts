@@ -1,8 +1,8 @@
-import { BaseService, TID, IOkPacket } from 'common';
+import { IBaseService, TID, IOkPacket } from 'interfaces';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IMarkerRequestSessionDTO, IGetAllQuery } from '@mapbul-pub/types';
 
-export class MarkerRequestSessionsService implements BaseService<IMarkerRequestSessionDTO> {
+export class MarkerRequestSessionsService implements IBaseService<IMarkerRequestSessionDTO> {
   constructor() {
     this.connection = dbConnectionSingleton.getInstance();
   }

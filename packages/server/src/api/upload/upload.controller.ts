@@ -6,7 +6,7 @@ import { UploadFtpService } from './upload.ftpService';
 import path from 'path';
 import { IImageMeta, IFileResponse, IFileCreateResponse } from '@mapbul-pub/types';
 import { NotFoundInterceptor } from 'serverSrc/interceptors/NotFoundInterceptor';
-import { IFile } from 'serverSrc/common';
+import { IFile } from 'interfaces';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('api/upload')

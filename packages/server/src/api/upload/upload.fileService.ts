@@ -1,7 +1,6 @@
-import { IUploadService } from 'serverSrc/common/IUploadService';
+import { IUploadService, IFile } from 'interfaces';
 import { promises as fs } from 'fs';
 import { IFileResponse, IFileCreateResponse } from '@mapbul-pub/types';
-import { IFile } from 'serverSrc/common';
 
 export class UploadFileService implements IUploadService {
   async write(fileName: string, file: IFile): Promise<IFileCreateResponse> {

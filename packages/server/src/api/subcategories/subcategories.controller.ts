@@ -1,5 +1,5 @@
 import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
-import { IController, IGetParams } from 'common';
+import { IController, IGetParams } from 'interfaces';
 import { PageContent, ISubcategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { SubcategoriesService } from './subcategories.service';
 import { NotFoundInterceptor } from 'interceptors';

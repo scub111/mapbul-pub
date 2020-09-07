@@ -1,8 +1,8 @@
-import { BaseService, TID, IOkPacket } from 'common';
+import { IBaseService, TID, IOkPacket } from 'interfaces';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IUserTypeDTO, IGetAllQuery } from '@mapbul-pub/types';
 
-export class UserTypesService implements BaseService<IUserTypeDTO> {
+export class UserTypesService implements IBaseService<IUserTypeDTO> {
   constructor() {
     this.connection = dbConnectionSingleton.getInstance();
   }

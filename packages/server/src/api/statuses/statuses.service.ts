@@ -1,8 +1,8 @@
-import { BaseService, TID, IOkPacket } from 'common';
+import { IBaseService, TID, IOkPacket } from 'interfaces';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IStatusDTO, IGetAllQuery } from '@mapbul-pub/types';
 
-export class StatusesService implements BaseService<IStatusDTO> {
+export class StatusesService implements IBaseService<IStatusDTO> {
   constructor() {
     this.connection = dbConnectionSingleton.getInstance();
   }

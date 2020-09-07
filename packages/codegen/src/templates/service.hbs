@@ -1,11 +1,11 @@
-import { BaseService, TID, IOkPacket } from 'common';
+import { IBaseService, TID, IOkPacket } from 'interfaces';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 {{#if hasDateField}}
 import { dateTimeFormat } from '@mapbul-pub/utils';
 {{/if}}
 import { IDbConnection, PageContent, {{interfaceName}}, IGetAllQuery } from '@mapbul-pub/types';
 
-export class {{serviceName}} implements BaseService<{{interfaceName}}> {
+export class {{serviceName}} implements IBaseService<{{interfaceName}}> {
   constructor() {
     this.connection = dbConnectionSingleton.getInstance();
   }

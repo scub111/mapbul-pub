@@ -1,6 +1,6 @@
-import { IUploadService } from 'serverSrc/common/IUploadService';
+import { IUploadService, IFile } from 'interfaces';
 import { IFileResponse, IFileCreateResponse } from '@mapbul-pub/types';
-import { IFile, ftpConnectionSingleton } from 'serverSrc/common';
+import { ftpConnectionSingleton } from 'common';
 import { Mutex } from '@mapbul-pub/utils';
 
 export class UploadFtpService implements IUploadService {

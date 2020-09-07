@@ -1,8 +1,8 @@
-import { BaseService, TID, IOkPacket } from 'common';
+import { IBaseService, TID, IOkPacket } from 'interfaces';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IRegionPermissionDTO, IGetAllQuery } from '@mapbul-pub/types';
 
-export class RegionPermissionsService implements BaseService<IRegionPermissionDTO> {
+export class RegionPermissionsService implements IBaseService<IRegionPermissionDTO> {
   constructor() {
     this.connection = dbConnectionSingleton.getInstance();
   }

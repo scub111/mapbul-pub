@@ -1,9 +1,9 @@
-import { BaseService, TID, IOkPacket } from 'common';
+import { IBaseService, TID, IOkPacket } from 'interfaces';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, IWorkTimeDTO, IGetAllQuery } from '@mapbul-pub/types';
 
-export class WorkTimesService implements BaseService<IWorkTimeDTO> {
+export class WorkTimesService implements IBaseService<IWorkTimeDTO> {
   constructor() {
     this.connection = dbConnectionSingleton.getInstance();
   }

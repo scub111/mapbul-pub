@@ -1,4 +1,4 @@
-import { TID } from 'common';
+import { TID } from 'interfaces';
 
 export interface IGetParams {
   id: TID;

@@ -1,8 +1,8 @@
-import { BaseService, TID, IOkPacket } from 'common';
+import { IBaseService, TID, IOkPacket } from 'interfaces';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { IDbConnection, PageContent, IFavoritesArticleDTO, IGetAllQuery } from '@mapbul-pub/types';
 
-export class FavoritesArticlesService implements BaseService<IFavoritesArticleDTO> {
+export class FavoritesArticlesService implements IBaseService<IFavoritesArticleDTO> {
   constructor() {
     this.connection = dbConnectionSingleton.getInstance();
   }
