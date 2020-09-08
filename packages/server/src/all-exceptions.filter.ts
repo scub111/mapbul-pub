@@ -5,10 +5,10 @@ import { IErrorResponse } from 'interfaces';
 const getMessage = (error: any): string => {
   if ('message' in error && Array.isArray(error.message)) {
     const errors = error.message as Array<ValidationError>;
-    return errors.map(i => Object.values(i.constraints)).join('; ');
+    return errors.map(i => Object.values(i.constraints ? i.constraints : {})).join('; ');
   }
   return '';
-}
+};
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -31,7 +31,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
         error: 'error' in rawError ? (rawError as any).error : '',
         statusCode: status,
         rawError,
-        message: getMessage(rawError)
+        message: getMessage(rawError),
       };
 
       if (typeof error === 'string') {
