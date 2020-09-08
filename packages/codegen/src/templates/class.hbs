@@ -5,7 +5,9 @@ import { {{interfaceName}} } from '@mapbul-pub/types';
 
 export class {{className}} implements {{interfaceName}} {
   {{#each fields}}
-  
+  {{#ifNotEquals @index 0}}
+
+  {{/ifNotEquals}}
   {{#ifNotEquals field "id"}}
   {{#unless nullable}}
   @IsDefined()
