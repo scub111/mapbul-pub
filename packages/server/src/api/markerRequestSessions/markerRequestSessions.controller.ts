@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IMarkerRequestSessionDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { MarkerRequestSessionsService } from './markerRequestSessions.service';
+import { MarkerRequestSessionDTO } from './markerRequestSessions.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class MarkerRequestSessionsController implements IController<IMarkerReque
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: IMarkerRequestSessionDTO): Promise<IMarkerRequestSessionDTO> {
+  async postItem(@Body() body: MarkerRequestSessionDTO): Promise<IMarkerRequestSessionDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class MarkerRequestSessionsController implements IController<IMarkerReque
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: IMarkerRequestSessionDTO): Promise<IMarkerRequestSessionDTO> {
+  async putItem(@Param('id') id: string, @Body() body: MarkerRequestSessionDTO): Promise<IMarkerRequestSessionDTO> {
     return await this.service.putItem(id, body);
   }
 

@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IWorkTimeDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { WorkTimesService } from './workTimes.service';
+import { WorkTimeDTO } from './workTimes.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class WorkTimesController implements IController<IWorkTimeDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: IWorkTimeDTO): Promise<IWorkTimeDTO> {
+  async postItem(@Body() body: WorkTimeDTO): Promise<IWorkTimeDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class WorkTimesController implements IController<IWorkTimeDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: IWorkTimeDTO): Promise<IWorkTimeDTO> {
+  async putItem(@Param('id') id: string, @Body() body: WorkTimeDTO): Promise<IWorkTimeDTO> {
     return await this.service.putItem(id, body);
   }
 

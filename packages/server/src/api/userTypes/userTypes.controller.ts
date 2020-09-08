@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IUserTypeDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { UserTypesService } from './userTypes.service';
+import { UserTypeDTO } from './userTypes.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class UserTypesController implements IController<IUserTypeDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: IUserTypeDTO): Promise<IUserTypeDTO> {
+  async postItem(@Body() body: UserTypeDTO): Promise<IUserTypeDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class UserTypesController implements IController<IUserTypeDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: IUserTypeDTO): Promise<IUserTypeDTO> {
+  async putItem(@Param('id') id: string, @Body() body: UserTypeDTO): Promise<IUserTypeDTO> {
     return await this.service.putItem(id, body);
   }
 

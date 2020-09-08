@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IRegionPermissionDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { RegionPermissionsService } from './regionPermissions.service';
+import { RegionPermissionDTO } from './regionPermissions.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class RegionPermissionsController implements IController<IRegionPermissio
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: IRegionPermissionDTO): Promise<IRegionPermissionDTO> {
+  async postItem(@Body() body: RegionPermissionDTO): Promise<IRegionPermissionDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class RegionPermissionsController implements IController<IRegionPermissio
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: IRegionPermissionDTO): Promise<IRegionPermissionDTO> {
+  async putItem(@Param('id') id: string, @Body() body: RegionPermissionDTO): Promise<IRegionPermissionDTO> {
     return await this.service.putItem(id, body);
   }
 

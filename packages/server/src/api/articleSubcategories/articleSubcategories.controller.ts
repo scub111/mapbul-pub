@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IArticleSubcategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { ArticleSubcategoriesService } from './articleSubcategories.service';
+import { ArticleSubcategoryDTO } from './articleSubcategories.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class ArticleSubcategoriesController implements IController<IArticleSubca
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: IArticleSubcategoryDTO): Promise<IArticleSubcategoryDTO> {
+  async postItem(@Body() body: ArticleSubcategoryDTO): Promise<IArticleSubcategoryDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class ArticleSubcategoriesController implements IController<IArticleSubca
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: IArticleSubcategoryDTO): Promise<IArticleSubcategoryDTO> {
+  async putItem(@Param('id') id: string, @Body() body: ArticleSubcategoryDTO): Promise<IArticleSubcategoryDTO> {
     return await this.service.putItem(id, body);
   }
 

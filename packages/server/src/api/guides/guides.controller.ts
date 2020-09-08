@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IGuideDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { GuidesService } from './guides.service';
+import { GuideDTO } from './guides.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class GuidesController implements IController<IGuideDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: IGuideDTO): Promise<IGuideDTO> {
+  async postItem(@Body() body: GuideDTO): Promise<IGuideDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class GuidesController implements IController<IGuideDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: IGuideDTO): Promise<IGuideDTO> {
+  async putItem(@Param('id') id: string, @Body() body: GuideDTO): Promise<IGuideDTO> {
     return await this.service.putItem(id, body);
   }
 

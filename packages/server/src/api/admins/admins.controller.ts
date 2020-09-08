@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IAdminDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { AdminsService } from './admins.service';
+import { AdminDTO } from './admins.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class AdminsController implements IController<IAdminDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: IAdminDTO): Promise<IAdminDTO> {
+  async postItem(@Body() body: AdminDTO): Promise<IAdminDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class AdminsController implements IController<IAdminDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: IAdminDTO): Promise<IAdminDTO> {
+  async putItem(@Param('id') id: string, @Body() body: AdminDTO): Promise<IAdminDTO> {
     return await this.service.putItem(id, body);
   }
 

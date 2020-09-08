@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IRegionDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { RegionsService } from './regions.service';
+import { RegionDTO } from './regions.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class RegionsController implements IController<IRegionDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: IRegionDTO): Promise<IRegionDTO> {
+  async postItem(@Body() body: RegionDTO): Promise<IRegionDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class RegionsController implements IController<IRegionDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: IRegionDTO): Promise<IRegionDTO> {
+  async putItem(@Param('id') id: string, @Body() body: RegionDTO): Promise<IRegionDTO> {
     return await this.service.putItem(id, body);
   }
 

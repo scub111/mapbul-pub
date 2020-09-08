@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IPhoneDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { PhonesService } from './phones.service';
+import { PhoneDTO } from './phones.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class PhonesController implements IController<IPhoneDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: IPhoneDTO): Promise<IPhoneDTO> {
+  async postItem(@Body() body: PhoneDTO): Promise<IPhoneDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class PhonesController implements IController<IPhoneDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: IPhoneDTO): Promise<IPhoneDTO> {
+  async putItem(@Param('id') id: string, @Body() body: PhoneDTO): Promise<IPhoneDTO> {
     return await this.service.putItem(id, body);
   }
 

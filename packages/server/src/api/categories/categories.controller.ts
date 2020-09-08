@@ -2,9 +2,9 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, ICategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { CategoriesService } from './categories.service';
+import { CategoryDTO } from './categories.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
-import { CategoryDto } from './categoryDto';
 
 @Controller('api/categories')
 export class CategoriesController implements IController<ICategoryDTO> {
@@ -19,7 +19,7 @@ export class CategoriesController implements IController<ICategoryDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: CategoryDto): Promise<ICategoryDTO> {
+  async postItem(@Body() body: CategoryDTO): Promise<ICategoryDTO> {
     return await this.service.postItem(body);
   }
 
@@ -32,7 +32,7 @@ export class CategoriesController implements IController<ICategoryDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: CategoryDto): Promise<ICategoryDTO> {
+  async putItem(@Param('id') id: string, @Body() body: CategoryDTO): Promise<ICategoryDTO> {
     return await this.service.putItem(id, body);
   }
 

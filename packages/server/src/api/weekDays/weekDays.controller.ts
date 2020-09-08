@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IWeekDayDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { WeekDaysService } from './weekDays.service';
+import { WeekDayDTO } from './weekDays.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class WeekDaysController implements IController<IWeekDayDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: IWeekDayDTO): Promise<IWeekDayDTO> {
+  async postItem(@Body() body: WeekDayDTO): Promise<IWeekDayDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class WeekDaysController implements IController<IWeekDayDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: IWeekDayDTO): Promise<IWeekDayDTO> {
+  async putItem(@Param('id') id: string, @Body() body: WeekDayDTO): Promise<IWeekDayDTO> {
     return await this.service.putItem(id, body);
   }
 

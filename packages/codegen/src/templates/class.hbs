@@ -1,0 +1,16 @@
+{{#if hasNotNullField}}
+import { IsDefined } from 'class-validator';
+{{/if}}
+import { {{interfaceName}} } from '@mapbul-pub/types';
+
+export class {{className}} implements {{interfaceName}} {
+  {{#each fields}}
+  
+  {{#ifNotEquals field "id"}}
+  {{#unless nullable}}
+  @IsDefined()
+  {{/unless}}
+  {{/ifNotEquals}}
+  {{field}}: {{type}}{{#if nullable}} | null{{/if}};
+  {{/each}}
+}

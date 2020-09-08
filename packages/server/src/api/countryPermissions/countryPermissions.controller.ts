@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, ICountryPermissionDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { CountryPermissionsService } from './countryPermissions.service';
+import { CountryPermissionDTO } from './countryPermissions.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class CountryPermissionsController implements IController<ICountryPermiss
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: ICountryPermissionDTO): Promise<ICountryPermissionDTO> {
+  async postItem(@Body() body: CountryPermissionDTO): Promise<ICountryPermissionDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class CountryPermissionsController implements IController<ICountryPermiss
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: ICountryPermissionDTO): Promise<ICountryPermissionDTO> {
+  async putItem(@Param('id') id: string, @Body() body: CountryPermissionDTO): Promise<ICountryPermissionDTO> {
     return await this.service.putItem(id, body);
   }
 

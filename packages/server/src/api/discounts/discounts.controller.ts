@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IDiscountDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { DiscountsService } from './discounts.service';
+import { DiscountDTO } from './discounts.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class DiscountsController implements IController<IDiscountDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: IDiscountDTO): Promise<IDiscountDTO> {
+  async postItem(@Body() body: DiscountDTO): Promise<IDiscountDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class DiscountsController implements IController<IDiscountDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: IDiscountDTO): Promise<IDiscountDTO> {
+  async putItem(@Param('id') id: string, @Body() body: DiscountDTO): Promise<IDiscountDTO> {
     return await this.service.putItem(id, body);
   }
 

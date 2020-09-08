@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IFavoritesArticleDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { FavoritesArticlesService } from './favoritesArticles.service';
+import { FavoritesArticleDTO } from './favoritesArticles.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class FavoritesArticlesController implements IController<IFavoritesArticl
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: IFavoritesArticleDTO): Promise<IFavoritesArticleDTO> {
+  async postItem(@Body() body: FavoritesArticleDTO): Promise<IFavoritesArticleDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class FavoritesArticlesController implements IController<IFavoritesArticl
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: IFavoritesArticleDTO): Promise<IFavoritesArticleDTO> {
+  async putItem(@Param('id') id: string, @Body() body: FavoritesArticleDTO): Promise<IFavoritesArticleDTO> {
     return await this.service.putItem(id, body);
   }
 

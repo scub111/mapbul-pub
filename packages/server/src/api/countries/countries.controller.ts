@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, ICountryDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { CountriesService } from './countries.service';
+import { CountryDTO } from './countries.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class CountriesController implements IController<ICountryDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: ICountryDTO): Promise<ICountryDTO> {
+  async postItem(@Body() body: CountryDTO): Promise<ICountryDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class CountriesController implements IController<ICountryDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: ICountryDTO): Promise<ICountryDTO> {
+  async putItem(@Param('id') id: string, @Body() body: CountryDTO): Promise<ICountryDTO> {
     return await this.service.putItem(id, body);
   }
 

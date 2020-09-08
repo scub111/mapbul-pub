@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IStatusDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { StatusesService } from './statuses.service';
+import { StatusDTO } from './statuses.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class StatusesController implements IController<IStatusDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: IStatusDTO): Promise<IStatusDTO> {
+  async postItem(@Body() body: StatusDTO): Promise<IStatusDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class StatusesController implements IController<IStatusDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: IStatusDTO): Promise<IStatusDTO> {
+  async putItem(@Param('id') id: string, @Body() body: StatusDTO): Promise<IStatusDTO> {
     return await this.service.putItem(id, body);
   }
 

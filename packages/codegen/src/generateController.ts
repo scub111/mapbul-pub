@@ -19,6 +19,7 @@ export const generateController = async (
   console.log(router);
   appendRouterSync(`${router};${dto}`);
   const interfaceName = `I${dto[0].toUpperCase()}${dto.slice(1)}DTO`;
+  const className = `${dto[0].toUpperCase()}${dto.slice(1)}DTO`;
   const filePrefixDTO = dto;
   const filePrefix = `${service[0].toLowerCase()}${service.slice(1)}`;
 
@@ -29,8 +30,9 @@ export const generateController = async (
   const fields = await getFields(connection, tableName);
 
   const hasDateField = fields.some(i => i.type === 'Date');
+  const hasNotNullField = fields.some(i => !i.nullable);
 
-  // Create *.dto.ts
+  // Create type *.dto.ts
   createSorce({
     templatePath: `${templateRootPath}/dto.hbs`,
     data: {
@@ -38,6 +40,18 @@ export const generateController = async (
       fields,
     },
     sourcePath: `${typesRootPath}/server/api/${filePrefixDTO}.dto.ts`,
+  });
+
+  // Create class *.dto.ts
+  createSorce({
+    templatePath: `${templateRootPath}/class.hbs`,
+    data: {
+      className,
+      interfaceName,
+      fields,
+      hasNotNullField
+    },
+    sourcePath: `${serverRootPath}/${routerPath}/${filePrefix}.dto.ts`,
   });
 
   // Create *.service.ts
@@ -65,6 +79,7 @@ export const generateController = async (
       service,
       serviceName,
       interfaceName,
+      className,
       fields,
     },
     sourcePath: `${serverRootPath}/${routerPath}/${filePrefix}.controller.ts`,

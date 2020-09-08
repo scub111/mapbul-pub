@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, ICityDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { CitiesService } from './cities.service';
+import { CityDTO } from './cities.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class CitiesController implements IController<ICityDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: ICityDTO): Promise<ICityDTO> {
+  async postItem(@Body() body: CityDTO): Promise<ICityDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class CitiesController implements IController<ICityDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: ICityDTO): Promise<ICityDTO> {
+  async putItem(@Param('id') id: string, @Body() body: CityDTO): Promise<ICityDTO> {
     return await this.service.putItem(id, body);
   }
 

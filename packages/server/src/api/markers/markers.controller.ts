@@ -2,6 +2,7 @@ import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IMarkerDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { MarkersService } from './markers.service';
+import { MarkerDTO } from './markers.dto';
 import { NotFoundInterceptor } from 'interceptors';
 import { JwtAuthGuard } from '../auth';
 
@@ -18,7 +19,7 @@ export class MarkersController implements IController<IMarkerDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: IMarkerDTO): Promise<IMarkerDTO> {
+  async postItem(@Body() body: MarkerDTO): Promise<IMarkerDTO> {
     return await this.service.postItem(body);
   }
 
@@ -31,7 +32,7 @@ export class MarkersController implements IController<IMarkerDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: IMarkerDTO): Promise<IMarkerDTO> {
+  async putItem(@Param('id') id: string, @Body() body: MarkerDTO): Promise<IMarkerDTO> {
     return await this.service.putItem(id, body);
   }
 
