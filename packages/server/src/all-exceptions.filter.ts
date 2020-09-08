@@ -1,5 +1,15 @@
 import { Catch, ArgumentsHost, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
 
+interface IErrorResponse {
+  statusCode?: number;
+  error?: string;
+  message?: string;
+  stack?: string;
+  errorRaw?: object;
+}
+
+//const getMessage = () => {}
+
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
   catch(error: Error, host: ArgumentsHost) {
@@ -10,19 +20,25 @@ export class AllExceptionsFilter implements ExceptionFilter {
     else if (status === HttpStatus.FORBIDDEN) return response.status(status).render(`${__dirname}/views/403`);
     else if (status === HttpStatus.NOT_FOUND) return response.status(status).render(`${__dirname}/views/404`);
     else {
-      if (process.env.NODE_ENV === 'production') {
-        console.error(error.stack);
-        return response.status(status).render('views/500');
-      } else {
-        // let message = error.stack;
-        let message;
-        if (typeof error === 'string') {
-          message = error;
-        } else if ('stack' in error) {
-          message = error.stack;
-        }
-        return response.status(status).send(message);
+      // if (process.env.NODE_ENV === 'production') {
+      // let message;
+      // if (typeof error === 'string') {
+      //   message = error;
+      // } else if ('stack' in error) {
+      //   message = error.stack;
+      // }
+      let errorRaw = error;
+      if ('response' in error) {
+        errorRaw = (error as any).response;
       }
+
+      let message: IErrorResponse = { statusCode: status, errorRaw, message: 'test' };
+      if (typeof error === 'string') {
+        message.error = error;
+      } else if ('stack' in error) {
+        message.stack = error.stack;
+      }
+      return response.status(status).send(message);
     }
   }
 }

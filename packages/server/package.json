@@ -37,7 +37,7 @@
     "app-root-path": "^3.0.0",
     "basic-ftp": "^4.6.2",
     "class-transformer": "^0.2.3",
-    "class-validator": "^0.11.0",
+    "class-validator": "^0.12.2",
     "fs": "0.0.1-security",
     "hbs": "^4.0.6",
     "md5": "^2.3.0",
