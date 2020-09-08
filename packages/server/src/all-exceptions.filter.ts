@@ -1,14 +1,14 @@
 import { Catch, ArgumentsHost, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
+import { ValidationError } from 'class-validator';
+import { IErrorResponse } from 'interfaces';
 
-interface IErrorResponse {
-  statusCode?: number;
-  error?: string;
-  message?: string;
-  stack?: string;
-  errorRaw?: object;
+const getMessage = (error: any): string => {
+  if ('message' in error && Array.isArray(error.message)) {
+    const errors = error.message as Array<ValidationError>;
+    return errors.map(i => Object.values(i.constraints)).join('; ');
+  }
+  return '';
 }
-
-//const getMessage = () => {}
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -21,18 +21,19 @@ export class AllExceptionsFilter implements ExceptionFilter {
     else if (status === HttpStatus.NOT_FOUND) return response.status(status).render(`${__dirname}/views/404`);
     else {
       // if (process.env.NODE_ENV === 'production') {
-      // let message;
-      // if (typeof error === 'string') {
-      //   message = error;
-      // } else if ('stack' in error) {
-      //   message = error.stack;
-      // }
-      let errorRaw = error;
+
+      let rawError = error;
       if ('response' in error) {
-        errorRaw = (error as any).response;
+        rawError = (error as any).response;
       }
 
-      let message: IErrorResponse = { statusCode: status, errorRaw, message: 'test' };
+      let message: IErrorResponse = {
+        error: 'error' in rawError ? (rawError as any).error : '',
+        statusCode: status,
+        rawError,
+        message: getMessage(rawError)
+      };
+
       if (typeof error === 'string') {
         message.error = error;
       } else if ('stack' in error) {
