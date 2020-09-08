@@ -6,6 +6,8 @@ const getMessage = (error: any): string => {
   if ('message' in error && Array.isArray(error.message)) {
     const errors = error.message as Array<ValidationError>;
     return errors.map(i => Object.values(i.constraints ? i.constraints : {})).join('; ');
+  } else if ('sqlMessage' in error) {
+    return error.sqlMessage;
   }
   return '';
 };

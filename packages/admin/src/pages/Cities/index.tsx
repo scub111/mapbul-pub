@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   List,
   TextField,
+  NumberInput,
   SimpleForm,
   TextInput,
   ReferenceField,
@@ -39,13 +40,18 @@ const CommonForm: React.FC<FieldProps<ICityDTO>> = (props) => (
   <SimpleForm {...props} redirect="list">
     <RowLayout>
       <TextInput disabled source={P<ICityDTO>((p) => p.id)} fullWidth />
-      <TextInput source={P<ICityDTO>((p) => p.name)} fullWidth />
+      <TextInput source={P<ICityDTO>((p) => p.name)} validate={required()} fullWidth />
+    </RowLayout>
+    <RowLayout>
+      <NumberInput source={P<ICityDTO>((p) => p.lat)} validate={required()} defaultValue="-1" fullWidth />
+      <NumberInput source={P<ICityDTO>((p) => p.lng)} validate={required()} defaultValue="-1" fullWidth />
     </RowLayout>
     <RowLayout>
       <ReferenceInput
         source={P<ICityDTO>((p) => p.countryId)}
         reference={Routes.countries}
         perPage={1000}
+        validate={required()}
         fullWidth
       >
         <AutocompleteInput optionText={P<ICountryDTO>((p) => p.name)} />
@@ -56,7 +62,7 @@ const CommonForm: React.FC<FieldProps<ICityDTO>> = (props) => (
         perPage={1000}
         fullWidth
       >
-        <AutocompleteInput optionText={P<IMarkerDTO>((p) => p.name)} />
+        <AutocompleteInput optionText={P<IMarkerDTO>((p) => p.name)} defaultValue="-1"/>
       </ReferenceInput>
     </RowLayout>
   </SimpleForm>

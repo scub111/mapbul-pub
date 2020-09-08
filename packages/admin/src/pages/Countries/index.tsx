@@ -43,8 +43,8 @@ const CommonForm: React.FC<FieldProps<ICountryDTO>> = (props) => {
             <TextInput disabled source={P<ICountryDTO>((p) => p.id)} fullWidth />
          </RowLayout>
          <RowLayout>
-            <TextInput source={P<ICountryDTO>((p) => p.name)} fullWidth />
-            <TextInput source={P<ICountryDTO>((p) => p.enName)} fullWidth validate={required()} />
+            <TextInput source={P<ICountryDTO>((p) => p.name)} fullWidth validate={required()} />
+            <TextInput source={P<ICountryDTO>((p) => p.enName)} defaultValue="" fullWidth />
          </RowLayout>
          <RowLayout>
             <ReferenceInput
@@ -53,7 +53,7 @@ const CommonForm: React.FC<FieldProps<ICountryDTO>> = (props) => {
                perPage={1000}
                fullWidth
             >
-               <AutocompleteInput optionText={P<IMarkerDTO>((p) => p.name)} />
+               <AutocompleteInput optionText={P<IMarkerDTO>((p) => p.name)} defaultValue="-1"/>
             </ReferenceInput>
             <TextInput source={P<ICountryDTO>((p) => p.code)} fullWidth validate={required()} />
          </RowLayout>

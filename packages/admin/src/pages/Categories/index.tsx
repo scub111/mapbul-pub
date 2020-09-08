@@ -75,8 +75,7 @@ const CommonForm: React.FC<FieldProps<ICategoryDTOEx>> = (props) => {
             </ReferenceInput>
          </RowLayout>
          <RowLayout>
-            {/* <TextInput source={P<ICategoryDTOEx>((p) => p.name)} validate={required()} fullWidth /> */}
-            <TextInput source={P<ICategoryDTOEx>((p) => p.name)} fullWidth />
+            <TextInput source={P<ICategoryDTOEx>((p) => p.name)} validate={required()} fullWidth />
             <TextInput source={P<ICategoryDTOEx>((p) => p.enName)} defaultValue="" fullWidth />
          </RowLayout>
          <BooleanInput
@@ -138,7 +137,7 @@ const CommonForm: React.FC<FieldProps<ICategoryDTOEx>> = (props) => {
                defaultValue={new Date()}
                fullWidth
             />
-            <TextInput source={P<ICategoryDTOEx>((p) => p.color)} fullWidth />
+            <TextInput source={P<ICategoryDTOEx>((p) => p.color)} validate={required()} fullWidth />
          </RowLayout>
       </SimpleForm>
    );
