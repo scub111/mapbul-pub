@@ -6,6 +6,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PublicIcon from '@material-ui/icons/Public';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 import { Routes } from '@mapbul-pub/ui';
 import { Admin, Resource } from 'react-admin';
@@ -30,7 +31,10 @@ import {
    CityCreate,
    CountryList,
    CountryEdit,
-   CountryCreate
+   CountryCreate,
+   DiscountCreate,
+   DiscountList,
+   DiscountEdit
 } from 'pages';
 
 import authProvider from './authProvider';
@@ -56,6 +60,13 @@ const App = () => (
          create={ArticleCreate}
       />
       <Resource
+         name={Routes.markers}
+         icon={LocationOnIcon}
+         list={MarkerList}
+         edit={MarkerEdit}
+         create={MarkerCreate}
+      />
+      <Resource
          name={Routes.categories}
          icon={CategoryIcon}
          list={CategoryList}
@@ -70,13 +81,6 @@ const App = () => (
          create={StatusCreate}
       />
       <Resource
-         name={Routes.markers}
-         icon={LocationOnIcon}
-         list={MarkerList}
-         edit={MarkerEdit}
-         create={MarkerCreate}
-      />
-      <Resource
          name={Routes.cities}
          icon={LocationCityIcon}
          list={CityList}
@@ -89,6 +93,13 @@ const App = () => (
          list={CountryList}
          edit={CountryEdit}
          create={CountryCreate}
+      />
+      <Resource
+         name={Routes.discounts}
+         icon={AttachMoneyIcon}
+         list={DiscountList}
+         edit={DiscountEdit}
+         create={DiscountCreate}
       />
    </Admin>
 );

@@ -64,7 +64,7 @@ const CommonForm: React.FC<FieldProps<ICategoryDTOEx>> = (props) => {
       <SimpleForm {...props} redirect="list">
          <SectionTitle label="Main" />
          <RowLayout>
-            <TextInput disabled source={P<ICategoryDTOEx>((p) => p.id)} fullWidth />
+            <TextInput source={P<ICategoryDTOEx>((p) => p.id)} disabled fullWidth />
             <ReferenceInput
                source={P<ICategoryDTOEx>((p) => p.parentId)}
                reference={Routes.categories}

@@ -7,6 +7,7 @@ import {
   TextInput,
   ReferenceField,
   ReferenceInput,
+  SelectInput,
   AutocompleteInput,
   required
 } from 'react-admin';
@@ -39,7 +40,7 @@ export const CityList: React.FC = (props: any) => {
 const CommonForm: React.FC<FieldProps<ICityDTO>> = (props) => (
   <SimpleForm {...props} redirect="list">
     <RowLayout>
-      <TextInput disabled source={P<ICityDTO>((p) => p.id)} fullWidth />
+      <TextInput source={P<ICityDTO>((p) => p.id)} disabled fullWidth />
       <TextInput source={P<ICityDTO>((p) => p.name)} validate={required()} fullWidth />
     </RowLayout>
     <RowLayout>
@@ -54,7 +55,7 @@ const CommonForm: React.FC<FieldProps<ICityDTO>> = (props) => (
         validate={required()}
         fullWidth
       >
-        <AutocompleteInput optionText={P<ICountryDTO>((p) => p.name)} />
+        <SelectInput optionText={P<ICountryDTO>((p) => p.name)} />
       </ReferenceInput>
       <ReferenceInput
         source={P<ICityDTO>((p) => p.placeId)}

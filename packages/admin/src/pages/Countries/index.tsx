@@ -40,7 +40,7 @@ const CommonForm: React.FC<FieldProps<ICountryDTO>> = (props) => {
   return (
      <SimpleForm {...props} redirect="list">
          <RowLayout>
-            <TextInput disabled source={P<ICountryDTO>((p) => p.id)} fullWidth />
+            <TextInput source={P<ICountryDTO>((p) => p.id)} disabled fullWidth />
          </RowLayout>
          <RowLayout>
             <TextInput source={P<ICountryDTO>((p) => p.name)} fullWidth validate={required()} />

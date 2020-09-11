@@ -5,3 +5,4 @@ export * from './Statuses';
 export * from './Markers';
 export * from './Cities';
 export * from './Countries';
+export * from './Discounts';

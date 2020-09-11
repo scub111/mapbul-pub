@@ -60,7 +60,7 @@ export const ArticleList: React.FC = (props: any) => (
             source={P<IArticleDTO>((p) => p.statusId)}
             reference={Routes.statuses}
          >
-            <TextField source={P<IStatusDTO>(p => p.description)} />
+            <TextField source={P<IStatusDTO>((p) => p.description)} />
          </ReferenceField>
       </SortedGrid>
    </List>
@@ -83,8 +83,8 @@ export const ArticleEdit: React.FC = withEditPage<IArticleDTOEx>((props) => {
             <TextInput source={P<IArticleDTOEx>((p) => p.descriptionEn)} fullWidth />
          </RowLayout>
          <RowLayout>
-            <TextInput multiline source={P<IArticleDTOEx>((p) => p.text)} fullWidth />
-            <TextInput multiline source={P<IArticleDTOEx>((p) => p.textEn)} fullWidth />
+            <TextInput source={P<IArticleDTOEx>((p) => p.text)} multiline fullWidth />
+            <TextInput source={P<IArticleDTOEx>((p) => p.textEn)} multiline fullWidth />
          </RowLayout>
          <RowLayout>
             <TextInput source={P<IArticleDTOEx>((p) => p.sourceUrl)} fullWidth />
@@ -102,7 +102,6 @@ export const ArticleEdit: React.FC = withEditPage<IArticleDTOEx>((props) => {
                perPage={1000}
                fullWidth
             >
-               {/* <SelectInput optionText={P<ICategoryDTOEx>(p => p.name)} /> */}
                <AutocompleteInput optionText={P<ICategoryDTOEx>((p) => p.name)} />
             </ReferenceInput>
             <ReferenceInput
@@ -111,7 +110,7 @@ export const ArticleEdit: React.FC = withEditPage<IArticleDTOEx>((props) => {
                perPage={1000}
                fullWidth
             >
-               <SelectInput optionText={P<IStatusDTO>(p => p.description)} />
+               <SelectInput optionText={P<IStatusDTO>((p) => p.description)} />
             </ReferenceInput>
          </RowLayout>
          <RowLayout>
