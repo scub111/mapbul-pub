@@ -33,7 +33,6 @@ export class UsersService implements IBaseService<IUserDTO> {
       SELECT
         \`id\`,
         \`email\`,
-        \`password\`,
         \`guid\`,
         \`userTypeId\`,
         \`registrationDate\`,
@@ -91,7 +90,6 @@ export class UsersService implements IBaseService<IUserDTO> {
       SELECT
         \`id\`,
         \`email\`,
-        \`password\`,
         \`guid\`,
         \`userTypeId\`,
         \`registrationDate\`,

@@ -10,6 +10,7 @@ export const generateController = async (
   tableName: string,
   dto: string,
   service: string,
+  skipReadFields?: Array<string>
 ): Promise<void> => {
   const baseName = `${service[0].toUpperCase()}${service.slice(1)}`;
   const serviceName = `${baseName}Service`;
@@ -27,17 +28,18 @@ export const generateController = async (
   const serverRootPath = path.join(appRootPath.path, '..', '/server/src');
   const typesRootPath = path.join(appRootPath.path, '..', '/types');
 
-  const fields = await getFields(connection, tableName);
+  const initFields = await getFields(connection, tableName);
+  const readFields = initFields.filter(i => !skipReadFields?.some(t => t === i.field));
 
-  const hasDateField = fields.some(i => i.type === 'Date');
-  const hasNotNullField = fields.some(i => !i.nullable);
+  const hasDateField = readFields.some(i => i.type === 'Date');
+  const hasNotNullField = readFields.some(i => !i.nullable);
 
   // Create type *.dto.ts
   createSorce({
     templatePath: `${templateRootPath}/dto.hbs`,
     data: {
       interfaceName,
-      fields,
+      fields: initFields,
     },
     sourcePath: `${typesRootPath}/server/api/${filePrefixDTO}.dto.ts`,
   });
@@ -48,7 +50,7 @@ export const generateController = async (
     data: {
       className,
       interfaceName,
-      fields,
+      fields: initFields,
       hasNotNullField
     },
     sourcePath: `${serverRootPath}/${routerPath}/${filePrefix}.dto.ts`,
@@ -62,7 +64,8 @@ export const generateController = async (
       serviceName,
       interfaceName,
       filePrefixDTO,
-      fields,
+      fields: initFields,
+      readFields,
       hasDateField
     },
     sourcePath: `${serverRootPath}/${routerPath}/${filePrefix}.service.ts`,
@@ -80,7 +83,7 @@ export const generateController = async (
       serviceName,
       interfaceName,
       className,
-      fields,
+      fields: readFields,
     },
     sourcePath: `${serverRootPath}/${routerPath}/${filePrefix}.controller.ts`,
   });

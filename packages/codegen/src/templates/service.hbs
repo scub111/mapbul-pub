@@ -33,7 +33,7 @@ export class {{serviceName}} implements IBaseService<{{interfaceName}}> {
     }
     const records = await this.connection.query(`
       SELECT
-        {{#each fields}}
+        {{#each readFields}}
         \`{{field}}\`{{separator}}
         {{/each}} 
       FROM {{tableName}} ${additional}`);
@@ -85,7 +85,7 @@ export class {{serviceName}} implements IBaseService<{{interfaceName}}> {
     return (
       await this.connection.query(`
       SELECT
-        {{#each fields}}
+        {{#each readFields}}
         \`{{field}}\`{{separator}}
         {{/each}} 
       FROM {{tableName}}

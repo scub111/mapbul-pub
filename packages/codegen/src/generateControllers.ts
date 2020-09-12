@@ -39,7 +39,7 @@ export const generateControllers = async () => {
   await generateController(dbConnection, 'status', 'status', 'statuses');
   await generateController(dbConnection, 'subcategory', 'subcategory', 'subcategories');
   await generateController(dbConnection, 'tenant', 'tenant', 'tenants');
-  await generateController(dbConnection, 'user', 'user', 'users');
+  await generateController(dbConnection, 'user', 'user', 'users', ['password']);
   await generateController(dbConnection, 'usertype', 'userType', 'userTypes');
   await generateController(dbConnection, 'weekday', 'weekDay', 'weekDays');
   await generateController(dbConnection, 'worktime', 'workTime', 'workTimes');
