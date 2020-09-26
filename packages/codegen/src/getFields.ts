@@ -45,16 +45,16 @@ export const getFields = async (connection: IDbConnection, tableName: string): P
     let value = '';
 
     if (field.type === 'string') {
-      value = `'\${body.${field.field}}'`
+      value = `'\${body.${field.field}}'`;
     } else if (field.type === 'Date') {
-      value = `'\${dateTimeFormat(body.${field.field})}'`
+      value = `'\${dateTimeFormat(body.${field.field})}'`;
     } else {
-      value = `\${body.${field.field}}`
+      value = `\${body.${field.field}}`;
     }
 
     return {
       ...field,
-      value
+      value,
     };
   });
 };

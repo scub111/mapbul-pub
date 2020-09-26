@@ -37,8 +37,8 @@ export const CountryList: React.FC = (props: any) => {
 };
 
 const CommonForm: React.FC<FieldProps<ICountryDTO>> = (props) => {
-  return (
-     <SimpleForm {...props} redirect="list">
+   return (
+      <SimpleForm {...props} redirect="list">
          <RowLayout>
             <TextInput source={P<ICountryDTO>((p) => p.id)} disabled fullWidth />
          </RowLayout>
@@ -53,12 +53,12 @@ const CommonForm: React.FC<FieldProps<ICountryDTO>> = (props) => {
                perPage={1000}
                fullWidth
             >
-               <AutocompleteInput optionText={P<IMarkerDTO>((p) => p.name)} defaultValue="-1"/>
+               <AutocompleteInput optionText={P<IMarkerDTO>((p) => p.name)} defaultValue="-1" />
             </ReferenceInput>
             <TextInput source={P<ICountryDTO>((p) => p.code)} fullWidth validate={required()} />
          </RowLayout>
-     </SimpleForm>
-  );
+      </SimpleForm>
+   );
 };
 
 export const CountryCreate: React.FC = withCreatePage(CommonForm);

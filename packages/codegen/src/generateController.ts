@@ -10,7 +10,7 @@ export const generateController = async (
   tableName: string,
   dto: string,
   service: string,
-  skipReadFields?: Array<string>
+  skipReadFields?: Array<string>,
 ): Promise<void> => {
   const baseName = `${service[0].toUpperCase()}${service.slice(1)}`;
   const serviceName = `${baseName}Service`;
@@ -51,7 +51,7 @@ export const generateController = async (
       className,
       interfaceName,
       fields: initFields,
-      hasNotNullField
+      hasNotNullField,
     },
     sourcePath: `${serverRootPath}/${routerPath}/${filePrefix}.dto.ts`,
   });
@@ -66,7 +66,7 @@ export const generateController = async (
       filePrefixDTO,
       fields: initFields,
       readFields,
-      hasDateField
+      hasDateField,
     },
     sourcePath: `${serverRootPath}/${routerPath}/${filePrefix}.service.ts`,
   });

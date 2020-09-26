@@ -5,6 +5,7 @@ import { SortedGrid } from 'components';
 import { RowLayout } from 'ui';
 import { withCreatePage, withEditPage } from 'hocs';
 import { IStatusDTO } from '@mapbul-pub/types';
+import { FieldProps } from 'types';
 
 export const StatusList: React.FC = (props: any) => {
    return (
@@ -18,7 +19,7 @@ export const StatusList: React.FC = (props: any) => {
    );
 };
 
-export const StatusCreate: React.FC = withCreatePage((props) => {
+const CommonForm: React.FC<FieldProps<IStatusDTO>> = (props) => {
    return (
       <SimpleForm {...props} redirect="list">
          <RowLayout>
@@ -28,16 +29,8 @@ export const StatusCreate: React.FC = withCreatePage((props) => {
          <TextInput source={P<IStatusDTO>((p) => p.description)} fullWidth defaultValue="" />
       </SimpleForm>
    );
-});
+};
 
-export const StatusEdit = withEditPage<IStatusDTO>((props) => {
-   return (
-      <SimpleForm {...props}>
-         <RowLayout>
-            <TextInput disabled source={P<IStatusDTO>((p) => p.id)} fullWidth />
-            <TextInput source={P<IStatusDTO>((p) => p.tag)} fullWidth />
-         </RowLayout>
-         <TextInput source={P<IStatusDTO>((p) => p.description)} fullWidth />
-      </SimpleForm>
-   );
-});
+export const StatusCreate: React.FC = withCreatePage(CommonForm);
+
+export const StatusEdit = withEditPage<IStatusDTO>(CommonForm);

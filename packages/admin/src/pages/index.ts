@@ -6,3 +6,5 @@ export * from './Markers';
 export * from './Cities';
 export * from './Countries';
 export * from './Discounts';
+export * from './Users';
+export * from './UserTypes';

@@ -30,14 +30,20 @@ export const DiscountList: React.FC = (props: any) => {
 };
 
 const CommonForm: React.FC<FieldProps<IDiscountDTO>> = (props) => {
-  return (
-     <SimpleForm {...props} redirect="list">
+   return (
+      <SimpleForm {...props} redirect="list">
          <RowLayout>
             <TextInput source={P<IDiscountDTO>((p) => p.id)} disabled fullWidth />
-            <NumberInput source={P<IDiscountDTO>((p) => p.value)} min={0} max={100} validate={required()} fullWidth />
+            <NumberInput
+               source={P<IDiscountDTO>((p) => p.value)}
+               min={0}
+               max={100}
+               validate={required()}
+               fullWidth
+            />
          </RowLayout>
-     </SimpleForm>
-  );
+      </SimpleForm>
+   );
 };
 
 export const DiscountCreate: React.FC = withCreatePage(CommonForm);

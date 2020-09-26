@@ -7,6 +7,8 @@ import PublicIcon from '@material-ui/icons/Public';
 import LocationCityIcon from '@material-ui/icons/LocationCity';
 import DoneAllIcon from '@material-ui/icons/DoneAll';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import PersonIcon from '@material-ui/icons/Person';
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
 import { Routes } from '@mapbul-pub/ui';
 import { Admin, Resource } from 'react-admin';
@@ -34,13 +36,17 @@ import {
    CountryCreate,
    DiscountCreate,
    DiscountList,
-   DiscountEdit
+   DiscountEdit,
+   UserList,
+   UserEdit,
+   UserCreate
 } from 'pages';
 
 import authProvider from './authProvider';
 import { GlobalVar } from 'src/constants';
 
 import { createBrowserHistory } from 'history';
+import { UserTypeList, UserTypeEdit, UserTypeCreate } from './pages/UserTypes';
 // const history = createBrowserHistory({ basename: '/12' });
 const history = createBrowserHistory();
 
@@ -100,6 +106,20 @@ const App = () => (
          list={DiscountList}
          edit={DiscountEdit}
          create={DiscountCreate}
+      />
+      <Resource
+         name={Routes.users}
+         icon={PersonIcon}
+         list={UserList}
+         edit={UserEdit}
+         create={UserCreate}
+      />
+      <Resource
+         name={Routes.usertypes}
+         icon={AssignmentIndIcon}
+         list={UserTypeList}
+         edit={UserTypeEdit}
+         create={UserTypeCreate}
       />
    </Admin>
 );
