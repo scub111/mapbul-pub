@@ -35,7 +35,9 @@ describe('pathUtils', () => {
         { key: 'sort', value: 'sort2,asc' },
       ],
     });
-    expect(result).toBe('https://test.com/documents?page=0&size=50&sort=sort1%2Casc&sort=sort2%2Casc');
+    expect(result).toBe(
+      'https://test.com/documents?page=0&size=50&sort=sort1%2Casc&sort=sort2%2Casc',
+    );
   });
 
   it('createPathEx complex test with undefined and null', () => {

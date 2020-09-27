@@ -17,7 +17,10 @@ export const makePageState = <T extends object>(): IPageState<T> => {
   };
 };
 
-export const makePageReducer = <T extends object>(actions: IActionSet<T>, initialState: IPageState<T>) => {
+export const makePageReducer = <T extends object>(
+  actions: IActionSet<T>,
+  initialState: IPageState<T>,
+) => {
   return handleActions<IPageState<T>, any>(
     {
       [actions.incrementCurrentPage.toString()]: (state): IPageState<T> => {

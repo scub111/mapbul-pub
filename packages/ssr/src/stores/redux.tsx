@@ -40,7 +40,9 @@ export const withRedux = (PageComponent: any, { ssr = true } = {}) => {
 
       // Run getInitialProps from HOCed PageComponent
       const pageProps =
-        typeof PageComponent.getInitialProps === 'function' ? await PageComponent.getInitialProps(context) : {};
+        typeof PageComponent.getInitialProps === 'function'
+          ? await PageComponent.getInitialProps(context)
+          : {};
 
       // Pass props to PageComponent
       return {

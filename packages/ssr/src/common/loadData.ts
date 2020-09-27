@@ -3,7 +3,9 @@ import { Article, Marker } from 'models';
 import { PageContent } from '@mapbul-pub/types';
 import { articlesService, markersService } from 'services';
 
-export const loadArticlesData = (size: number) => async (page: number): Promise<ListPageProps<Article>> => {
+export const loadArticlesData = (size: number) => async (
+  page: number,
+): Promise<ListPageProps<Article>> => {
   try {
     const pagination: PageContent<Article> = await articlesService.list({
       page,
@@ -17,7 +19,9 @@ export const loadArticlesData = (size: number) => async (page: number): Promise<
   }
 };
 
-export const loadEventsData = (size: number) => async (page: number): Promise<ListPageProps<Article>> => {
+export const loadEventsData = (size: number) => async (
+  page: number,
+): Promise<ListPageProps<Article>> => {
   try {
     const pagination: PageContent<Article> = await articlesService.list({
       page,
@@ -31,7 +35,9 @@ export const loadEventsData = (size: number) => async (page: number): Promise<Li
   }
 };
 
-export const loadMarkersData = (size: number) => async (page: number): Promise<ListPageProps<Marker>> => {
+export const loadMarkersData = (size: number) => async (
+  page: number,
+): Promise<ListPageProps<Marker>> => {
   try {
     const pagination: PageContent<Marker> = await markersService.list({
       page,

@@ -80,5 +80,7 @@ function getSVGSize(size: string, value: string) {
 }
 
 export const customizeHOC = (Component: React.ElementType) => {
-  return (props: Partial<IIConProps>) => <Icon {...convertToSVGProps(props)} component={Component} />;
+  return (props: Partial<IIConProps>) => (
+    <Icon {...convertToSVGProps(props)} component={Component} />
+  );
 };

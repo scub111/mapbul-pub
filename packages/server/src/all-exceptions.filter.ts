@@ -16,11 +16,15 @@ const getMessage = (error: any): string => {
 export class AllExceptionsFilter implements ExceptionFilter {
   catch(error: Error, host: ArgumentsHost) {
     let response = host.switchToHttp().getResponse();
-    let status = error instanceof HttpException ? error.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
+    let status =
+      error instanceof HttpException ? error.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
 
-    if (status === HttpStatus.UNAUTHORIZED) return response.status(status).render(`${__dirname}/views/401`);
-    else if (status === HttpStatus.FORBIDDEN) return response.status(status).render(`${__dirname}/views/403`);
-    else if (status === HttpStatus.NOT_FOUND) return response.status(status).render(`${__dirname}/views/404`);
+    if (status === HttpStatus.UNAUTHORIZED)
+      return response.status(status).render(`${__dirname}/views/401`);
+    else if (status === HttpStatus.FORBIDDEN)
+      return response.status(status).render(`${__dirname}/views/403`);
+    else if (status === HttpStatus.NOT_FOUND)
+      return response.status(status).render(`${__dirname}/views/404`);
     else {
       // if (process.env.NODE_ENV === 'production') {
 

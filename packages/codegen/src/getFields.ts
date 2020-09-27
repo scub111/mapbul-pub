@@ -30,7 +30,10 @@ const traslateType = (type: string): DbType => {
   return 'unknown';
 };
 
-export const getFields = async (connection: IDbConnection, tableName: string): Promise<Array<IField>> => {
+export const getFields = async (
+  connection: IDbConnection,
+  tableName: string,
+): Promise<Array<IField>> => {
   const result: any[] = await connection.query(`DESCRIBE ${tableName}`);
   // console.log(result);
   return result.map((row: IDescribeRowData, index: number) => {

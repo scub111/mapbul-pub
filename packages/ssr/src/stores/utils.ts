@@ -33,5 +33,15 @@ export const makeUseList = <T extends object>(
   const addList = (newList: Array<T>) => dispatch(actions.addList(newList));
   const setTotalPages = (totalPages: number) => dispatch(actions.setTotalPages(totalPages));
   const setLoading = (loading: boolean) => dispatch(actions.setLoading(loading));
-  return { list, currentPage, totalPages, loading, incrementCurrentPage, setList, addList, setTotalPages, setLoading };
+  return {
+    list,
+    currentPage,
+    totalPages,
+    loading,
+    incrementCurrentPage,
+    setList,
+    addList,
+    setTotalPages,
+    setLoading,
+  };
 };

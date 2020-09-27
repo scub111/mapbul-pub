@@ -7,7 +7,11 @@ import { UserDescription } from 'interfaces';
 const { publicRuntimeConfig } = getConfig();
 
 export class Article implements IArticleDTO {
-  public static async New(init: IArticleDTO, category?: Category, userDescription?: UserDescription) {
+  public static async New(
+    init: IArticleDTO,
+    category?: Category,
+    userDescription?: UserDescription,
+  ) {
     const newArticle = new Article(init);
     newArticle.category = category;
     newArticle.userDescription = userDescription;
@@ -49,7 +53,9 @@ export class Article implements IArticleDTO {
     this.id = init.id;
     this.title = init.title;
     this.titleEn = init.titleEn;
-    this.titlePhoto = init.titlePhoto ? clearUrl(`${publicRuntimeConfig.IMAGE_URL}/${init.titlePhoto}`) : null;
+    this.titlePhoto = init.titlePhoto
+      ? clearUrl(`${publicRuntimeConfig.IMAGE_URL}/${init.titlePhoto}`)
+      : null;
     this.photo = init.photo ? clearUrl(`${publicRuntimeConfig.IMAGE_URL}/${init.photo}`) : null;
     this.sourceUrl = init.sourceUrl;
     this.sourceUrlEn = init.sourceUrlEn;

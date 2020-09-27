@@ -9,7 +9,8 @@ const { publicRuntimeConfig } = getConfig();
 //To verify BASE_URL for reloading specific page
 console.log(`BASE_URL_FRONT = ${publicRuntimeConfig.BASE_URL_FRONT}`);
 console.log(`BASE_URL_SERVER = ${publicRuntimeConfig.BASE_URL_SERVER}`);
-const getApiUrl = () => (isClient ? `${publicRuntimeConfig.BASE_URL_FRONT}` : `${publicRuntimeConfig.BASE_URL_SERVER}`);
+const getApiUrl = () =>
+  isClient ? `${publicRuntimeConfig.BASE_URL_FRONT}` : `${publicRuntimeConfig.BASE_URL_SERVER}`;
 
 export interface IEndpointFn {
   list: (query: IGetAllQuery) => string;

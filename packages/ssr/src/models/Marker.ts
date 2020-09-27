@@ -7,7 +7,11 @@ import { Category } from '.';
 const { publicRuntimeConfig } = getConfig();
 
 export class Marker implements IMarkerDTO {
-  public static async New(init: IMarkerDTO, category?: Category, userDescription?: UserDescription) {
+  public static async New(
+    init: IMarkerDTO,
+    category?: Category,
+    userDescription?: UserDescription,
+  ) {
     const newMarker = new Marker(init);
     newMarker.category = category;
     newMarker.userDescription = userDescription;

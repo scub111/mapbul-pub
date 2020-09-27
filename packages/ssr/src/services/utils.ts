@@ -1,10 +1,20 @@
 import { GlobalVar } from '../config';
 import { BaseService } from './BaseService';
 import { User } from 'models';
-import { editorsService, journalistsService, guidesService, tenantsService, userTypesService } from '.';
+import {
+  editorsService,
+  journalistsService,
+  guidesService,
+  tenantsService,
+  userTypesService,
+} from '.';
 import { UserDescription } from 'interfaces';
 
-export const analizeUserTag = async (service: BaseService<any, any>, user: User, caption: string): Promise<string> => {
+export const analizeUserTag = async (
+  service: BaseService<any, any>,
+  user: User,
+  caption: string,
+): Promise<string> => {
   const journalists = await service.list({ page: 1, size: 1, filter: `userId=${user.id}` });
   if (journalists.content.length > 0) {
     const journalist = journalists.content[0];
@@ -19,7 +29,11 @@ export const takeUserDescription = async (user: User, userTag: string): Promise<
   } else if (userTag === 'edit') {
     return await analizeUserTag(editorsService, user, GlobalVar.isRus ? 'Редактор:' : 'Editor:');
   } else if (userTag === 'journ') {
-    return await analizeUserTag(journalistsService, user, GlobalVar.isRus ? 'Журналист:' : 'Journalist');
+    return await analizeUserTag(
+      journalistsService,
+      user,
+      GlobalVar.isRus ? 'Журналист:' : 'Journalist',
+    );
   } else if (userTag === 'guide') {
     return await analizeUserTag(guidesService, user, GlobalVar.isRus ? 'Гид:' : 'Guide');
   } else if (userTag === 'tenant') {

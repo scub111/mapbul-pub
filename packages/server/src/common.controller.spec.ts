@@ -48,7 +48,11 @@ describe('AdminsController', () => {
     });
 
     it('should return filtered page with pagination', async () => {
-      const result = await controller.getAll({ page: 1, size: 1, filter: 'id > 100 and enName = "money"' });
+      const result = await controller.getAll({
+        page: 1,
+        size: 1,
+        filter: 'id > 100 and enName = "money"',
+      });
       expect(result.content.length).toBe(1);
       expect(result.totalPages).toBe(1);
     });
@@ -61,7 +65,12 @@ describe('AdminsController', () => {
     });
 
     it('should return sorted and filtered page with pagination', async () => {
-      const result = await controller.getAll({ page: 1, size: 1, filter: 'id > 100', sort: 'name desc' });
+      const result = await controller.getAll({
+        page: 1,
+        size: 1,
+        filter: 'id > 100',
+        sort: 'name desc',
+      });
       expect(result.content.length).toBe(1);
       expect(result.content[0].name).toBe('экология');
       expect(result.totalPages).toBeGreaterThanOrEqual(49);

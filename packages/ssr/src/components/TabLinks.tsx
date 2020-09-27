@@ -36,7 +36,8 @@ const TabEx: React.FC<IPageUrl> = ({ page, url, ...props }) => {
 export const TabLinks: React.FC<{ sections: Array<IPageUrl> }> = ({ sections }) => {
   const classes = useStyles();
   const router = useRouter();
-  const findIndex = () => sections.findIndex(item => getActive(`/[lang]${item.url}`, router.pathname));
+  const findIndex = () =>
+    sections.findIndex(item => getActive(`/[lang]${item.url}`, router.pathname));
 
   return (
     <Tabs

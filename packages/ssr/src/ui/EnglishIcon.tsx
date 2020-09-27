@@ -3,7 +3,13 @@ import { customizeHOC } from './CustomizedIcons';
 
 const Icon = (props: any) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="1200" height="600" {...props}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 60 30"
+      width="1200"
+      height="600"
+      {...props}
+    >
       <clipPath id="s">
         <path d="M0,0 v30 h60 v-30 z" />
       </clipPath>

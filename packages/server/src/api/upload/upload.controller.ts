@@ -1,4 +1,12 @@
-import { Controller, Post, UseInterceptors, UploadedFile, Body, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  UseInterceptors,
+  UploadedFile,
+  Body,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 // import { UploadFileService } from './upload.fileService';
 import { v4 as uuidv4 } from 'uuid';

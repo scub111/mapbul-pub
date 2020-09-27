@@ -5,13 +5,21 @@ import { createSorce } from 'codegenSrc/generateSource';
 import { appendRouterSync } from 'codegenSrc/routerStorage';
 import { IDbConnection } from '@mapbul-pub/types';
 
-export const generateController = async (
-  connection: IDbConnection,
-  tableName: string,
-  dto: string,
-  service: string,
-  skipReadFields?: Array<string>,
-): Promise<void> => {
+export interface IGenerateControllerConfig {
+  connection: IDbConnection;
+  tableName: string;
+  dto: string;
+  service: string;
+  skipReadFields?: Array<string>;
+}
+
+export const generateController = async ({
+  connection,
+  tableName,
+  dto,
+  service,
+  skipReadFields,
+}: IGenerateControllerConfig): Promise<void> => {
   const baseName = `${service[0].toUpperCase()}${service.slice(1)}`;
   const serviceName = `${baseName}Service`;
   const controllerName = `${baseName}Controller`;

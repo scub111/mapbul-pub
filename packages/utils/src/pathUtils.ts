@@ -32,7 +32,8 @@ export const createPathEx = ({ endpoint, queryParams }: IPathConfigEx) => {
   if (queryParams) {
     const params = new URLSearchParams();
     queryParams.forEach(param => {
-      if (param.value !== undefined && param.value !== null) params.append(param.key, String(param.value));
+      if (param.value !== undefined && param.value !== null)
+        params.append(param.key, String(param.value));
     });
     searchString = params.toString();
   }

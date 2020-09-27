@@ -18,7 +18,11 @@ export const ArticleDetail: React.FC<IDetailItemProps<Article>> = ({ item }) => 
         <Box style={{ flex: 1 }}>
           <Typography variant="h6">{item.category ? item.category.nameLang : ''}</Typography>
           {isActicle && item.userDescription && !item.sourceUrl && (
-            <Typography variant="h6" color="textSecondary" style={{ paddingBottom: theme.spacing(2) }}>
+            <Typography
+              variant="h6"
+              color="textSecondary"
+              style={{ paddingBottom: theme.spacing(2) }}
+            >
               {item.userDescription ? item.userDescription.description : ''}
             </Typography>
           )}
@@ -61,7 +65,12 @@ export const ArticleDetail: React.FC<IDetailItemProps<Article>> = ({ item }) => 
             <Box style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Box style={{ display: 'flex', flexDirection: 'row', fontStyle: 'italic' }}>
                 {item.sourcePhoto && (
-                  <Link display="block" variant="body1" href={item.sourcePhoto} key={item.sourcePhoto}>
+                  <Link
+                    display="block"
+                    variant="body1"
+                    href={item.sourcePhoto}
+                    key={item.sourcePhoto}
+                  >
                     {isRus ? item.sourcePhoto : item.sourcePhotoEn}
                   </Link>
                 )}
@@ -76,7 +85,11 @@ export const ArticleDetail: React.FC<IDetailItemProps<Article>> = ({ item }) => 
           </Box>
         )}
         {!isActicle && item.userDescription && !item.sourceUrl && (
-          <Typography variant="h6" color="textSecondary" style={{ paddingBottom: theme.spacing(2) }}>
+          <Typography
+            variant="h6"
+            color="textSecondary"
+            style={{ paddingBottom: theme.spacing(2) }}
+          >
             {item.userDescription ? item.userDescription.description : ''}
           </Typography>
         )}

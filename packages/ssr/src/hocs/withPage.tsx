@@ -36,9 +36,18 @@ export interface IPageConfig<T> {
 
 export interface IUseList<T> extends IActionSet<T>, IPageState<T> {}
 
-export const withPage = <T extends object>(config: IPageConfig<T>) => (Component: React.FC<IPageProps<T>>) => {
+export const withPage = <T extends object>(config: IPageConfig<T>) => (
+  Component: React.FC<IPageProps<T>>,
+) => {
   const MainPage: NextPage<ListPageProps<T>> = ({ error }) => {
-    const { list, currentPage, totalPages, loading, incrementCurrentPage, addList } = config.useList();
+    const {
+      list,
+      currentPage,
+      totalPages,
+      loading,
+      incrementCurrentPage,
+      addList,
+    } = config.useList();
     const hasMore = currentPage < totalPages;
 
     const { t } = useTranslation();
@@ -69,7 +78,10 @@ export const withPage = <T extends object>(config: IPageConfig<T>) => (Component
     );
   };
 
-  MainPage.getInitialProps = async ({ query, reduxStore }: NextPageContext & { reduxStore: Store }) => {
+  MainPage.getInitialProps = async ({
+    query,
+    reduxStore,
+  }: NextPageContext & { reduxStore: Store }) => {
     const { list, setList, setTotalPages } = config.useList(reduxStore);
     const { lang } = query;
     GlobalVar.setLang(lang);

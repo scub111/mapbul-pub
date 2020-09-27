@@ -8,7 +8,12 @@ import { useScrollPercentage } from 'hooks';
 import { ScrollFab } from 'ui';
 import { IPageBaseProps } from 'interfaces';
 
-export const PageLayout: React.FC<IPageBaseProps> = ({ children, title, description, imageUrl }) => {
+export const PageLayout: React.FC<IPageBaseProps> = ({
+  children,
+  title,
+  description,
+  imageUrl,
+}) => {
   const [percent] = useScrollPercentage();
   return (
     <ThemeProvider theme={theme}>

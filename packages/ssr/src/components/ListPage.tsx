@@ -31,7 +31,10 @@ export const ListPage = <T extends object>({
     <PageLayout title={title}>
       {error && <ErrorText error={error} />}
       {list && (
-        <InfiniteScroll hasMore={hasMore} loadMore={async page => loadMore && (await loadMore(page))}>
+        <InfiniteScroll
+          hasMore={hasMore}
+          loadMore={async page => loadMore && (await loadMore(page))}
+        >
           <ListBase component={component} items={list} route={route} />
           {loading && (
             <Grid className={classes.loader}>

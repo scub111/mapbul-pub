@@ -32,7 +32,11 @@ export const ArticleListItem: React.FC<ListItemProps<Article>> = ({ item, route 
                 </CardContent>
               </div>
               {item.titlePhoto && (
-                <CardMedia image={titlePhoto} title={titleLang} style={{ width: '30%', minWidth: 150 }} />
+                <CardMedia
+                  image={titlePhoto}
+                  title={titleLang}
+                  style={{ width: '30%', minWidth: 150 }}
+                />
               )}
             </Card>
           </MuiLink>

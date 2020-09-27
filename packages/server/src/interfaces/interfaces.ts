@@ -1,4 +1,5 @@
 import { TID } from 'interfaces';
+import { IUserDTO } from '@mapbul-pub/types';
 
 export interface IGetParams {
   id: TID;
@@ -26,4 +27,8 @@ export interface IOkPacket {
   message: string;
   protocol41: boolean;
   changedRows: number;
+}
+
+export interface IRequest {
+  user: Partial<IUserDTO>;
 }

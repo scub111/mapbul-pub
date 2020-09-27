@@ -9,7 +9,9 @@ export const withList = <T extends object>({
   items,
   route,
   ...props
-}: { items: Array<T>; route: string } & CommonProps<any>) => (Component: React.FC<{ item: T; route: string }>) => {
+}: { items: Array<T>; route: string } & CommonProps<any>) => (
+  Component: React.FC<{ item: T; route: string }>,
+) => {
   return (
     <Grid container spacing={2} {...props}>
       {items.map((item: T, index: number) => (
@@ -24,7 +26,9 @@ export const ListBase = <T extends object>({
   route,
   component: Component,
   ...props
-}: { items: Array<T>; route: string; component: React.FC<ListItemProps<T>> } & CommonProps<any>) => {
+}: { items: Array<T>; route: string; component: React.FC<ListItemProps<T>> } & CommonProps<
+  any
+>) => {
   return (
     <Grid container spacing={2} {...props}>
       {items.map((item: T, index: number) => (
