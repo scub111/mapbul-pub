@@ -1,4 +1,4 @@
-import { IBaseService, TID, IOkPacket } from 'interfaces';
+import { IBaseService, TID, IOkPacket, IRequest } from 'interfaces';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, IMarkerDTO, IGetAllQuery } from '@mapbul-pub/types';
@@ -70,7 +70,7 @@ export class MarkersService implements IBaseService<IMarkerDTO> {
     };
   }
 
-  async postItem(body: IMarkerDTO): Promise<IMarkerDTO> {
+  async postItem(body: IMarkerDTO, req: IRequest): Promise<IMarkerDTO> {
     const response: IOkPacket = await this.connection.query(
       `
       INSERT INTO marker
@@ -115,7 +115,7 @@ export class MarkersService implements IBaseService<IMarkerDTO> {
         ${body.baseCategoryId},
         ${body.lat},
         ${body.lng},
-        '${body.entryTicket}',
+        '',
         ${body.discountId},
         '${body.street}',
         '${body.house}',
@@ -124,7 +124,7 @@ export class MarkersService implements IBaseService<IMarkerDTO> {
         '${body.site}',
         '${body.email}',
         '${body.photo}',
-        ${body.userId},
+        ${req.user.id},
         '${dateTimeFormat(body.addedDate)}',
         '${dateTimeFormat(body.publishedDate)}',
         '${dateTimeFormat(body.checkDate)}',

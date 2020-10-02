@@ -8,7 +8,7 @@ import {
    DateField,
    SimpleForm,
    TextInput,
-   DateInput,
+   DateTimeInput,
    ReferenceInput,
    ImageInput,
    BooleanInput,
@@ -132,7 +132,7 @@ const CommonForm: React.FC<FieldProps<ICategoryDTOEx>> = (props) => {
             </Box>
          </RowLayout>
          <RowLayout>
-            <DateInput
+            <DateTimeInput
                source={P<ICategoryDTOEx>((p) => p.addedDate)}
                defaultValue={new Date()}
                fullWidth

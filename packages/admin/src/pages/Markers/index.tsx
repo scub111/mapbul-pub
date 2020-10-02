@@ -9,6 +9,7 @@ import {
    AutocompleteInput,
    NumberInput,
    BooleanInput,
+   DateTimeInput,
    required,
    useDataProvider
 } from 'react-admin';
@@ -98,6 +99,7 @@ const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
             <ReferenceInput
                source={P<IMarkerDTOEx>((p) => p.cityId)}
                reference={Routes.cities}
+               validate={required()}
                perPage={1000}
                defaultValue=""
                fullWidth
@@ -182,6 +184,14 @@ const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
             >
                <AutocompleteInput optionText={P<ICategoryDTOEx>((p) => p.name)} defaultValue="-1" />
             </ReferenceInput>
+         </RowLayout>
+         <RowLayout>
+            <DateTimeInput
+               source={P<ICategoryDTOEx>((p) => p.addedDate)}
+               defaultValue={new Date()}
+               fullWidth
+            />
+            <BooleanInput source={P<IMarkerDTOEx>((p) => p.personal)} defaultValue={false} fullWidth />
          </RowLayout>
       </SimpleForm>
    );

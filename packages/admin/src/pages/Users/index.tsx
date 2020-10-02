@@ -7,7 +7,7 @@ import {
    ReferenceField,
    ReferenceInput,
    SelectInput,
-   DateInput,
+   DateTimeInput,
    required
 } from 'react-admin';
 import { P } from '@mapbul-pub/utils';
@@ -53,7 +53,7 @@ const CommonForm: React.FC<FieldProps<IUserDTO>> = (props) => {
             >
                <SelectInput optionText={P<IUserTypeDTO>((p) => p.description)} />
             </ReferenceInput>
-            <DateInput
+            <DateTimeInput
                source={P<IUserDTO>((p) => p.registrationDate)}
                defaultValue={new Date()}
                fullWidth
