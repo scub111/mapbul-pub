@@ -27,7 +27,7 @@ const CommonForm: React.FC<FieldProps<IUserTypeDTO>> = (props) => {
             <TextInput source={P<IUserTypeDTO>((p) => p.tag)} fullWidth validate={required()} />
          </RowLayout>
          <RowLayout>
-            <TextInput disabled source={P<IUserTypeDTO>((p) => p.description)} fullWidth />
+            <TextInput source={P<IUserTypeDTO>((p) => p.description)} fullWidth />
          </RowLayout>
       </SimpleForm>
    );
