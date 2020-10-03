@@ -187,11 +187,27 @@ const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
          </RowLayout>
          <RowLayout>
             <DateTimeInput
-               source={P<ICategoryDTOEx>((p) => p.addedDate)}
+               source={P<IMarkerDTOEx>((p) => p.addedDate)}
                defaultValue={new Date()}
                fullWidth
             />
-            <BooleanInput source={P<IMarkerDTOEx>((p) => p.personal)} defaultValue={false} fullWidth />
+            <BooleanInput
+               source={P<IMarkerDTOEx>((p) => p.personal)}
+               defaultValue={false}
+               fullWidth
+            />
+         </RowLayout>
+         <RowLayout>
+            <DateTimeInput
+               source={P<IMarkerDTOEx>((p) => p.publishedDate)}
+               // defaultValue={new Date()}
+               fullWidth
+            />
+            <DateTimeInput
+               source={P<IMarkerDTOEx>((p) => p.checkDate)}
+               defaultValue={new Date()}
+               fullWidth
+            />
          </RowLayout>
       </SimpleForm>
    );
