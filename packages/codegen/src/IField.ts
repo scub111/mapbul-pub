@@ -7,5 +7,5 @@ export interface IField {
   nullable: boolean;
   separator: string;
   value?: string;
-  replaced?: boolean;
+  defined?: boolean;
 }

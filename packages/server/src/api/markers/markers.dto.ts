@@ -52,7 +52,6 @@ export class MarkerDTO implements IMarkerDTO {
 
   photo: string | null;
 
-  // @IsDefined()
   userId: number;
 
   @IsDefined()

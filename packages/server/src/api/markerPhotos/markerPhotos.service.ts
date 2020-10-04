@@ -57,8 +57,8 @@ export class MarkerPhotosService implements IBaseService<IMarkerPhotosDTO> {
       Values 
       (
         ${body.markerId},
-        '${body.photo}',
-        '${body.photoMini}'
+        ${body.photo ? `'${body.photo}'` : 'NULL'},
+        ${body.photoMini ? `'${body.photoMini}'` : 'NULL'}
       )`.replace(/\\/g, '\\\\'),
     );
     return {
@@ -94,8 +94,8 @@ export class MarkerPhotosService implements IBaseService<IMarkerPhotosDTO> {
       UPDATE marker_photos
       SET
         \`markerId\`=${body.markerId},
-        \`photo\`='${body.photo}',
-        \`photoMini\`='${body.photoMini}'
+        \`photo\`=${body.photo ? `'${body.photo}'` : 'NULL'},
+        \`photoMini\`=${body.photoMini ? `'${body.photoMini}'` : 'NULL'}
       WHERE id = ${id}`.replace(/\\/g, '\\\\'),
     );
     return body;

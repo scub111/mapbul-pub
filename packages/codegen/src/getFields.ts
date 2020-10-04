@@ -49,21 +49,35 @@ export const getFields = async (
 
     let value = '';
 
-    if (fieldObject.type === 'string') {
-      //value = `'\${body.${field.field}}'`;
-      value = fieldObject.nullable ? `\${body.${fieldObject.field} ? \`'\${body.${fieldObject.field}}'\` : 'NULL'}` : `'\${body.${fieldObject.field}}'`;
-    } else if (fieldObject.type === 'Date') {
-      //value = `'\${dateTimeFormat(body.${field.field})}'`;
-      value = fieldObject.nullable ? `\${body.${fieldObject.field} ? \`'\${dateTimeFormat(body.${fieldObject.field})}'\` : 'NULL'}` : `'\${dateTimeFormat(body.${fieldObject.field})}'`;
+    const replaceValue = map?.replaceValues?.find(item => item.field === fieldObject.field);
+
+    if (replaceValue) {
+      value = replaceValue.value;
     } else {
-      //value = `\${body.${field.field}}`;
-      value = fieldObject.nullable ? `\${body.${fieldObject.field} ? \`\${body.${fieldObject.field}}\` : 'NULL'}` : `\${body.${fieldObject.field}}`;
+      if (fieldObject.type === 'string') {
+        //value = `'\${body.${field.field}}'`;
+        value = fieldObject.nullable
+          ? `\${body.${fieldObject.field} ? \`'\${body.${fieldObject.field}}'\` : 'NULL'}`
+          : `'\${body.${fieldObject.field}}'`;
+      } else if (fieldObject.type === 'Date') {
+        //value = `'\${dateTimeFormat(body.${field.field})}'`;
+        value = fieldObject.nullable
+          ? `\${body.${fieldObject.field} ? \`'\${dateTimeFormat(body.${fieldObject.field})}'\` : 'NULL'}`
+          : `'\${dateTimeFormat(body.${fieldObject.field})}'`;
+      } else {
+        //value = `\${body.${field.field}}`;
+        value = fieldObject.nullable
+          ? `\${body.${fieldObject.field} ? \`\${body.${fieldObject.field}}\` : 'NULL'}`
+          : `\${body.${fieldObject.field}}`;
+      }
     }
+
+    const defined = !(fieldObject.nullable || replaceValue);
 
     return {
       ...fieldObject,
       value,
-      replaced: map && map.replaceValues?.some(item => item.field === fieldObject.field),
-    };
+      defined,
+    } as IField;
   });
 };

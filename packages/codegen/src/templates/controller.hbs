@@ -32,8 +32,8 @@ export class {{controllerName}} implements IController<{{interfaceName}}> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: {{className}}): Promise<{{interfaceName}}> {
-    return await this.service.putItem(id, body);
+  async putItem(@Param('id') id: string, @Body() body: {{className}}{{#if map.needRequest}}, @Request() req: IRequest{{/if}}): Promise<{{interfaceName}}> {
+    return await this.service.putItem(id, body{{#if map.needRequest}}, req{{/if}});
   }
 
   @Delete(':id')

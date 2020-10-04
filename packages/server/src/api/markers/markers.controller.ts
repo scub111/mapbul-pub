@@ -20,7 +20,6 @@ export class MarkersController implements IController<IMarkerDTO> {
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
   async postItem(@Body() body: MarkerDTO, @Request() req: IRequest): Promise<IMarkerDTO> {
-    console.log(111, req.user);
     return await this.service.postItem(body, req);
   }
 
@@ -33,8 +32,8 @@ export class MarkersController implements IController<IMarkerDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: MarkerDTO): Promise<IMarkerDTO> {
-    return await this.service.putItem(id, body);
+  async putItem(@Param('id') id: string, @Body() body: MarkerDTO, @Request() req: IRequest): Promise<IMarkerDTO> {
+    return await this.service.putItem(id, body, req);
   }
 
   @Delete(':id')

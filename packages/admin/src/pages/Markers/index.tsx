@@ -200,12 +200,12 @@ const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
          <RowLayout>
             <DateTimeInput
                source={P<IMarkerDTOEx>((p) => p.publishedDate)}
-               // defaultValue={new Date()}
+               defaultValue={new Date()}
                fullWidth
             />
             <DateTimeInput
                source={P<IMarkerDTOEx>((p) => p.checkDate)}
-               defaultValue={new Date()}
+               // defaultValue={new Date()}
                fullWidth
             />
          </RowLayout>

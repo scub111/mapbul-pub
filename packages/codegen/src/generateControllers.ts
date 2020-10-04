@@ -110,7 +110,7 @@ export const generateControllers = async () => {
       replaceValues: [
         {
           field: 'userId',
-          value: 'req.user.id'
+          value: '${req.user.id}'
         }
       ]
     }

@@ -59,8 +59,8 @@ export class CountriesService implements IBaseService<ICountryDTO> {
       Values 
       (
         '${body.name}',
-        '${body.enName}',
-        '${body.placeId}',
+        ${body.enName ? `'${body.enName}'` : 'NULL'},
+        ${body.placeId ? `'${body.placeId}'` : 'NULL'},
         '${body.code}'
       )`.replace(/\\/g, '\\\\'),
     );
@@ -98,8 +98,8 @@ export class CountriesService implements IBaseService<ICountryDTO> {
       UPDATE country
       SET
         \`name\`='${body.name}',
-        \`enName\`='${body.enName}',
-        \`placeId\`='${body.placeId}',
+        \`enName\`=${body.enName ? `'${body.enName}'` : 'NULL'},
+        \`placeId\`=${body.placeId ? `'${body.placeId}'` : 'NULL'},
         \`code\`='${body.code}'
       WHERE id = ${id}`.replace(/\\/g, '\\\\'),
     );

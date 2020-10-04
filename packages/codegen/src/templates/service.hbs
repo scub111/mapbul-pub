@@ -93,7 +93,7 @@ export class {{serviceName}} implements IBaseService<{{interfaceName}}> {
     )[0];
   }
 
-  async putItem(id: TID, body: {{interfaceName}}): Promise<{{interfaceName}}> {
+  async putItem(id: TID, body: {{interfaceName}}{{#if map.needRequest}}, req: IRequest{{/if}}): Promise<{{interfaceName}}> {
     await this.connection.query(
       `
       UPDATE {{tableName}}
