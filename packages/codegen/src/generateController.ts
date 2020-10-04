@@ -5,12 +5,23 @@ import { createSorce } from 'codegenSrc/generateSource';
 import { appendRouterSync } from 'codegenSrc/routerStorage';
 import { IDbConnection } from '@mapbul-pub/types';
 
+export interface IReplaceConfig {
+  field: string;
+  value: string;
+}
+
+export interface IMapConfig {
+  needRequest?: boolean;
+  replaceValues?: Array<IReplaceConfig>;
+}
+
 export interface IGenerateControllerConfig {
   connection: IDbConnection;
   tableName: string;
   dto: string;
   service: string;
   skipReadFields?: Array<string>;
+  map?: IMapConfig;
 }
 
 export const generateController = async ({
@@ -19,6 +30,7 @@ export const generateController = async ({
   dto,
   service,
   skipReadFields,
+  map
 }: IGenerateControllerConfig): Promise<void> => {
   const baseName = `${service[0].toUpperCase()}${service.slice(1)}`;
   const serviceName = `${baseName}Service`;
@@ -36,11 +48,13 @@ export const generateController = async ({
   const serverRootPath = path.join(appRootPath.path, '..', '/server/src');
   const typesRootPath = path.join(appRootPath.path, '..', '/types');
 
-  const initFields = await getFields(connection, tableName);
+  const initFields = await getFields(connection, tableName, map);
   const readFields = initFields.filter(i => !skipReadFields?.some(t => t === i.field));
 
   const hasDateField = readFields.some(i => i.type === 'Date');
   const hasNotNullField = readFields.some(i => !i.nullable);
+
+  const hasRequestImport = map && map.needRequest;
 
   // Create type *.dto.ts
   createSorce({
@@ -75,6 +89,8 @@ export const generateController = async ({
       fields: initFields,
       readFields,
       hasDateField,
+      hasRequestImport,
+      map,
     },
     sourcePath: `${serverRootPath}/${routerPath}/${filePrefix}.service.ts`,
   });
@@ -92,6 +108,8 @@ export const generateController = async ({
       interfaceName,
       className,
       fields: readFields,
+      hasRequestImport,
+      map,
     },
     sourcePath: `${serverRootPath}/${routerPath}/${filePrefix}.controller.ts`,
   });

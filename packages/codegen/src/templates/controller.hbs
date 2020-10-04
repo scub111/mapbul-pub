@@ -1,5 +1,5 @@
-import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
-import { IController, IGetParams } from 'interfaces';
+import { Controller, Get, Param{{#if hasRequestImport}}, Request{{/if}}, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
+import { IController, IGetParams{{#if hasRequestImport}}, IRequest{{/if}} } from 'interfaces';
 import { PageContent, {{interfaceName}}, IGetAllQuery } from '@mapbul-pub/types';
 import { {{serviceName}} } from './{{service}}.service';
 import { {{className}} } from './{{service}}.dto';
@@ -19,8 +19,8 @@ export class {{controllerName}} implements IController<{{interfaceName}}> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: {{className}}): Promise<{{interfaceName}}> {
-    return await this.service.postItem(body);
+  async postItem(@Body() body: {{className}}{{#if map.needRequest}}, @Request() req: IRequest{{/if}}): Promise<{{interfaceName}}> {
+    return await this.service.postItem(body{{#if map.needRequest}}, req{{/if}});
   }
 
   @Get(':id')

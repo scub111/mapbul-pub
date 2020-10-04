@@ -105,6 +105,15 @@ export const generateControllers = async () => {
     tableName: 'marker',
     dto: 'marker',
     service: 'markers',
+    map: {
+      needRequest: true,
+      replaceValues: [
+        {
+          field: 'userId',
+          value: 'req.user.id'
+        }
+      ]
+    }
   });
   await generateController({
     connection: dbConnection,

@@ -1,4 +1,4 @@
-import { IBaseService, TID, IOkPacket } from 'interfaces';
+import { IBaseService, TID, IOkPacket{{#if hasRequestImport}}, IRequest{{/if}} } from 'interfaces';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 {{#if hasDateField}}
 import { dateTimeFormat } from '@mapbul-pub/utils';
@@ -47,7 +47,7 @@ export class {{serviceName}} implements IBaseService<{{interfaceName}}> {
     };
   }
 
-  async postItem(body: {{interfaceName}}): Promise<{{interfaceName}}> {
+  async postItem(body: {{interfaceName}}{{#if map.needRequest}}, req: IRequest{{/if}}): Promise<{{interfaceName}}> {
     const response: IOkPacket = await this.connection.query(
       `
       INSERT INTO {{tableName}}
