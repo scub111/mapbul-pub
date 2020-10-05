@@ -19,7 +19,7 @@ import {
 } from 'react-admin';
 import { P, clearUrl } from '@mapbul-pub/utils';
 import { Routes } from '@mapbul-pub/ui';
-import { SortedGrid } from 'components';
+import { SortedGrid, PosterInput } from 'components';
 import { RowLayout, SectionTitle, Poster, ImageFile } from 'ui';
 import { GlobalVar } from 'src/constants';
 import { withCreatePage, withEditPage } from 'hocs';
@@ -86,49 +86,24 @@ const CommonForm: React.FC<FieldProps<ICategoryDTOEx>> = (props) => {
          <SectionTitle label="Misc" />
          <RowLayout style={{ display: 'flex', alignItems: 'flex-end' }}>
             <Box style={{ width: '100%' }}>
-               {isEdit ? (
-                  <>
-                     <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.icon}`)} />
-                     <TextInput
-                        source={P<ICategoryDTOEx>((p) => p.icon)}
-                        multiline
-                        validate={required()}
-                        fullWidth
-                     />
-                     <ImageFile
-                        label="icon"
-                        source={P<ICategoryDTOEx>((p) => p.iconFile)}
-                        fullWidth
-                     />
-                  </>
-               ) : (
-                  <ImageFile
-                     label="icon"
-                     source={P<ICategoryDTOEx>((p) => p.iconFile)}
-                     validate={required()}
-                     fullWidth
-                  />
-               )}
+               <PosterInput
+                  imageFile={P<ICategoryDTOEx>((p) => p.iconFile)}
+                  image={P<ICategoryDTOEx>((p) => p.icon)}
+                  label="icon"
+                  isEdit={isEdit}
+                  imageSource={record?.icon}
+                  validate={required()}
+               />
             </Box>
             <Box style={{ width: '100%' }}>
-               {isEdit ? (
-                  <>
-                     <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.pin}`)} />
-                     <TextInput source={P<ICategoryDTOEx>((p) => p.pin)} multiline fullWidth />
-                     <ImageFile
-                        label="pin"
-                        source={P<ICategoryDTOEx>((p) => p.pinFile)}
-                        fullWidth
-                     />
-                  </>
-               ) : (
-                  <ImageFile
-                     label="pin"
-                     source={P<ICategoryDTOEx>((p) => p.pinFile)}
-                     validate={required()}
-                     fullWidth
-                  />
-               )}
+               <PosterInput
+                  imageFile={P<ICategoryDTOEx>((p) => p.pinFile)}
+                  image={P<ICategoryDTOEx>((p) => p.pin)}
+                  label="pin"
+                  isEdit={isEdit}
+                  imageSource={record?.pin}
+                  validate={required()}
+               />
             </Box>
          </RowLayout>
          <RowLayout>
