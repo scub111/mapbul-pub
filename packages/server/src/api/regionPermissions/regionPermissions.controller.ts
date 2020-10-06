@@ -1,4 +1,15 @@
-import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  UseInterceptors,
+  Query,
+  Put,
+  Body,
+  Post,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IRegionPermissionDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { RegionPermissionsService } from './regionPermissions.service';
@@ -32,7 +43,10 @@ export class RegionPermissionsController implements IController<IRegionPermissio
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: RegionPermissionDTO): Promise<IRegionPermissionDTO> {
+  async putItem(
+    @Param('id') id: string,
+    @Body() body: RegionPermissionDTO,
+  ): Promise<IRegionPermissionDTO> {
     return await this.service.putItem(id, body);
   }
 

@@ -32,7 +32,7 @@ import { FieldProps } from 'src/types';
 //   tertiaryText={(record: ICategoryDTOEx) => record.parentId}
 // /></List>
 
-export const CategoryList: React.FC = (props: any) => {
+export const CategoryList = (props: any) => {
    const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
    return (
       <List title="All categories" {...props}>
@@ -46,7 +46,7 @@ export const CategoryList: React.FC = (props: any) => {
    );
 };
 
-export const CategoryShow: React.FC = (props: any) => (
+export const CategoryShow = (props: any) => (
    <Show {...props}>
       <SimpleShowLayout>
          <TextField source={P<ICategoryDTOEx>((p) => p.id)} />

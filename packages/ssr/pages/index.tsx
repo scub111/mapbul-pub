@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/dist/client/router';
 import { getInitialLocale } from 'translations/getInitialLocale';
 
-const Index: React.FC = () => {
+const Index = () => {
   const router = useRouter();
   React.useEffect(() => {
     router.replace('/[lang]', `/${getInitialLocale()}`);

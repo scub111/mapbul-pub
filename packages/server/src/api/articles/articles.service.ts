@@ -201,7 +201,9 @@ export class ArticlesService implements IBaseService<IArticleDTO> {
         \`authorId\`=${body.authorId},
         \`editorId\`=${body.editorId ? `${body.editorId}` : 'NULL'},
         \`addedDate\`='${dateTimeFormat(body.addedDate)}',
-        \`publishedDate\`=${body.publishedDate ? `'${dateTimeFormat(body.publishedDate)}'` : 'NULL'},
+        \`publishedDate\`=${
+          body.publishedDate ? `'${dateTimeFormat(body.publishedDate)}'` : 'NULL'
+        },
         \`markerId\`=${body.markerId ? `${body.markerId}` : 'NULL'},
         \`startDate\`=${body.startDate ? `'${dateTimeFormat(body.startDate)}'` : 'NULL'},
         \`startTime\`=${body.startTime ? `'${dateTimeFormat(body.startTime)}'` : 'NULL'},

@@ -24,7 +24,7 @@ import { ICityDTO, IDiscountDTO, IStatusDTO } from '@mapbul-pub/types';
 import { useState, useEffect } from 'react';
 import { Box } from '@material-ui/core';
 
-export const MarkerList: React.FC = (props: any) => {
+export const MarkerList = (props: any) => {
    return (
       <List title="All markers" {...props}>
          <SortedGrid {...props}>
@@ -37,7 +37,7 @@ export const MarkerList: React.FC = (props: any) => {
    );
 };
 
-const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
+const CommonForm = (props: FieldProps<IMarkerDTOEx>) => {
    // const dataProvider = useDataProvider();
    // const [user, setUser] = useState();
    // const [loading, setLoading] = useState(true);
@@ -168,15 +168,6 @@ const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
          </RowLayout>
          <RowLayout>
             <ReferenceInput
-               source={P<IMarkerDTOEx>((p) => p.statusId)}
-               reference={Routes.statuses}
-               perPage={1000}
-               validate={required()}
-               fullWidth
-            >
-               <SelectInput optionText={P<IStatusDTO>((p) => p.description)} />
-            </ReferenceInput>
-            <ReferenceInput
                source={P<IMarkerDTOEx>((p) => p.baseCategoryId)}
                reference={Routes.categories}
                perPage={1000}
@@ -184,6 +175,15 @@ const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
                fullWidth
             >
                <AutocompleteInput optionText={P<ICategoryDTOEx>((p) => p.name)} defaultValue="-1" />
+            </ReferenceInput>
+            <ReferenceInput
+               source={P<IMarkerDTOEx>((p) => p.statusId)}
+               reference={Routes.statuses}
+               perPage={1000}
+               validate={required()}
+               fullWidth
+            >
+               <SelectInput optionText={P<IStatusDTO>((p) => p.description)} />
             </ReferenceInput>
          </RowLayout>
          <RowLayout>
@@ -236,6 +236,6 @@ const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
    );
 };
 
-export const MarkerCreate: React.FC = withCreatePage(CommonForm);
+export const MarkerCreate = withCreatePage(CommonForm);
 
 export const MarkerEdit = withEditPage<IMarkerDTOEx>(CommonForm);

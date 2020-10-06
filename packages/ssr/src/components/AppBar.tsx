@@ -39,7 +39,7 @@ const StyledContainer = styled(Container)`
   }
 `;
 
-export const AppBar: React.FC = () => {
+export const AppBar = () => {
   const theme = useTheme();
   const notZeroTrigger = useScrollTrigger({
     target: isClient ? window : undefined,

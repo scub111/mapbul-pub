@@ -7,7 +7,7 @@ import { Locale } from '../translations/types';
 import { useCallback } from 'react';
 import { Box } from '@material-ui/core';
 
-export const LocaleSwitcher: React.FC = () => {
+export const LocaleSwitcher = () => {
   const router = useRouter();
   const { locale } = React.useContext(LocaleContext);
   const onClick = useCallback(() => {

@@ -17,14 +17,16 @@ import {
    Filter,
    DateTimeInput,
    AutocompleteInput,
-   SelectInput
+   SelectInput,
+   required
 } from 'react-admin';
 import { IArticleDTOEx, ICategoryDTOEx } from 'interfaces';
 import { RowLayout, SectionTitle } from 'ui';
-import { withEditPage } from 'hocs';
+import { withEditPage, withCreatePage } from 'hocs';
 import { SortedGrid } from 'components';
+import { FieldProps } from 'types';
 
-const ArticleFilter: React.FC = (props: any) => (
+const ArticleFilter = (props: any) => (
    <Filter {...props}>
       <TextInput label="Search" source="q" alwaysOn />
       {/* <ReferenceInput
@@ -42,7 +44,7 @@ const PostPanel = ({ record }: { id?: string; record?: IArticleDTO; resource?: s
    <div dangerouslySetInnerHTML={{ __html: record?.text || '' }} />
 );
 
-export const ArticleList: React.FC = (props: any) => (
+export const ArticleList = (props: any) => (
    <List {...props} filters={<ArticleFilter />}>
       <SortedGrid expand={<PostPanel />}>
          <TextField source={P<IArticleDTO>((p) => p.id)} />
@@ -66,24 +68,33 @@ export const ArticleList: React.FC = (props: any) => (
    </List>
 );
 
-export const ArticleEdit: React.FC = withEditPage<IArticleDTOEx>((props) => {
+const CommonForm = (props: FieldProps<IArticleDTOEx>) => {
    return (
-      <SimpleForm {...props}>
+      <SimpleForm {...props} redirect="list">
          <SectionTitle label="Main" />
          {/* <TextInput disabled source={P<IArticleDTOEx>((p) => p.id)} /> */}
          {/* <ReferenceInput label="User" source="userId" reference="users">
-            <SelectInput optionText="name" />
-         </ReferenceInput> */}
+       <SelectInput optionText="name" />
+    </ReferenceInput> */}
          <RowLayout>
-            <TextInput source={P<IArticleDTOEx>((p) => p.title)} fullWidth />
+            <TextInput source={P<IArticleDTOEx>((p) => p.title)} validate={required()} fullWidth />
             <TextInput source={P<IArticleDTOEx>((p) => p.titleEn)} fullWidth />
          </RowLayout>
          <RowLayout>
-            <TextInput source={P<IArticleDTOEx>((p) => p.description)} fullWidth />
+            <TextInput
+               source={P<IArticleDTOEx>((p) => p.description)}
+               validate={required()}
+               fullWidth
+            />
             <TextInput source={P<IArticleDTOEx>((p) => p.descriptionEn)} fullWidth />
          </RowLayout>
          <RowLayout>
-            <TextInput source={P<IArticleDTOEx>((p) => p.text)} multiline fullWidth />
+            <TextInput
+               source={P<IArticleDTOEx>((p) => p.text)}
+               multiline
+               validate={required()}
+               fullWidth
+            />
             <TextInput source={P<IArticleDTOEx>((p) => p.textEn)} multiline fullWidth />
          </RowLayout>
          <RowLayout>
@@ -92,14 +103,12 @@ export const ArticleEdit: React.FC = withEditPage<IArticleDTOEx>((props) => {
          </RowLayout>
          <SectionTitle label="Misc" />
          <RowLayout>
-            <DateTimeInput source={P<IArticleDTOEx>((p) => p.startDate)} fullWidth />
-            <DateTimeInput source={P<IArticleDTOEx>((p) => p.endDate)} fullWidth />
-         </RowLayout>
-         <RowLayout>
             <ReferenceInput
                source={P<IArticleDTOEx>((p) => p.baseCategoryId)}
                reference={Routes.categories}
                perPage={1000}
+               validate={required()}
+               label="Category"
                fullWidth
             >
                <AutocompleteInput optionText={P<ICategoryDTOEx>((p) => p.name)} />
@@ -108,35 +117,42 @@ export const ArticleEdit: React.FC = withEditPage<IArticleDTOEx>((props) => {
                source={P<IArticleDTOEx>((p) => p.statusId)}
                reference={Routes.statuses}
                perPage={1000}
+               validate={required()}
+               label="Status *"
                fullWidth
             >
                <SelectInput optionText={P<IStatusDTO>((p) => p.description)} />
             </ReferenceInput>
          </RowLayout>
          <RowLayout>
-            <DateTimeInput source={P<IArticleDTOEx>((p) => p.addedDate)} fullWidth />
-            <DateTimeInput source={P<IArticleDTOEx>((p) => p.publishedDate)} fullWidth />
+            <DateTimeInput
+               source={P<IArticleDTOEx>((p) => p.startDate)}
+               defaultValue={new Date()}
+               fullWidth
+            />
+            <DateTimeInput
+               source={P<IArticleDTOEx>((p) => p.endDate)}
+               defaultValue={new Date()}
+               fullWidth
+            />
+         </RowLayout>
+         <RowLayout>
+            <DateTimeInput
+               source={P<IArticleDTOEx>((p) => p.addedDate)}
+               defaultValue={new Date()}
+               validate={required()}
+               fullWidth
+            />
+            <DateTimeInput
+               source={P<IArticleDTOEx>((p) => p.publishedDate)}
+               defaultValue={new Date()}
+               fullWidth
+            />
          </RowLayout>
       </SimpleForm>
    );
-});
+};
 
-export const ArticleCreate: React.FC = (props: any) => (
-   <Create {...props}>
-      <SimpleForm>
-         <TextInput source={P<IArticleDTO>((p) => p.title)} />
-         <TextInput multiline source={P<IArticleDTO>((p) => p.text)} />
-      </SimpleForm>
-   </Create>
-);
+export const ArticleCreate = withCreatePage(CommonForm);
 
-export const ArticleShow: React.FC = (props: any) => (
-   <Show {...props}>
-      <SimpleShowLayout>
-         <TextField source="title" />
-         <TextField source="teaser" />
-         <RichTextField source="body" />
-         <DateField label="Publication date" source="created_at" />
-      </SimpleShowLayout>
-   </Show>
-);
+export const ArticleEdit = withEditPage<IArticleDTOEx>(CommonForm);

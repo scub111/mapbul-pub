@@ -1,4 +1,15 @@
-import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  UseInterceptors,
+  Query,
+  Put,
+  Body,
+  Post,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IJournalistDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { JournalistsService } from './journalists.service';

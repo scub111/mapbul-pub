@@ -19,7 +19,7 @@ import { ICityDTO, IMarkerDTO, ICountryDTO } from '@mapbul-pub/types';
 import { Routes } from '@mapbul-pub/ui';
 import { FieldProps } from 'types';
 
-export const CityList: React.FC = (props: any) => {
+export const CityList = (props: any) => {
    return (
       <List title="All cities" {...props}>
          <SortedGrid {...props}>
@@ -79,6 +79,6 @@ const CommonForm: React.FC<FieldProps<ICityDTO>> = (props) => (
    </SimpleForm>
 );
 
-export const CityCreate: React.FC = withCreatePage(CommonForm);
+export const CityCreate = withCreatePage(CommonForm);
 
 export const CityEdit = withEditPage<ICityDTO>(CommonForm);

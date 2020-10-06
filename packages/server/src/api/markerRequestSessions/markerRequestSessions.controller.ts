@@ -1,4 +1,15 @@
-import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  UseInterceptors,
+  Query,
+  Put,
+  Body,
+  Post,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IMarkerRequestSessionDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { MarkerRequestSessionsService } from './markerRequestSessions.service';
@@ -32,7 +43,10 @@ export class MarkerRequestSessionsController implements IController<IMarkerReque
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: MarkerRequestSessionDTO): Promise<IMarkerRequestSessionDTO> {
+  async putItem(
+    @Param('id') id: string,
+    @Body() body: MarkerRequestSessionDTO,
+  ): Promise<IMarkerRequestSessionDTO> {
     return await this.service.putItem(id, body);
   }
 
