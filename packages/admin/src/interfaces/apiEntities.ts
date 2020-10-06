@@ -11,6 +11,6 @@ export interface IArticleDTOEx extends IArticleDTO {
 }
 
 export interface IMarkerDTOEx extends IMarkerDTO {
-   iconFile: any;
-   pinFile: any;
+   photoFile: any;
+   logoFile: any;
 }

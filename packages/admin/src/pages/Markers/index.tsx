@@ -14,7 +14,7 @@ import {
    useDataProvider
 } from 'react-admin';
 import { P } from '@mapbul-pub/utils';
-import { SortedGrid } from 'components';
+import { SortedGrid, PosterInput } from 'components';
 import { RowLayout, SectionTitle } from 'ui';
 import { withCreatePage, withEditPage } from 'hocs';
 import { IMarkerDTOEx, ICategoryDTOEx } from 'interfaces';
@@ -22,6 +22,7 @@ import { FieldProps } from 'types';
 import { Routes } from '@mapbul-pub/ui';
 import { ICityDTO, IDiscountDTO, IStatusDTO } from '@mapbul-pub/types';
 import { useState, useEffect } from 'react';
+import { Box } from '@material-ui/core';
 
 export const MarkerList: React.FC = (props: any) => {
    return (
@@ -53,7 +54,7 @@ const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
    //             setLoading(false);
    //         })
    // }, []);
-
+   const { isEdit, record } = props;
    return (
       <SimpleForm {...props} redirect="list">
          <SectionTitle label="Main" />
@@ -208,6 +209,28 @@ const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
                // defaultValue={new Date()}
                fullWidth
             />
+         </RowLayout>
+         <RowLayout style={{ display: 'flex', alignItems: 'flex-end' }}>
+            <Box style={{ minWidth: '100%' }}>
+               <PosterInput
+                  imageFile={P<IMarkerDTOEx>((p) => p.logoFile)}
+                  image={P<IMarkerDTOEx>((p) => p.logo)}
+                  label="logo"
+                  isEdit={isEdit}
+                  imageSource={record?.logo}
+                  validate={required()}
+               />
+            </Box>
+            <Box style={{ minWidth: '100%' }}>
+               <PosterInput
+                  imageFile={P<IMarkerDTOEx>((p) => p.photoFile)}
+                  image={P<IMarkerDTOEx>((p) => p.photo)}
+                  label="photo"
+                  isEdit={isEdit}
+                  imageSource={record?.photo}
+                  validate={required()}
+               />
+            </Box>
          </RowLayout>
       </SimpleForm>
    );

@@ -85,7 +85,7 @@ const CommonForm: React.FC<FieldProps<ICategoryDTOEx>> = (props) => {
          />
          <SectionTitle label="Misc" />
          <RowLayout style={{ display: 'flex', alignItems: 'flex-end' }}>
-            <Box style={{ width: '100%' }}>
+            <Box style={{ minWidth: '100%' }}>
                <PosterInput
                   imageFile={P<ICategoryDTOEx>((p) => p.iconFile)}
                   image={P<ICategoryDTOEx>((p) => p.icon)}
@@ -95,7 +95,7 @@ const CommonForm: React.FC<FieldProps<ICategoryDTOEx>> = (props) => {
                   validate={required()}
                />
             </Box>
-            <Box style={{ width: '100%' }}>
+            <Box style={{ minWidth: '100%' }}>
                <PosterInput
                   imageFile={P<ICategoryDTOEx>((p) => p.pinFile)}
                   image={P<ICategoryDTOEx>((p) => p.pin)}

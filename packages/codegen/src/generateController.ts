@@ -30,7 +30,7 @@ export const generateController = async ({
   dto,
   service,
   skipReadFields,
-  map
+  map,
 }: IGenerateControllerConfig): Promise<void> => {
   const baseName = `${service[0].toUpperCase()}${service.slice(1)}`;
   const serviceName = `${baseName}Service`;

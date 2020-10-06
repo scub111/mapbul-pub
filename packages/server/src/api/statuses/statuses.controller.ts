@@ -1,4 +1,15 @@
-import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  UseInterceptors,
+  Query,
+  Put,
+  Body,
+  Post,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
 import { IController, IGetParams } from 'interfaces';
 import { PageContent, IStatusDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { StatusesService } from './statuses.service';

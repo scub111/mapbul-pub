@@ -11,13 +11,13 @@ export const PosterInput = ({
    label,
    isEdit,
    imageSource,
-   validate,
+   validate
 }: {
    imageFile: string;
    image: string;
    label: string;
    isEdit?: boolean;
-   imageSource?: string;
+   imageSource?: string | null;
    validate?: any;
 }) => {
    return (
