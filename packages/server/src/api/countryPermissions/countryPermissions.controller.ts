@@ -1,4 +1,4 @@
-import {
+import { 
   Controller,
   Get,
   Param,
@@ -43,10 +43,7 @@ export class CountryPermissionsController implements IController<ICountryPermiss
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(
-    @Param('id') id: string,
-    @Body() body: CountryPermissionDTO,
-  ): Promise<ICountryPermissionDTO> {
+  async putItem(@Param('id') id: string, @Body() body: CountryPermissionDTO): Promise<ICountryPermissionDTO> {
     return await this.service.putItem(id, body);
   }
 

@@ -1,11 +1,6 @@
 import { IBaseService, TID, IOkPacket } from 'interfaces';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
-import {
-  IDbConnection,
-  PageContent,
-  IArticleSubcategoryDTO,
-  IGetAllQuery,
-} from '@mapbul-pub/types';
+import { IDbConnection, PageContent, IArticleSubcategoryDTO, IGetAllQuery } from '@mapbul-pub/types';
 
 export class ArticleSubcategoriesService implements IBaseService<IArticleSubcategoryDTO> {
   constructor() {

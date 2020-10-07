@@ -1,7 +1,8 @@
-import {
+import { 
   Controller,
   Get,
   Param,
+  Request,
   UseInterceptors,
   Query,
   Put,
@@ -10,7 +11,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { IController, IGetParams } from 'interfaces';
+import { IController, IGetParams, IRequest } from 'interfaces';
 import { PageContent, IArticleDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { ArticlesService } from './articles.service';
 import { ArticleDTO } from './articles.dto';
@@ -30,8 +31,8 @@ export class ArticlesController implements IController<IArticleDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: ArticleDTO): Promise<IArticleDTO> {
-    return await this.service.postItem(body);
+  async postItem(@Body() body: ArticleDTO, @Request() req: IRequest): Promise<IArticleDTO> {
+    return await this.service.postItem(body, req);
   }
 
   @Get(':id')
@@ -43,8 +44,8 @@ export class ArticlesController implements IController<IArticleDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: ArticleDTO): Promise<IArticleDTO> {
-    return await this.service.putItem(id, body);
+  async putItem(@Param('id') id: string, @Body() body: ArticleDTO, @Request() req: IRequest): Promise<IArticleDTO> {
+    return await this.service.putItem(id, body, req);
   }
 
   @Delete(':id')
