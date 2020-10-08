@@ -58,7 +58,7 @@ export class RegionsService implements IBaseService<IRegionDTO> {
       (
         ${body.countryId},
         '${body.name}',
-        '${body.placeId}'
+        ${body.placeId ? `'${body.placeId}'` : 'NULL'}
       )`.replace(/\\/g, '\\\\'),
     );
     return {
@@ -95,7 +95,7 @@ export class RegionsService implements IBaseService<IRegionDTO> {
       SET
         \`countryId\`=${body.countryId},
         \`name\`='${body.name}',
-        \`placeId\`='${body.placeId}'
+        \`placeId\`=${body.placeId ? `'${body.placeId}'` : 'NULL'}
       WHERE id = ${id}`.replace(/\\/g, '\\\\'),
     );
     return body;

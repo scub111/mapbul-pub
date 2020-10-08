@@ -18,7 +18,7 @@ import { withCreatePage, withEditPage } from 'hocs';
 import { IDiscountDTO, IMarkerDTO } from '@mapbul-pub/types';
 import { FieldProps } from 'types';
 
-export const DiscountList: React.FC = (props: any) => {
+export const DiscountList = (props: any) => {
    return (
       <List title="All countries" {...props}>
          <SortedGrid {...props}>
@@ -46,6 +46,6 @@ const CommonForm: React.FC<FieldProps<IDiscountDTO>> = (props) => {
    );
 };
 
-export const DiscountCreate: React.FC = withCreatePage(CommonForm);
+export const DiscountCreate = withCreatePage(CommonForm);
 
 export const DiscountEdit = withEditPage<IDiscountDTO>(CommonForm);

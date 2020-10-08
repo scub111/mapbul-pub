@@ -7,7 +7,7 @@ import { withCreatePage, withEditPage } from 'hocs';
 import { IUserTypeDTO } from '@mapbul-pub/types';
 import { FieldProps } from 'src/types';
 
-export const UserTypeList: React.FC = (props: any) => {
+export const UserTypeList = (props: any) => {
    return (
       <List title="All Usertypes" {...props}>
          <SortedGrid {...props}>
@@ -27,12 +27,12 @@ const CommonForm: React.FC<FieldProps<IUserTypeDTO>> = (props) => {
             <TextInput source={P<IUserTypeDTO>((p) => p.tag)} fullWidth validate={required()} />
          </RowLayout>
          <RowLayout>
-            <TextInput disabled source={P<IUserTypeDTO>((p) => p.description)} fullWidth />
+            <TextInput source={P<IUserTypeDTO>((p) => p.description)} fullWidth />
          </RowLayout>
       </SimpleForm>
    );
 };
 
-export const UserTypeCreate: React.FC = withCreatePage(CommonForm);
+export const UserTypeCreate = withCreatePage(CommonForm);
 
 export const UserTypeEdit = withEditPage<IUserTypeDTO>(CommonForm);

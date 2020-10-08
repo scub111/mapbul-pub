@@ -9,11 +9,12 @@ import {
    AutocompleteInput,
    NumberInput,
    BooleanInput,
+   DateTimeInput,
    required,
    useDataProvider
 } from 'react-admin';
 import { P } from '@mapbul-pub/utils';
-import { SortedGrid } from 'components';
+import { SortedGrid, PosterInput } from 'components';
 import { RowLayout, SectionTitle } from 'ui';
 import { withCreatePage, withEditPage } from 'hocs';
 import { IMarkerDTOEx, ICategoryDTOEx } from 'interfaces';
@@ -21,8 +22,9 @@ import { FieldProps } from 'types';
 import { Routes } from '@mapbul-pub/ui';
 import { ICityDTO, IDiscountDTO, IStatusDTO } from '@mapbul-pub/types';
 import { useState, useEffect } from 'react';
+import { Box } from '@material-ui/core';
 
-export const MarkerList: React.FC = (props: any) => {
+export const MarkerList = (props: any) => {
    return (
       <List title="All markers" {...props}>
          <SortedGrid {...props}>
@@ -35,7 +37,7 @@ export const MarkerList: React.FC = (props: any) => {
    );
 };
 
-const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
+const CommonForm = (props: FieldProps<IMarkerDTOEx>) => {
    // const dataProvider = useDataProvider();
    // const [user, setUser] = useState();
    // const [loading, setLoading] = useState(true);
@@ -52,7 +54,7 @@ const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
    //             setLoading(false);
    //         })
    // }, []);
-
+   const { isEdit, record } = props;
    return (
       <SimpleForm {...props} redirect="list">
          <SectionTitle label="Main" />
@@ -98,6 +100,7 @@ const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
             <ReferenceInput
                source={P<IMarkerDTOEx>((p) => p.cityId)}
                reference={Routes.cities}
+               validate={required()}
                perPage={1000}
                defaultValue=""
                fullWidth
@@ -165,15 +168,6 @@ const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
          </RowLayout>
          <RowLayout>
             <ReferenceInput
-               source={P<IMarkerDTOEx>((p) => p.statusId)}
-               reference={Routes.statuses}
-               perPage={1000}
-               validate={required()}
-               fullWidth
-            >
-               <SelectInput optionText={P<IStatusDTO>((p) => p.description)} />
-            </ReferenceInput>
-            <ReferenceInput
                source={P<IMarkerDTOEx>((p) => p.baseCategoryId)}
                reference={Routes.categories}
                perPage={1000}
@@ -182,11 +176,66 @@ const CommonForm: React.FC<FieldProps<IMarkerDTOEx>> = (props) => {
             >
                <AutocompleteInput optionText={P<ICategoryDTOEx>((p) => p.name)} defaultValue="-1" />
             </ReferenceInput>
+            <ReferenceInput
+               source={P<IMarkerDTOEx>((p) => p.statusId)}
+               reference={Routes.statuses}
+               perPage={1000}
+               validate={required()}
+               fullWidth
+            >
+               <SelectInput optionText={P<IStatusDTO>((p) => p.description)} />
+            </ReferenceInput>
+         </RowLayout>
+         <RowLayout>
+            <DateTimeInput
+               source={P<IMarkerDTOEx>((p) => p.addedDate)}
+               defaultValue={new Date()}
+               fullWidth
+            />
+            <BooleanInput
+               source={P<IMarkerDTOEx>((p) => p.personal)}
+               defaultValue={false}
+               fullWidth
+            />
+         </RowLayout>
+         <RowLayout>
+            <DateTimeInput
+               source={P<IMarkerDTOEx>((p) => p.publishedDate)}
+               defaultValue={new Date()}
+               fullWidth
+            />
+            <DateTimeInput
+               source={P<IMarkerDTOEx>((p) => p.checkDate)}
+               // defaultValue={new Date()}
+               fullWidth
+            />
+         </RowLayout>
+         <RowLayout style={{ display: 'flex', alignItems: 'flex-end' }}>
+            <Box style={{ minWidth: '100%' }}>
+               <PosterInput
+                  imageFile={P<IMarkerDTOEx>((p) => p.logoFile)}
+                  image={P<IMarkerDTOEx>((p) => p.logo)}
+                  label="logo"
+                  isEdit={isEdit}
+                  imageSource={record?.logo}
+                  validate={required()}
+               />
+            </Box>
+            <Box style={{ minWidth: '100%' }}>
+               <PosterInput
+                  imageFile={P<IMarkerDTOEx>((p) => p.photoFile)}
+                  image={P<IMarkerDTOEx>((p) => p.photo)}
+                  label="photo"
+                  isEdit={isEdit}
+                  imageSource={record?.photo}
+                  validate={required()}
+               />
+            </Box>
          </RowLayout>
       </SimpleForm>
    );
 };
 
-export const MarkerCreate: React.FC = withCreatePage(CommonForm);
+export const MarkerCreate = withCreatePage(CommonForm);
 
 export const MarkerEdit = withEditPage<IMarkerDTOEx>(CommonForm);

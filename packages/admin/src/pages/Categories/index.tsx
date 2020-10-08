@@ -8,7 +8,7 @@ import {
    DateField,
    SimpleForm,
    TextInput,
-   DateInput,
+   DateTimeInput,
    ReferenceInput,
    ImageInput,
    BooleanInput,
@@ -19,7 +19,7 @@ import {
 } from 'react-admin';
 import { P, clearUrl } from '@mapbul-pub/utils';
 import { Routes } from '@mapbul-pub/ui';
-import { SortedGrid } from 'components';
+import { SortedGrid, PosterInput } from 'components';
 import { RowLayout, SectionTitle, Poster, ImageFile } from 'ui';
 import { GlobalVar } from 'src/constants';
 import { withCreatePage, withEditPage } from 'hocs';
@@ -32,7 +32,7 @@ import { FieldProps } from 'src/types';
 //   tertiaryText={(record: ICategoryDTOEx) => record.parentId}
 // /></List>
 
-export const CategoryList: React.FC = (props: any) => {
+export const CategoryList = (props: any) => {
    const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
    return (
       <List title="All categories" {...props}>
@@ -46,7 +46,7 @@ export const CategoryList: React.FC = (props: any) => {
    );
 };
 
-export const CategoryShow: React.FC = (props: any) => (
+export const CategoryShow = (props: any) => (
    <Show {...props}>
       <SimpleShowLayout>
          <TextField source={P<ICategoryDTOEx>((p) => p.id)} />
@@ -85,54 +85,29 @@ const CommonForm: React.FC<FieldProps<ICategoryDTOEx>> = (props) => {
          />
          <SectionTitle label="Misc" />
          <RowLayout style={{ display: 'flex', alignItems: 'flex-end' }}>
-            <Box style={{ width: '100%' }}>
-               {isEdit ? (
-                  <>
-                     <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.icon}`)} />
-                     <TextInput
-                        source={P<ICategoryDTOEx>((p) => p.icon)}
-                        multiline
-                        validate={required()}
-                        fullWidth
-                     />
-                     <ImageFile
-                        label="icon"
-                        source={P<ICategoryDTOEx>((p) => p.iconFile)}
-                        fullWidth
-                     />
-                  </>
-               ) : (
-                  <ImageFile
-                     label="icon"
-                     source={P<ICategoryDTOEx>((p) => p.iconFile)}
-                     validate={required()}
-                     fullWidth
-                  />
-               )}
+            <Box style={{ minWidth: '100%' }}>
+               <PosterInput
+                  imageFile={P<ICategoryDTOEx>((p) => p.iconFile)}
+                  image={P<ICategoryDTOEx>((p) => p.icon)}
+                  label="icon"
+                  isEdit={isEdit}
+                  imageSource={record?.icon}
+                  validate={required()}
+               />
             </Box>
-            <Box style={{ width: '100%' }}>
-               {isEdit ? (
-                  <>
-                     <Poster src={clearUrl(`${GlobalVar.env.imageUrl}/${record?.pin}`)} />
-                     <TextInput source={P<ICategoryDTOEx>((p) => p.pin)} multiline fullWidth />
-                     <ImageFile
-                        label="pin"
-                        source={P<ICategoryDTOEx>((p) => p.pinFile)}
-                        fullWidth
-                     />
-                  </>
-               ) : (
-                  <ImageFile
-                     label="pin"
-                     source={P<ICategoryDTOEx>((p) => p.pinFile)}
-                     validate={required()}
-                     fullWidth
-                  />
-               )}
+            <Box style={{ minWidth: '100%' }}>
+               <PosterInput
+                  imageFile={P<ICategoryDTOEx>((p) => p.pinFile)}
+                  image={P<ICategoryDTOEx>((p) => p.pin)}
+                  label="pin"
+                  isEdit={isEdit}
+                  imageSource={record?.pin}
+                  validate={required()}
+               />
             </Box>
          </RowLayout>
          <RowLayout>
-            <DateInput
+            <DateTimeInput
                source={P<ICategoryDTOEx>((p) => p.addedDate)}
                defaultValue={new Date()}
                fullWidth

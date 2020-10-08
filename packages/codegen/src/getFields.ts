@@ -1,5 +1,6 @@
 import { DbType, IField } from 'codegenSrc/IField';
 import { IDbConnection } from '@mapbul-pub/types';
+import { IMapConfig } from './generateController';
 
 interface IDescribeRowData {
   Default: any;
@@ -33,11 +34,12 @@ const traslateType = (type: string): DbType => {
 export const getFields = async (
   connection: IDbConnection,
   tableName: string,
+  map: IMapConfig | undefined,
 ): Promise<Array<IField>> => {
   const result: any[] = await connection.query(`DESCRIBE ${tableName}`);
   // console.log(result);
   return result.map((row: IDescribeRowData, index: number) => {
-    const field = {
+    const fieldObject: IField = {
       fieldOrigin: row.Field,
       field: traslateField(row.Field),
       type: traslateType(row.Type),
@@ -47,17 +49,35 @@ export const getFields = async (
 
     let value = '';
 
-    if (field.type === 'string') {
-      value = `'\${body.${field.field}}'`;
-    } else if (field.type === 'Date') {
-      value = `'\${dateTimeFormat(body.${field.field})}'`;
+    const replaceValue = map?.replaceValues?.find(item => item.field === fieldObject.field);
+
+    if (replaceValue) {
+      value = replaceValue.value;
     } else {
-      value = `\${body.${field.field}}`;
+      if (fieldObject.type === 'string') {
+        //value = `'\${body.${field.field}}'`;
+        value = fieldObject.nullable
+          ? `\${body.${fieldObject.field} ? \`'\${body.${fieldObject.field}}'\` : 'NULL'}`
+          : `'\${body.${fieldObject.field}}'`;
+      } else if (fieldObject.type === 'Date') {
+        //value = `'\${dateTimeFormat(body.${field.field})}'`;
+        value = fieldObject.nullable
+          ? `\${body.${fieldObject.field} ? \`'\${dateTimeFormat(body.${fieldObject.field})}'\` : 'NULL'}`
+          : `'\${dateTimeFormat(body.${fieldObject.field})}'`;
+      } else {
+        //value = `\${body.${field.field}}`;
+        value = fieldObject.nullable
+          ? `\${body.${fieldObject.field} ? \`\${body.${fieldObject.field}}\` : 'NULL'}`
+          : `\${body.${fieldObject.field}}`;
+      }
     }
 
+    const defined = !(fieldObject.nullable || replaceValue);
+
     return {
-      ...field,
+      ...fieldObject,
       value,
-    };
+      defined,
+    } as IField;
   });
 };

@@ -68,8 +68,8 @@ export class CategoriesService implements IBaseService<ICategoryDTO> {
       Values 
       (
         '${body.name}',
-        '${body.enName}',
-        ${body.parentId},
+        ${body.enName ? `'${body.enName}'` : 'NULL'},
+        ${body.parentId ? `${body.parentId}` : 'NULL'},
         '${dateTimeFormat(body.addedDate)}',
         '${body.icon}',
         '${body.color}',
@@ -115,8 +115,8 @@ export class CategoriesService implements IBaseService<ICategoryDTO> {
       UPDATE category
       SET
         \`name\`='${body.name}',
-        \`enName\`='${body.enName}',
-        \`parentId\`=${body.parentId},
+        \`enName\`=${body.enName ? `'${body.enName}'` : 'NULL'},
+        \`parentId\`=${body.parentId ? `${body.parentId}` : 'NULL'},
         \`addedDate\`='${dateTimeFormat(body.addedDate)}',
         \`icon\`='${body.icon}',
         \`color\`='${body.color}',

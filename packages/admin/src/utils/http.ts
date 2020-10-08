@@ -10,7 +10,6 @@ export const httpClientToken = (url: string, options: Options = {}) => {
       const headers = new Headers({ Accept: 'application/json' });
       const token = localStorage.getItem(P<IAuthLogin>((p) => p.token));
       headers.append('Authorization', `Bearer ${token}`);
-      console.log(111, 'headers');
       options.headers = headers;
    }
    return fetchUtils.fetchJson(url, options);

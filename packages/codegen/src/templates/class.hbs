@@ -9,9 +9,9 @@ export class {{className}} implements {{interfaceName}} {
 
   {{/ifNotEquals}}
   {{#ifNotEquals field "id"}}
-  {{#unless nullable}}
+  {{#if defined}}
   @IsDefined()
-  {{/unless}}
+  {{/if}}
   {{/ifNotEquals}}
   {{field}}: {{type}}{{#if nullable}} | null{{/if}};
   {{/each}}

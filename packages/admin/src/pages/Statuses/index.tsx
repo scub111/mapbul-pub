@@ -7,7 +7,7 @@ import { withCreatePage, withEditPage } from 'hocs';
 import { IStatusDTO } from '@mapbul-pub/types';
 import { FieldProps } from 'types';
 
-export const StatusList: React.FC = (props: any) => {
+export const StatusList = (props: any) => {
    return (
       <List title="All statuses" {...props}>
          <SortedGrid {...props}>
@@ -19,7 +19,7 @@ export const StatusList: React.FC = (props: any) => {
    );
 };
 
-const CommonForm: React.FC<FieldProps<IStatusDTO>> = (props) => {
+const CommonForm = (props: FieldProps<IStatusDTO>) => {
    return (
       <SimpleForm {...props} redirect="list">
          <RowLayout>
@@ -31,6 +31,6 @@ const CommonForm: React.FC<FieldProps<IStatusDTO>> = (props) => {
    );
 };
 
-export const StatusCreate: React.FC = withCreatePage(CommonForm);
+export const StatusCreate = withCreatePage(CommonForm);
 
 export const StatusEdit = withEditPage<IStatusDTO>(CommonForm);

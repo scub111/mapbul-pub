@@ -1,5 +1,17 @@
-import { Controller, Get, Param, UseInterceptors, Query, Put, Body, Post, Delete, UseGuards } from '@nestjs/common';
-import { IController, IGetParams } from 'interfaces';
+import { 
+  Controller,
+  Get,
+  Param,
+  Request,
+  UseInterceptors,
+  Query,
+  Put,
+  Body,
+  Post,
+  Delete,
+  UseGuards,
+} from '@nestjs/common';
+import { IController, IGetParams, IRequest } from 'interfaces';
 import { PageContent, IMarkerDTO, IGetAllQuery } from '@mapbul-pub/types';
 import { MarkersService } from './markers.service';
 import { MarkerDTO } from './markers.dto';
@@ -19,8 +31,8 @@ export class MarkersController implements IController<IMarkerDTO> {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async postItem(@Body() body: MarkerDTO): Promise<IMarkerDTO> {
-    return await this.service.postItem(body);
+  async postItem(@Body() body: MarkerDTO, @Request() req: IRequest): Promise<IMarkerDTO> {
+    return await this.service.postItem(body, req);
   }
 
   @Get(':id')
@@ -32,8 +44,8 @@ export class MarkersController implements IController<IMarkerDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: MarkerDTO): Promise<IMarkerDTO> {
-    return await this.service.putItem(id, body);
+  async putItem(@Param('id') id: string, @Body() body: MarkerDTO, @Request() req: IRequest): Promise<IMarkerDTO> {
+    return await this.service.putItem(id, body, req);
   }
 
   @Delete(':id')

@@ -12,7 +12,7 @@ import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
 import { Routes } from '@mapbul-pub/ui';
 import { Admin, Resource } from 'react-admin';
-import jsonServerProvider from './ra-data-json-server';
+import { daServer } from './services';
 
 import {
    Dashboard,
@@ -53,7 +53,7 @@ const history = createBrowserHistory();
 const App = () => (
    <Admin
       title="Admin panel"
-      dataProvider={jsonServerProvider(GlobalVar.env.baseUrl)}
+      dataProvider={daServer(GlobalVar.env.baseUrl)}
       authProvider={authProvider}
       dashboard={Dashboard}
       // history={history}

@@ -7,7 +7,7 @@ import {
    ReferenceField,
    ReferenceInput,
    SelectInput,
-   DateInput,
+   DateTimeInput,
    required
 } from 'react-admin';
 import { P } from '@mapbul-pub/utils';
@@ -18,7 +18,7 @@ import { IUserDTO, IUserTypeDTO } from '@mapbul-pub/types';
 import { FieldProps } from 'types';
 import { Routes } from '@mapbul-pub/ui';
 
-export const UserList: React.FC = (props: any) => {
+export const UserList = (props: any) => {
    return (
       <List title="All Users" {...props}>
          <SortedGrid {...props}>
@@ -53,7 +53,7 @@ const CommonForm: React.FC<FieldProps<IUserDTO>> = (props) => {
             >
                <SelectInput optionText={P<IUserTypeDTO>((p) => p.description)} />
             </ReferenceInput>
-            <DateInput
+            <DateTimeInput
                source={P<IUserDTO>((p) => p.registrationDate)}
                defaultValue={new Date()}
                fullWidth
@@ -63,6 +63,6 @@ const CommonForm: React.FC<FieldProps<IUserDTO>> = (props) => {
    );
 };
 
-export const UserCreate: React.FC = withCreatePage(CommonForm);
+export const UserCreate = withCreatePage(CommonForm);
 
 export const UserEdit = withEditPage<IUserDTO>(CommonForm);

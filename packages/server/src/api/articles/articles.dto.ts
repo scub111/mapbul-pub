@@ -31,7 +31,6 @@ export class ArticleDTO implements IArticleDTO {
 
   textEn: string | null;
 
-  @IsDefined()
   authorId: number;
 
   editorId: number | null;

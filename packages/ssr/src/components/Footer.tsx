@@ -3,7 +3,7 @@ import { Container, Typography } from '@material-ui/core';
 import { useTranslation } from 'hooks';
 import { IStyleProps } from 'interfaces';
 
-const Copyright: React.FC = () => {
+const Copyright = () => {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
@@ -12,7 +12,7 @@ const Copyright: React.FC = () => {
   );
 };
 
-export const Footer: React.FC<IStyleProps> = ({ style }) => {
+export const Footer = ({ style }: IStyleProps) => {
   const { t } = useTranslation();
   return (
     <Container maxWidth="lg" style={{ ...style }}>

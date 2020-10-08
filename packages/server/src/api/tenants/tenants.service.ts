@@ -68,13 +68,13 @@ export class TenantsService implements IBaseService<ITenantDTO> {
       Values 
       (
         ${body.userId},
-        '${body.firstName}',
-        '${body.middleName}',
-        '${body.lastName}',
-        '${body.gender}',
-        '${body.phone}',
-        '${dateTimeFormat(body.birthDate)}',
-        '${body.address}'
+        ${body.firstName ? `'${body.firstName}'` : 'NULL'},
+        ${body.middleName ? `'${body.middleName}'` : 'NULL'},
+        ${body.lastName ? `'${body.lastName}'` : 'NULL'},
+        ${body.gender ? `'${body.gender}'` : 'NULL'},
+        ${body.phone ? `'${body.phone}'` : 'NULL'},
+        ${body.birthDate ? `'${dateTimeFormat(body.birthDate)}'` : 'NULL'},
+        ${body.address ? `'${body.address}'` : 'NULL'}
       )`.replace(/\\/g, '\\\\'),
     );
     return {
@@ -115,13 +115,13 @@ export class TenantsService implements IBaseService<ITenantDTO> {
       UPDATE tenant
       SET
         \`userId\`=${body.userId},
-        \`firstName\`='${body.firstName}',
-        \`middleName\`='${body.middleName}',
-        \`lastName\`='${body.lastName}',
-        \`gender\`='${body.gender}',
-        \`phone\`='${body.phone}',
-        \`birthDate\`='${dateTimeFormat(body.birthDate)}',
-        \`address\`='${body.address}'
+        \`firstName\`=${body.firstName ? `'${body.firstName}'` : 'NULL'},
+        \`middleName\`=${body.middleName ? `'${body.middleName}'` : 'NULL'},
+        \`lastName\`=${body.lastName ? `'${body.lastName}'` : 'NULL'},
+        \`gender\`=${body.gender ? `'${body.gender}'` : 'NULL'},
+        \`phone\`=${body.phone ? `'${body.phone}'` : 'NULL'},
+        \`birthDate\`=${body.birthDate ? `'${dateTimeFormat(body.birthDate)}'` : 'NULL'},
+        \`address\`=${body.address ? `'${body.address}'` : 'NULL'}
       WHERE id = ${id}`.replace(/\\/g, '\\\\'),
     );
     return body;

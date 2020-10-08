@@ -58,7 +58,7 @@ export class WeekDaysService implements IBaseService<IWeekDayDTO> {
       (
         '${body.tag}',
         '${body.description}',
-        '${body.descriptionEn}'
+        ${body.descriptionEn ? `'${body.descriptionEn}'` : 'NULL'}
       )`.replace(/\\/g, '\\\\'),
     );
     return {
@@ -95,7 +95,7 @@ export class WeekDaysService implements IBaseService<IWeekDayDTO> {
       SET
         \`tag\`='${body.tag}',
         \`description\`='${body.description}',
-        \`descriptionEn\`='${body.descriptionEn}'
+        \`descriptionEn\`=${body.descriptionEn ? `'${body.descriptionEn}'` : 'NULL'}
       WHERE id = ${id}`.replace(/\\/g, '\\\\'),
     );
     return body;

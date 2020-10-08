@@ -70,7 +70,7 @@ export class JournalistsService implements IBaseService<IJournalistDTO> {
       Values 
       (
         ${body.userId},
-        ${body.editorId},
+        ${body.editorId ? `${body.editorId}` : 'NULL'},
         '${body.firstName}',
         '${body.middleName}',
         '${body.lastName}',
@@ -119,7 +119,7 @@ export class JournalistsService implements IBaseService<IJournalistDTO> {
       UPDATE journalist
       SET
         \`userId\`=${body.userId},
-        \`editorId\`=${body.editorId},
+        \`editorId\`=${body.editorId ? `${body.editorId}` : 'NULL'},
         \`firstName\`='${body.firstName}',
         \`middleName\`='${body.middleName}',
         \`lastName\`='${body.lastName}',

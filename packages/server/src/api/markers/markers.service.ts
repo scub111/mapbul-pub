@@ -1,4 +1,4 @@
-import { IBaseService, TID, IOkPacket } from 'interfaces';
+import { IBaseService, TID, IOkPacket, IRequest } from 'interfaces';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, IMarkerDTO, IGetAllQuery } from '@mapbul-pub/types';
@@ -70,7 +70,7 @@ export class MarkersService implements IBaseService<IMarkerDTO> {
     };
   }
 
-  async postItem(body: IMarkerDTO): Promise<IMarkerDTO> {
+  async postItem(body: IMarkerDTO, req: IRequest): Promise<IMarkerDTO> {
     const response: IOkPacket = await this.connection.query(
       `
       INSERT INTO marker
@@ -106,30 +106,30 @@ export class MarkersService implements IBaseService<IMarkerDTO> {
       Values 
       (
         '${body.name}',
-        '${body.nameEn}',
+        ${body.nameEn ? `'${body.nameEn}'` : 'NULL'},
         '${body.introduction}',
-        '${body.introductionEn}',
+        ${body.introductionEn ? `'${body.introductionEn}'` : 'NULL'},
         '${body.description}',
-        '${body.descriptionEn}',
+        ${body.descriptionEn ? `'${body.descriptionEn}'` : 'NULL'},
         ${body.cityId},
         ${body.baseCategoryId},
         ${body.lat},
         ${body.lng},
-        '${body.entryTicket}',
+        ${body.entryTicket ? `'${body.entryTicket}'` : 'NULL'},
         ${body.discountId},
         '${body.street}',
         '${body.house}',
-        '${body.buliding}',
-        '${body.floor}',
-        '${body.site}',
-        '${body.email}',
-        '${body.photo}',
-        ${body.userId},
+        ${body.buliding ? `'${body.buliding}'` : 'NULL'},
+        ${body.floor ? `'${body.floor}'` : 'NULL'},
+        ${body.site ? `'${body.site}'` : 'NULL'},
+        ${body.email ? `'${body.email}'` : 'NULL'},
+        ${body.photo ? `'${body.photo}'` : 'NULL'},
+        ${req.user.id},
         '${dateTimeFormat(body.addedDate)}',
-        '${dateTimeFormat(body.publishedDate)}',
-        '${dateTimeFormat(body.checkDate)}',
+        ${body.publishedDate ? `'${dateTimeFormat(body.publishedDate)}'` : 'NULL'},
+        ${body.checkDate ? `'${dateTimeFormat(body.checkDate)}'` : 'NULL'},
         ${body.statusId},
-        '${body.logo}',
+        ${body.logo ? `'${body.logo}'` : 'NULL'},
         ${body.wifi},
         ${body.personal}
       )`.replace(/\\/g, '\\\\'),
@@ -185,36 +185,36 @@ export class MarkersService implements IBaseService<IMarkerDTO> {
     )[0];
   }
 
-  async putItem(id: TID, body: IMarkerDTO): Promise<IMarkerDTO> {
+  async putItem(id: TID, body: IMarkerDTO, req: IRequest): Promise<IMarkerDTO> {
     await this.connection.query(
       `
       UPDATE marker
       SET
         \`name\`='${body.name}',
-        \`nameEn\`='${body.nameEn}',
+        \`nameEn\`=${body.nameEn ? `'${body.nameEn}'` : 'NULL'},
         \`introduction\`='${body.introduction}',
-        \`introductionEn\`='${body.introductionEn}',
+        \`introductionEn\`=${body.introductionEn ? `'${body.introductionEn}'` : 'NULL'},
         \`description\`='${body.description}',
-        \`descriptionEn\`='${body.descriptionEn}',
+        \`descriptionEn\`=${body.descriptionEn ? `'${body.descriptionEn}'` : 'NULL'},
         \`cityId\`=${body.cityId},
         \`baseCategoryId\`=${body.baseCategoryId},
         \`lat\`=${body.lat},
         \`lng\`=${body.lng},
-        \`entryTicket\`='${body.entryTicket}',
+        \`entryTicket\`=${body.entryTicket ? `'${body.entryTicket}'` : 'NULL'},
         \`discountId\`=${body.discountId},
         \`street\`='${body.street}',
         \`house\`='${body.house}',
-        \`buliding\`='${body.buliding}',
-        \`floor\`='${body.floor}',
-        \`site\`='${body.site}',
-        \`email\`='${body.email}',
-        \`photo\`='${body.photo}',
-        \`userId\`=${body.userId},
+        \`buliding\`=${body.buliding ? `'${body.buliding}'` : 'NULL'},
+        \`floor\`=${body.floor ? `'${body.floor}'` : 'NULL'},
+        \`site\`=${body.site ? `'${body.site}'` : 'NULL'},
+        \`email\`=${body.email ? `'${body.email}'` : 'NULL'},
+        \`photo\`=${body.photo ? `'${body.photo}'` : 'NULL'},
+        \`userId\`=${req.user.id},
         \`addedDate\`='${dateTimeFormat(body.addedDate)}',
-        \`publishedDate\`='${dateTimeFormat(body.publishedDate)}',
-        \`checkDate\`='${dateTimeFormat(body.checkDate)}',
+        \`publishedDate\`=${body.publishedDate ? `'${dateTimeFormat(body.publishedDate)}'` : 'NULL'},
+        \`checkDate\`=${body.checkDate ? `'${dateTimeFormat(body.checkDate)}'` : 'NULL'},
         \`statusId\`=${body.statusId},
-        \`logo\`='${body.logo}',
+        \`logo\`=${body.logo ? `'${body.logo}'` : 'NULL'},
         \`wifi\`=${body.wifi},
         \`personal\`=${body.personal}
       WHERE id = ${id}`.replace(/\\/g, '\\\\'),
