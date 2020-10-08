@@ -22,6 +22,14 @@ pipeline {
       }
     }
 
+    stage('Copy .env'){
+      steps {
+        timeout(time: 3, unit: 'MINUTES') {
+          sh 'cp ../_Persist/mapbul-pub/admin/.env.prod packages/admin/.env.prod'
+        }
+      }
+    }
+
     stage('Build'){
       steps {
         timeout(time: 3, unit: 'MINUTES') {
