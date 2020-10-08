@@ -1,4 +1,4 @@
-import { IBaseService, TID, IOkPacket } from 'interfaces';
+import { IBaseService, TID, IOkPacket, IRequest } from 'interfaces';
 import { dbConnectionSingleton } from '@mapbul-pub/common';
 import { dateTimeFormat } from '@mapbul-pub/utils';
 import { IDbConnection, PageContent, IArticleDTO, IGetAllQuery } from '@mapbul-pub/types';
@@ -69,7 +69,7 @@ export class ArticlesService implements IBaseService<IArticleDTO> {
     };
   }
 
-  async postItem(body: IArticleDTO): Promise<IArticleDTO> {
+  async postItem(body: IArticleDTO, req: IRequest): Promise<IArticleDTO> {
     const response: IOkPacket = await this.connection.query(
       `
       INSERT INTO article
@@ -115,7 +115,7 @@ export class ArticlesService implements IBaseService<IArticleDTO> {
         ${body.descriptionEn ? `'${body.descriptionEn}'` : 'NULL'},
         '${body.text}',
         ${body.textEn ? `'${body.textEn}'` : 'NULL'},
-        ${body.authorId},
+        ${req.user.id},
         ${body.editorId ? `${body.editorId}` : 'NULL'},
         '${dateTimeFormat(body.addedDate)}',
         ${body.publishedDate ? `'${dateTimeFormat(body.publishedDate)}'` : 'NULL'},
@@ -181,7 +181,7 @@ export class ArticlesService implements IBaseService<IArticleDTO> {
     )[0];
   }
 
-  async putItem(id: TID, body: IArticleDTO): Promise<IArticleDTO> {
+  async putItem(id: TID, body: IArticleDTO, req: IRequest): Promise<IArticleDTO> {
     await this.connection.query(
       `
       UPDATE article
@@ -198,12 +198,10 @@ export class ArticlesService implements IBaseService<IArticleDTO> {
         \`descriptionEn\`=${body.descriptionEn ? `'${body.descriptionEn}'` : 'NULL'},
         \`text\`='${body.text}',
         \`textEn\`=${body.textEn ? `'${body.textEn}'` : 'NULL'},
-        \`authorId\`=${body.authorId},
+        \`authorId\`=${req.user.id},
         \`editorId\`=${body.editorId ? `${body.editorId}` : 'NULL'},
         \`addedDate\`='${dateTimeFormat(body.addedDate)}',
-        \`publishedDate\`=${
-          body.publishedDate ? `'${dateTimeFormat(body.publishedDate)}'` : 'NULL'
-        },
+        \`publishedDate\`=${body.publishedDate ? `'${dateTimeFormat(body.publishedDate)}'` : 'NULL'},
         \`markerId\`=${body.markerId ? `${body.markerId}` : 'NULL'},
         \`startDate\`=${body.startDate ? `'${dateTimeFormat(body.startDate)}'` : 'NULL'},
         \`startTime\`=${body.startTime ? `'${dateTimeFormat(body.startTime)}'` : 'NULL'},
