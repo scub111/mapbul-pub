@@ -17,7 +17,6 @@ packages/server/tsconfig.json
 *.xml
 *.rar
 *.tsbuildinfo
-api.txt
 *.env*
 .next
 db-connection.json
