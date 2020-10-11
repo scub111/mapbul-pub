@@ -35,7 +35,6 @@ export class ArticleDTO implements IArticleDTO {
 
   editorId: number | null;
 
-  @IsDefined()
   addedDate: Date;
 
   publishedDate: Date | null;

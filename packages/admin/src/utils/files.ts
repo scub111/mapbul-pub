@@ -32,10 +32,11 @@ export const uploadFile = async (
    data: any,
    fileField: string,
    entityField: string,
+   dir: string,
    erase = false
 ): Promise<any> => {
    let meta: IImageMeta = {
-      dir: ImageDirs.CategoryIcons
+      dir
    };
 
    if (erase) meta = { ...meta, fileName: data[entityField] };

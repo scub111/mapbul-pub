@@ -34,6 +34,10 @@ export const generateControllers = async () => {
           field: 'authorId',
           value: '${req.user.id}',
         },
+        {
+          field: 'addedDate',
+          value: '\'${dateTimeFormat(new Date())}\'',
+        },
       ],
     },
   });

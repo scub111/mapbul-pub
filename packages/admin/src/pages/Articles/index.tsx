@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { P } from '@mapbul-pub/utils';
 import { Routes } from '@mapbul-pub/ui';
-import { IArticleDTO, ICategoryDTO, IStatusDTO } from '@mapbul-pub/types';
+import { IArticleDTO, ICategoryDTO, IStatusDTO, ICityDTO } from '@mapbul-pub/types';
 import {
    Show,
    SimpleShowLayout,
@@ -20,11 +20,12 @@ import {
    SelectInput,
    required
 } from 'react-admin';
-import { IArticleDTOEx, ICategoryDTOEx } from 'interfaces';
+import { IArticleDTOEx, ICategoryDTOEx, IMarkerDTOEx } from 'interfaces';
 import { RowLayout, SectionTitle } from 'ui';
 import { withEditPage, withCreatePage } from 'hocs';
-import { SortedGrid } from 'components';
+import { SortedGrid, PosterInput } from 'components';
 import { FieldProps } from 'types';
+import { Box } from '@material-ui/core';
 
 const ArticleFilter = (props: any) => (
    <Filter {...props}>
@@ -69,6 +70,7 @@ export const ArticleList = (props: any) => (
 );
 
 const CommonForm = (props: FieldProps<IArticleDTOEx>) => {
+   const { isEdit, record } = props;
    return (
       <SimpleForm {...props} redirect="list">
          <SectionTitle label="Main" />
@@ -118,7 +120,7 @@ const CommonForm = (props: FieldProps<IArticleDTOEx>) => {
                reference={Routes.statuses}
                perPage={1000}
                validate={required()}
-               label="Status *"
+               // label="Status *"
                fullWidth
             >
                <SelectInput optionText={P<IStatusDTO>((p) => p.description)} />
@@ -137,17 +139,57 @@ const CommonForm = (props: FieldProps<IArticleDTOEx>) => {
             />
          </RowLayout>
          <RowLayout>
-            <DateTimeInput
+            {/* <DateTimeInput
                source={P<IArticleDTOEx>((p) => p.addedDate)}
                defaultValue={new Date()}
                validate={required()}
                fullWidth
-            />
+            /> */}
             <DateTimeInput
                source={P<IArticleDTOEx>((p) => p.publishedDate)}
                defaultValue={new Date()}
                fullWidth
             />
+         </RowLayout>
+         <RowLayout>
+            <ReferenceInput
+               source={P<IArticleDTOEx>((p) => p.markerId)}
+               reference={Routes.markers}
+               perPage={1000}
+               fullWidth
+            >
+               <AutocompleteInput optionText={P<IMarkerDTOEx>((p) => p.name)} />
+            </ReferenceInput>
+            <ReferenceInput
+               source={P<IArticleDTOEx>((p) => p.cityId)}
+               reference={Routes.cities}
+               perPage={1000}
+               fullWidth
+            >
+               <AutocompleteInput optionText={P<ICityDTO>((p) => p.name)} />
+            </ReferenceInput>
+         </RowLayout>
+         <RowLayout style={{ display: 'flex', alignItems: 'flex-end' }}>
+            <Box style={{ minWidth: '100%' }}>
+               <PosterInput
+                  imageFile={P<IArticleDTOEx>((p) => p.titlePhotoFile)}
+                  image={P<IArticleDTOEx>((p) => p.titlePhoto)}
+                  label="titlePhoto"
+                  isEdit={isEdit}
+                  imageSource={record?.titlePhoto}
+                  validate={required()}
+               />
+            </Box>
+            <Box style={{ minWidth: '100%' }}>
+               <PosterInput
+                  imageFile={P<IArticleDTOEx>((p) => p.photoFile)}
+                  image={P<IArticleDTOEx>((p) => p.photo)}
+                  label="photo"
+                  isEdit={isEdit}
+                  imageSource={record?.photo}
+                  validate={required()}
+               />
+            </Box>
          </RowLayout>
       </SimpleForm>
    );
