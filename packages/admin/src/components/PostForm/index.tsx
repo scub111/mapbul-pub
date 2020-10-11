@@ -61,7 +61,7 @@ class PostForm extends React.Component<PostForm.Props, PostForm.State> {
    }
 
    render() {
-      const { status, post } = this.state;
+      const { status } = this.state;
       const { title, body } = this.state.post;
       return (
          <div>

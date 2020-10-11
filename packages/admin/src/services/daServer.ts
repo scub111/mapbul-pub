@@ -1,10 +1,8 @@
 import { stringify } from 'query-string';
 import { fetchUtils, DataProvider } from 'ra-core';
-import { Routes } from '@mapbul-pub/ui';
-import { createPath, P } from '@mapbul-pub/utils';
+import { createPath } from '@mapbul-pub/utils';
 import { PageContent } from '@mapbul-pub/types';
-import { uploadFile, deleteFile, httpClient, httpClientToken } from 'utils';
-import { ICategoryDTOEx, IMarkerDTOEx } from 'interfaces';
+import { httpClient, httpClientToken } from 'utils';
 import { createUpdateData, deleteRecord } from '.';
 
 interface IResponse<T> {

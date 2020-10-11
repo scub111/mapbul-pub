@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useMediaQuery, Theme } from '@material-ui/core';
+
 import { useEffect, useState } from 'react';
 
 export function useImageInfo(url: string) {

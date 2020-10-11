@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useMediaQuery, Theme, Box, useTheme } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import {
    List,
    TextField,
@@ -10,17 +10,15 @@ import {
    TextInput,
    DateTimeInput,
    ReferenceInput,
-   ImageInput,
    BooleanInput,
    AutocompleteInput,
    BooleanField,
    required,
 } from 'react-admin';
-import { P, clearUrl } from '@mapbul-pub/utils';
+import { P } from '@mapbul-pub/utils';
 import { Routes } from '@mapbul-pub/ui';
 import { SortedGrid, PosterInput } from 'components';
-import { RowLayout, SectionTitle, Poster, ImageFile } from 'ui';
-import { GlobalVar } from 'src/constants';
+import { RowLayout, SectionTitle } from 'ui';
 import { withCreatePage, withEditPage } from 'hocs';
 import { ICategoryDTOEx } from 'interfaces';
 import { FieldProps } from 'types';

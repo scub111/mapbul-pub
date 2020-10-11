@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Poster, ImageFile } from 'src/ui';
-import { clearUrl, P } from '@mapbul-pub/utils';
+import { clearUrl } from '@mapbul-pub/utils';
 import { GlobalVar } from 'src/constants';
-import { ICategoryDTOEx } from 'src/interfaces';
-import { TextInput, required } from 'react-admin';
+import { TextInput } from 'react-admin';
 
 export const PosterInput = ({
    imageFile,
