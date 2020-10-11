@@ -6,8 +6,8 @@ export interface ICategoryDTOEx extends ICategoryDTO {
 }
 
 export interface IArticleDTOEx extends IArticleDTO {
-   iconFile: any;
-   pinFile: any;
+   photoFile: any;
+   titlePhotoFile: any;
 }
 
 export interface IMarkerDTOEx extends IMarkerDTO {
