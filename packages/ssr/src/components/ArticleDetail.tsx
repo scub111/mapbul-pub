@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Typography, Box, Link, useTheme } from '@material-ui/core';
+import { Typography, Box, Link, useTheme, useMediaQuery } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
 import { useTypeRoute, useTranslation } from 'hooks';
@@ -11,7 +11,7 @@ export const ArticleDetail: React.FC<IDetailItemProps<Article>> = ({ item }) => 
   const { isRus } = useTranslation();
   const typeRoute = useTypeRoute();
   const isActicle = typeRoute === 'articles';
-
+  const isSmall = useMediaQuery(theme.breakpoints.down('xs'));
   return (
     <Box style={{ padding: theme.spacing(0, 1) }}>
       <Box style={{ display: 'flex' }}>
@@ -52,7 +52,7 @@ export const ArticleDetail: React.FC<IDetailItemProps<Article>> = ({ item }) => 
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            float: 'left',
+            float: isSmall ? 'unset' : 'left',
             padding: '0 20px 20px 0',
           }}
         >
