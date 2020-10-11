@@ -22,6 +22,16 @@ pipeline {
       }
     }
 
+    stage('Copy .env'){
+      steps {
+        timeout(time: 3, unit: 'MINUTES') {
+          sh 'cp ../_Persist/mapbul-pub/admin/.env.prod packages/admin/.env.prod'
+          sh 'cp ../_Persist/mapbul-pub/ssr/.env.prod packages/ssr/.env.prod'
+          sh 'cp ../_Persist/mapbul-pub/server/.env packages/server/src/.env'
+        }
+      }
+    }
+
     stage('Build'){
       steps {
         timeout(time: 3, unit: 'MINUTES') {
