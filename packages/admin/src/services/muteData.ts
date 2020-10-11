@@ -58,8 +58,32 @@ export const createUpdateData = async (
       data = await uploadFile(
          apiUrl,
          data,
+         P<IArticleDTOEx>((p) => p.titlePhotoFile),
+         P<IArticleDTOEx>((p) => p.titlePhotoPreview),
+         ImageDirs.ArticlePhotos,
+         erase
+      );
+      data = await uploadFile(
+         apiUrl,
+         data,
+         P<IArticleDTOEx>((p) => p.titlePhotoFile),
+         P<IArticleDTOEx>((p) => p.titlePhotoOriginal),
+         ImageDirs.ArticlePhotos,
+         erase
+      );
+      data = await uploadFile(
+         apiUrl,
+         data,
          P<IArticleDTOEx>((p) => p.photoFile),
          P<IArticleDTOEx>((p) => p.photo),
+         ImageDirs.ArticlePhotos,
+         erase
+      );
+      data = await uploadFile(
+         apiUrl,
+         data,
+         P<IArticleDTOEx>((p) => p.photoFile),
+         P<IArticleDTOEx>((p) => p.photoOriginal),
          ImageDirs.ArticlePhotos,
          erase
       );
