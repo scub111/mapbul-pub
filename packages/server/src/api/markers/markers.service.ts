@@ -211,7 +211,9 @@ export class MarkersService implements IBaseService<IMarkerDTO> {
         \`photo\`=${body.photo ? `'${body.photo}'` : 'NULL'},
         \`userId\`=${req.user.id},
         \`addedDate\`='${dateTimeFormat(body.addedDate)}',
-        \`publishedDate\`=${body.publishedDate ? `'${dateTimeFormat(body.publishedDate)}'` : 'NULL'},
+        \`publishedDate\`=${
+          body.publishedDate ? `'${dateTimeFormat(body.publishedDate)}'` : 'NULL'
+        },
         \`checkDate\`=${body.checkDate ? `'${dateTimeFormat(body.checkDate)}'` : 'NULL'},
         \`statusId\`=${body.statusId},
         \`logo\`=${body.logo ? `'${body.logo}'` : 'NULL'},

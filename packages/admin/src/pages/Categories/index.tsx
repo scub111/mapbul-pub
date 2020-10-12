@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useMediaQuery, Theme, Box } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import {
    List,
    TextField,
@@ -10,30 +10,22 @@ import {
    TextInput,
    DateTimeInput,
    ReferenceInput,
-   ImageInput,
    BooleanInput,
    AutocompleteInput,
    BooleanField,
-   required,
-   ImageField
+   required
 } from 'react-admin';
-import { P, clearUrl } from '@mapbul-pub/utils';
+import { P } from '@mapbul-pub/utils';
 import { Routes } from '@mapbul-pub/ui';
 import { SortedGrid, PosterInput } from 'components';
-import { RowLayout, SectionTitle, Poster, ImageFile } from 'ui';
-import { GlobalVar } from 'src/constants';
+import { RowLayout, SectionTitle } from 'ui';
 import { withCreatePage, withEditPage } from 'hocs';
 import { ICategoryDTOEx } from 'interfaces';
-import { FieldProps } from 'src/types';
-
-// <SimpleList
-//   primaryText={(record: ICategoryDTOEx) => record.name}
-//   secondaryText={(record: ICategoryDTOEx) => record.id}
-//   tertiaryText={(record: ICategoryDTOEx) => record.parentId}
-// /></List>
+import { FieldProps } from 'types';
+import { useSmall } from 'hooks';
 
 export const CategoryList = (props: any) => {
-   const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+   const { isSmall } = useSmall();
    return (
       <List title="All categories" {...props}>
          <SortedGrid {...props}>

@@ -1,4 +1,4 @@
-import { 
+import {
   Controller,
   Get,
   Param,
@@ -43,7 +43,10 @@ export class RegionPermissionsController implements IController<IRegionPermissio
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: RegionPermissionDTO): Promise<IRegionPermissionDTO> {
+  async putItem(
+    @Param('id') id: string,
+    @Body() body: RegionPermissionDTO,
+  ): Promise<IRegionPermissionDTO> {
     return await this.service.putItem(id, body);
   }
 

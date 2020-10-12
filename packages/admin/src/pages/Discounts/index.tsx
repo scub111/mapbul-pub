@@ -1,21 +1,10 @@
 import * as React from 'react';
-import {
-   List,
-   TextField,
-   NumberField,
-   SimpleForm,
-   TextInput,
-   NumberInput,
-   ReferenceField,
-   ReferenceInput,
-   AutocompleteInput,
-   required
-} from 'react-admin';
+import { List, TextField, SimpleForm, TextInput, NumberInput, required } from 'react-admin';
 import { P } from '@mapbul-pub/utils';
 import { SortedGrid } from 'components';
 import { RowLayout } from 'ui';
 import { withCreatePage, withEditPage } from 'hocs';
-import { IDiscountDTO, IMarkerDTO } from '@mapbul-pub/types';
+import { IDiscountDTO } from '@mapbul-pub/types';
 import { FieldProps } from 'types';
 
 export const DiscountList = (props: any) => {

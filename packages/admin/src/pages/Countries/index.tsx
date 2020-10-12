@@ -4,7 +4,6 @@ import {
    TextField,
    SimpleForm,
    TextInput,
-   ReferenceField,
    ReferenceInput,
    AutocompleteInput,
    required

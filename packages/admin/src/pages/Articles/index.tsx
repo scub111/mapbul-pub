@@ -3,12 +3,7 @@ import { P } from '@mapbul-pub/utils';
 import { Routes } from '@mapbul-pub/ui';
 import { IArticleDTO, ICategoryDTO, IStatusDTO, ICityDTO } from '@mapbul-pub/types';
 import {
-   Show,
-   SimpleShowLayout,
-   RichTextField,
-   DateField,
    List,
-   Create,
    ReferenceField,
    TextField,
    ReferenceInput,

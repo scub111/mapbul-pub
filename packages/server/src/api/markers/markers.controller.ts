@@ -1,4 +1,4 @@
-import { 
+import {
   Controller,
   Get,
   Param,
@@ -44,7 +44,11 @@ export class MarkersController implements IController<IMarkerDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: MarkerDTO, @Request() req: IRequest): Promise<IMarkerDTO> {
+  async putItem(
+    @Param('id') id: string,
+    @Body() body: MarkerDTO,
+    @Request() req: IRequest,
+  ): Promise<IMarkerDTO> {
     return await this.service.putItem(id, body, req);
   }
 

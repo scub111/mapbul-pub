@@ -1,4 +1,4 @@
-import { 
+import {
   Controller,
   Get,
   Param,
@@ -43,7 +43,10 @@ export class FavoritesArticlesController implements IController<IFavoritesArticl
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: FavoritesArticleDTO): Promise<IFavoritesArticleDTO> {
+  async putItem(
+    @Param('id') id: string,
+    @Body() body: FavoritesArticleDTO,
+  ): Promise<IFavoritesArticleDTO> {
     return await this.service.putItem(id, body);
   }
 

@@ -10,8 +10,7 @@ import {
    NumberInput,
    BooleanInput,
    DateTimeInput,
-   required,
-   useDataProvider
+   required
 } from 'react-admin';
 import { P } from '@mapbul-pub/utils';
 import { SortedGrid, PosterInput } from 'components';
@@ -21,7 +20,6 @@ import { IMarkerDTOEx, ICategoryDTOEx } from 'interfaces';
 import { FieldProps } from 'types';
 import { Routes } from '@mapbul-pub/ui';
 import { ICityDTO, IDiscountDTO, IStatusDTO } from '@mapbul-pub/types';
-import { useState, useEffect } from 'react';
 import { Box } from '@material-ui/core';
 
 export const MarkerList = (props: any) => {

@@ -1,5 +1,4 @@
 import { IFileCreateResponse, IImageMeta, IImageFormData } from '@mapbul-pub/types';
-import { ImageDirs } from '@mapbul-pub/ui';
 import { P } from '@mapbul-pub/utils';
 import { httpClientToken } from './http';
 

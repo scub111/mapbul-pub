@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { useMediaQuery, Theme } from '@material-ui/core';
+import { useMediaQuery, useTheme } from '@material-ui/core';
 
 export function useSmall() {
-   const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+   const theme = useTheme();
+   const isSmall = useMediaQuery(theme.breakpoints.down('xs'));
 
    return {
       isSmall

@@ -36,7 +36,7 @@ export const generateControllers = async () => {
         },
         {
           field: 'addedDate',
-          value: '\'${dateTimeFormat(new Date())}\'',
+          value: "'${dateTimeFormat(new Date())}'",
         },
       ],
     },

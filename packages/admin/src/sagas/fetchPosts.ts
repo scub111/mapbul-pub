@@ -1,7 +1,6 @@
 import api from 'services/api';
 import { PostActions } from 'actions/posts';
 import { call, put, takeEvery, all, fork } from 'redux-saga/effects';
-import { PostModel } from 'models/PostModel';
 
 export default function* fetchPostsSaga() {
    console.log('postsSaga');

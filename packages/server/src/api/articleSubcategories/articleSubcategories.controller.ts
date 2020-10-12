@@ -1,4 +1,4 @@
-import { 
+import {
   Controller,
   Get,
   Param,
@@ -43,7 +43,10 @@ export class ArticleSubcategoriesController implements IController<IArticleSubca
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: ArticleSubcategoryDTO): Promise<IArticleSubcategoryDTO> {
+  async putItem(
+    @Param('id') id: string,
+    @Body() body: ArticleSubcategoryDTO,
+  ): Promise<IArticleSubcategoryDTO> {
     return await this.service.putItem(id, body);
   }
 
