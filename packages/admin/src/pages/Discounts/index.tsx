@@ -1,12 +1,5 @@
 import * as React from 'react';
-import {
-   List,
-   TextField,
-   SimpleForm,
-   TextInput,
-   NumberInput,
-   required
-} from 'react-admin';
+import { List, TextField, SimpleForm, TextInput, NumberInput, required } from 'react-admin';
 import { P } from '@mapbul-pub/utils';
 import { SortedGrid } from 'components';
 import { RowLayout } from 'ui';

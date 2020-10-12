@@ -32,7 +32,7 @@ export const PageLayout: React.FC<IPageBaseProps> = ({
       </header>
       <main>
         <div id="top" />
-        <Container maxWidth="lg">{children}</Container>
+        {children && <Container maxWidth="lg">{children}</Container>}
       </main>
       <footer>
         <ScrollFab percent={percent} />

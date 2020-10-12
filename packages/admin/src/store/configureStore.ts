@@ -7,10 +7,7 @@ import rootSaga from 'sagas';
 
 export function configureStore(initialState?: any): Store {
    const sagaMiddleware = createSagaMiddleware();
-   let middleware = compose(
-      applyMiddleware(sagaMiddleware),
-      applyMiddleware(logger)
-   );
+   let middleware = compose(applyMiddleware(sagaMiddleware), applyMiddleware(logger));
 
    if (process.env.NODE_ENV !== 'production') {
       middleware = composeWithDevTools(middleware);

@@ -1,17 +1,17 @@
 import * as React from 'react';
-import { Typography, Box, Link, useTheme, useMediaQuery } from '@material-ui/core';
+import { Typography, Box, Link, useTheme } from '@material-ui/core';
 import { formatDateToString } from '@mapbul-pub/utils';
 import { Article } from 'models';
-import { useTypeRoute, useTranslation } from 'hooks';
+import { useTypeRoute, useTranslation, useSmall } from 'hooks';
 import { IDetailItemProps } from 'hocs';
 import { PreText } from 'ui';
 
 export const ArticleDetail: React.FC<IDetailItemProps<Article>> = ({ item }) => {
   const theme = useTheme();
   const { isRus } = useTranslation();
+  const { isSmall } = useSmall();
   const typeRoute = useTypeRoute();
   const isActicle = typeRoute === 'articles';
-  const isSmall = useMediaQuery(theme.breakpoints.down('xs'));
   return (
     <Box style={{ padding: theme.spacing(0, 1) }}>
       <Box style={{ display: 'flex' }}>

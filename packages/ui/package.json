@@ -40,9 +40,12 @@
   },
   "dependencies": {
     "@mapbul-pub/types": "^1.0.0",
+    "@material-ui/core": "^4.11.0",
     "app-root-path": "^3.0.0",
     "dayjs": "^1.8.30",
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "gitHead": "165f7993c2acc907c653c02847fb02721052c6e7",
   "jest": {

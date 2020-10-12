@@ -1,4 +1,4 @@
-import { 
+import {
   Controller,
   Get,
   Param,
@@ -44,7 +44,11 @@ export class ArticlesController implements IController<IArticleDTO> {
   @Put(':id')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(NotFoundInterceptor)
-  async putItem(@Param('id') id: string, @Body() body: ArticleDTO, @Request() req: IRequest): Promise<IArticleDTO> {
+  async putItem(
+    @Param('id') id: string,
+    @Body() body: ArticleDTO,
+    @Request() req: IRequest,
+  ): Promise<IArticleDTO> {
     return await this.service.putItem(id, body, req);
   }
 

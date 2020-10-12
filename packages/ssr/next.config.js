@@ -1,5 +1,6 @@
 require('dotenv').config();
 // const withTypescript = require('@zeit/next-typescript')
+// var DuplicatePackageCheckerPlugin = require("duplicate-package-checker-webpack-plugin");
 
 module.exports = (phase, { defaultConfig }) => {
   return {
@@ -42,6 +43,12 @@ module.exports = (phase, { defaultConfig }) => {
           // loader: 'ts-loader',
         }
       );
+
+      // config.plugins = [new DuplicatePackageCheckerPlugin({
+      //   exclude(instance) {
+      //     return instance.name === "styles.css";
+      //   }
+      // })];
 
       return config;
     },

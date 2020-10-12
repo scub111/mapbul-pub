@@ -10,7 +10,7 @@ import {
    NumberInput,
    BooleanInput,
    DateTimeInput,
-   required,
+   required
 } from 'react-admin';
 import { P } from '@mapbul-pub/utils';
 import { SortedGrid, PosterInput } from 'components';

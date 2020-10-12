@@ -13,7 +13,7 @@ import {
    BooleanInput,
    AutocompleteInput,
    BooleanField,
-   required,
+   required
 } from 'react-admin';
 import { P } from '@mapbul-pub/utils';
 import { Routes } from '@mapbul-pub/ui';
