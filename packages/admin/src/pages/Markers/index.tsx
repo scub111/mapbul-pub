@@ -151,6 +151,9 @@ const CommonForm = (props: FieldProps<IMarkerDTOEx>) => {
             <TextInput source={P<IMarkerDTOEx>((p) => p.site)} defaultValue="" fullWidth />
             <TextInput source={P<IMarkerDTOEx>((p) => p.email)} defaultValue="" fullWidth />
          </RowLayout>
+         <RowLayout>
+            <TextInput source={P<IMarkerDTOEx>((p) => p.entryTicket)} fullWidth />
+         </RowLayout>
          <SectionTitle label="Misc" />
          <RowLayout>
             <ReferenceInput
