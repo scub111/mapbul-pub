@@ -5,4 +5,5 @@ export interface ICityDTO {
   lat: number;
   countryId: number;
   placeId: string;
+  nameEn: string | null;
 }
