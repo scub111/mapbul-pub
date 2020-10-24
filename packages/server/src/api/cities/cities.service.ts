@@ -35,7 +35,8 @@ export class CitiesService implements IBaseService<ICityDTO> {
         \`lng\`,
         \`lat\`,
         \`countryId\`,
-        \`placeId\`
+        \`placeId\`,
+        \`nameEn\`
       FROM city ${additional}`);
 
     const totalElements = isPagination ? Number(records[1][0]['count(*)']) : records.length;
@@ -56,7 +57,8 @@ export class CitiesService implements IBaseService<ICityDTO> {
         \`lng\`,
         \`lat\`,
         \`countryId\`,
-        \`placeId\`
+        \`placeId\`,
+        \`nameEn\`
       ) 
       Values 
       (
@@ -64,7 +66,8 @@ export class CitiesService implements IBaseService<ICityDTO> {
         ${body.lng},
         ${body.lat},
         ${body.countryId},
-        '${body.placeId}'
+        '${body.placeId}',
+        ${body.nameEn ? `'${body.nameEn}'` : 'NULL'}
       )`.replace(/\\/g, '\\\\'),
     );
     return {
@@ -90,7 +93,8 @@ export class CitiesService implements IBaseService<ICityDTO> {
         \`lng\`,
         \`lat\`,
         \`countryId\`,
-        \`placeId\`
+        \`placeId\`,
+        \`nameEn\`
       FROM city
       WHERE id = ${id}`)
     )[0];
@@ -105,7 +109,8 @@ export class CitiesService implements IBaseService<ICityDTO> {
         \`lng\`=${body.lng},
         \`lat\`=${body.lat},
         \`countryId\`=${body.countryId},
-        \`placeId\`='${body.placeId}'
+        \`placeId\`='${body.placeId}',
+        \`nameEn\`=${body.nameEn ? `'${body.nameEn}'` : 'NULL'}
       WHERE id = ${id}`.replace(/\\/g, '\\\\'),
     );
     return body;

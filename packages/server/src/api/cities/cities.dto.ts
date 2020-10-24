@@ -18,4 +18,6 @@ export class CityDTO implements ICityDTO {
 
   @IsDefined()
   placeId: string;
+
+  nameEn: string | null;
 }
