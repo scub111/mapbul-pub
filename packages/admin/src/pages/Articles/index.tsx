@@ -98,6 +98,10 @@ const CommonForm = (props: FieldProps<IArticleDTOEx>) => {
             <TextInput source={P<IArticleDTOEx>((p) => p.sourceUrl)} fullWidth />
             <TextInput source={P<IArticleDTOEx>((p) => p.sourceUrlEn)} fullWidth />
          </RowLayout>
+         <RowLayout>
+            <TextInput source={P<IArticleDTOEx>((p) => p.sourcePhoto)} fullWidth />
+            <TextInput source={P<IArticleDTOEx>((p) => p.sourcePhotoEn)} fullWidth />
+         </RowLayout>
          <SectionTitle label="Misc" />
          <RowLayout>
             <ReferenceInput
